@@ -11,7 +11,7 @@ export const Login = () => {
   <>
    <div className="h-screen flex items-center justify-center">
     <div className="bg-gray-100 w-[400px] h-auto p-5 rounded">
-     <div>Login Page</div>
+     <div className="text-2xl font-bold">Login Page</div>
      <div className="flex flex-col gap-4 pt-5">
       <div className="flex flex-col">
        <label htmlFor="">Email</label>
