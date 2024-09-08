@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "../../components/Navbar";
 
 export const Signup = () => {
  const nav = useNavigate();
@@ -9,6 +10,7 @@ export const Signup = () => {
 
  return (
   <>
+   <Navbar />
    <div className="h-screen flex items-center justify-center">
     <div className="bg-gray-100 w-[400px] h-auto p-5 rounded">
      <div className="text-2xl font-bold">Signup Page</div>

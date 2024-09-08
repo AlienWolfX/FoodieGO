@@ -7,7 +7,7 @@ export const Hero = () => {
     <div className="font-black text-5xl text-center leading-[50px]">
      <h1>Foodie on the Go</h1>
      <h1>With your Kodigo</h1>
-     <div className="pt-3">
+     <div className="pt-3 w-[600px] leading-6">
       <p className="text-[20px] font-light text-center">
        Discover, Save, Share, and Savor: Explore Recipes, Connect with Cooks,
        and Review Delicious Dishes.

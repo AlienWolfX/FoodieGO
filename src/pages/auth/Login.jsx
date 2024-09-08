@@ -1,14 +1,46 @@
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "../../components/Navbar";
+import { useState } from "react";
+import { Toaster, toast } from "sonner";
+import { buildUrl } from "../../../utils/buildUrl";
 
 export const Login = () => {
+ const [email, setEmail] = useState("");
+ const [password, setPassword] = useState("");
+ const [cpass, setCpass] = useState("");
+
  const nav = useNavigate();
 
  const navCreateAccount = () => {
   nav("/signup");
  };
 
+ const login = async (e) => {
+  e.preventDefault();
+  if (password === cpass) {
+   try {
+    let res = await fetch(buildUrl("/login"), {
+     method: "POST",
+     headers: {
+      "Content-Type": "application/json",
+     },
+     body: JSON.stringify({
+      email: email,
+      password: password,
+     }),
+    })
+   } catch (err) {
+    console.log(err);
+   }
+  } else {
+   toast.error("Password does not match");
+  }
+ };
+
  return (
   <>
+   <Navbar />
+   <Toaster richColors position="top-center" />
    <div className="h-screen flex items-center justify-center">
     <div className="bg-gray-100 w-[400px] h-auto p-5 rounded">
      <div className="text-2xl font-bold">Login Page</div>

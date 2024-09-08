@@ -6,12 +6,18 @@ export const Navbar = () => {
   nav("/login");
  };
 
+ const navHome = () => {
+  nav("/");
+ };
+
  return (
   <>
    <div className="fixed w-full border">
     <div className="mx-32 flex items-center justify-between my-5">
      <div>
-      <h1 className="font-bold text-2xl">FoodieGO</h1>
+      <h1 onClick={navHome} className="font-bold text-2xl cursor-pointer">
+       FoodieGO
+      </h1>
      </div>
      <div className="flex items-center gap-20">
       <div>
