@@ -4,6 +4,12 @@ import "./App.css";
 import { Mainpage } from "./pages/landing page/Mainpage";
 import { Login } from "./pages/auth/Login";
 import { Signup } from "./pages/auth/Signup";
+import { Layout } from "./pages/dashboard/Layout";
+import { Home } from "./pages/dashboard/pages/Home";
+import { MyRecipes } from "./pages/dashboard/pages/MyRecipes";
+import { SavedRecipes } from "./pages/dashboard/pages/Saved";
+import { Analytics } from "./pages/dashboard/pages/Analytics";
+import { MyProfile } from "./pages/dashboard/pages/Profile";
 
 function App() {
  const [count, setCount] = useState(0);
@@ -15,10 +21,22 @@ function App() {
      <Route path="/" element={<Mainpage />} />
      <Route path="/login" element={<Login />} />
      <Route path="/signup" element={<Signup />} />
+     <Route path="/home" element={<Home />} />
+     <Route path="/user/*" element={<UserRoutes />} />
     </Routes>
    </Routers>
   </>
  );
 }
+
+const UserRoutes = () => {
+ <Routes>
+  <Route path="/home" element={<Home />} />
+  <Route path="/recipes" element={<MyRecipes />} />
+  <Route path="/saved-recipes" element={<SavedRecipes />} />
+  <Route path="/analytics" element={<Analytics />} />
+  <Route path="/profile" element={<MyProfile />} />
+ </Routes>;
+};
 
 export default App;
