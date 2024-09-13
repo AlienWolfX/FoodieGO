@@ -1,6 +1,7 @@
 import { Toaster, toast } from "sonner";
 import { NavLink } from "react-router-dom";
 import { sidebar } from "../../data/navbarData";
+import { IoLogOut } from "react-icons/io5";
 
 export const Sidebar = () => {
  const handleLogout = () => {

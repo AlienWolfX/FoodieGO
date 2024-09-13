@@ -23,6 +23,11 @@ function App() {
      <Route path="/signup" element={<Signup />} />
      <Route path="/home" element={<Home />} />
      <Route path="/user/*" element={<UserRoutes />} />
+     <Route path="/home" element={<Home />} />
+     <Route path="/my-recipes" element={<MyRecipes />} />
+     <Route path="/saved-recipes" element={<SavedRecipes />} />
+     <Route path="/analytics" element={<Analytics />} />
+     <Route path="/profile" element={<MyProfile />} />
     </Routes>
    </Routers>
   </>

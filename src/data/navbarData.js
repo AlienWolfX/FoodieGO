@@ -1,7 +1,8 @@
 import { MdDashboard, MdPeopleAlt } from "react-icons/md";
-import { GiGraduateCap } from "react-icons/gi";
-import { CgProfile } from "react-icons/cg";
-import { IoMdSettings } from "react-icons/io";
+import { GrNotes } from "react-icons/gr";
+import { MdOutlineUnarchive } from "react-icons/md";
+import { FaRegChartBar } from "react-icons/fa";
+import { IoPerson } from "react-icons/io5";
 
 export const sidebar = [
  {
@@ -10,18 +11,23 @@ export const sidebar = [
   label: "Home",
  },
  {
-  path: "/lor-info",
-  icon: MdPeopleAlt,
-  label: "Counselor",
+  path: "/my-recipes",
+  icon: GrNotes,
+  label: "My Recipes",
  },
  {
-  path: "/e-info",
-  icon: GiGraduateCap,
-  label: "Colleges",
+  path: "/saved-recipes",
+  icon: MdOutlineUnarchive,
+  label: "Saved",
+ },
+ {
+  path: "/analytics",
+  icon: FaRegChartBar,
+  label: "Analytics",
  },
  {
   path: "/profile",
-  icon: CgProfile,
+  icon: IoPerson,
   label: "My Profile",
  },
 ];
