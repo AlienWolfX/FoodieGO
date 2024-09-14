@@ -6,9 +6,7 @@ export const Home = () => {
   <>
    <Layout>
     <div>Home</div>
-    <div className="mt-2">
-     <hr />
-    </div>
+    
     <div className="mt-5 grid grid-cols-4 gap-3">
      <FoodCard />
      <FoodCard />
