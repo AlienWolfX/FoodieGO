@@ -12,8 +12,8 @@ export const Navbar = () => {
 
  return (
   <>
-   <div className="fixed w-full border">
-    <div className="mx-32 flex items-center justify-between my-5">
+   <div className="fixed w-full border bg-white">
+    <div className="mx-32 flex items-center justify-between my-2">
      <div>
       <h1 onClick={navHome} className="font-bold text-2xl cursor-pointer">
        FoodieGO
