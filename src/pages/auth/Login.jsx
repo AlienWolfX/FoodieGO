@@ -28,7 +28,7 @@ export const Login = () => {
       email: email,
       password: password,
      }),
-    })
+    });
    } catch (err) {
     console.log(err);
    }
@@ -64,7 +64,10 @@ export const Login = () => {
       </div>
      </div>
      <div className="mt-10 flex flex-col gap-3 items-center">
-      <button className="w-full bg-gray-500 h-10 text-white rounded">
+      <button
+       onClick={login}
+       className="w-full bg-gray-500 h-10 text-white rounded"
+      >
        Login
       </button>
       <p

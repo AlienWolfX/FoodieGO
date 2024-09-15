@@ -10,6 +10,7 @@ import { MyRecipes } from "./pages/dashboard/pages/MyRecipes";
 import { SavedRecipes } from "./pages/dashboard/pages/Saved";
 import { Analytics } from "./pages/dashboard/pages/Analytics";
 import { MyProfile } from "./pages/dashboard/pages/Profile";
+import { ViewRecipe } from "./pages/dashboard/pages/ViewRecipe";
 
 function App() {
  const [count, setCount] = useState(0);
@@ -28,6 +29,7 @@ function App() {
      <Route path="/saved-recipes" element={<SavedRecipes />} />
      <Route path="/analytics" element={<Analytics />} />
      <Route path="/profile" element={<MyProfile />} />
+     <Route path="/view-recipe" element={<ViewRecipe />} />
     </Routes>
    </Routers>
   </>
