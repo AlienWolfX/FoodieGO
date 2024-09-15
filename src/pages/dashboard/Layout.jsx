@@ -6,7 +6,7 @@ export const Layout = ({ children }) => {
   <>
    <div className="flex bg-mainbg h-screen overflow-y-scroll">
     <Sidebar />
-    <div className="ml-[190px] px-10 mt-5 w-full">
+    <div className="ml-[170px] px-10 mt-5 w-full">
      <Topbar />
      <div className="mt-10">{children}</div>
     </div>

@@ -11,7 +11,7 @@ export const Sidebar = () => {
  return (
   <>
    <Toaster richColors position="top-center" />
-   <div className="fixed w-[190px] h-screen bg-white shadow-lg rounded-tr-2xl p-3 flex flex-col">
+   <div className="fixed w-[170px] h-screen bg-white shadow-lg rounded-tr-2xl p-3 flex flex-col">
     <div className="mt-3">
      {/* <img src={counsefilogo} alt="" /> */}
      <h1>FoodieGO</h1>
@@ -31,7 +31,7 @@ export const Sidebar = () => {
          <div
           className={`flex items-center gap-2 h-8 px-2 ${
            isActive
-            ? "text-mainblue bg-mainblue bg-opacity-20 rounded px-2"
+            ? "text-blue-600 bg-mainblue bg-opacity-20 rounded px-2"
             : "text-darkgray"
           }`}
          >
