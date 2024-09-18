@@ -31,6 +31,8 @@ export const Home = () => {
        difficulty={recipe.difficulty}
        time={recipe.time}
        ratings={recipe.ratings}
+       ingredients={recipe.ingredients}
+       instructions={recipe.instructions}
       />
      ))}
     </div>

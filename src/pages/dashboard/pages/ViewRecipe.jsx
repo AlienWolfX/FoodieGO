@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { Layout } from "../Layout";
 import { CiHeart } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthorProfile } from "../../../components/Modals/AuthorProfile";
 
 export const ViewRecipe = () => {
@@ -15,12 +15,18 @@ export const ViewRecipe = () => {
   difficulty,
   time,
   img_path,
+  ingredients,
+  instructions,
  } = location.state; // Retrieve data passed from the previous page
  const [authorModal, setAuthorModal] = useState(false);
 
+ useEffect(() => {
+  console.log(ingredients);
+ }, []);
+
  return (
   <Layout>
-   <div>
+   <div className="bg-white p-8 rounded-xl">
     <p onClick={() => nav(-1)} className="font-light text-xs cursor-pointer">
      Back
     </p>
@@ -59,7 +65,7 @@ export const ViewRecipe = () => {
      </div>
     </div>
     <div className="mt-5">
-     <div className="w-full rounded h-[500px] bg-gray-100">
+     <div className="w-full h-[500px] bg-gray-200 rounded">
       {img_path ? (
        <img
         src={img_path}
@@ -67,11 +73,46 @@ export const ViewRecipe = () => {
         className="h-full w-full object-cover rounded"
        />
       ) : (
-       <div className="h-[500px] bg-gray-200 flex items-center justify-center">
+       <div className="h-[500px] bg-gray-200 rounded flex items-center justify-center">
         No Image Available
        </div>
       )}
      </div>
+    </div>
+    <div className="flex items-start justify-between gap-3">
+     <div className="space-y-2 mt-4 w-full">
+      <h1 className="text-sm font-medium">Ingredients</h1>
+      <div className="py-2">
+       <hr />
+      </div>
+      {ingredients.map((data, index) => (
+       <div
+        className="h-10 border rounded bg-white text-xs   flex items-center justify-start px-4"
+        key={index}
+       >
+        <p>{data}</p>{" "}
+       </div>
+      ))}
+     </div>
+     <div className="space-y-2 mt-4 w-full">
+      <h1 className="text-sm font-medium">Instructions</h1>
+      <div className="py-2">
+       <hr />
+      </div>
+      {instructions.map((data, index) => (
+       <div
+        className="h-10 border rounded bg-white text-xs   flex items-center justify-start px-4"
+        key={index}
+       >
+        <h1>{data}</h1>
+       </div>
+      ))}
+     </div>
+    </div>
+    <div className="mt-5 flex items-center justify-center">
+     <button className="bg-mainblue text-white text-xs h-10 px-4 rounded">
+      Download Recipe
+     </button>
     </div>
    </div>
    {authorModal && <AuthorProfile setAuthor={setAuthorModal} />}

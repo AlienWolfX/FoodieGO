@@ -3,7 +3,7 @@ import { Topbar } from "../../components/Topbar";
 import { useState } from "react";
 
 export const Layout = ({ children }) => {
- const [isSidebarCollapsed, setSidebarCollapsed] = useState(false); // State to track if the sidebar is collapsed
+ const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
 
  const handleSidebarToggle = (collapsed) => {
   setSidebarCollapsed(collapsed);
@@ -19,7 +19,7 @@ export const Layout = ({ children }) => {
      }`}
     >
      <Topbar />
-     <div className="mt-10">{children}</div>
+     <div className="mt-5 bg-mainbg pb-10">{children}</div>
     </div>
    </div>
   </>

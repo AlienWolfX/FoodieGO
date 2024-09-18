@@ -16,25 +16,26 @@ export const Login = () => {
  };
 
  const login = async (e) => {
-  e.preventDefault();
-  if (password === cpass) {
-   try {
-    let res = await fetch(buildUrl("/login"), {
-     method: "POST",
-     headers: {
-      "Content-Type": "application/json",
-     },
-     body: JSON.stringify({
-      email: email,
-      password: password,
-     }),
-    });
-   } catch (err) {
-    console.log(err);
-   }
-  } else {
-   toast.error("Password does not match");
-  }
+  nav("/home");
+  // e.preventDefault();
+  // if (password === cpass) {
+  //  try {
+  //   let res = await fetch(buildUrl("/login"), {
+  //    method: "POST",
+  //    headers: {
+  //     "Content-Type": "application/json",
+  //    },
+  //    body: JSON.stringify({
+  //     email: email,
+  //     password: password,
+  //    }),
+  //   });
+  //  } catch (err) {
+  //   console.log(err);
+  //  }
+  // } else {
+  //  toast.error("Password does not match");
+  // }
  };
 
  return (
