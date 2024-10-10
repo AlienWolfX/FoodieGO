@@ -18,7 +18,9 @@ export const ViewRecipe = () => {
   ingredients,
   instructions,
  } = location.state; // Retrieve data passed from the previous page
+
  const [authorModal, setAuthorModal] = useState(false);
+ const [favModal, setFavModal] = useState(false)
 
  useEffect(() => {
   console.log(ingredients);
@@ -33,13 +35,13 @@ export const ViewRecipe = () => {
     <div className="flex items-center justify-between">
      <div>
       <h1 className="text-2xl font-bold">{title}</h1>
-      <p onClick={() => setAuthorModal(true)} className="cursor-pointer">
+      <p onClick={() => setAuthorModal(true)} className="cursor-pointer hover:text-red-500">
        Author: {author}
       </p>
      </div>
      <div>
       <div className="bg-red-100 rounded-lg h-10 w-10 flex items-center justify-center">
-       <CiHeart size={25} className="text-red-500" />
+       <CiHeart size={25} className="text-red-500" onClick={() => setFavModal(true)} />
       </div>
      </div>
     </div>
@@ -80,7 +82,7 @@ export const ViewRecipe = () => {
      </div>
     </div>
     <div className="flex items-start justify-between gap-3">
-     <div className="space-y-2 mt-4 w-full">
+     <div className="space-y-2 mt-6 w-full">
       <h1 className="text-sm font-medium">Ingredients</h1>
       <div className="py-2">
        <hr />
@@ -94,7 +96,7 @@ export const ViewRecipe = () => {
        </div>
       ))}
      </div>
-     <div className="space-y-2 mt-4 w-full">
+     <div className="space-y-2 mt-6 w-full">
       <h1 className="text-sm font-medium">Instructions</h1>
       <div className="py-2">
        <hr />
@@ -116,6 +118,7 @@ export const ViewRecipe = () => {
     </div>
    </div>
    {authorModal && <AuthorProfile setAuthor={setAuthorModal} />}
+   {favModal && ""}
   </Layout>
  );
 };

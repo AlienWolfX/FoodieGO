@@ -75,7 +75,7 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
           </label>
           <input
            type="text"
-           className="h-10 rounded px-4 border outline-none"
+           className="h-10 rounded px-4 border outline-none" 
           />
          </div>
          <div className="flex flex-col gap-1">

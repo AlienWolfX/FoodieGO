@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import { buildUrl } from "../../../utils/buildUrl";
 
+import loginImg from "/public/auth-images/login.png"
+
 export const Login = () => {
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
@@ -42,8 +44,12 @@ export const Login = () => {
   <>
    <Navbar />
    <Toaster richColors position="top-center" />
-   <div className="h-screen flex items-center justify-center">
-    <div className="bg-gray-100 w-[400px] h-auto p-5 rounded">
+   <div className="w-full h-screen flex justify-between items-center">
+    <div className=" h-full w-full">
+    <img src={loginImg} alt="" className="w-full h-full"/>
+    </div>
+    <div className="p-16">
+     <div className="bg-gray-100 w-[500px]  h-auto p-5 rounded">
      <div className="text-2xl font-bold">Login Page</div>
      <div className="flex flex-col gap-4 pt-5">
       <div className="flex flex-col">
@@ -78,6 +84,7 @@ export const Login = () => {
        Dont have an account yet? Create account here
       </p>
      </div>
+    </div>
     </div>
    </div>
   </>

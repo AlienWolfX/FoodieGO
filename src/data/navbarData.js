@@ -1,6 +1,7 @@
 import { MdDashboard, MdPeopleAlt } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
 import { MdOutlineUnarchive } from "react-icons/md";
+import { GrFavorite } from "react-icons/gr";
 import { FaRegChartBar } from "react-icons/fa";
 import { IoPerson } from "react-icons/io5";
 
@@ -17,8 +18,8 @@ export const sidebar = [
  },
  {
   path: "/saved-recipes",
-  icon: MdOutlineUnarchive,
-  label: "Saved",
+  icon: GrFavorite,
+  label: "Favorites",
  },
  {
   path: "/analytics",
