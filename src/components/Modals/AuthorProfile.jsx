@@ -13,9 +13,9 @@ export const AuthorProfile = ({ setAuthor }) => {
         <div className="flex flex-col">
          <p className="font-medium text-sm">Allen Gabrielle Cruiz</p>
          <div className="flex items-center gap-2 font-light text-xs">
-          <p>Followers</p>
-          <p>Recipes</p>
-          <p>Total Likes</p>
+          <p>Followers:</p>
+          <p>Recipes: </p>
+          <p>Total Likes: </p>
          </div>
         </div>
         <div>
