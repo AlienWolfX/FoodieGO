@@ -13,7 +13,6 @@ import { MyProfile } from "./pages/dashboard/pages/Profile";
 import { ViewRecipe } from "./pages/dashboard/pages/ViewRecipe";
 
 function App() {
- const [count, setCount] = useState(0);
 
  return (
   <>
