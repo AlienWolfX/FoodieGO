@@ -1,10 +1,15 @@
 import { MdCancel } from "react-icons/md";
 import { FoodCard } from "../FoodCard/FoodCard";
 import { recipeData } from "../../../data/RecipeData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const AuthorProfile = ({ setAuthor, author }) => {
+export const AuthorProfile = ({ setAuthorModal, author }) => {
  const [selectedAuthor, setSelectedAuthor] = useState(null);
+
+ const openSharedRecipe = () => {
+  setAuthorModal(false);
+  console.log("Clicked....");
+ };
 
  return (
   <>
@@ -14,7 +19,7 @@ export const AuthorProfile = ({ setAuthor, author }) => {
       <div className="flex items-center  justify-between">
        <h1 className="font-medium text-lg ">Foodigoer Profile</h1>
        <MdCancel
-        onClick={() => setAuthor(false)}
+        onClick={() => setAuthorModal(false)}
         size={20}
         className="text-gray-500 cursor-pointer"
        />
@@ -29,16 +34,16 @@ export const AuthorProfile = ({ setAuthor, author }) => {
          <p className="font-medium text-sm">{author}</p>
          <div className="flex items-center gap-2 font-light text-gray-500 text-xs">
           <p>
-           Followers{" "}
+           Followers
            <span className="text-xs text-gray-700 font-medium">100</span>:
           </p>
           <p>
-           Recipes:{" "}
-           <span className="text-xs text-gray-700 font-medium">100</span>{" "}
+           Recipes:
+           <span className="text-xs text-gray-700 font-medium">100</span>
           </p>
           <p>
-           Total Likes:{" "}
-           <span className="text-xs text-gray-700 font-medium">100</span>{" "}
+           Total Likes:
+           <span className="text-xs text-gray-700 font-medium">100</span>
           </p>
          </div>
         </div>
@@ -52,9 +57,12 @@ export const AuthorProfile = ({ setAuthor, author }) => {
       <h3 className="text-sm font-medium">Shared Recipes</h3>
      </div>
      <div className="mt-5">
-      <div className="mt-5 w-full grid grid-cols-4 gap-3">
+      <div
+       className="mt-5 w-full grid grid-cols-4 gap-3"
+       onClick={() => setAuthorModal(false)}
+      >
        {recipeData
-        .filter((recipe) => recipe.author === author) // Filter for the specific author passed as a prop
+        .filter((recipe) => recipe.author === author)
         .map((recipe) => (
          <FoodCard
           key={recipe.id}
@@ -70,8 +78,7 @@ export const AuthorProfile = ({ setAuthor, author }) => {
           ingredients={recipe.ingredients}
           instructions={recipe.instructions}
           onClick={() => {
-           setAuthorModal(true); // Open the author modal
-           setSelectedAuthor(recipe.author); // Pass the author to the modal
+           setSelectedAuthor(recipe.author);
           }}
          />
         ))}

@@ -134,7 +134,9 @@ export const ViewRecipe = () => {
    <div className="mt-8">
     <CommentsCard />
    </div>
-   {authorModal && <AuthorProfile setAuthor={setAuthorModal} author={author} />}
+   {authorModal && (
+    <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
+   )}
    {favModal && <AddFavorite setFavModal={setFavModal} />}
   </Layout>
  );

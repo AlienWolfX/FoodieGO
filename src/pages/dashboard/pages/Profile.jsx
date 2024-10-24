@@ -10,7 +10,7 @@ export const MyProfile = () => {
    </div> 
    <div className="mt-3">
    <ProfileCard/>
-   <div className="flex items-end justify-end">
+   <div className="flex items-end justify-start">
     <h1 className="text-xs font-light">Delete Account</h1>
    </div>
    </div>
