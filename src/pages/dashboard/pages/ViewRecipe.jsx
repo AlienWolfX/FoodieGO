@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { AuthorProfile } from "../../../components/Modals/AuthorProfile";
 import { CommentsCard } from "../../../components/DashboardComponents/CommentsCard";
 import { AiSuggestions } from "../../../components/DashboardComponents/AiSuggestions";
+import { AddFavorite } from "../../../components/Modals/AddFavorite";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
  const location = useLocation();
+
  const {
   title,
   author,
@@ -48,7 +50,7 @@ export const ViewRecipe = () => {
       <div className="bg-red-100 rounded-lg h-10 w-10 flex items-center justify-center">
        <CiHeart
         size={25}
-        className="text-red-500"
+        className="text-red-500 cursor-pointer"
         onClick={() => setFavModal(true)}
        />
       </div>
@@ -132,8 +134,8 @@ export const ViewRecipe = () => {
    <div className="mt-8">
     <CommentsCard />
    </div>
-   {authorModal && <AuthorProfile setAuthor={setAuthorModal} />}
-   {favModal && ""}
+   {authorModal && <AuthorProfile setAuthor={setAuthorModal} author={author} />}
+   {favModal && <AddFavorite setFavModal={setFavModal} />}
   </Layout>
  );
 };
