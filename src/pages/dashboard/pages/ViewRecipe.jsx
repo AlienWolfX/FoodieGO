@@ -3,6 +3,8 @@ import { Layout } from "../Layout";
 import { CiHeart } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { AuthorProfile } from "../../../components/Modals/AuthorProfile";
+import { CommentsCard } from "../../../components/DashboardComponents/CommentsCard";
+import { AiSuggestions } from "../../../components/DashboardComponents/AiSuggestions";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
@@ -20,7 +22,7 @@ export const ViewRecipe = () => {
  } = location.state; // Retrieve data passed from the previous page
 
  const [authorModal, setAuthorModal] = useState(false);
- const [favModal, setFavModal] = useState(false)
+ const [favModal, setFavModal] = useState(false);
 
  useEffect(() => {
   console.log(ingredients);
@@ -35,13 +37,20 @@ export const ViewRecipe = () => {
     <div className="flex items-center justify-between">
      <div>
       <h1 className="text-2xl font-bold">{title}</h1>
-      <p onClick={() => setAuthorModal(true)} className="cursor-pointer hover:text-red-500">
+      <p
+       onClick={() => setAuthorModal(true)}
+       className="cursor-pointer hover:text-red-500"
+      >
        Author: {author}
       </p>
      </div>
      <div>
       <div className="bg-red-100 rounded-lg h-10 w-10 flex items-center justify-center">
-       <CiHeart size={25} className="text-red-500" onClick={() => setFavModal(true)} />
+       <CiHeart
+        size={25}
+        className="text-red-500"
+        onClick={() => setFavModal(true)}
+       />
       </div>
      </div>
     </div>
@@ -116,6 +125,12 @@ export const ViewRecipe = () => {
       Download Recipe
      </button>
     </div>
+   </div>
+   <div className="mt-5">
+    <AiSuggestions />
+   </div>
+   <div className="mt-8">
+    <CommentsCard />
    </div>
    {authorModal && <AuthorProfile setAuthor={setAuthorModal} />}
    {favModal && ""}

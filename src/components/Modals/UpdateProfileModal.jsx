@@ -18,16 +18,34 @@ export const UpdateProfileModal = ({ setOpenEdit }) => {
      </div>
      <div className="my-5 space-y-3">
       <div className="flex flex-col">
-       <label htmlFor="" className="text-xs font-medium">First Name</label>
-       <input type="text" placeholder="" className="text-xs border rounded h-10 outline-none px-4" />
+       <label htmlFor="" className="text-xs font-medium">
+        First Name
+       </label>
+       <input
+        type="text"
+        placeholder=""
+        className="text-xs border rounded h-10 outline-none px-4"
+       />
       </div>
       <div className="flex flex-col">
-       <label htmlFor="" className="text-xs font-medium">Last Name</label>
-       <input type="text" placeholder="" className="text-xs border rounded h-10 outline-none px-4" />
+       <label htmlFor="" className="text-xs font-medium">
+        Last Name
+       </label>
+       <input
+        type="text"
+        placeholder=""
+        className="text-xs border rounded h-10 outline-none px-4"
+       />
       </div>
       <div className="flex flex-col">
-       <label htmlFor="" className="text-xs font-medium">Contact Number</label>
-       <input type="text" placeholder="" className="text-xs border rounded h-10 outline-none px-4" />
+       <label htmlFor="" className="text-xs font-medium">
+        Contact Number
+       </label>
+       <input
+        type="text"
+        placeholder=""
+        className="text-xs border rounded h-10 outline-none px-4"
+       />
       </div>
      </div>
      <div className="flex items-center justify-end">

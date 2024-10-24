@@ -7,7 +7,7 @@ export const AuthorProfile = ({ setAuthor }) => {
     <div className="bg-white border w-[900px] min-h-[700px] p-5 rounded">
      <div className="flex items-start justify-between">
       <div>
-       <h1 className="font-bold text-sm ">Foodigoer Profile</h1>
+       <h1 className="font-medium text-lg ">Foodigoer Profile</h1>
        <div className="flex items-center gap-2 ">
         <div className="h-10 w-10 bg-gray-100 rounded-full"></div>
         <div className="flex flex-col">
@@ -28,7 +28,7 @@ export const AuthorProfile = ({ setAuthor }) => {
       <MdCancel
        onClick={() => setAuthor(false)}
        size={20}
-       className="text-red-500"
+       className="text-gray-500"
       />
      </div>
      <div className="mt-2">
