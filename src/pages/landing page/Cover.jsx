@@ -1,11 +1,11 @@
+import header from "/foodimages/header.png";
+
 export const Cover = () => {
- return(
+ return (
   <>
-   <div>
-    <div className="bg-gray-50 w-full h-[700px]">
-     <img src="" alt="" />
-    </div>
+   <div className="bg-gray-50 w-full">
+    <img src={header} alt="" />
    </div>
   </>
- )
+ );
 };

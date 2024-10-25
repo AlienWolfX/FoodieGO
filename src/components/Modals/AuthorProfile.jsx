@@ -5,12 +5,7 @@ import { useEffect, useState } from "react";
 
 export const AuthorProfile = ({ setAuthorModal, author }) => {
  const [selectedAuthor, setSelectedAuthor] = useState(null);
-
- const openSharedRecipe = () => {
-  setAuthorModal(false);
-  console.log("Clicked....");
- };
-
+ 
  return (
   <>
    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">

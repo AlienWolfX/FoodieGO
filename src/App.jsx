@@ -11,9 +11,9 @@ import { SavedRecipes } from "./pages/dashboard/pages/Saved";
 import { Analytics } from "./pages/dashboard/pages/Analytics";
 import { MyProfile } from "./pages/dashboard/pages/Profile";
 import { ViewRecipe } from "./pages/dashboard/pages/ViewRecipe";
+import { Preferences } from "./pages/auth/Preferences";
 
 function App() {
-
  return (
   <>
    <Routers>
@@ -21,7 +21,9 @@ function App() {
      <Route path="/" element={<Mainpage />} />
      <Route path="/login" element={<Login />} />
      <Route path="/signup" element={<Signup />} />
+     <Route path="/preferences" element={<Preferences/>}/>
      <Route path="/home" element={<Home />} />
+     {/* todo: add protected routes */}
      <Route path="/user/*" element={<UserRoutes />} />
      <Route path="/home" element={<Home />} />
      <Route path="/my-recipes" element={<MyRecipes />} />
