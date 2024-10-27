@@ -9,16 +9,20 @@ export const MyRecipes = () => {
  return (
   <>
    <Layout>
-    <div>My Recipes</div>
+    <div className="flex items-center justify-between">
+     <div>
+      <h1 className="text-md font-medium text-gray-600">My Recipes</h1>
+     </div>
+     <button
+      onClick={() => setCreateRecipe(true)}
+      className="px-4 h-10 bg-mainblue rounded text-xs text-white font-medium"
+     >
+      + Create Recipe
+     </button>
+    </div>
     <div className="mt-2">
      <hr />
     </div>
-    <button
-     onClick={() => setCreateRecipe(true)}
-     className="bg-gray-100 px-4 h-10 rounded text-xs"
-    >
-     + Create Recipe
-    </button>
     {createRecipe ? (
      <AnimatePresence>
       <motion.div

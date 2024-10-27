@@ -1,11 +1,12 @@
 import { Layout } from "../Layout";
 
-
 export const Analytics = () => {
  return (
   <>
    <Layout>
-    <div>Analytics</div>
+    <div>
+     <h1 className="text-md font-medium text-gray-600">Analytics</h1>
+    </div>
     <div className="mt-2">
      <hr />
     </div>

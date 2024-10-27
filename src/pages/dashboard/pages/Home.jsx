@@ -6,7 +6,7 @@ export const Home = () => {
  return (
   <Layout>
    <div>
-    <h1 className="font-bold text-xl">Explore New Recipes</h1>
+    <h1 className=" text-md  font-medium text-gray-600">Explore New Recipes</h1>
     <p className="text-xs font-light text-gray-500">
      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptas...
     </p>

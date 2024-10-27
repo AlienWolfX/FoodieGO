@@ -1,5 +1,5 @@
 import { Toaster, toast } from "sonner";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { sidebar } from "../../data/navbarData";
 import { IoLogOut } from "react-icons/io5";
@@ -7,9 +7,13 @@ import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 
 export const Sidebar = ({ onToggle }) => {
  const [collapsed, setCollapsed] = useState(false);
+ const nav = useNavigate();
 
  const handleLogout = () => {
   toast.info("Logging out of account");
+  setTimeout(() => {
+   nav("/");
+  }, 3000);
  };
 
  const toggleSidebar = () => {

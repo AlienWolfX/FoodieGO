@@ -17,7 +17,7 @@ export const sidebar = [
   label: "My Recipes",
  },
  {
-  path: "/saved-recipes",
+  path: "/favorite-recipes",
   icon: GrFavorite,
   label: "Favorites",
  },

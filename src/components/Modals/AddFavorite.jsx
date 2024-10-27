@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 export const AddFavorite = ({ setFavModal }) => {
+
+ const nav = useNavigate()
+
  return (
   <>
    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
@@ -8,7 +13,7 @@ export const AddFavorite = ({ setFavModal }) => {
       <p className="text-sm font-medium">Recipe added to favorites</p>
       <div className="flex w-full">
        <button
-        onClick={() => setFavModal(false)}
+        onClick={() => nav('/favorite-recipes')}
         className="w-full h-10 rounded-md text-xs bg-green-400 text-white"
        >
         view favorites
