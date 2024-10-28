@@ -11,12 +11,12 @@ export const Navbar = () => {
   nav("/");
  };
 
- const navRecipes = () => {
+ const navExplore = () => {
   nav("/recipes");
  };
 
- const navFavorites = () => {
-  nav("/favorites");
+ const navAboutUs = () => {
+  nav("/about");
  };
 
  return (
@@ -31,23 +31,20 @@ export const Navbar = () => {
      <div className="flex items-center gap-20">
       <div>
        <ul className="flex items-center gap-5">
-        <li onClick={navHome} className="cursor-pointer hover:text-mainblue">
+        <li onClick={navHome} className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue">
          Home
         </li>
-        <li onClick={navRecipes} className="cursor-pointer hover:text-mainblue">
-         Recipes
+        <li onClick={navAboutUs} className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue">
+         About US
         </li>
-        <li
-         onClick={navFavorites}
-         className="cursor-pointer hover:text-mainblue"
-        >
-         Favorites
+        <li onClick={navExplore} className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue">
+         Explore
         </li>
        </ul>
       </div>
       <button
        onClick={navLogin}
-       className="h-10 px-4 text-sm font-medium bg-mainblue rounded text-white"
+       className="h-8 px-4 text-xs font-semibold bg-mainblue rounded text-white"
       >
        Login
       </button>

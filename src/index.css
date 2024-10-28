@@ -27,3 +27,24 @@
  scroll-behavior: smooth;
  transition: 0.3 ease-in-out;
 }
+
+.custom-shape-divider-bottom-1730098822 {
+ position: absolute;
+ bottom: 0;
+ left: 0;
+ width: 100%;
+ overflow: hidden;
+ line-height: 0;
+}
+
+.custom-shape-divider-bottom-1730098822 svg {
+ position: relative;
+ display: block;
+ width: calc(224% + 1.3px);
+ height: 500px;
+ transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1730098822 .shape-fill {
+ fill: #4364ff;
+}

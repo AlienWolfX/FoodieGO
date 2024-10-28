@@ -49,7 +49,7 @@ export const Login = () => {
      <img src={loginImg} alt="" className="w-full h-full" />
     </div>
     <div className="p-16">
-     <div className="bg-white w-[500px]  h-auto p-8 rounded-md">
+     <div className="bg-white w-[400px]  h-auto p-8 rounded-md">
       <div className="text-2xl text-mainblue font-bold">Login Page</div>
       <div className="flex flex-col gap-4 pt-5">
        <div className="flex flex-col">
