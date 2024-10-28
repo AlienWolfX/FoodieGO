@@ -31,7 +31,7 @@ export const Hero = () => {
     <div className="pt-5 mx-32">
      <Searchbar />
     </div>
-    <div className="mx-32 mt-10 flex items-center gap-4">
+    <div className="mx-32 mt-32 flex items-center gap-4">
      <div className="bg-white px-8 py-4 border rounded-md flex flex-col">
       <h1 className="text-md font-semibold text-red-500">12k</h1>
       <p className="text-sm font-light text-gray-500">Users</p>

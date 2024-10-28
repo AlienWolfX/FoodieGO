@@ -33,7 +33,7 @@ export const Explore = () => {
        />
       ))}
      </div>
-     <div className="flex items-center justify-center mt-5">
+     <div className="flex items-center justify-center mt-16">
       <button
        onClick={() => nav("/explore")}
        className="bg-mainblue text-xs font-medium text-white h-10 rounded px-4"

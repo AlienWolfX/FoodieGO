@@ -16,7 +16,7 @@ export const Steps = () => {
      <img
       src={img1}
       alt="Create Account"
-      className="w-[340px] bg-white rounded-md p-4 border"
+      className="w-[380px] bg-white rounded-md p-4 border"
      />
      <p className="text-center mt-2">Create Account</p>
      <div className="w-8 h-8 bg-mainblue text-white rounded-full flex items-center justify-center mt-2">
@@ -34,7 +34,7 @@ export const Steps = () => {
      <img
       src={img2}
       alt="Create Recipe"
-      className="w-[340px] bg-white rounded-md p-4 border"
+      className="w-[380px] bg-white rounded-md p-4 border"
      />
      <p className="text-center mt-2">Create Recipe</p>
      <div className="w-8 h-8 bg-mainblue text-white rounded-full flex items-center justify-center mt-2">
@@ -52,7 +52,7 @@ export const Steps = () => {
      <img
       src={img3}
       alt="Share Recipe"
-      className="w-[340px] bg-white rounded-md p-4 border"
+      className="w-[380px] bg-white rounded-md p-4 border"
      />
      <p className="text-center mt-2">Share Recipe</p>
      <div className="w-8 h-8 bg-mainblue text-white rounded-full flex items-center justify-center mt-2">
