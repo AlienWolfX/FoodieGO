@@ -1,10 +1,11 @@
 import { CiEdit } from "react-icons/ci";
 import { UpdateProfileModal } from "../Modals/UpdateProfileModal";
 import { useState } from "react";
+import { UpdateProfilePicture } from "../Modals/UpdateProfilePicture";
 
 export const ProfileCard = () => {
  const [openEdit, setOpenEdit] = useState(false);
-
+ const [openPicture, setOpenPicture] = useState(false);
  return (
   <>
    <div className="flex flex-col gap-4">
@@ -24,7 +25,7 @@ export const ProfileCard = () => {
       </div>
       <div className="border p-1 rounded flex">
        <CiEdit
-        onClick={() => setOpenEdit(true)}
+        onClick={() => setOpenPicture(true)}
         size={16}
         className="text-gray-500 cursor-pointer"
        />
@@ -81,6 +82,7 @@ export const ProfileCard = () => {
      </div>
     </div>
    </div>
+   {openPicture ? <UpdateProfilePicture setOpenPicture={setOpenPicture} /> : ""}
    {openEdit ? <UpdateProfileModal setOpenEdit={setOpenEdit} /> : ""}
   </>
  );
