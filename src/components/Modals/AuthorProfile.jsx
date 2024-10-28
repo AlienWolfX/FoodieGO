@@ -9,7 +9,7 @@ export const AuthorProfile = ({ setAuthorModal, author }) => {
  return (
   <>
    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-    <div className="bg-white border w-[900px] max-h-[700px] p-5 rounded overflow-y-scroll">
+    <div className="bg-white border w-[900px] max-h-[600px] p-5 rounded overflow-y-scroll">
      <div>
       <div className="flex items-center  justify-between">
        <h1 className="font-medium text-lg ">Foodigoer Profile</h1>

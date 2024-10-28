@@ -7,15 +7,12 @@ export const Mainpage = () => {
  return (
   <>
    <Navbar />
-   <div>
-    <div className="mx-32">
-     <Hero />
-    </div>
-    <Cover />
-    <div className="">
-     <Footer />
-    </div>
+   <div className="mx-32">
+    <Hero />
    </div>
+   <Cover />
+   
+   <Footer />
   </>
  );
 };
