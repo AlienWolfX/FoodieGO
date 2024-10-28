@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import mainLogo from "/public/mainLogo.png";
 
 export const Navbar = () => {
  const nav = useNavigate();
@@ -24,20 +25,27 @@ export const Navbar = () => {
    <div className="fixed w-full border bg-white z-50">
     <div className="mx-32 flex items-center justify-between my-2">
      <div>
-      <h1 onClick={navHome} className="font-bold text-2xl cursor-pointer">
-       FoodieGO
-      </h1>
+      <img src={mainLogo} onClick={navHome} alt="" className="w-[50px]"/>
      </div>
      <div className="flex items-center gap-20">
       <div>
        <ul className="flex items-center gap-5">
-        <li onClick={navHome} className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue">
+        <li
+         onClick={navHome}
+         className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue"
+        >
          Home
         </li>
-        <li onClick={navAboutUs} className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue">
+        <li
+         onClick={navAboutUs}
+         className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue"
+        >
          About US
         </li>
-        <li onClick={navExplore} className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue">
+        <li
+         onClick={navExplore}
+         className="text-sm font-medium  text-gray-600 cursor-pointer hover:text-mainblue"
+        >
          Explore
         </li>
        </ul>

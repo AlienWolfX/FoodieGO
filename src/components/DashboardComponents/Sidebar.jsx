@@ -4,6 +4,7 @@ import { useState } from "react";
 import { sidebar } from "../../data/navbarData";
 import { IoLogOut } from "react-icons/io5";
 import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
+import mainLogo from "/public/mainLogo.png";
 
 export const Sidebar = ({ onToggle }) => {
  const [collapsed, setCollapsed] = useState(false);
@@ -30,7 +31,8 @@ export const Sidebar = ({ onToggle }) => {
     }`}
    >
     <div className="mt-3 flex items-center justify-between">
-     <h1 className={`${collapsed ? "hidden" : ""}`}>FoodieGO</h1>
+     {/* <h1 className={`${collapsed ? "hidden" : ""}`}>FoodieGO</h1> */}
+     <img src={mainLogo} alt="" className="w-[70px]" />
      <button onClick={toggleSidebar} className="ml-auto">
       {collapsed ? (
        <IoArrowForwardCircle size={20} />
