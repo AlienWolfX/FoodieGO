@@ -4,7 +4,7 @@ import { PiBowlFoodLight } from "react-icons/pi";
 export const AiSuggestions = () => {
  return (
   <>
-   <div className="flex items-center gap-10">
+   <div className="flex items-center gap-4">
     <div className="w-full bg-white h-[200px] border rounded-lg p-6">
      <div className="flex flex-col gap-2">
       <div className="h-14 w-14 rounded-lg border border-yellow-300 bg-yellow-50 flex items-center justify-center">
