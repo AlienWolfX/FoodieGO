@@ -15,10 +15,11 @@ export const FoodCard = ({
  ingredients,
  instructions,
  ratings,
+ navigateTo = "/view-recipe",
 }) => {
  return (
   <Link
-   to={`/view-recipe`}
+   to={navigateTo}
    state={{
     title,
     img_path,

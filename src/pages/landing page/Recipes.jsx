@@ -8,7 +8,7 @@ export const Recipes = () => {
    <Navbar />
    <div className="pt-20">
     <div className="mt-2 mx-32 pb-20">
-    <h1>Recipes</h1>
+     <h1>Recipes</h1>
      <div className="mt-5 w-full grid grid-cols-4 gap-3">
       {recipeData.map((recipe) => (
        <FoodCard
@@ -24,6 +24,7 @@ export const Recipes = () => {
         ratings={recipe.ratings}
         ingredients={recipe.ingredients}
         instructions={recipe.instructions}
+        navigateTo="/explore/view-recipe"
        />
       ))}
      </div>

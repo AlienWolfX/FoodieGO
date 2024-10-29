@@ -17,7 +17,7 @@ export const ViewRecipe = () => {
   category,
   description,
   difficulty,
-  time,
+  time, 
   img_path,
   ingredients,
   instructions,
@@ -26,16 +26,13 @@ export const ViewRecipe = () => {
  const [authorModal, setAuthorModal] = useState(false);
  const [favModal, setFavModal] = useState(false);
 
- useEffect(() => {
-  console.log(ingredients);
- }, []);
 
  return (
   <Layout>
-   <div className="bg-white p-8 rounded-xl">
-    <p onClick={() => nav(-1)} className="font-light text-xs cursor-pointer">
-     Back
-    </p>
+   <p onClick={() => nav(-1)} className="font-light text-xs cursor-pointer text-orange-500">
+    Back
+   </p>
+   <div className="bg-white p-8 rounded-xl mt-5">
     <div className="flex items-center justify-between">
      <div>
       <h1 className="text-2xl font-bold">{title}</h1>

@@ -35,6 +35,7 @@ export const Explore = () => {
         ratings={recipe.ratings}
         ingredients={recipe.ingredients}
         instructions={recipe.instructions}
+        navigateTo={`/explore/view-recipe`} // Specify the path for the view-recipe
        />
       ))}
      </div>

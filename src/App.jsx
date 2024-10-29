@@ -13,6 +13,7 @@ import { ViewRecipe } from "./pages/dashboard/pages/ViewRecipe";
 import { Preferences } from "./pages/auth/Preferences";
 import { Recipes } from "./pages/landing page/Recipes";
 import { TermsConditions } from "./pages/landing page/TermsConditions";
+import { ViewRecipeInitial } from "./pages/landing page/ViewRecipeInitial";
 
 function App() {
  return (
@@ -22,6 +23,7 @@ function App() {
      <Route path="/" element={<Mainpage />} />
      <Route path="/terms-conditions" element={<TermsConditions />} />
      <Route path="/explore" element={<Recipes />} />
+     <Route path="/explore/view-recipe" element={<ViewRecipeInitial />} />
      <Route path="/login" element={<Login />} />
      <Route path="/signup" element={<Signup />} />
      <Route path="/preferences" element={<Preferences />} />

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { sidebar } from "../../data/navbarData";
 import { IoLogOut } from "react-icons/io5";
 import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
-import mainLogo from "/public/mainLogo.png";
+import mainLogo from "/mainLogo.png";
 
 export const Sidebar = ({ onToggle }) => {
  const [collapsed, setCollapsed] = useState(false);
