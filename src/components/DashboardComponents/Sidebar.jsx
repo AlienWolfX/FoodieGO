@@ -31,15 +31,25 @@ export const Sidebar = ({ onToggle }) => {
     }`}
    >
     <div className="mt-3 flex items-center justify-between">
-     {/* <h1 className={`${collapsed ? "hidden" : ""}`}>FoodieGO</h1> */}
-     <img src={mainLogo} alt="" className="w-[70px]" />
-     <button onClick={toggleSidebar} className="ml-auto">
-      {collapsed ? (
-       <IoArrowForwardCircle size={20} />
-      ) : (
-       <IoArrowBackCircle size={20} />
-      )}
-     </button>
+     <div className="flex items-center gap-2">
+      <img src={mainLogo} alt="" className="w-[50px]" />
+      <h1
+       className={`${
+        collapsed ? "hidden" : "text-sm text-mainblue font-medium"
+       }`}
+      >
+       FoodieGO
+      </h1>
+     </div>
+     <div className="absolute -right-2">
+      <button onClick={toggleSidebar} className="ml-auto text-mainblue">
+       {collapsed ? (
+        <IoArrowForwardCircle size={18} />
+       ) : (
+        <IoArrowBackCircle size={18} />
+       )}
+      </button>
+     </div>
     </div>
     <div className="text-darkgray my-2">
      <hr />
