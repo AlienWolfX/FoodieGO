@@ -7,12 +7,17 @@ export const Explore = () => {
 
  return (
   <>
-   <div className="mx-32 h-screen flex items-center justify-center">
+   <div
+    id="explore"
+    className="mx-32 h-screen flex items-center justify-center"
+   >
     <div>
      <div>
       <h1 className="text-3xl font-bold text-[#121212]">Explore New Recipes</h1>
       <p className="mt-2 text-gray-600">
-       Discover a variety of delicious recipes from around the world. Whether you're looking for quick meals, healthy options, or indulgent treats, we have something for everyone!
+       Discover a variety of delicious recipes from around the world. Whether
+       you're looking for quick meals, healthy options, or indulgent treats, we
+       have something for everyone!
       </p>
      </div>
      <div className="mt-5 w-full grid grid-cols-4 gap-3">

@@ -1,5 +1,6 @@
 import { Navbar } from "../../components/Navbar";
 import { About } from "./About";
+import { Contact } from "./Contact";
 import { Cover } from "./Cover";
 import { Explore } from "./Explore";
 import { Footer } from "./Footer";
@@ -13,8 +14,10 @@ export const Mainpage = () => {
    <Hero />
    <About />
    <Cover />
+   
    <Explore />
    <Steps />
+   <Contact />
    <Footer />
   </>
  );

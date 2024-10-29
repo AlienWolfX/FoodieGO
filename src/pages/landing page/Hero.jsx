@@ -4,7 +4,10 @@ import threePlateFood from "/public/threePlateFood.png";
 export const Hero = () => {
  return (
   <>
-   <div className="relative flex flex-col items-start h-screen bg-mainbg pt-40">
+   <div
+    id="hero"
+    className="relative flex flex-col items-start h-screen bg-mainbg pt-40"
+   >
     <div class="custom-shape-divider-bottom-1730098822">
      <svg
       data-name="Layer 1"

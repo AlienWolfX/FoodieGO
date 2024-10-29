@@ -1,7 +1,10 @@
 export const About = () => {
  return (
   <>
-   <div className="relative h-screen flex flex-col items-end justify-center">
+   <div
+    id="about"
+    className="relative h-screen flex flex-col items-end justify-center"
+   >
     <div class="custom-shape-divider-top-1730107130">
      <svg
       data-name="Layer 1"
