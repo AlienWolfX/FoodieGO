@@ -12,6 +12,7 @@ import { MyProfile } from "./pages/dashboard/pages/Profile";
 import { ViewRecipe } from "./pages/dashboard/pages/ViewRecipe";
 import { Preferences } from "./pages/auth/Preferences";
 import { Recipes } from "./pages/landing page/Recipes";
+import { TermsConditions } from "./pages/landing page/TermsConditions";
 
 function App() {
  return (
@@ -19,8 +20,8 @@ function App() {
    <Routers>
     <Routes>
      <Route path="/" element={<Mainpage />} />
+     <Route path="/terms-conditions" element={<TermsConditions />} />
      <Route path="/recipes" element={<Recipes />} />
-
      <Route path="/login" element={<Login />} />
      <Route path="/signup" element={<Signup />} />
      <Route path="/preferences" element={<Preferences />} />
