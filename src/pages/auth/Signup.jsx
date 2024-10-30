@@ -86,8 +86,8 @@ export const Signup = () => {
        </button>
        <div className="flex items-center justify-center gap-2 mt-2">
         <input type="checkbox" />
-        <label htmlFor="" className="text-xs font-light text-gray-400">
-         Please agree to the terms and conditions to proceed
+        <label onClick={() => nav('/terms-conditions')} htmlFor="" className="text-xs font-light text-gray-400">
+         I agree to the <span className="underline cursor-pointer textmain"> terms and condition</span> of FoodieGo
         </label>
        </div>
       </div>
