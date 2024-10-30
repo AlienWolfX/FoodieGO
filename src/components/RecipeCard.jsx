@@ -30,7 +30,6 @@ export const RecipeCard = () => {
 
  return (
   <>
-   <Navbar />
    <div className="bg-mainbg">
     <div className="mx-32 py-20">
      <p

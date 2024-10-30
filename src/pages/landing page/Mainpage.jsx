@@ -14,7 +14,6 @@ export const Mainpage = () => {
    <Hero />
    <About />
    <Cover />
-   
    <Explore />
    <Steps />
    <Contact />
