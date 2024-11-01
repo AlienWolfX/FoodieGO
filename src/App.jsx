@@ -11,7 +11,7 @@ import { Analytics } from "./pages/dashboard/pages/Analytics";
 import { MyProfile } from "./pages/dashboard/pages/Profile";
 import { ViewRecipe } from "./pages/dashboard/pages/ViewRecipe";
 import { Preferences } from "./pages/auth/Preferences";
-import { Recipes } from "./pages/landing page/Recipes";
+import { ExploreRecipes } from "./pages/landing page/ExploreRecipes";
 import { TermsConditions } from "./pages/landing page/TermsConditions";
 import { ViewRecipeInitial } from "./pages/landing page/ViewRecipeInitial";
 
@@ -22,7 +22,7 @@ function App() {
     <Routes>
      <Route path="/" element={<Mainpage />} />
      <Route path="/terms-conditions" element={<TermsConditions />} />
-     <Route path="/explore" element={<Recipes />} />
+     <Route path="/explore" element={<ExploreRecipes />} />
      <Route path="/explore/view-recipe" element={<ViewRecipeInitial />} />
      <Route path="/login" element={<Login />} />
      <Route path="/signup" element={<Signup />} />
