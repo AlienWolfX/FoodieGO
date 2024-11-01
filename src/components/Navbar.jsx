@@ -13,7 +13,7 @@ export const Navbar = () => {
  };
 
  const navHome = () => {
-  window.location.hash = "hero";
+  nav("/");
  };
 
  const navExplore = () => {
@@ -37,7 +37,10 @@ export const Navbar = () => {
     const element = document.getElementById(section);
     if (element) {
      const { offsetTop, clientHeight } = element;
-     if (scrollPosition >= offsetTop && scrollPosition < offsetTop + clientHeight) {
+     if (
+      scrollPosition >= offsetTop &&
+      scrollPosition < offsetTop + clientHeight
+     ) {
       setActiveItem(section);
      }
     }
@@ -57,31 +60,42 @@ export const Navbar = () => {
      <img src={mainLogo} onClick={navHome} alt="" className="w-[50px]" />
     </div>
     <div className="md:hidden">
-     <FaBars onClick={() => setIsOpen(!isOpen)} className="cursor-pointer" /> {/* Hamburger icon */}
+     <FaBars onClick={() => setIsOpen(!isOpen)} className="cursor-pointer" />{" "}
+     {/* Hamburger icon */}
     </div>
-    <div className="hidden md:flex items-center gap-20"> {/* Navbar for medium and larger screens */}
+    <div className="hidden md:flex items-center gap-20">
+     {" "}
+     {/* Navbar for medium and larger screens */}
      <ul className="flex items-center gap-5">
       <li
        onClick={navHome}
-       className={`text-sm font-medium cursor-pointer ${activeItem === "hero" ? "text-mainblue" : "text-gray-600"} hover:text-mainblue`}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "hero" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
       >
        Home
       </li>
       <li
        onClick={navAboutUs}
-       className={`text-sm font-medium cursor-pointer ${activeItem === "about" ? "text-mainblue" : "text-gray-600"} hover:text-mainblue`}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "about" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
       >
        About
       </li>
       <li
        onClick={navExplore}
-       className={`text-sm font-medium cursor-pointer ${activeItem === "explore" ? "text-mainblue" : "text-gray-600"} hover:text-mainblue`}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "explore" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
       >
        Explore
       </li>
       <li
        onClick={navContact}
-       className={`text-sm font-medium cursor-pointer ${activeItem === "contact" ? "text-mainblue" : "text-gray-600"} hover:text-mainblue`}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "contact" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
       >
        Contact Us
       </li>
@@ -98,30 +112,42 @@ export const Navbar = () => {
     <div className="fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 p-5">
      <div className="flex justify-between items-center mb-4">
       <h2 className="text-lg font-bold">Menu</h2>
-      <FaTimes onClick={() => setIsOpen(false)} className="cursor-pointer" /> {/* Close icon */}
+      <FaTimes
+       onClick={() => setIsOpen(false)}
+       className="cursor-pointer"
+      />{" "}
+      {/* Close icon */}
      </div>
      <ul className="flex flex-col items-start gap-5">
       <li
        onClick={navHome}
-       className={`text-sm font-medium cursor-pointer ${activeItem === "hero" ? "text-mainblue" : "text-gray-600"} hover:text-mainblue`}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "hero" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
       >
        Home
       </li>
       <li
        onClick={navAboutUs}
-       className={`text-sm font-medium cursor-pointer ${activeItem === "about" ? "text-mainblue" : "text-gray-600"} hover:text-mainblue`}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "about" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
       >
        About
       </li>
       <li
        onClick={navExplore}
-       className={`text-sm font-medium cursor-pointer ${activeItem === "explore" ? "text-mainblue" : "text-gray-600"} hover:text-mainblue`}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "explore" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
       >
        Explore
       </li>
       <li
        onClick={navContact}
-       className={`text-sm font-medium cursor-pointer ${activeItem === "contact" ? "text-mainblue" : "text-gray-600"} hover:text-mainblue`}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "contact" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
       >
        Contact Us
       </li>

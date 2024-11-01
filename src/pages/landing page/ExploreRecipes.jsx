@@ -29,7 +29,7 @@ export const ExploreRecipes = () => {
       <img
        src={exploreSide}
        alt=""
-       className="hidden md:block w-full md:w-auto md:max-w-[300px] mt-4 md:mt-0"
+       className="hidden md:block w-full md:w-auto md:max-w-[600px] mt-4 md:mt-0"
       />
      </div>
      <div className="md:pt-10 flex flex-col md:flex-row justify-between items-center mt-5">
