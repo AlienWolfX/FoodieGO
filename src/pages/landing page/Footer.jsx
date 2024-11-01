@@ -1,59 +1,42 @@
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+
 export const Footer = () => {
  return (
-  <>
-   <div className="bg-mainblue text-white py-4">
-    <div className="container mx-auto text-center">
-     <p className="mb-2">© 2024 Your Company Name. All rights reserved.</p>
-     <div className="flex justify-center space-x-4">
-      <a href="/about" className="hover:underline">
-       About Us
-      </a>
-      <a href="/contact" className="hover:underline">
-       Contact
-      </a>
-      <a href="/privacy" className="hover:underline">
-       Privacy Policy
-      </a>
-      <a href="/terms" className="hover:underline">
-       Terms of Service
-      </a>
+  <footer className="bg-gray-800 text-white py-10">
+   <div className="container mx-auto px-5 md:px-10">
+    <div className="flex flex-col md:flex-row justify-between items-center">
+     <div className="mb-5 md:mb-0">
+      <h2 className="text-lg font-bold">Foodie Go</h2>
+      <p className="text-sm mt-2">
+       Your go-to platform for discovering and sharing delicious recipes.
+      </p>
      </div>
-     <div className="mt-4">
-      <a
-       href="https://facebook.com"
-       target="_blank"
-       rel="noopener noreferrer"
-       className="mx-2"
-      >
-       <img
-        src="/icons/facebook.svg"
-        alt="Facebook"
-        className="inline h-6 w-6"
-       />
-      </a>
-      <a
-       href="https://twitter.com"
-       target="_blank"
-       rel="noopener noreferrer"
-       className="mx-2"
-      >
-       <img src="/icons/twitter.svg" alt="Twitter" className="inline h-6 w-6" />
-      </a>
-      <a
-       href="https://instagram.com"
-       target="_blank"
-       rel="noopener noreferrer"
-       className="mx-2"
-      >
-       <img
-        src="/icons/instagram.svg"
-        alt="Instagram"
-        className="inline h-6 w-6"
-       />
-      </a>
+     <div className="flex flex-col md:flex-row gap-5 mb-5 md:mb-0">
+      <div>
+       <h3 className="font-semibold">Quick Links</h3>
+       <ul className="text-sm">
+        <li><a href="#about" className="hover:underline">About Us</a></li>
+        <li><a href="#explore" className="hover:underline">Explore</a></li>
+        <li><a href="#contact" className="hover:underline">Contact</a></li>
+       </ul>
+      </div>
+      <div>
+       <h3 className="font-semibold">Follow Us</h3>
+       <div className="flex gap-3 mt-2">
+        <a href="#" className="hover:text-blue-400"><FaFacebookF /></a>
+        <a href="#" className="hover:text-blue-400"><FaTwitter /></a>
+        <a href="#" className="hover:text-blue-400"><FaInstagram /></a>
+        <a href="#" className="hover:text-blue-400"><FaLinkedin /></a>
+       </div>
+      </div>
      </div>
     </div>
+    <div className="border-t border-gray-700 mt-5 pt-5 text-center">
+     <p className="text-xs">
+      &copy; {new Date().getFullYear()} Foodie Go. All rights reserved.
+     </p>
+    </div>
    </div>
-  </>
+  </footer>
  );
-};
+}; 

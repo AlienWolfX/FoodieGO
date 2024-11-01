@@ -9,18 +9,20 @@ export const Explore = () => {
   <>
    <div
     id="explore"
-    className="mx-32 h-screen flex items-center justify-center my-32"
+    className="mx-5 lg:mx-32 h-auto lg:h-screen pt-10 lg:pt-0 flex items-center justify-center lg:my-32"
    >
-    <div>
-     <div>
-      <h1 className="text-3xl font-bold text-[#121212]">Explore New Recipes</h1>
-      <p className="mt-2 text-gray-600">
+    <div className="w-full">
+     <div className="text-center">
+      <h1 className="text-3xl md:text-4xl font-bold text-[#121212]">
+       Explore New Recipes
+      </h1>
+      <p className="mt-2 text-gray-600 text-sm md:text-base">
        Discover a variety of delicious recipes from around the world. Whether
        you're looking for quick meals, healthy options, or indulgent treats, we
        have something for everyone!
       </p>
      </div>
-     <div className="mt-5 w-full grid grid-cols-4 gap-3">
+     <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       {recipeData.slice(0, 8).map((recipe) => (
        <FoodCard
         key={recipe.id}
@@ -35,11 +37,11 @@ export const Explore = () => {
         ratings={recipe.ratings}
         ingredients={recipe.ingredients}
         instructions={recipe.instructions}
-        navigateTo={`/explore/view-recipe`} // Specify the path for the view-recipe
+        navigateTo={`/explore/view-recipe`}
        />
       ))}
      </div>
-     <div className="flex items-center justify-center mt-16">
+     <div className="flex items-center justify-center mt-10">
       <button
        onClick={() => nav("/explore")}
        className="bg-mainblue text-xs font-medium text-white h-10 rounded px-4"
