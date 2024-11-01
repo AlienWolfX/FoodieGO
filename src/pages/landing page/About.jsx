@@ -1,10 +1,45 @@
+import aboutImg from "/public/aboutImg.png";
+
 export const About = () => {
  return (
   <>
    <div
     id="about"
-    className="relative h-screen flex flex-col items-end justify-center"
+    className="relative h-screen flex items-center justify-center"
    >
+    <div className="flex items-center justify-center mx-32 gap-32">
+     <div className="flex items-center justify-center rounded-md z-10 bg-white shadow-lg p-2">
+      <img src={aboutImg} alt="" className="w-[360px] rounded-md" />
+     </div>
+     <div className="text-center">
+      <h1 className="text-4xl font-bold mb-4">About Us</h1>
+      <div className="w-[500px] bg-white border p-8 rounded-md shadow">
+       <p className="text-xs font-medium mb-4">
+        Welcome to Foodie Go, where culinary dreams come to life! Our journey
+        began with a simple passion for food and a desire to share it with the
+        world.
+       </p>
+       <p className="text-xs font-medium mb-4">
+        Food has been a universal language, bringing people together across
+        cultures and generations. At Foodie Go, we believe that every recipe
+        tells a story, and every meal is an opportunity to create lasting
+        memories.
+       </p>
+       <p className="text-xs font-medium mb-4">
+        Our platform is designed for food lovers, home cooks, and aspiring chefs
+        alike. Whether you’re looking to discover new recipes, share your
+        culinary creations, or connect with fellow food enthusiasts, Foodie Go
+        is your go-to destination.
+       </p>
+       <p className="text-xs font-medium mb-4">
+        Join us on this delicious journey as we explore flavors from around the
+        globe, celebrate diverse cuisines, and inspire each other to cook,
+        share, and enjoy food together. Let’s make every meal a celebration
+       </p>
+      </div>
+     </div>
+    </div>
+    {/* background divider */}
     <div class="custom-shape-divider-top-1730107130">
      <svg
       data-name="Layer 1"
@@ -17,33 +52,6 @@ export const About = () => {
        class="shape-fill"
       ></path>
      </svg>
-    </div>
-    <div className="mt-10 text-center mx-32">
-     <h1 className="text-4xl font-bold mb-4">About Us</h1>
-     <div className="w-[500px] bg-white border p-8 rounded-md shadow">
-      <p className="text-xs font-medium mb-4">
-       Welcome to Foodie Go, where culinary dreams come to life! Our journey
-       began with a simple passion for food and a desire to share it with the
-       world.
-      </p>
-      <p className="text-xs font-medium mb-4">
-       Food has been a universal language, bringing people together across
-       cultures and generations. At Foodie Go, we believe that every recipe
-       tells a story, and every meal is an opportunity to create lasting
-       memories.
-      </p>
-      <p className="text-xs font-medium mb-4">
-       Our platform is designed for food lovers, home cooks, and aspiring chefs
-       alike. Whether you’re looking to discover new recipes, share your
-       culinary creations, or connect with fellow food enthusiasts, Foodie Go is
-       your go-to destination.
-      </p>
-      <p className="text-xs font-medium mb-4">
-       Join us on this delicious journey as we explore flavors from around the
-       globe, celebrate diverse cuisines, and inspire each other to cook, share,
-       and enjoy food together. Let’s make every meal a celebration
-      </p>
-     </div>
     </div>
    </div>
   </>

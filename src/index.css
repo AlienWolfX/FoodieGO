@@ -35,6 +35,7 @@
  width: 100%;
  overflow: hidden;
  line-height: 0;
+ z-index: 1;
 }
 
 .custom-shape-divider-bottom-1730098822 svg {
@@ -56,6 +57,7 @@
  width: 100%;
  overflow: hidden;
  line-height: 0;
+ z-index: 1;
 }
 
 .custom-shape-divider-top-1730107130 svg {
@@ -77,6 +79,7 @@
  width: 100%;
  overflow: hidden;
  line-height: 0;
+ z-index: 1;
 }
 
 .custom-shape-divider-bottom-1730205142 svg {

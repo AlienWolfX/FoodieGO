@@ -9,7 +9,7 @@ export const Explore = () => {
   <>
    <div
     id="explore"
-    className="mx-32 h-screen flex items-center justify-center"
+    className="mx-32 h-screen flex items-center justify-center my-32"
    >
     <div>
      <div>

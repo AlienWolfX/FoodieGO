@@ -4,7 +4,7 @@ export const Searchbar = () => {
  return (
   <>
    <div className="flex items-start gap-3 w-full">
-    <label className="relative w-[500px]">
+    <label className="relative w-[450px]">
      <CiSearch
       size={30}
       className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"

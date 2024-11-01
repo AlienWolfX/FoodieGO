@@ -26,7 +26,7 @@ export const Home = () => {
     <img src={exploreSide} alt="" className="w-[390px]" />
    </div>
    <div className="mt-10">
-    <h1 className="font-medium text-md">Latest Recipes</h1>
+    <h1 className="font-semibold text-lg text-gray-800">Latest Recipes</h1>
    </div>
    <div className="mb-3">
     <hr />
@@ -52,7 +52,7 @@ export const Home = () => {
     </div>
    </div>
    <div className="mt-10">
-    <h1 className="font-medium text-md">Recommended Recipes</h1>
+    <h1 className="font-semibold text-lg text-gray-800">Recommended Recipes</h1>
    </div>
 
    <div className="mb-3">
@@ -79,7 +79,7 @@ export const Home = () => {
     </div>
    </div>
    <div className="mt-10">
-    <h1 className="font-medium text-md">Popular Recipes</h1>
+    <h1 className="font-semibold text-lg text-gray-800">Popular Recipes</h1>
    </div>
    <div className="mb-3">
     <hr />
