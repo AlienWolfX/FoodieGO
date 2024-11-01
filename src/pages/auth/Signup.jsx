@@ -37,12 +37,10 @@ export const Signup = () => {
      className={`h-full w-full md:w-1/2 flex items-center justify-center ${
       !isMobile ? `bg-cover bg-center` : ""
      }`}
-     style={
-      isMobile ? { backgroundImage: `url(${registerImg})` } : {}
-     }
+     style={isMobile ? { backgroundImage: `url(${registerImg})` } : {}}
     >
-     <div className="p-5 mt-20 md:p-10 lg:p-16 w-full max-w-md">
-      <div className="bg-white w-full h-auto p-8 rounded-md shadow-md">
+     <div className="p-5 md:p-10">
+      <div className="bg-white w-full lg:w-[450px] h-auto p-8 mt-5 rounded-md shadow-md">
        <div className="text-2xl text-mainblue font-bold text-center">
         Signup Page
        </div>
