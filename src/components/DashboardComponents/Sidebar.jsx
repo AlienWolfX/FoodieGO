@@ -3,9 +3,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { sidebar } from "../../data/navbarData";
 import { IoLogOut } from "react-icons/io5";
-import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 import mainLogo from "/mainLogo.png";
 import { motion } from "framer-motion";
+import { FaAngleRight } from "react-icons/fa6";
+import { FaAngleLeft } from "react-icons/fa6";
 
 export const Sidebar = ({ onToggle }) => {
  const [collapsed, setCollapsed] = useState(false);
@@ -29,7 +30,10 @@ export const Sidebar = ({ onToggle }) => {
    <motion.div
     className={`z-20 fixed h-screen bg-white shadow-lg rounded-tr-2xl p-3 flex flex-col`}
     initial={{ width: "170px", x: 0 }}
-    animate={{ width: collapsed ? "60px" : "170px", x: collapsed ? "-110px" : "0" }}
+    animate={{
+     width: collapsed ? "60px" : "170px",
+     x: collapsed ? "-110px" : "0",
+    }}
     transition={{ duration: 0.3 }}
    >
     <div className="mt-3 flex items-center justify-between">
@@ -43,12 +47,15 @@ export const Sidebar = ({ onToggle }) => {
        FoodieGO
       </h1>
      </div>
-     <div className="absolute -right-2">
-      <button onClick={toggleSidebar} className="ml-auto text-mainblue">
+     <div className="absolute -right-[28px]">
+      <button
+       onClick={toggleSidebar}
+       className="h-10 flex items-center justify-center w-[28px] bg-mainblue rounded-tr-full rounded-br-full text-white"
+      >
        {collapsed ? (
-        <IoArrowForwardCircle size={18} />
+        <FaAngleRight size={16} className="text-white" />
        ) : (
-        <IoArrowBackCircle size={18} />
+        <FaAngleLeft size={16} className="text-white" />
        )}
       </button>
      </div>
@@ -74,7 +81,11 @@ export const Sidebar = ({ onToggle }) => {
       );
      })}
     </div>
-    <div className={`py-4 w-full flex items-center justify-center ${collapsed ? "hidden" : ""}`}>
+    <div
+     className={`py-4 w-full flex items-center justify-center ${
+      collapsed ? "hidden" : ""
+     }`}
+    >
      <button
       onClick={handleLogout}
       className="font-medium flex items-center gap-1 justify-center text-xs text-white px-4 bg-mainblue rounded h-10"
@@ -84,12 +95,17 @@ export const Sidebar = ({ onToggle }) => {
      </button>
     </div>
    </motion.div>
-   <div className={`absolute top-8 left-0 ${collapsed ? "w-[60px]" : "w-[170px]"}`}>
-    <button onClick={toggleSidebar} className="text-mainblue">
+   <div
+    className={`absolute top-5 left-0 ${collapsed ? "w-[60px]" : "w-[170px]"}`}
+   >
+    <button
+     onClick={toggleSidebar}
+     className="h-10 w-[28px] flex items-center justify-center bg-mainblue rounded-tr-full rounded-br-full text-mainblue"
+    >
      {collapsed ? (
-      <IoArrowForwardCircle size={18} />
+      <FaAngleRight size={16} className="text-white" />
      ) : (
-      <IoArrowBackCircle size={18} />
+      <FaAngleLeft size={16} className="text-white" />
      )}
     </button>
    </div>
