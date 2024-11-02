@@ -3,19 +3,19 @@ import { MdCancel } from "react-icons/md";
 export const CreateRecipe = ({ setCreateRecipe }) => {
  return (
   <>
-   <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-    <div className="bg-white border w-[700px] min-h-[500px] p-5 rounded">
+   <div className="p-5 md:p-0 fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center overflow-x-scroll md:overflow-hidden">
+    <div className="mt-60 md:mt-0 bg-white border w-full max-w-[700px] min-h-[400px] md:min-h-[500px] p-5 rounded ">
      <div className="flex items-center justify-between">
-      <h1>Add Recipe</h1>
+      <h1 className="text-lg font-bold">Add Recipe</h1>
       <MdCancel
        onClick={() => setCreateRecipe(false)}
        size={20}
-       className="text-red-500"
+       className="text-red-500 cursor-pointer"
       />
      </div>
      <div>
       <form action="">
-       <div className="flex items-star gap-2">
+       <div className="flex flex-col md:flex-row gap-2">
         <div className="space-y-3 mt-5 w-full">
          <div className="flex flex-col gap-1">
           <label htmlFor="" className="text-xs font-medium">
@@ -53,7 +53,6 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
           </label>
           <input
            type="file"
-           placeholder="Lunch"
            className="h-10 border rounded px-4 text-xs font-medium outline-none"
           />
          </div>
@@ -63,7 +62,7 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
           </label>
           <input
            type="text"
-           placeholder="Lunch"
+           placeholder="e.g., 30 minutes"
            className="h-10 border rounded px-4 text-xs font-medium outline-none"
           />
          </div>
@@ -106,6 +105,15 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
           />
          </div>
         </div>
+       </div>
+       {/* Create Recipe Button */}
+       <div className="mt-5">
+        <button
+         type="submit"
+         className="w-full bg-blue-500 text-xs text-white font-medium py-2 rounded hover:bg-blue-600 transition duration-200"
+        >
+         Create Recipe
+        </button>
        </div>
       </form>
      </div>
