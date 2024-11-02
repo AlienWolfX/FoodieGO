@@ -5,6 +5,7 @@ import { sidebar } from "../../data/navbarData";
 import { IoLogOut } from "react-icons/io5";
 import { IoArrowForwardCircle, IoArrowBackCircle } from "react-icons/io5";
 import mainLogo from "/mainLogo.png";
+import { motion } from "framer-motion";
 
 export const Sidebar = ({ onToggle }) => {
  const [collapsed, setCollapsed] = useState(false);
@@ -25,10 +26,11 @@ export const Sidebar = ({ onToggle }) => {
  return (
   <>
    <Toaster richColors position="top-center" />
-   <div
-    className={`fixed h-screen bg-white shadow-lg rounded-tr-2xl p-3 flex flex-col transition-width duration-300 ${
-     collapsed ? "w-[60px]" : "w-[170px]"
-    }`}
+   <motion.div
+    className={`z-20 fixed h-screen bg-white shadow-lg rounded-tr-2xl p-3 flex flex-col`}
+    initial={{ width: "170px", x: 0 }}
+    animate={{ width: collapsed ? "60px" : "170px", x: collapsed ? "-110px" : "0" }}
+    transition={{ duration: 0.3 }}
    >
     <div className="mt-3 flex items-center justify-between">
      <div className="flex items-center gap-2">
@@ -51,13 +53,7 @@ export const Sidebar = ({ onToggle }) => {
       </button>
      </div>
     </div>
-    <div className="text-darkgray my-2">
-     <hr />
-    </div>
-    <div className={`mt-5 mb-2 ${collapsed ? "hidden" : ""}`}>
-     <h1 className="text-[10px] text-darkgray text-light">Dashboard</h1>
-    </div>
-    <div className="flex-grow">
+    <div className={`flex-grow ${collapsed ? "hidden" : ""}`}>
      {sidebar.map((item, index) => {
       const IconComponent = item.icon;
       return (
@@ -78,7 +74,7 @@ export const Sidebar = ({ onToggle }) => {
       );
      })}
     </div>
-    <div className="py-4 w-full flex items-center justify-center">
+    <div className={`py-4 w-full flex items-center justify-center ${collapsed ? "hidden" : ""}`}>
      <button
       onClick={handleLogout}
       className="font-medium flex items-center gap-1 justify-center text-xs text-white px-4 bg-mainblue rounded h-10"
@@ -87,6 +83,15 @@ export const Sidebar = ({ onToggle }) => {
       {!collapsed && "Logout"}
      </button>
     </div>
+   </motion.div>
+   <div className={`absolute top-8 left-0 ${collapsed ? "w-[60px]" : "w-[170px]"}`}>
+    <button onClick={toggleSidebar} className="text-mainblue">
+     {collapsed ? (
+      <IoArrowForwardCircle size={18} />
+     ) : (
+      <IoArrowBackCircle size={18} />
+     )}
+    </button>
    </div>
   </>
  );

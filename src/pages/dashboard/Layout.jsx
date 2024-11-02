@@ -14,8 +14,8 @@ export const Layout = ({ children }) => {
    <div className="flex bg-mainbg h-screen overflow-y-scroll">
     <Sidebar onToggle={handleSidebarToggle} />
     <div
-     className={`px-10 mt-5 w-full transition-all duration-300 ${
-      isSidebarCollapsed ? "ml-[60px]" : "ml-[170px]"
+     className={`px-4 md:px-10 mt-5 w-full transition-all duration-300 ${
+      isSidebarCollapsed ? "ml-0 md:ml-[60px]" : "ml-0 md:ml-[170px]"
      }`}
     >
      <Topbar />
