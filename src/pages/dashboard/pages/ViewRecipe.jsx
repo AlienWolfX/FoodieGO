@@ -32,10 +32,10 @@ export const ViewRecipe = () => {
    <p onClick={() => nav(-1)} className="font-light text-xs cursor-pointer text-orange-500">
     Back
    </p>
-   <div className="bg-white p-8 rounded-xl mt-5">
-    <div className="flex items-center justify-between">
+   <div className="bg-white p-4 md:p-8 rounded-xl mt-5">
+    <div className="flex flex-row items-center justify-between">
      <div>
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h1 className="text-xl md:text-2xl font-bold">{title}</h1>
       <p
        onClick={() => setAuthorModal(true)}
        className="cursor-pointer hover:text-red-500"
@@ -62,7 +62,7 @@ export const ViewRecipe = () => {
     </div>
     <div className="mt-2">
      <p className="text-sm font-light">Tags</p>
-     <div className="flex items-center gap-2 mt-2">
+     <div className="flex flex-wrap items-center gap-2 mt-2">
       <div className="px-4 h-8 rounded border flex items-center cursor-pointer justify-center">
        <h1 className="text-xs font-light">Category: {category}</h1>
       </div>
@@ -75,7 +75,7 @@ export const ViewRecipe = () => {
      </div>
     </div>
     <div className="mt-5">
-     <div className="w-full h-[500px] bg-gray-200 rounded">
+     <div className="w-full h-[300px] md:h-[500px] bg-gray-200 rounded">
       {img_path ? (
        <img
         src={img_path}
@@ -83,13 +83,13 @@ export const ViewRecipe = () => {
         className="h-full w-full object-cover rounded"
        />
       ) : (
-       <div className="h-[500px] bg-gray-200 rounded flex items-center justify-center">
+       <div className="h-full bg-gray-200 rounded flex items-center justify-center">
         No Image Available
        </div>
       )}
      </div>
     </div>
-    <div className="flex items-start justify-between gap-3">
+    <div className="flex flex-col md:flex-row items-start justify-between gap-3">
      <div className="space-y-2 mt-6 w-full">
       <h1 className="text-sm font-medium">Ingredients</h1>
       <div className="py-2">
@@ -97,10 +97,10 @@ export const ViewRecipe = () => {
       </div>
       {ingredients.map((data, index) => (
        <div
-        className="h-10 border rounded bg-white text-xs   flex items-center justify-start px-4"
+        className="h-10 border rounded bg-white text-xs flex items-center justify-start px-4"
         key={index}
        >
-        <p>{data}</p>{" "}
+        <p>{data}</p>
        </div>
       ))}
      </div>
@@ -111,7 +111,7 @@ export const ViewRecipe = () => {
       </div>
       {instructions.map((data, index) => (
        <div
-        className="h-10 border rounded bg-white text-xs   flex items-center justify-start px-4"
+        className="h-10 border rounded bg-white text-xs flex items-center justify-start px-4"
         key={index}
        >
         <h1>{data}</h1>
