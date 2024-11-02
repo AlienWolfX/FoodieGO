@@ -60,6 +60,9 @@ export const Sidebar = ({ onToggle }) => {
       </button>
      </div>
     </div>
+    <div className="mt-5">
+      <p className="text-[10px] font-light text-gray-500">Menu</p>
+    </div>
     <div className={`flex-grow ${collapsed ? "hidden" : ""}`}>
      {sidebar.map((item, index) => {
       const IconComponent = item.icon;
