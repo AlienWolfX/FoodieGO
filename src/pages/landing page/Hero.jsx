@@ -1,5 +1,5 @@
 import { Searchbar } from "../../components/Searchbar";
-import threePlateFood from "/public/threePlateFood.png";
+import threePlateFood from "/threePlateFood.png";
 
 export const Hero = () => {
  return (

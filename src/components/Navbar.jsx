@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import mainLogo from "/public/mainLogo.png";
+import mainLogo from "/mainLogo.png";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing hamburger and close icons
 
 export const Navbar = () => {

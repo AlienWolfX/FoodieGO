@@ -1,3 +1,5 @@
+// import { Cards } from "../../../components/AnalyticsComponents/Cards";
+import { OverviewCards } from "../../../components/AnalyticsComponents/OverviewCards";
 import { Layout } from "../Layout";
 
 export const Analytics = () => {
@@ -9,6 +11,9 @@ export const Analytics = () => {
     </div>
     <div className="mt-2">
      <hr />
+    </div>
+    <div className="mt-5">
+     <OverviewCards />
     </div>
    </Layout>
   </>
