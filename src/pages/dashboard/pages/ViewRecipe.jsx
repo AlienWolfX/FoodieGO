@@ -2,11 +2,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Layout } from "../Layout";
 import { CiHeart } from "react-icons/ci";
 import { useEffect, useState } from "react";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { AuthorProfile } from "../../../components/Modals/AuthorProfile";
 import { CommentsCard } from "../../../components/DashboardComponents/CommentsCard";
 import { AiSuggestions } from "../../../components/DashboardComponents/AiSuggestions";
 import { AddFavorite } from "../../../components/Modals/AddFavorite";
 import { AnalyzeRecipe } from "../../../components/AiComponent/AnalyzeRecipe";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
@@ -49,11 +53,11 @@ export const ViewRecipe = () => {
      </div>
      <div>
       <div className="bg-red-100 rounded-lg h-10 w-10 flex items-center justify-center">
-       <CiHeart
-        size={25}
-        className="text-red-500 cursor-pointer"
-        onClick={() => setFavModal(true)}
-       />
+       <Tooltip title="Like" onClick={() => setFavModal(true)}>
+        <IconButton>
+         <FavoriteBorderOutlinedIcon className="text-red-500" />
+        </IconButton>
+       </Tooltip>
       </div>
      </div>
     </div>
