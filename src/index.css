@@ -152,26 +152,8 @@
  }
 }
 
-/* arrow slider */
-.custom-arrow {
- background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
- border-radius: 50%; /* Rounded corners */
- width: 30px; /* Width of the arrow */
- height: 30px; /* Height of the arrow */
- display: flex;
- align-items: center;
- justify-content: center;
- z-index: 1; /* Ensure it is above other elements */
-}
 
-.custom-prev-arrow {
- left: -10px; /* Positioning for the left arrow */
-}
-
-.custom-next-arrow {
- right: -10px; /* Positioning for the right arrow */
-}
-
-.custom-arrow:hover {
- background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
+.slick-arrow::before{
+ color: blue;
+font-size: 20px;
 }

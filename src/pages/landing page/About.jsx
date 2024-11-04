@@ -1,4 +1,4 @@
-import aboutImg from "/public/aboutImg.png";
+import aboutImg from "/aboutImg.png";
 
 export const About = () => {
  return (
@@ -7,9 +7,9 @@ export const About = () => {
     id="about"
     className="relative h-auto lg:h-screen flex items-center justify-center my-10 lg:my-0"
    >
-    <div className="flex flex-col md:flex-row items-center justify-center mx-5 lg:mx-32 gap-10 lg:gap-32">
+    <div className="flex flex-col md:flex-row items-center justify-center mx-5 lg:mx-32 gap-10 md:gap-5 xl:gap-32">
      <div className="flex items-center justify-center rounded-md z-10 bg-white shadow-lg p-2">
-      <img src={aboutImg} alt="" className="w-full lg:w-[350px] rounded-md" />
+      <img src={aboutImg} alt="" className="w-full lg:w-[340px] rounded-md" />
      </div>
      <div className="text-center">
       <h1 className="text-3xl md:text-4xl font-bold mb-4">About Us</h1>

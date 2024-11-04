@@ -66,25 +66,8 @@ export const ExploreRecipes = () => {
        </button>
       </div>
      </div>
-
-     <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {filteredRecipes.map((recipe) => (
-       <FoodCard
-        key={recipe.id}
-        id={recipe.id}
-        title={recipe.title}
-        img_path={recipe.img_path}
-        category={recipe.category}
-        author={recipe.author}
-        description={recipe.description}
-        difficulty={recipe.difficulty}
-        time={recipe.time}
-        ratings={recipe.ratings}
-        ingredients={recipe.ingredients}
-        instructions={recipe.instructions}
-        navigateTo="/explore/view-recipe"
-       />
-      ))}
+     <div>
+      <FoodCard recipes={recipeData} />
      </div>
     </div>
    </div>

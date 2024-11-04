@@ -1,7 +1,8 @@
-import { FoodCard } from "../../../components/FoodCard/FoodCard";
+import { FoodCardSlider } from "../../../components/FoodCard/FoodCardSlider";
 import { Layout } from "../Layout";
 import { recipeData } from "../../../../data/RecipeData";
-import exploreSide from "/public/exploreSide.png";
+import exploreSide from "/exploreSide.png";
+import { FoodCard } from "../../../components/FoodCard/FoodCard";
 
 export const Home = () => {
  return (
@@ -39,8 +40,8 @@ export const Home = () => {
    <div className="mb-3">
     <hr />
    </div>
-   <div className="w-full max-w-[1100px] mx-auto mt-5">
-    <FoodCard recipes={recipeData} />
+   <div className="mt-5 w-full">
+    <FoodCardSlider recipes={recipeData} />
    </div>
 
    <div className="mt-16">
@@ -49,8 +50,8 @@ export const Home = () => {
    <div className="mb-3">
     <hr />
    </div>
-   <div className="w-full max-w-[1100px] mx-auto mt-5">
-    <FoodCard recipes={recipeData} />
+   <div className="mt-5 w-full">
+    <FoodCardSlider recipes={recipeData} />
    </div>
 
    <div className="mt-16">
@@ -61,8 +62,8 @@ export const Home = () => {
    <div className="mb-3">
     <hr />
    </div>
-   <div className="w-full max-w-[1100px] mx-auto mt-5">
-    <FoodCard recipes={recipeData} />
+   <div className="mt-5 w-full">
+    <FoodCardSlider recipes={recipeData} />
    </div>
 
    <div className="mt-16">
@@ -73,8 +74,8 @@ export const Home = () => {
    <div className="mb-3">
     <hr />
    </div>
-   <div className="w-full max-w-[1100px] mx-auto mt-5">
-    <FoodCard recipes={recipeData} />
+   <div className="mt-5 w-full">
+    <FoodCardSlider recipes={recipeData} />
    </div>
   </Layout>
  );

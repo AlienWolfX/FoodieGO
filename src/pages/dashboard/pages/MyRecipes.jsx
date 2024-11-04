@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Layout } from "../Layout";
 import { CreateRecipe } from "../../../components/recipe/CreateRecipe";
 import { AnimatePresence, motion } from "framer-motion";
+import { UserFoodCard } from "../../../components/FoodCard/UserFoodCard";
 
 export const MyRecipes = () => {
  const [createRecipe, setCreateRecipe] = useState(false);
@@ -22,6 +23,9 @@ export const MyRecipes = () => {
     </div>
     <div className="mt-2">
      <hr />
+    </div>
+    <div className="mt-5">
+     <UserFoodCard />
     </div>
     {createRecipe ? (
      <AnimatePresence>

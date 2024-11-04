@@ -1,11 +1,12 @@
 import { MdCancel } from "react-icons/md";
-import { FoodCard } from "../FoodCard/FoodCard";
+import { FoodCardSlider } from "../FoodCard/FoodCardSlider";
 import { recipeData } from "../../../data/RecipeData";
 import { useEffect, useState } from "react";
+import { FoodCard } from "../FoodCard/FoodCard";
 
 export const AuthorProfile = ({ setAuthorModal, author }) => {
  const [selectedAuthor, setSelectedAuthor] = useState(null);
- 
+
  return (
   <>
    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
@@ -52,32 +53,7 @@ export const AuthorProfile = ({ setAuthorModal, author }) => {
       <h3 className="text-sm font-medium">Shared Recipes</h3>
      </div>
      <div className="mt-5">
-      <div
-       className="mt-5 w-full grid grid-cols-4 gap-3"
-       onClick={() => setAuthorModal(false)}
-      >
-       {recipeData
-        .filter((recipe) => recipe.author === author)
-        .map((recipe) => (
-         <FoodCard
-          key={recipe.id}
-          id={recipe.id}
-          title={recipe.title}
-          img_path={recipe.img_path}
-          category={recipe.category}
-          author={recipe.author}
-          description={recipe.description}
-          difficulty={recipe.difficulty}
-          time={recipe.time}
-          ratings={recipe.ratings}
-          ingredients={recipe.ingredients}
-          instructions={recipe.instructions}
-          onClick={() => {
-           setSelectedAuthor(recipe.author);
-          }}
-         />
-        ))}
-      </div>
+      <FoodCard recipes={recipeData} />
      </div>
     </div>
    </div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Toaster } from "sonner";
 import { buildUrl } from "../../../utils/buildUrl";
 
-import loginImg from "/public/auth-images/login.png";
+import loginImg from "/auth-images/login.png";
 
 export const Login = () => {
  const [email, setEmail] = useState("");

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
-import registerImg from "/public/auth-images/register.png";
+import registerImg from "/auth-images/register.png";
 
 export const Signup = () => {
  const nav = useNavigate();

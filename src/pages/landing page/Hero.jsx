@@ -40,7 +40,7 @@ export const Hero = () => {
      <img
       src={threePlateFood}
       alt=""
-      className="w-full hidden lg:block max-w-xs lg:max-w-[500px] z-10"
+      className="w-full hidden lg:block max-w-xs lg:max-w-[430px] xl:w-[500px] z-10"
      />
     </div>
    </div>

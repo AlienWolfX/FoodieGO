@@ -1,4 +1,5 @@
 import { ProfileCard } from "../../../components/DashboardComponents/ProfileCard";
+import { ProfilePreferencesCards } from "../../../components/DashboardComponents/ProfilePreferencesCards";
 import { Layout } from "../Layout";
 
 export const MyProfile = () => {
@@ -10,11 +11,9 @@ export const MyProfile = () => {
    <div className="mt-2">
     <hr />
    </div>
-   <div className="mt-3">
+   <div className="mt-5 flex items-start gap-5">
     <ProfileCard />
-    <div className="flex items-end justify-start mt-2">
-     <h1 className="text-xs font-light text-red-500 cursor-pointer">Delete Account</h1>
-    </div>
+    <ProfilePreferencesCards />
    </div>
   </Layout>
  );

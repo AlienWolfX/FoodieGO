@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { CiClock2 } from "react-icons/ci";
+import { UserRecipeData } from "../../../data/UserRecipeData";
 
-export const FoodCard = ({ recipes }) => {
+export const UserFoodCard = () => {
  return (
   <>
-   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-    {recipes.map((recipe) => (
+   <div className="grid grid-cols-3 gap-4">
+    {UserRecipeData.map((recipe) => (
      <Link
       key={recipe.id}
       to="/view-recipe"

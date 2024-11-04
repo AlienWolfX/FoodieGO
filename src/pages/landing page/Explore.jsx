@@ -11,8 +11,8 @@ export const Explore = () => {
     id="explore"
     className="mx-5 lg:mx-32 h-auto lg:h-screen pt-10 lg:pt-0 flex items-center justify-center lg:my-32"
    >
-    <div className="w-full">
-     <div className="text-center">
+    <div className="w-full flex flex-col justify-center items-center">
+     <div className="text-center lg:w-[600px] flex flex-col justify-center items-center">
       <h1 className="text-3xl md:text-4xl font-bold text-[#121212]">
        Explore New Recipes
       </h1>
@@ -22,24 +22,8 @@ export const Explore = () => {
        have something for everyone!
       </p>
      </div>
-     <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      {recipeData.slice(0, 8).map((recipe) => (
-       <FoodCard
-        key={recipe.id}
-        id={recipe.id}
-        title={recipe.title}
-        img_path={recipe.img_path}
-        category={recipe.category}
-        author={recipe.author}
-        description={recipe.description}
-        difficulty={recipe.difficulty}
-        time={recipe.time}
-        ratings={recipe.ratings}
-        ingredients={recipe.ingredients}
-        instructions={recipe.instructions}
-        navigateTo={`/explore/view-recipe`}
-       />
-      ))}
+     <div className="mt-5 mx-32">
+      <FoodCard recipes={recipeData.slice(0, 6)} />
      </div>
      <div className="flex items-center justify-center mt-10">
       <button
