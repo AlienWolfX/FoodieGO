@@ -16,40 +16,6 @@ export const FoodCardSlider = ({ recipes }) => {
   slidesToShow: slidesToShow,
   slidesToScroll: slidesToShow,
   initialSlide: 0,
-  prevArrow: (
-   <div
-    className="slick-prev"
-    style={{
-     display: "block",
-     color: "white",
-     fontSize: "40px",
-     backgroundColor: "rgba(0, 0, 0, 0.7)",
-     padding: "10px",
-     borderRadius: "50%",
-     cursor: "pointer",
-     zIndex: 1, // Ensures the arrow is above other elements
-    }}
-   >
-    &lt;
-   </div>
-  ),
-  nextArrow: (
-   <div
-    className="slick-next"
-    style={{
-     display: "block",
-     color: "white",
-     fontSize: "40px",
-     backgroundColor: "rgba(0, 0, 0, 0.7)",
-     padding: "10px",
-     borderRadius: "50%",
-     cursor: "pointer",
-     zIndex: 1,
-    }}
-   >
-    &gt;
-   </div>
-  ),
   responsive: [
    {
     breakpoint: 1536,
