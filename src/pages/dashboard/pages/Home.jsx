@@ -32,85 +32,49 @@ export const Home = () => {
      className="hidden md:block w-full md:w-[390px] mt-5 md:mt-0"
     />
    </div>
-   <div className="mt-10">
-    <h1 className="font-semibold text-lg text-gray-800">Latest Recipes</h1>
-   </div>
-   <div className="mb-3">
-    <hr />
-   </div>
-   <div className="mt-2">
-    <div className="mt-5 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-     {recipeData.map((recipe) => (
-      <FoodCard
-       key={recipe.id}
-       id={recipe.id}
-       title={recipe.title}
-       img_path={recipe.img_path}
-       category={recipe.category}
-       author={recipe.author}
-       description={recipe.description}
-       difficulty={recipe.difficulty}
-       time={recipe.time}
-       ratings={recipe.ratings}
-       ingredients={recipe.ingredients}
-       instructions={recipe.instructions}
-      />
-     ))}
-    </div>
-   </div>
 
    <div className="mt-10">
-    <h1 className="font-semibold text-lg text-gray-800">Recommended Recipes</h1>
+    <h1 className="font-semibold text-2xl text-gray-800">Latest Recipes</h1>
    </div>
    <div className="mb-3">
     <hr />
    </div>
-   <div className="mt-2">
-    <div className="mt-5 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-     {recipeData.map((recipe) => (
-      <FoodCard
-       key={recipe.id}
-       id={recipe.id}
-       title={recipe.title}
-       img_path={recipe.img_path}
-       category={recipe.category}
-       author={recipe.author}
-       description={recipe.description}
-       difficulty={recipe.difficulty}
-       time={recipe.time}
-       ratings={recipe.ratings}
-       ingredients={recipe.ingredients}
-       instructions={recipe.instructions}
-      />
-     ))}
-    </div>
+   <div className="w-full max-w-[1100px] mx-auto mt-5">
+    <FoodCard recipes={recipeData} />
    </div>
 
-   <div className="mt-10">
-    <h1 className="font-semibold text-lg text-gray-800">Popular Recipes</h1>
+   <div className="mt-16">
+    <h1 className="font-semibold text-2xl text-gray-800">Popular Recipes</h1>
    </div>
    <div className="mb-3">
     <hr />
    </div>
-   <div className="mt-2">
-    <div className="mt-5 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-     {recipeData.map((recipe) => (
-      <FoodCard
-       key={recipe.id}
-       id={recipe.id}
-       title={recipe.title}
-       img_path={recipe.img_path}
-       category={recipe.category}
-       author={recipe.author}
-       description={recipe.description}
-       difficulty={recipe.difficulty}
-       time={recipe.time}
-       ratings={recipe.ratings}
-       ingredients={recipe.ingredients}
-       instructions={recipe.instructions}
-      />
-     ))}
-    </div>
+   <div className="w-full max-w-[1100px] mx-auto mt-5">
+    <FoodCard recipes={recipeData} />
+   </div>
+
+   <div className="mt-16">
+    <h1 className="font-semibold text-2xl text-gray-800">
+     Recommended Recipes
+    </h1>
+   </div>
+   <div className="mb-3">
+    <hr />
+   </div>
+   <div className="w-full max-w-[1100px] mx-auto mt-5">
+    <FoodCard recipes={recipeData} />
+   </div>
+
+   <div className="mt-16">
+    <h1 className="font-semibold text-2xl text-gray-800">
+     Followed User's Recipes
+    </h1>
+   </div>
+   <div className="mb-3">
+    <hr />
+   </div>
+   <div className="w-full max-w-[1100px] mx-auto mt-5">
+    <FoodCard recipes={recipeData} />
    </div>
   </Layout>
  );
