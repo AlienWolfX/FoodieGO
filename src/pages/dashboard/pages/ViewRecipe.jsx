@@ -6,6 +6,7 @@ import { AuthorProfile } from "../../../components/Modals/AuthorProfile";
 import { CommentsCard } from "../../../components/DashboardComponents/CommentsCard";
 import { AiSuggestions } from "../../../components/DashboardComponents/AiSuggestions";
 import { AddFavorite } from "../../../components/Modals/AddFavorite";
+import { AnalyzeRecipe } from "../../../components/AiComponent/AnalyzeRecipe";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
@@ -17,7 +18,7 @@ export const ViewRecipe = () => {
   category,
   description,
   difficulty,
-  time, 
+  time,
   img_path,
   ingredients,
   instructions,
@@ -25,11 +26,14 @@ export const ViewRecipe = () => {
 
  const [authorModal, setAuthorModal] = useState(false);
  const [favModal, setFavModal] = useState(false);
-
+ const [analyze, setAnalyze] = useState(false);
 
  return (
   <Layout>
-   <p onClick={() => nav(-1)} className="font-light text-xs cursor-pointer text-orange-500">
+   <p
+    onClick={() => nav(-1)}
+    className="font-light text-xs cursor-pointer text-orange-500"
+   >
     Back
    </p>
    <div className="bg-white p-4 md:p-8 rounded-xl mt-5">
@@ -119,7 +123,13 @@ export const ViewRecipe = () => {
       ))}
      </div>
     </div>
-    <div className="mt-5 flex items-center justify-center">
+    <div className="mt-5 flex items-center justify-center gap-2">
+     <button
+      onClick={() => setAnalyze(true)}
+      className="text-mainblue text-xs fotn-medium"
+     >
+      Analyze Nutrition✨
+     </button>
      <button className="bg-mainblue text-white text-xs h-10 px-4 rounded">
       Download Recipe
      </button>
@@ -135,6 +145,7 @@ export const ViewRecipe = () => {
     <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
    )}
    {favModal && <AddFavorite setFavModal={setFavModal} />}
+   {analyze && <AnalyzeRecipe setAnalyze={setAnalyze} />}
   </Layout>
  );
 };
