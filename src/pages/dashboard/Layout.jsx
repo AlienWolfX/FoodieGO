@@ -15,7 +15,7 @@ export const Layout = ({ children }) => {
     <Sidebar onToggle={handleSidebarToggle} />
     <div
      className={`px-4 md:px-10 mt-5 w-[1120px] transition-all duration-300 ${
-      isSidebarCollapsed ? "ml-0 md:ml-[60px]" : "ml-0 md:ml-[170px]"
+      isSidebarCollapsed ? "ml-0 md:ml-[170px]" : "ml-0 md:ml-[170px]"
      }`}
     >
      <Topbar />
