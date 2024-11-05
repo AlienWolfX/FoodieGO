@@ -9,6 +9,7 @@ import { AnalyzeRecipe } from "../../../components/AiComponent/AnalyzeRecipe";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
@@ -49,11 +50,21 @@ export const ViewRecipe = () => {
        Author: {author}
       </p>
      </div>
-     <div>
+     <div className="flex items-center gap-2">
       <div className="bg-red-100 rounded-lg h-10 w-10 flex items-center justify-center">
        <Tooltip title="Like" onClick={() => setFavModal(true)}>
         <IconButton>
-         <FavoriteBorderOutlinedIcon className="text-red-500" />
+         <FavoriteBorderOutlinedIcon
+          className="text-red-500"
+          fontSize="small"
+         />
+        </IconButton>
+       </Tooltip>
+      </div>
+      <div className="bg-yellow-100 rounded-lg h-10 w-10 flex items-center justify-center">
+       <Tooltip title="Add to Favorites" onClick={() => setFavModal(true)}>
+        <IconButton>
+         <StarBorderIcon className="text-yellow-500" fontSize="small" />
         </IconButton>
        </Tooltip>
       </div>

@@ -1,16 +1,17 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { CiClock2 } from "react-icons/ci";
 
-export const FoodCard = ({ recipes }) => {
+export const FoodCard = ({ recipes, basePath }) => {
  return (
   <>
    <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {recipes.map((recipe) => (
      <Link
       key={recipe.id}
-      to="/view-recipe"
+      to={`${basePath}/view-recipe`}
       state={{
        title: recipe.title,
        img_path: recipe.img_path,
@@ -24,7 +25,7 @@ export const FoodCard = ({ recipes }) => {
        instructions: recipe.instructions,
       }}
      >
-      <div className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 w-full">
+      <div className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 w-full flex flex-col">
        <div className="relative overflow-hidden rounded">
         {recipe.img_path ? (
          <img
@@ -44,11 +45,8 @@ export const FoodCard = ({ recipes }) => {
           Author: {recipe.author}
          </h1>
         </div>
-        <div className="bg-gray-50 h-8 w-8 border rounded-lg flex items-center justify-center">
-         <CiHeart />
-        </div>
        </div>
-       <div className="md:flex items-center gap-3">
+       <div className="md:flex items-center gap-3 mt-auto">
         <p className="text-gray-500 text-xs md:text-sm font-light">
          Category: {recipe.category}
         </p>

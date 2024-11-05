@@ -1,18 +1,25 @@
 import { MdCancel } from "react-icons/md";
-import { FoodCardSlider } from "../FoodCard/FoodCardSlider";
+import { FoodCard } from "../FoodCard/FoodCard";
 import { recipeData } from "../../../data/RecipeData";
 import { useEffect, useState } from "react";
-import { FoodCard } from "../FoodCard/FoodCard";
 
 export const AuthorProfile = ({ setAuthorModal, author }) => {
  const [selectedAuthor, setSelectedAuthor] = useState(null);
+
+ // Filter recipes by the selected author
+ const filteredRecipes = recipeData.filter(recipe => recipe.author === author);
+
+ // Function to handle closing the modal
+ const handleCardClick = () => {
+  setAuthorModal(false);
+ };
 
  return (
   <>
    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
     <div className="bg-white border w-[900px] max-h-[600px] p-5 rounded overflow-y-scroll">
      <div>
-      <div className="flex items-center  justify-between">
+      <div className="flex items-center justify-between">
        <h1 className="font-medium text-lg ">Foodigoer Profile</h1>
        <MdCancel
         onClick={() => setAuthorModal(false)}
@@ -35,7 +42,7 @@ export const AuthorProfile = ({ setAuthorModal, author }) => {
           </p>
           <p>
            Recipes:
-           <span className="text-xs text-gray-700 font-medium">100</span>
+           <span className="text-xs text-gray-700 font-medium">{filteredRecipes.length}</span>
           </p>
           <p>
            Total Likes:
@@ -53,7 +60,8 @@ export const AuthorProfile = ({ setAuthorModal, author }) => {
       <h3 className="text-sm font-medium">Shared Recipes</h3>
      </div>
      <div className="mt-5">
-      <FoodCard recipes={recipeData} />
+      {/* Pass the filtered recipes and handleCardClick to FoodCard */}
+      <FoodCard recipes={filteredRecipes} onCardClick={handleCardClick} />
      </div>
     </div>
    </div>
