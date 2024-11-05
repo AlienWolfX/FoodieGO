@@ -28,7 +28,7 @@ export const Sidebar = ({ onToggle }) => {
   <>
    <Toaster richColors position="top-center" />
    <motion.div
-    className={`z-20 fixed h-screen bg-white shadow-lg rounded-tr-2xl p-3 flex flex-col`}
+    className={`fixed h-screen bg-white shadow-lg rounded-tr-2xl p-3 flex flex-col`}
     initial={{ width: "170px", x: 0 }}
     animate={{
      width: collapsed ? "60px" : "170px",
@@ -37,7 +37,10 @@ export const Sidebar = ({ onToggle }) => {
     transition={{ duration: 0.3 }}
    >
     <div className="mt-3 flex items-center justify-between">
-     <div className="flex items-center gap-2">
+     <div
+      onClick={() => nav("/")}
+      className="flex items-center gap-2 cursor-pointer"
+     >
       <img src={mainLogo} alt="" className="w-[50px]" />
       <h1
        className={`${
@@ -61,7 +64,7 @@ export const Sidebar = ({ onToggle }) => {
      </div>
     </div>
     <div className="mt-5">
-      <p className="text-[10px] font-light text-gray-500">Menu</p>
+     <p className="text-[10px] font-light text-gray-500">Menu</p>
     </div>
     <div className={`flex-grow ${collapsed ? "hidden" : ""}`}>
      {sidebar.map((item, index) => {
@@ -99,7 +102,11 @@ export const Sidebar = ({ onToggle }) => {
     </div>
    </motion.div>
    <div
-    className={`absolute top-5 left-0 ${collapsed ? "w-[60px]" : "w-[170px]"}`}
+    className={`absolute top-5 left-0 ${
+     collapsed
+      ? "w-[60px] transition-all duration-100 opacity-100"
+      : "w-[170px] transition-width duration-100 opacity-0 hidden"
+    }`}
    >
     <button
      onClick={toggleSidebar}
