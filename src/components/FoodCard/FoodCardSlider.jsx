@@ -5,9 +5,15 @@ import { CiClock2 } from "react-icons/ci";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useState } from "react";
+import { AddFavorite } from "../Modals/AddFavorite";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 export const FoodCardSlider = ({ recipes }) => {
  const slidesToShow = Math.min(recipes?.length || 0, 4);
+ const [favModal, setFavModal] = useState(false);
 
  const settings = {
   dots: false,
@@ -75,7 +81,7 @@ export const FoodCardSlider = ({ recipes }) => {
        instructions: recipe.instructions,
       }}
      >
-      <div className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 w-[250px] h-[300px]">
+      <div className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 w-[250px] h-[280px] flex flex-col">
        <div className="relative overflow-hidden rounded">
         {recipe.img_path ? (
          <img
@@ -95,26 +101,26 @@ export const FoodCardSlider = ({ recipes }) => {
           Author: {recipe.author}
          </h1>
         </div>
-        <div className="bg-gray-50 h-8 w-8 border rounded-lg flex items-center justify-center">
-         <CiHeart />
-        </div>
+        {/* <div className="bg-red-100 rounded-lg h-8 w-8 flex items-center justify-center">
+         <Tooltip title="Like" onClick={() => setFavModal(true)}>
+          <IconButton>
+           <FavoriteBorderOutlinedIcon className="text-red-500" />
+          </IconButton>
+         </Tooltip>
+        </div> */}
        </div>
        <div className="md:flex items-center gap-3 mt-auto">
-        <p className="text-gray-500 text-xs md:text-sm font-light">
+        <p className="text-gray-500 text-xs font-light">
          Category: {recipe.category}
         </p>
         <div className="flex items-center gap-2">
          <div className="flex items-center gap-1">
           <CiStar size={16} className="text-yellow-400" />
-          <p className="text-gray-500 text-xs md:text-sm font-light">
-           {recipe.ratings}
-          </p>
+          <p className="text-gray-500 text-xs font-light">{recipe.ratings}</p>
          </div>
          <div className="flex items-center gap-1">
           <CiClock2 size={16} className="text-yellow-400" />
-          <p className="text-gray-500 text-xs md:text-sm font-light">
-           {recipe.time}
-          </p>
+          <p className="text-gray-500 text-xs font-light">{recipe.time}</p>
          </div>
         </div>
        </div>
@@ -122,6 +128,7 @@ export const FoodCardSlider = ({ recipes }) => {
      </Link>
     )) || null}
    </Slider>
+   {favModal && <AddFavorite setFavModal={setFavModal} />}
   </div>
  );
 };

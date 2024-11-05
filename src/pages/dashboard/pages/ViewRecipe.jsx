@@ -1,16 +1,14 @@
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Layout } from "../Layout";
-import { CiHeart } from "react-icons/ci";
-import { useEffect, useState } from "react";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { AuthorProfile } from "../../../components/Modals/AuthorProfile";
 import { CommentsCard } from "../../../components/DashboardComponents/CommentsCard";
 import { AiSuggestions } from "../../../components/DashboardComponents/AiSuggestions";
 import { AddFavorite } from "../../../components/Modals/AddFavorite";
 import { AnalyzeRecipe } from "../../../components/AiComponent/AnalyzeRecipe";
-import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
