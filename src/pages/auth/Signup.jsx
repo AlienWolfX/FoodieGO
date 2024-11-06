@@ -6,6 +6,23 @@ import registerImg from "/auth-images/register.png";
 export const Signup = () => {
  const nav = useNavigate();
  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+ const [password, setPassword] = useState("");
+ const [passwordStrength, setPasswordStrength] = useState({
+  hasLength: false,
+  hasUpperCase: false,
+  hasLowerCase: false,
+  hasSymbol: false
+ });
+ const [showTooltip, setShowTooltip] = useState(false);
+
+ const checkPasswordStrength = (pass) => {
+  setPasswordStrength({
+   hasLength: pass.length >= 8,
+   hasUpperCase: /[A-Z]/.test(pass),
+   hasLowerCase: /[a-z]/.test(pass),
+   hasSymbol: /[!@#$%^&*(),.?":{}|<>]/.test(pass)
+  });
+ };
 
  const navLogin = () => {
   nav("/login");
@@ -65,7 +82,7 @@ export const Signup = () => {
           className="px-4 h-10 rounded text-xs border"
          />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col relative">
          <label htmlFor="password" className="text-xs text-gray-600">
           Password
          </label>
@@ -73,11 +90,32 @@ export const Signup = () => {
           type="password"
           placeholder="Enter your password"
           className="px-4 h-10 rounded text-xs border"
+          value={password}
+          onChange={(e) => {
+           setPassword(e.target.value);
+           checkPasswordStrength(e.target.value);
+          }}
+          onFocus={() => setShowTooltip(true)}
+          onBlur={() => setShowTooltip(false)}
          />
-         <p className="font-light text-gray-400 text-xs">
-          *Password must contain 8 characters, one capital letter, one lower
-          case letter, and one symbol
-         </p>
+         {showTooltip && (
+          <div className="absolute right-0 mt-12 bg-white border rounded-md shadow-lg p-3 z-10">
+           <div className="space-y-1">
+            <p className={`text-xs ${passwordStrength.hasLength ? 'text-green-500' : 'text-gray-400'}`}>
+             ✓ At least 8 characters
+            </p>
+            <p className={`text-xs ${passwordStrength.hasUpperCase ? 'text-green-500' : 'text-gray-400'}`}>
+             ✓ At least one capital letter
+            </p>
+            <p className={`text-xs ${passwordStrength.hasLowerCase ? 'text-green-500' : 'text-gray-400'}`}>
+             ✓ At least one lowercase letter
+            </p>
+            <p className={`text-xs ${passwordStrength.hasSymbol ? 'text-green-500' : 'text-gray-400'}`}>
+             ✓ At least one symbol
+            </p>
+           </div>
+          </div>
+         )}
         </div>
         <div className="flex flex-col">
          <label htmlFor="confirm-password" className="text-xs text-gray-600">
