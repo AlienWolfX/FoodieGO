@@ -3,7 +3,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 export const UpdateProfileModal = ({ setOpenEdit }) => {
  return (
   <>
-   <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+   <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-20">
     <div className="bg-white w-[500px] rounded p-5">
      <div className="flex items-center justify-between">
       <h1 className="text-lg font-medium">Update Profile</h1>

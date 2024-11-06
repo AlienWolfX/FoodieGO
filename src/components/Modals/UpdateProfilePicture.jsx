@@ -3,7 +3,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 export const UpdateProfilePicture = ({ setOpenPicture }) => {
  return (
   <>
-   <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+   <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-20">
     <div className="bg-white w-[320px] p-8 rounded-md">
      <div className="flex items-ceqnter justify-between">
       <h1 className="text-md font-medium text-gray-700">

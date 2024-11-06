@@ -3,7 +3,7 @@ import { MdCancel } from "react-icons/md";
 export const CreateRecipe = ({ setCreateRecipe }) => {
  return (
   <>
-   <div className="p-5 md:p-0 fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center overflow-x-scroll md:overflow-hidden">
+   <div className="p-5 md:p-0 fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center overflow-x-scroll md:overflow-hidden z-20">
     <div className="mt-60 md:mt-0 bg-white border w-full max-w-[700px] min-h-[400px] md:min-h-[500px] p-5 rounded ">
      <div className="flex items-center justify-between">
       <h1 className="text-lg font-bold">Add Recipe</h1>
