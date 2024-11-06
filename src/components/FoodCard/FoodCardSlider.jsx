@@ -5,17 +5,44 @@ import { CiClock2 } from "react-icons/ci";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AddFavorite } from "../Modals/AddFavorite";
 import { motion } from "framer-motion";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export const FoodCardSlider = ({ recipes }) => {
  const [favModal, setFavModal] = useState(false);
+ const sliderRef = useRef(null);
+
+ const CustomArrow = ({ direction, onClick }) => {
+   return (
+     <button
+       onClick={onClick}
+       className={`
+         custom-arrow 
+         w-8 h-8 
+         flex items-center justify-center 
+         bg-white 
+         border border-gray-200 
+         rounded-full 
+         hover:bg-gray-50
+         transition-all
+         ${!onClick && 'opacity-50 cursor-not-allowed'}
+       `}
+     >
+       {direction === 'prev' ? (
+         <IoIosArrowBack size={20} className="text-gray-600" />
+       ) : (
+         <IoIosArrowForward size={20} className="text-gray-600" />
+       )}
+     </button>
+   );
+ };
 
  const settings = {
   className: "slider-width",
   dots: false,
-  infinite: false,
+  infinite: true,
   speed: 500,
   arrows: false,
   slidesToShow: 4,
@@ -61,8 +88,17 @@ export const FoodCardSlider = ({ recipes }) => {
  };
 
  return (
-  <div className="w-full">
-   <Slider {...settings}>
+  <div className="w-full relative">
+   <div className="absolute right-2 top-[-50px] flex items-center gap-2 z-10">
+    <div className="custom-arrow-container">
+     <CustomArrow direction="prev" onClick={() => sliderRef.current?.slickPrev()} />
+    </div>
+    <div className="custom-arrow-container">
+     <CustomArrow direction="next" onClick={() => sliderRef.current?.slickNext()} />
+    </div>
+   </div>
+
+   <Slider ref={sliderRef} {...settings}>
     {recipes?.map((recipe) => (
      <motion.div 
       key={recipe.id} 

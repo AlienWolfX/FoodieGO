@@ -154,30 +154,23 @@
  }
 }
 
-.slick-arrow::before {
- color: blue;
- font-size: 20px;
-}
-/* 
-.slick-slide div {
- margin-right: 0px;
-} */
-
-.slider-width {
- width: 100%;
+/* Add to your CSS file */
+.slick-prev:before,
+.slick-next:before {
+ display: none !important;
 }
 
-.slick-track {
- display: flex !important;
- gap: 0;
+/* Hide only the default Slick arrows */
+.slick-prev.slick-arrow,
+.slick-next.slick-arrow {
+ display: none !important;
 }
 
-.slick-slide {
- height: inherit !important;
+/* Ensure custom arrows are visible */
+.custom-arrow-container {
  display: flex !important;
 }
 
-.slick-slide > div {
- display: flex;
- width: 100%;
+.custom-arrow {
+ display: flex !important;
 }
