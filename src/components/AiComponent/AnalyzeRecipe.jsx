@@ -1,13 +1,13 @@
 import { MdCancel } from "react-icons/md";
 
-export const AnalyzeRecipe = ({ recipe, setAnalyze }) => {
+export const AnalyzeRecipe = ({ setAnalyze }) => {
  return (
   <>
    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-20">
     <div className="bg-white rounded-md p-2 w-[400px]">
      <div className="flex items-end justify-end">
       <MdCancel
-       onClick={() => setAnalyze(true)}
+       onClick={() => setAnalyze(false)}
        size={20}
        className="hover:text-red-500"
       />
