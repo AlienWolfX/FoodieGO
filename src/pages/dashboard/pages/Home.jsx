@@ -34,7 +34,7 @@ export const Home = () => {
    </div>
 
    <div className="w-full flex flex-col gap-10">
-    <section className="w-full flex flex-col">
+    <section className="w-full flex flex-col mt-8">
      <h1 className="font-semibold text-2xl text-gray-800">Latest Recipes</h1>
      <div className="mb-3">
       <hr />
@@ -44,7 +44,7 @@ export const Home = () => {
      </div>
     </section>
 
-    <section className="w-full flex flex-col">
+    <section className="w-full flex flex-col mt-8">
      <h1 className="font-semibold text-2xl text-gray-800">Popular Recipes</h1>
      <div className="mb-3">
       <hr />
@@ -54,7 +54,7 @@ export const Home = () => {
      </div>
     </section>
 
-    <section className="w-full flex flex-col">
+    <section className="w-full flex flex-col mt-8">
      <h1 className="font-semibold text-2xl text-gray-800">
       Recommended Recipes
      </h1>
@@ -66,7 +66,7 @@ export const Home = () => {
      </div>
     </section>
 
-    <section className="w-full flex flex-col">
+    <section className="w-full flex flex-col mt-8">
      <h1 className="font-semibold text-2xl text-gray-800">
       Followed User's Recipes
      </h1>

@@ -28,7 +28,7 @@ export const Sidebar = ({ onToggle }) => {
   <>
    <Toaster richColors position="top-center" />
    <motion.div
-    className={`fixed h-screen bg-white shadow-lg rounded-tr-2xl p-3 flex flex-col`}
+    className={`fixed h-screen bg-white shadow-lg rounded-tr-2xl flex flex-col `}
     initial={{ width: "170px", x: 0 }}
     animate={{
      width: collapsed ? "60px" : "170px",
@@ -36,67 +36,69 @@ export const Sidebar = ({ onToggle }) => {
     }}
     transition={{ duration: 0.3 }}
    >
-    <div className="mt-3 flex items-center justify-between">
-     <div
-      onClick={() => nav("/")}
-      className="flex items-center gap-2 cursor-pointer"
-     >
-      <img src={mainLogo} alt="" className="w-[50px]" />
-      <h1
-       className={`${
-        collapsed ? "hidden" : "text-sm text-mainblue font-medium"
-       }`}
+    <div className="p-3">
+     <div className="mt-3 flex items-center justify-between">
+      <div
+       onClick={() => nav("/")}
+       className="flex items-center gap-2 cursor-pointer"
       >
-       FoodieGO
-      </h1>
-     </div>
-     <div className="absolute -right-[28px]">
-      <button
-       onClick={toggleSidebar}
-       className="h-10 flex items-center justify-center w-[28px] bg-mainblue rounded-tr-full rounded-br-full text-white"
-      >
-       {collapsed ? (
-        <FaAngleRight size={16} className="text-white" />
-       ) : (
-        <FaAngleLeft size={16} className="text-white" />
-       )}
-      </button>
-     </div>
-    </div>
-    <div className="mt-5">
-     <p className="text-[10px] font-light text-gray-500">Menu</p>
-    </div>
-    <div className={`flex-grow ${collapsed ? "hidden" : ""}`}>
-     {sidebar.map((item, index) => {
-      const IconComponent = item.icon;
-      return (
-       <NavLink key={index} to={item.path}>
-        {({ isActive }) => (
-         <div
-          className={`flex items-center gap-2 h-8 px-2 ${
-           isActive
-            ? "text-blue-600 bg-mainblue bg-opacity-20 rounded px-2"
-            : "text-darkgray"
-          }`}
-         >
-          <IconComponent size={16} />
-          {!collapsed && <p className="text-xs">{item.label}</p>}
-         </div>
+       <img src={mainLogo} alt="" className="w-[50px]" />
+       <h1
+        className={`${
+         collapsed ? "hidden" : "text-sm text-mainblue font-medium"
+        }`}
+       >
+        FoodieGO
+       </h1>
+      </div>
+      <div className="absolute -right-[28px]">
+       <button
+        onClick={toggleSidebar}
+        className="h-10 flex items-center justify-center w-[28px] bg-mainblue rounded-tr-full rounded-br-full text-white"
+       >
+        {collapsed ? (
+         <FaAngleRight size={16} className="text-white" />
+        ) : (
+         <FaAngleLeft size={16} className="text-white" />
         )}
-       </NavLink>
-      );
-     })}
+       </button>
+      </div>
+     </div>
+     <div className="mt-5">
+      <p className="text-[10px] font-light text-gray-500">Menu</p>
+     </div>
+     <div className={`flex-grow ${collapsed ? "hidden" : ""}`}>
+      {sidebar.map((item, index) => {
+       const IconComponent = item.icon;
+       return (
+        <NavLink key={index} to={item.path}>
+         {({ isActive }) => (
+          <div
+           className={`flex items-center gap-2 h-8 px-2 ${
+            isActive
+             ? "text-blue-600 bg-mainblue bg-opacity-20 rounded px-2"
+             : "text-darkgray"
+           }`}
+          >
+           <IconComponent size={16} />
+           {!collapsed && <p className="text-xs">{item.label}</p>}
+          </div>
+         )}
+        </NavLink>
+       );
+      })}
+     </div>
     </div>
     <div
-     className={`py-4 w-full flex items-center justify-center ${
+     className={`w-full flex items-center justify-center mt-auto border-t ${
       collapsed ? "hidden" : ""
      }`}
     >
      <button
       onClick={handleLogout}
-      className="font-medium flex items-center gap-1 justify-center text-xs text-white px-4 bg-mainblue rounded h-10"
+      className="w-full m-1 font-regular flex items-center gap-1 justify-center text-xs text-gray-700 px-4 rounded-md h-10 hover:bg-gray-200"
      >
-      <IoLogOut size={20} />
+      <IoLogOut size={16} />
       {!collapsed && "Logout"}
      </button>
     </div>
@@ -110,7 +112,7 @@ export const Sidebar = ({ onToggle }) => {
    >
     <button
      onClick={toggleSidebar}
-     className="h-10 w-[28px] flex items-center justify-center bg-mainblue rounded-tr-full rounded-br-full text-mainblue"
+     className="h-10 w-[28px] flex items-center justify-center bg-mainblue rounded-tr-full rounded-br-full text-mainblue "
     >
      {collapsed ? (
       <FaAngleRight size={16} className="text-white" />
