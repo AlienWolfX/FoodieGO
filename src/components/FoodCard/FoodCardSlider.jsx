@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useState } from "react";
 import { AddFavorite } from "../Modals/AddFavorite";
+import { motion } from "framer-motion";
 
 export const FoodCardSlider = ({ recipes }) => {
  const [favModal, setFavModal] = useState(false);
@@ -63,7 +64,14 @@ export const FoodCardSlider = ({ recipes }) => {
   <div className="w-full">
    <Slider {...settings}>
     {recipes?.map((recipe) => (
-     <div key={recipe.id} className="inline-block">
+     <motion.div 
+      key={recipe.id} 
+      className="inline-block"
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+     >
       <Link
        to="/view-recipe"
        state={{
@@ -80,7 +88,18 @@ export const FoodCardSlider = ({ recipes }) => {
        }}
       >
        <div className="px-2">
-        <div className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 gap-1 flex flex-col h-[290px]">
+        <motion.div 
+         className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 gap-1 flex flex-col h-[290px]"
+         layout
+         transition={{
+          layout: { duration: 0.3 },
+          ease: "easeInOut"
+         }}
+         whileHover={{ 
+          scale: 1.02,
+          transition: { duration: 0.2 }
+         }}
+        >
          <div className="overflow-hidden rounded">
           {recipe.img_path ? (
            <img
@@ -115,10 +134,10 @@ export const FoodCardSlider = ({ recipes }) => {
            </div>
           </div>
          </div>
-        </div>
+        </motion.div>
        </div>
       </Link>
-     </div>
+     </motion.div>
     )) || null}
    </Slider>
   </div>

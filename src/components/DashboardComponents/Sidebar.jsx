@@ -28,7 +28,7 @@ export const Sidebar = ({ onToggle }) => {
   <>
    <Toaster richColors position="top-center" />
    <motion.div
-    className={`fixed h-screen bg-white shadow-lg rounded-tr-2xl flex flex-col `}
+    className={`fixed h-screen bg-white shadow-lg rounded-tr-2xl flex flex-col z-10`}
     initial={{ width: "170px", x: 0 }}
     animate={{
      width: collapsed ? "60px" : "170px",

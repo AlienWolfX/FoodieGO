@@ -7,7 +7,7 @@ import { UserRecipeData } from "../../../data/UserRecipeData";
 export const UserFoodCard = () => {
  return (
   <>
-   <div className="grid grid-cols-3 gap-4">
+   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {UserRecipeData.map((recipe) => (
      <Link
       key={recipe.id}
@@ -44,9 +44,6 @@ export const UserFoodCard = () => {
          <h1 className="text-xs md:text-sm font-medium text-gray-500">
           Author: {recipe.author}
          </h1>
-        </div>
-        <div className="bg-gray-50 h-8 w-8 border rounded-lg flex items-center justify-center">
-         <CiHeart />
         </div>
        </div>
        <div className="md:flex items-center gap-3">

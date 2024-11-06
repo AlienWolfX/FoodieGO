@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
@@ -7,7 +7,7 @@ import { CiClock2 } from "react-icons/ci";
 export const FoodCard = ({ recipes, basePath }) => {
  return (
   <>
-   <div className="mt-5 grid grid-cols-2 md:grid-cols-3 gap-4">
+   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {recipes.map((recipe) => (
      <Link
       key={recipe.id}
@@ -31,7 +31,7 @@ export const FoodCard = ({ recipes, basePath }) => {
          <img
           src={recipe.img_path}
           alt={recipe.title}
-          className="h-[140px] md:h-[180px] w-full object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-150"
+          className="h-[140px] w-full object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-150"
          />
         ) : (
          <div className="h-[140px] md:h-[180px] bg-gray-500 rounded"></div>
