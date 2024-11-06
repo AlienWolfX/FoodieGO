@@ -7,7 +7,7 @@ import { CiClock2 } from "react-icons/ci";
 export const FoodCard = ({ recipes, basePath }) => {
  return (
   <>
-   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+   <div className="mt-5 grid grid-cols-2 md:grid-cols-3 gap-4">
     {recipes.map((recipe) => (
      <Link
       key={recipe.id}

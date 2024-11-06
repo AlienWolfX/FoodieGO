@@ -22,7 +22,7 @@ export const Explore = () => {
        have something for everyone!
       </p>
      </div>
-     <div className="mt-5 mx-32">
+     <div className="mt-5 lg:mx-32">
       <FoodCard recipes={recipeData.slice(0, 6)} basePath="/explore" />
      </div>
      <div className="flex items-center justify-center mt-10">
