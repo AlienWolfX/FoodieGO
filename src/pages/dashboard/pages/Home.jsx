@@ -2,12 +2,11 @@ import { FoodCardSlider } from "../../../components/FoodCard/FoodCardSlider";
 import { Layout } from "../Layout";
 import { recipeData } from "../../../../data/RecipeData";
 import exploreSide from "/exploreSide.png";
-import { FoodCard } from "../../../components/FoodCard/FoodCard";
 
 export const Home = () => {
  return (
   <Layout>
-   <div className="mt-5 flex flex-col md:flex-row items-center justify-between">
+   <div className="w-full flex items-center justify-between">
     <div className="w-full md:w-[400px]">
      <h1 className="text-3xl md:text-4xl font-bold text-gray-700">
       Explore New Recipes
@@ -34,48 +33,50 @@ export const Home = () => {
     />
    </div>
 
-   <div className="mt-10">
-    <h1 className="font-semibold text-2xl text-gray-800">Latest Recipes</h1>
-   </div>
-   <div className="mb-3">
-    <hr />
-   </div>
-   <div className="mt-5 w-full">
-    <FoodCardSlider recipes={recipeData} />
-   </div>
+   <div className="w-full flex flex-col gap-10">
+    <section className="w-full flex flex-col">
+     <h1 className="font-semibold text-2xl text-gray-800">Latest Recipes</h1>
+     <div className="mb-3">
+      <hr />
+     </div>
+     <div className="w-full">
+      <FoodCardSlider recipes={recipeData} />
+     </div>
+    </section>
 
-   <div className="mt-16">
-    <h1 className="font-semibold text-2xl text-gray-800">Popular Recipes</h1>
-   </div>
-   <div className="mb-3">
-    <hr />
-   </div>
-   <div className="mt-5 w-full">
-    <FoodCardSlider recipes={recipeData} />
-   </div>
+    <section className="w-full flex flex-col">
+     <h1 className="font-semibold text-2xl text-gray-800">Popular Recipes</h1>
+     <div className="mb-3">
+      <hr />
+     </div>
+     <div className="w-full">
+      <FoodCardSlider recipes={recipeData} />
+     </div>
+    </section>
 
-   <div className="mt-16">
-    <h1 className="font-semibold text-2xl text-gray-800">
-     Recommended Recipes
-    </h1>
-   </div>
-   <div className="mb-3">
-    <hr />
-   </div>
-   <div className="mt-5 w-full">
-    <FoodCardSlider recipes={recipeData} />
-   </div>
+    <section className="w-full flex flex-col">
+     <h1 className="font-semibold text-2xl text-gray-800">
+      Recommended Recipes
+     </h1>
+     <div className="mb-3">
+      <hr />
+     </div>
+     <div className="w-full">
+      <FoodCardSlider recipes={recipeData} />
+     </div>
+    </section>
 
-   <div className="mt-16">
-    <h1 className="font-semibold text-2xl text-gray-800">
-     Followed User's Recipes
-    </h1>
-   </div>
-   <div className="mb-3">
-    <hr />
-   </div>
-   <div className="mt-5 w-full">
-    <FoodCardSlider recipes={recipeData} />
+    <section className="w-full flex flex-col">
+     <h1 className="font-semibold text-2xl text-gray-800">
+      Followed User's Recipes
+     </h1>
+     <div className="mb-3">
+      <hr />
+     </div>
+     <div className="w-full">
+      <FoodCardSlider recipes={recipeData} />
+     </div>
+    </section>
    </div>
   </Layout>
  );

@@ -10,18 +10,23 @@ export const Layout = ({ children }) => {
  };
 
  return (
-  <>
-   <div className="flex bg-mainbg h-screen overflow-y-scroll">
+  <div className="flex h-screen bg-mainbg">
     <Sidebar onToggle={handleSidebarToggle} />
-    <div
-     className={`px-4 md:px-10 mt-5 w-[1120px] transition-all duration-300 ${
-      isSidebarCollapsed ? "ml-0 md:ml-[170px]" : "ml-0 md:ml-[170px]"
-     }`}
-    >
-     <Topbar />
-     <div className="mt-5 bg-mainbg pb-10">{children}</div>
+    
+    {/* Main content wrapper */}
+    <div className={`flex-1 overflow-x-hidden ${
+      isSidebarCollapsed ? "ml-[60px]" : "ml-[170px]"
+    }`}>
+      {/* Scrollable content area */}
+      <div className="h-screen overflow-y-auto">
+        <div className="px-4 md:px-10 py-5">
+          <Topbar />
+          <div className="mt-5">
+            {children}
+          </div>
+        </div>
+      </div>
     </div>
-   </div>
-  </>
+  </div>
  );
 };
