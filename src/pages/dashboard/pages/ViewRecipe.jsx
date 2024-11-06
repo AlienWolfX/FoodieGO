@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
@@ -33,24 +34,52 @@ export const ViewRecipe = () => {
 
  return (
   <Layout>
-   <p
+   <motion.p
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.3 }}
     onClick={() => nav(-1)}
     className="font-light text-xs cursor-pointer text-orange-500"
    >
     Back
-   </p>
-   <div className="bg-white p-4 md:p-8 rounded-xl mt-5">
-    <div className="flex flex-row items-center justify-between">
+   </motion.p>
+   <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="bg-white p-4 md:p-8 rounded-xl mt-5"
+   >
+    <motion.div
+     initial={{ opacity: 0 }}
+     animate={{ opacity: 1 }}
+     transition={{ delay: 0.2 }}
+     className="flex flex-row items-center justify-between"
+    >
      <div>
-      <h1 className="text-xl md:text-2xl font-bold">{title}</h1>
-      <p
+      <motion.h1
+       initial={{ opacity: 0, y: -20 }}
+       animate={{ opacity: 1, y: 0 }}
+       transition={{ delay: 0.3 }}
+       className="text-xl md:text-2xl font-bold"
+      >
+       {title}
+      </motion.h1>
+      <motion.p
+       initial={{ opacity: 0 }}
+       animate={{ opacity: 1 }}
+       transition={{ delay: 0.4 }}
        onClick={() => setAuthorModal(true)}
        className="cursor-pointer hover:text-red-500"
       >
        Author: {author}
-      </p>
+      </motion.p>
      </div>
-     <div className="flex items-center gap-2">
+     <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.4 }}
+      className="flex items-center gap-2"
+     >
       <div className="rounded-lg h-10 w-10 flex items-center justify-center">
        <Tooltip title="Add to Favorites" onClick={() => setFavModal(true)}>
         <IconButton>
@@ -68,16 +97,32 @@ export const ViewRecipe = () => {
         </IconButton>
        </Tooltip>
       </div>
-     </div>
-    </div>
-    <div className="mt-3">
-     <hr />
-    </div>
-    <div className="mt-3">
+     </motion.div>
+    </motion.div>
+
+    <motion.hr
+     initial={{ scaleX: 0 }}
+     animate={{ scaleX: 1 }}
+     transition={{ delay: 0.5 }}
+     className="mt-3"
+    />
+
+    <motion.div
+     initial={{ opacity: 0, y: 20 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ delay: 0.6 }}
+     className="mt-3"
+    >
      <h1 className="font-medium text-md">Description</h1>
      <p className="text-xs font-light text-justify">{description}</p>
-    </div>
-    <div className="mt-2">
+    </motion.div>
+
+    <motion.div
+     initial={{ opacity: 0, y: 20 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ delay: 0.7 }}
+     className="mt-2"
+    >
      <p className="text-sm font-light">Tags</p>
      <div className="flex flex-wrap items-center gap-2 mt-2">
       <div className="px-4 h-8 rounded border flex items-center cursor-pointer justify-center">
@@ -90,8 +135,14 @@ export const ViewRecipe = () => {
        <h1 className="text-xs font-light">Time: {time}</h1>
       </div>
      </div>
-    </div>
-    <div className="mt-5">
+    </motion.div>
+
+    <motion.div
+     initial={{ opacity: 0, scale: 0.95 }}
+     animate={{ opacity: 1, scale: 1 }}
+     transition={{ delay: 0.8 }}
+     className="mt-5"
+    >
      <div className="w-full h-[300px] md:h-[500px] bg-gray-200 rounded">
       {img_path ? (
        <img
@@ -105,38 +156,55 @@ export const ViewRecipe = () => {
        </div>
       )}
      </div>
-    </div>
-    <div className="flex flex-col md:flex-row items-start justify-between gap-3">
-     <div className="space-y-2 mt-6 w-full">
+    </motion.div>
+
+    <motion.div
+     initial={{ opacity: 0, y: 30 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ delay: 0.9 }}
+     className="flex flex-col md:flex-row items-start justify-between gap-3"
+    >
+     {/* Ingredients Section */}
+     <motion.div className="space-y-2 mt-6 w-full">
       <h1 className="text-sm font-medium">Ingredients</h1>
-      <div className="py-2">
-       <hr />
-      </div>
+      <hr className="my-2" />
       {ingredients.map((data, index) => (
-       <div
-        className="h-10 border rounded bg-white text-xs flex items-center justify-start px-4"
+       <motion.div
         key={index}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1 + index * 0.1 }}
+        className="h-10 border rounded bg-white text-xs flex items-center justify-start px-4"
        >
         <p>{data}</p>
-       </div>
+       </motion.div>
       ))}
-     </div>
-     <div className="space-y-2 mt-6 w-full">
+     </motion.div>
+
+     {/* Instructions Section */}
+     <motion.div className="space-y-2 mt-6 w-full">
       <h1 className="text-sm font-medium">Instructions</h1>
-      <div className="py-2">
-       <hr />
-      </div>
+      <hr className="my-2" />
       {instructions.map((data, index) => (
-       <div
-        className="h-10 border rounded bg-white text-xs flex items-center justify-start px-4"
+       <motion.div
         key={index}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1 + index * 0.1 }}
+        className="h-10 border rounded bg-white text-xs flex items-center justify-start px-4"
        >
         <h1>{data}</h1>
-       </div>
+       </motion.div>
       ))}
-     </div>
-    </div>
-    <div className="mt-5 flex items-center justify-center gap-2">
+     </motion.div>
+    </motion.div>
+
+    <motion.div
+     initial={{ opacity: 0, y: 20 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ delay: 1.2 }}
+     className="mt-5 flex items-center justify-center gap-2"
+    >
      <button
       onClick={() => setAnalyze(true)}
       className="text-mainblue text-xs fotn-medium"
@@ -146,19 +214,59 @@ export const ViewRecipe = () => {
      <button className="bg-mainblue text-white text-xs h-10 px-4 rounded">
       Download Recipe
      </button>
-    </div>
-   </div>
-   <div className="mt-5">
+    </motion.div>
+   </motion.div>
+
+   <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.3 }}
+    className="mt-5"
+   >
     <AiSuggestions />
-   </div>
-   <div className="mt-8">
+   </motion.div>
+
+   <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.4 }}
+    className="mt-8"
+   >
     <CommentsCard />
-   </div>
-   {authorModal && (
-    <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
-   )}
-   {favModal && <AddFavorite setFavModal={setFavModal} />}
-   {analyze && <AnalyzeRecipe setAnalyze={setAnalyze} />}
+   </motion.div>
+
+   <AnimatePresence>
+    {authorModal && (
+     <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+     >
+      <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
+     </motion.div>
+    )}
+    {favModal && (
+     <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+     >
+      <AddFavorite setFavModal={setFavModal} />
+     </motion.div>
+    )}
+    {analyze && (
+     <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+     >
+      <AnalyzeRecipe setAnalyze={setAnalyze} />
+     </motion.div>
+    )}
+   </AnimatePresence>
   </Layout>
  );
 };
