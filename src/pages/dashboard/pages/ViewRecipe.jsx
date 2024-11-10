@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Layout } from "../Layout";
 import { AuthorProfile } from "../../../components/Modals/AuthorProfile";
@@ -9,12 +9,17 @@ import { AnalyzeRecipe } from "../../../components/AiComponent/AnalyzeRecipe";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { motion, AnimatePresence } from "framer-motion";
+import { Favorite } from "@mui/icons-material";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
  const location = useLocation();
+
+ const [like, setLike] = useState(false);
 
  const {
   title,
@@ -31,6 +36,10 @@ export const ViewRecipe = () => {
  const [authorModal, setAuthorModal] = useState(false);
  const [favModal, setFavModal] = useState(false);
  const [analyze, setAnalyze] = useState(false);
+
+ useEffect(() => {
+  console.log(`Recipe ${like ? "liked" : "unliked"}`);
+ }, [like]);
 
  return (
   <Layout>
@@ -83,17 +92,25 @@ export const ViewRecipe = () => {
       <div className="rounded-lg h-10 w-10 flex items-center justify-center">
        <Tooltip title="Add to Favorites" onClick={() => setFavModal(true)}>
         <IconButton>
-         <BookmarkIcon className="text-yellow-300" fontSize="medium" />
+         {favModal ? (
+          <BookmarkIcon className="text-yellow-300" fontSize="medium" />
+         ) : (
+          <BookmarkBorderIcon className="text-yellow-300" fontSize="medium" />
+         )}
         </IconButton>
        </Tooltip>
       </div>
-      <div className="bg-red-100 rounded-lg h-10 w-10 flex items-center justify-center">
-       <Tooltip title="Like" onClick={() => setFavModal(true)}>
+      <div className="rounded-lg h-10 w-10 flex items-center justify-center">
+       <Tooltip title="Like" onClick={() => setLike((prev) => !prev)}>
         <IconButton>
-         <FavoriteBorderOutlinedIcon
-          className="text-red-500"
-          fontSize="small"
-         />
+         {like ? (
+          <Favorite className="text-red-500" fontSize="small" />
+         ) : (
+          <FavoriteBorderOutlinedIcon
+           className="text-red-500"
+           fontSize="small"
+          />
+         )}
         </IconButton>
        </Tooltip>
       </div>
@@ -246,16 +263,18 @@ export const ViewRecipe = () => {
       <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
      </motion.div>
     )}
-    {favModal && (
-     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-     >
-      <AddFavorite setFavModal={setFavModal} />
-     </motion.div>
-    )}
+    <AnimatePresence>
+     {favModal && (
+      <motion.div
+       initial={{ opacity: 0, scale: 0.95 }}
+       animate={{ opacity: 1, scale: 1 }}
+       exit={{ opacity: 0, scale: 0.95 }}
+       transition={{ duration: 0.2 }}
+      >
+       <AddFavorite setFavModal={setFavModal} />
+      </motion.div>
+     )}
+    </AnimatePresence>
     {analyze && (
      <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
