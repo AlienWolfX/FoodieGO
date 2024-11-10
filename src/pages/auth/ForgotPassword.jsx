@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "../../components/Navbar";
 
 export const ForgotPassword = () => {
  const nav = useNavigate();
  return (
   <>
+  <Navbar/>
    <div className="w-full h-screen bg-mainbg flex items-center justify-center">
     <div className="w-[600px] h-auto bg-white rounded-lg p-6">
      <h1 className="text-xl font-medium text-mainblue">Forgot Password?</h1>

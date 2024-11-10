@@ -17,16 +17,31 @@ export const Navbar = () => {
  };
 
  const navExplore = () => {
-  window.location.hash = "explore";
- };
+  const section = document.getElementById("explore");
+  if (section) {
+    window.location.hash = "explore";
+  } else {
+    nav("/"); // Navigate to home if section not found
+  }
+};
 
  const navAboutUs = () => {
-  window.location.hash = "about";
- };
+  const section = document.getElementById("about");
+  if (section) {
+    window.location.hash = "about";
+  } else {
+    nav("/"); // Navigate to home if section not found
+  }
+};
 
  const navContact = () => {
-  window.location.hash = "contact";
- };
+  const section = document.getElementById("contact");
+  if (section) {
+    window.location.hash = "contact";
+  } else {
+    nav("/"); // Navigate to home if section not found
+  }
+};
 
  useEffect(() => {
   const handleScroll = () => {
@@ -55,7 +70,7 @@ export const Navbar = () => {
 
  return (
   <>
-   <div className="fixed w-full border bg-white z-50 flex justify-between items-center px-5">
+   <div className="fixed w-full border bg-white z-10 flex justify-between items-center px-5">
     <div>
      <img src={mainLogo} onClick={navHome} alt="" className="w-[50px]" />
     </div>

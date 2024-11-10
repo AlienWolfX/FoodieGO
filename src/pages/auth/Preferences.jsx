@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserGear } from "react-icons/fa6";
+import { Navbar } from "../../components/Navbar";
 
 export const Preferences = () => {
  const [selectedFoods, setSelectedFoods] = useState([]);
@@ -39,6 +40,7 @@ export const Preferences = () => {
 
  return (
   <>
+  <Navbar/>
    <div className="bg-mainblue w-full h-screen flex items-center justify-center">
     <div className="bg-white w-[700px] h-auto rounded-md p-8">
      <div className="flex flex-col gap-2">

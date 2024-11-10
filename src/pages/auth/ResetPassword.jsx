@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SuccessResetPassword } from "../../components/Modals/SuccessResetPassword";
 import { AnimatePresence } from "framer-motion";
+import { Navbar } from "../../components/Navbar";
 
 export const ResetPassword = () => {
  const [password, setPassword] = useState("");
@@ -48,6 +49,7 @@ export const ResetPassword = () => {
 
  return (
   <>
+   <Navbar />
    <div className="w-full h-screen bg-mainbg flex items-center justify-center">
     <div className="w-[500px] h-auto bg-white rounded-lg p-6">
      <h1 className="text-xl font-medium text-mainblue">Reset Password</h1>
