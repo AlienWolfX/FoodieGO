@@ -20,7 +20,7 @@ export const Layout = ({ children }) => {
     }`}
    >
     {/* Scrollable content area */}
-    <div className="h-screen overflow-y-auto">
+    <div className="h-screen mx-auto">
      <div className="px-4 md:px-10 py-5">
       <Topbar />
       <div className="mt-5">{children}</div>

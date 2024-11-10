@@ -14,6 +14,9 @@ import { Preferences } from "./pages/auth/Preferences";
 import { ExploreRecipes } from "./pages/landing page/ExploreRecipes";
 import { TermsConditions } from "./pages/landing page/TermsConditions";
 import { ViewRecipeInitial } from "./pages/landing page/ViewRecipeInitial";
+import { ForgotPassword } from "./pages/auth/ForgotPassword";
+import { OneTimePassword } from "./pages/auth/OneTimePassword";
+import { ResetPassword } from "./pages/auth/ResetPassword";
 
 function App() {
  return (
@@ -26,6 +29,12 @@ function App() {
      <Route path="/explore/view-recipe" element={<ViewRecipeInitial />} />
      <Route path="/login" element={<Login />} />
      <Route path="/signup" element={<Signup />} />
+     <Route path="/forgot-password" element={<ForgotPassword />} />
+     <Route path="/reset-password" element={<ResetPassword />} />
+     <Route
+      path="/forgot-password/one-time-password"
+      element={<OneTimePassword />}
+     />
      <Route path="/preferences" element={<Preferences />} />
      <Route path="/home" element={<Home />} />
      {/* todo: add protected routes */}

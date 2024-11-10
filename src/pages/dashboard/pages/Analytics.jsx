@@ -41,7 +41,7 @@ export const Analytics = () => {
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
    >
-    <Typography variant="h5" className="text-gray-600 font-medium mb-4">
+    <Typography variant="" className="text-lg text-gray-600 font-medium mb-4">
      Analytics Dashboard
     </Typography>
     <hr className="mb-6" />
@@ -90,7 +90,16 @@ export const Analytics = () => {
             {stat.value}
            </Typography>
           </div>
-          <Box style={{ color: stat.color }}>{stat.icon}</Box>
+          <Box 
+            style={{ color: stat.color }} 
+            className={`p-2 rounded-full`}
+            sx={{ 
+              color: stat.color,
+              backgroundColor: `${stat.color}20`,  // 20 is hex for 12% opacity
+            }}
+          >
+           {stat.icon}
+          </Box>
          </Box>
         </Card>
        </motion.div>
@@ -115,14 +124,14 @@ export const Analytics = () => {
          xAxis={[
           {
            data: monthlyData.map((item) => item.month),
-           scaleType: 'point',
-           tickLabelStyle: { fontSize: 11 }
-          }
+           scaleType: "point",
+           tickLabelStyle: { fontSize: 11 },
+          },
          ]}
          yAxis={[
           {
-           tickLabelStyle: { fontSize: 11 }
-          }
+           tickLabelStyle: { fontSize: 11 },
+          },
          ]}
          series={[
           {
@@ -130,23 +139,23 @@ export const Analytics = () => {
            label: "Followers",
            color: "#3b82f6",
            curve: "linear",
-           showMark: true
+           showMark: true,
           },
           {
            data: monthlyData.map((item) => item.likes),
            label: "Likes",
            color: "#ef4444",
            curve: "linear",
-           showMark: true
-          }
+           showMark: true,
+          },
          ]}
          height={300}
          margin={{ left: 40, right: 40, top: 20, bottom: 30 }}
          sx={{
-          '.MuiChartsLegend-root': {
+          ".MuiChartsLegend-root": {
            fontSize: 11,
-           gap: '8px'
-          }
+           gap: "8px",
+          },
          }}
         />
        </Card>
@@ -174,7 +183,7 @@ export const Analytics = () => {
            paddingAngle: 2,
            cornerRadius: 4,
            outerRadius: 80,
-           labels: { style: { fontSize: 11 } }
+           labels: { style: { fontSize: 11 } },
           },
          ]}
          height={300}
@@ -182,8 +191,8 @@ export const Analytics = () => {
          margin={{ left: 120, right: 20, top: 20, bottom: 20 }}
          slotProps={{
           legend: {
-           direction: 'row',
-           position: { vertical: 'bottom', horizontal: 'middle' },
+           direction: "row",
+           position: { vertical: "bottom", horizontal: "middle" },
            padding: 0,
            itemMarkWidth: 10,
            itemMarkHeight: 10,
@@ -191,9 +200,9 @@ export const Analytics = () => {
            itemGap: 8,
            labelStyle: {
             fontSize: 11,
-            fill: 'gray'
-           }
-          }
+            fill: "gray",
+           },
+          },
          }}
         />
        </Card>

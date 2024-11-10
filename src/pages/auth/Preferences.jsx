@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaUserGear } from "react-icons/fa6";
 
 export const Preferences = () => {
  const [selectedFoods, setSelectedFoods] = useState([]);
@@ -40,7 +41,10 @@ export const Preferences = () => {
   <>
    <div className="bg-mainblue w-full h-screen flex items-center justify-center">
     <div className="bg-white w-[700px] h-auto rounded-md p-8">
-     <div>
+     <div className="flex flex-col gap-2">
+      <div className="w-10 h-10 flex items-center justify-center border border-blue-500 bg-blue-100 rounded-md">
+       <FaUserGear size={16} className="text-mainblue"/>
+      </div>
       <h1 className="text-md font-medium">User Preferences</h1>
      </div>
      <div className="mt-1">
