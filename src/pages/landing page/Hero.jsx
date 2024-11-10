@@ -9,7 +9,7 @@ export const Hero = () => {
     className="relative md:flex items-center justify-center h-auto lg:h-screen bg-mainbg pt-12"
    >
     <div className="mx-auto p-10 md:mx-32 md:flex items-center justify-center md:gap-14">
-     <div className="z-10 w-full max-w-lg md:max-w-[500px]">
+     <div className="w-full max-w-lg md:max-w-[500px]">
       <div className="font-black text-[#313638] text-3xl md:text-5xl leading-[50px]">
        <h1>Foodie on the Go With your Kodigo</h1>
        <div className="pt-3 leading-6">
@@ -22,7 +22,7 @@ export const Hero = () => {
       <div className="pt-5">
        <Searchbar />
       </div>
-      <div className="mt-10 flex flex-row items-center justify-start md:justify-start gap-1 md:gap-4 z-10">
+      <div className="mt-10 flex flex-row items-center justify-start md:justify-start gap-1 md:gap-4">
        <div className="bg-white px-2 sm:px-6 py-2 border rounded-md flex flex-col items-center">
         <h1 className="text-md font-semibold text-red-500">12k</h1>
         <p className="text-sm font-light text-gray-500">Users</p>
@@ -40,7 +40,7 @@ export const Hero = () => {
      <img
       src={threePlateFood}
       alt=""
-      className="w-full hidden lg:block max-w-xs lg:max-w-[430px] xl:w-[500px] z-10"
+      className="w-full hidden z-10 lg:block max-w-xs lg:max-w-[430px] xl:w-[500px]"
      />
     </div>
    </div>

@@ -13,7 +13,12 @@ export const Navbar = () => {
  };
 
  const navHome = () => {
-  nav("/");
+  const section = document.getElementById("hero");
+  if (section) {
+   window.location.hash = "hero";
+  } else {
+   nav("/"); // Navigate to home if section not found
+  }
  };
 
  const navExplore = () => {
@@ -70,7 +75,7 @@ export const Navbar = () => {
 
  return (
   <>
-   <div className="fixed w-full border bg-white z-10 flex justify-between items-center px-5">
+   <div className="fixed w-full border bg-white z-20 flex justify-between items-center px-5">
     <div>
      <img src={mainLogo} onClick={navHome} alt="" className="w-[50px]" />
     </div>
@@ -84,7 +89,7 @@ export const Navbar = () => {
      <ul className="flex items-center gap-5">
       <li
        onClick={navHome}
-       className={`text-sm font-medium cursor-pointer ${
+       className={`text-sm font-medium cursor-pointer${
         activeItem === "hero" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -92,7 +97,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navAboutUs}
-       className={`text-sm font-medium cursor-pointer ${
+       className={`text-sm font-medium cursor-pointer${
         activeItem === "about" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -100,7 +105,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navExplore}
-       className={`text-sm font-medium cursor-pointer ${
+       className={`text-sm font-medium cursor-pointer${
         activeItem === "explore" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -108,7 +113,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navContact}
-       className={`text-sm font-medium cursor-pointer ${
+       className={`text-sm font-medium cursor-pointer${
         activeItem === "contact" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -136,7 +141,7 @@ export const Navbar = () => {
      <ul className="flex flex-col items-start gap-5">
       <li
        onClick={navHome}
-       className={`text-sm font-medium cursor-pointer ${
+       className={`text-sm font-medium cursor-pointer${
         activeItem === "hero" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -144,7 +149,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navAboutUs}
-       className={`text-sm font-medium cursor-pointer ${
+       className={`text-sm font-medium cursor-pointer${
         activeItem === "about" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -152,7 +157,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navExplore}
-       className={`text-sm font-medium cursor-pointer ${
+       className={`text-sm font-medium cursor-pointer${
         activeItem === "explore" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -160,7 +165,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navContact}
-       className={`text-sm font-medium cursor-pointer ${
+       className={`text-sm font-medium cursor-pointer${
         activeItem === "contact" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >

@@ -77,7 +77,7 @@ export const Sidebar = ({ onToggle }) => {
            className={`flex items-center gap-2 h-8 px-2 ${
             isActive
              ? "text-blue-600 bg-mainblue bg-opacity-20 rounded px-2"
-             : "text-darkgray"
+             : "text-darkgray hover:bg-gray-100 rounded"
            }`}
           >
            <IconComponent size={16} />
