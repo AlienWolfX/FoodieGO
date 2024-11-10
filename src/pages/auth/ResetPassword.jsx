@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { SuccessResetPassword } from "../../components/Modals/SuccessResetPassword";
+import { AnimatePresence } from "framer-motion";
 
 export const ResetPassword = () => {
  const [password, setPassword] = useState("");
@@ -11,6 +14,9 @@ export const ResetPassword = () => {
  });
  const [showTooltip, setShowTooltip] = useState(false);
 
+ const [passwordSuccess, setPasswordSuccess] = useState(false);
+ const nav = useNavigate();
+
  const checkPasswordStrength = (pass) => {
   setPasswordStrength({
    hasLength: pass.length >= 8,
@@ -20,10 +26,24 @@ export const ResetPassword = () => {
   });
  };
 
- const handleChangePassword = async() => {
-  // open success modal
-  // close modal after 2 seconds
-  // redirect to login page
+ const handleChangePassword = async () => {
+  // Simulate password change logic (e.g., API call)
+  try {
+   // Assume you have a function to change the password
+   // await changePassword(newPassword);
+
+   // Show success modal
+   setPasswordSuccess(true);
+
+   // Redirect to login page after 2 seconds
+   setTimeout(() => {
+    // setPasswordSuccess(false); // Optionally hide the modal
+    // nav("/login"); // Redirect to login page
+   }, 2000);
+  } catch (error) {
+   console.error("Error changing password:", error);
+   // Handle error (e.g., show an error message)
+  }
  };
 
  return (
@@ -100,6 +120,13 @@ export const ResetPassword = () => {
      </div>
     </div>
    </div>
+
+   {/* Success modal (conditional rendering) */}
+   <AnimatePresence>
+    {passwordSuccess && (
+     <SuccessResetPassword setPasswordSuccess={setPasswordSuccess} />
+    )}
+   </AnimatePresence>
   </>
  );
 };
