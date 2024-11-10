@@ -263,18 +263,20 @@ export const ViewRecipe = () => {
       <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
      </motion.div>
     )}
-    <AnimatePresence>
-     {favModal && (
-      <motion.div
-       initial={{ opacity: 0, scale: 0.95 }}
-       animate={{ opacity: 1, scale: 1 }}
-       exit={{ opacity: 0, scale: 0.95 }}
-       transition={{ duration: 0.2 }}
-      >
-       <AddFavorite setFavModal={setFavModal} />
-      </motion.div>
-     )}
-    </AnimatePresence>
+   </AnimatePresence>
+   <AnimatePresence>
+    {favModal && (
+     <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+     >
+      <AddFavorite setFavModal={setFavModal} />
+     </motion.div>
+    )}
+   </AnimatePresence>
+   <AnimatePresence>
     {analyze && (
      <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
