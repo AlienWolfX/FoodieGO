@@ -40,38 +40,52 @@ export const Analytics = () => {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
+    className="space-y-6"
    >
-    <Typography variant="" className="text-lg text-gray-600 font-medium mb-4">
-     Analytics Dashboard
-    </Typography>
-    <hr className="mb-6" />
+    <div className="flex items-center justify-between">
+     <Typography className="text-lg text-gray-700 font-medium">
+      Analytics Dashboard
+     </Typography>
+     <Typography className="text-sm text-gray-500">
+      Last updated: {new Date().toLocaleDateString()}
+     </Typography>
+    </div>
+    <hr className="border-gray-100" />
 
     {/* Stats Cards */}
-    <Grid container spacing={3} className="mb-6 rounded-md">
+    <Grid container spacing={3}>
      {[
       {
        title: "Total Followers",
-       value: statsData.followers,
+       value: statsData.followers.toLocaleString(),
        icon: <PersonIcon />,
        color: "#3b82f6",
+       bgColor: "#EFF6FF",
+       trend: "+12.5%",
       },
       {
        title: "Total Likes",
-       value: statsData.likes,
+       value: statsData.likes.toLocaleString(),
        icon: <FavoriteIcon />,
        color: "#ef4444",
+       bgColor: "#FEF2F2",
+       trend: "+8.2%",
       },
       {
        title: "Total Downloads",
-       value: statsData.downloads,
+       value: statsData.downloads.toLocaleString(),
        icon: <GetAppIcon />,
        color: "#10b981",
+       bgColor: "#ECFDF5",
+       trend: "+15.3%",
       },
       {
        title: "Total Recipes",
-       value: statsData.recipes,
+       value: statsData.recipes.toLocaleString(),
        icon: <RestaurantIcon />,
        color: "#f59e0b",
+       bgColor: "#FFFBEB",
+       trend: "+5.8%",
       },
      ].map((stat, index) => (
       <Grid item xs={12} sm={6} md={3} key={index}>
@@ -80,23 +94,31 @@ export const Analytics = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.1 }}
        >
-        <Card className="p-4">
+        <Card 
+         elevation={0}
+         className="p-5 border border-gray-100 hover:border-gray-200 transition-all duration-300"
+         sx={{ borderRadius: 3 }}
+        >
          <Box display="flex" alignItems="center" justifyContent="space-between">
-          <div>
-           <Typography color="textSecondary" variant="subtitle2">
+          <div className="space-y-2">
+           <Typography color="textSecondary" variant="subtitle2" className="text-gray-500">
             {stat.title}
            </Typography>
-           <Typography variant="h4" style={{ color: stat.color }}>
-            {stat.value}
-           </Typography>
+           <div className="space-y-1">
+            <Typography variant="h4" style={{ color: stat.color }} className="font-semibold">
+             {stat.value}
+            </Typography>
+            <Typography variant="caption" className="text-gray-500">
+             <span className="text-green-500">{stat.trend}</span> vs last month
+            </Typography>
+           </div>
           </div>
           <Box 
-            style={{ color: stat.color }} 
-            className={`p-2 rounded-full`}
-            sx={{ 
-              color: stat.color,
-              backgroundColor: `${stat.color}20`,  // 20 is hex for 12% opacity
-            }}
+           className="rounded-xl p-3"
+           sx={{ 
+            backgroundColor: stat.bgColor,
+            color: stat.color,
+           }}
           >
            {stat.icon}
           </Box>
@@ -116,10 +138,20 @@ export const Analytics = () => {
        animate={{ opacity: 1, y: 0 }}
        transition={{ delay: 0.4 }}
       >
-       <Card className="p-4">
-        <Typography variant="h6" className="mb-4">
-         Growth Overview
-        </Typography>
+       <Card 
+        elevation={0}
+        className="p-6 border border-gray-100"
+        sx={{ borderRadius: 3 }}
+       >
+        <div className="flex items-center justify-between mb-6">
+         <Typography variant="h6" className="text-gray-700 font-medium">
+          Growth Overview
+         </Typography>
+         <select className="text-sm border border-gray-200 rounded-lg px-3 py-1.5">
+          <option>Last 6 months</option>
+          <option>Last year</option>
+         </select>
+        </div>
         <LineChart
          xAxis={[
           {
@@ -152,9 +184,17 @@ export const Analytics = () => {
          height={300}
          margin={{ left: 40, right: 40, top: 20, bottom: 30 }}
          sx={{
-          ".MuiChartsLegend-root": {
+          '.MuiChartsLegend-root': {
            fontSize: 11,
-           gap: "8px",
+           gap: '8px',
+          },
+          '.MuiLineElement-root': {
+           strokeWidth: 2,
+          },
+          '.MuiMarkElement-root': {
+           stroke: 'white',
+           strokeWidth: 2,
+           fill: 'currentColor',
           },
          }}
         />
@@ -169,10 +209,19 @@ export const Analytics = () => {
        animate={{ opacity: 1, y: 0 }}
        transition={{ delay: 0.5 }}
       >
-       <Card className="p-4">
-        <Typography variant="h6" className="mb-4">
-         Recipe Categories
-        </Typography>
+       <Card 
+        elevation={0}
+        className="p-6 border border-gray-100"
+        sx={{ borderRadius: 3 }}
+       >
+        <div className="flex items-center justify-between mb-6">
+         <Typography variant="h6" className="text-gray-700 font-medium">
+          Recipe Categories
+         </Typography>
+         <button className="text-sm text-blue-500 hover:text-blue-600">
+          View All
+         </button>
+        </div>
         <PieChart
          series={[
           {
@@ -204,6 +253,12 @@ export const Analytics = () => {
            },
           },
          }}
+         sx={{
+          '.MuiChartsLegend-root': {
+           fontSize: 11,
+           gap: '8px',
+          },
+         }}
         />
        </Card>
       </motion.div>
@@ -216,10 +271,22 @@ export const Analytics = () => {
        animate={{ opacity: 1, y: 0 }}
        transition={{ delay: 0.6 }}
       >
-       <Card className="p-4">
-        <Typography variant="h6" className="mb-4">
-         Most Popular Recipes
-        </Typography>
+       <Card 
+        elevation={0}
+        className="p-6 border border-gray-100"
+        sx={{ borderRadius: 3 }}
+       >
+        <div className="flex items-center justify-between mb-6">
+         <Typography variant="h6" className="text-gray-700 font-medium">
+          Most Popular Recipes
+         </Typography>
+         <div className="flex items-center gap-2">
+          <select className="text-sm border border-gray-200 rounded-lg px-3 py-1.5">
+           <option>This Month</option>
+           <option>Last Month</option>
+          </select>
+         </div>
+        </div>
         <BarChart
          xAxis={[
           {
@@ -237,6 +304,11 @@ export const Analytics = () => {
          ]}
          height={300}
          margin={{ left: 40, right: 40, top: 20, bottom: 30 }}
+         sx={{
+          '.MuiBarElement-root': {
+           borderRadius: '6px',
+          },
+         }}
         />
        </Card>
       </motion.div>
