@@ -9,6 +9,30 @@ export const ExploreRecipes = () => {
  const [selectedCuisine, setSelectedCuisine] = useState("All");
  const [selectedCategory, setSelectedCategory] = useState("All");
 
+ const cuisines = [
+  "All",
+  "Chinese",
+  "Japanese",
+  "Korean",
+  "Thai",
+  "Indian",
+  "Vietnamese",
+  "Filipino",
+  "Malaysian",
+  "Indonesian",
+ ];
+
+ const categories = [
+  "All",
+  "Appetizers",
+  "Main Dishes",
+  "Side Dishes",
+  "Desserts",
+  "Soups",
+  "Noodles & Rice",
+  "Sauces & Condiments",
+ ];
+
  // Filter recipes based on search term, selected cuisine, and selected category
  const filteredRecipes = recipeData.filter((recipe) => {
   const matchesSearch = recipe.title
@@ -25,7 +49,7 @@ export const ExploreRecipes = () => {
  return (
   <>
    <Navbar />
-   <div className="pt-20 bg-gray-100 h-screen">
+   <div className="pt-20 bg-gray-100 min-h-screen">
     <div className="mt-2 mx-5 md:mx-10 lg:mx-32 pb-20">
      <div className="flex flex-col md:flex-row items-center justify-between">
       <div className="w-full md:w-[400px]">
@@ -42,75 +66,64 @@ export const ExploreRecipes = () => {
        className="hidden md:block w-full md:w-auto md:max-w-[600px] mt-4 md:mt-0"
       />
      </div>
-     <div className="md:pt-10 flex flex-col md:flex-row justify-between items-center mt-5">
-      <div className="flex flex-wrap gap-1 mb-4 md:mb-0">
-       <label htmlFor="cuisine" className="mr-2 text-gray-600">
-        Cuisine:
-       </label>
-       <select
-        id="cuisine"
-        value={selectedCuisine}
-        onChange={(e) => setSelectedCuisine(e.target.value)}
-        className="bg-white border border-gray-300 rounded px-4 py-2"
-       >
-        {[
-         "All",
-         "Chinese",
-         "Japanese",
-         "Korean",
-         "Thai",
-         "Indian",
-         "Vietnamese",
-         "Filipino",
-         "Malaysian",
-         "Indonesian",
-        ].map((cuisine) => (
-         <option key={cuisine} value={cuisine}>
+
+     <div className="md:pt-10 flex flex-col space-y-4 mt-5">
+      {/* Cuisine Buttons */}
+      <div className="space-y-2">
+       <h3 className="text-sm font-medium text-gray-600">Cuisine:</h3>
+       <div className="flex flex-wrap gap-2">
+        {cuisines.map((cuisine) => (
+         <button
+          key={cuisine}
+          onClick={() => setSelectedCuisine(cuisine)}
+          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+           selectedCuisine === cuisine
+            ? "bg-mainblue text-white"
+            : "bg-white text-gray-600 hover:bg-gray-100"
+          }`}
+         >
           {cuisine}
-         </option>
+         </button>
         ))}
-       </select>
+       </div>
       </div>
-      <div className="flex flex-wrap gap-1 mb-4 md:mb-0">
-       <label htmlFor="category" className="mr-2 text-gray-600">
-        Category:
-       </label>
-       <select
-        id="category"
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-        className="bg-white border border-gray-300 rounded px-4 py-2"
-       >
-        {[
-         "All",
-         "Appetizers",
-         "Main Dishes",
-         "Side Dishes",
-         "Desserts",
-         "Soups",
-         "Noodles & Rice",
-         "Sauces & Condiments",
-        ].map((category) => (
-         <option key={category} value={category}>
+
+      {/* Category Buttons */}
+      <div className="space-y-2">
+       <h3 className="text-sm font-medium text-gray-600">Category:</h3>
+       <div className="flex flex-wrap gap-2">
+        {categories.map((category) => (
+         <button
+          key={category}
+          onClick={() => setSelectedCategory(category)}
+          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+           selectedCategory === category
+            ? "bg-mainblue text-white"
+            : "bg-white text-gray-600 hover:bg-gray-100"
+          }`}
+         >
           {category}
-         </option>
+         </button>
         ))}
-       </select>
+       </div>
       </div>
-      <div className="flex items-center w-full md:w-auto">
+
+      {/* Search Bar */}
+      <div className="flex items-center w-full">
        <input
         type="text"
         placeholder="Explore recipes on the Internet"
-        className="border border-gray-300 rounded px-4 py-2 w-full md:w-64"
+        className="border border-gray-300 rounded-lg px-4 py-2 w-full md:w-64"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
        />
-       <button className="bg-mainblue text-white rounded px-4 py-2 ml-2">
+       <button className="bg-mainblue text-white rounded-lg px-6 py-2 ml-2 text-sm font-medium hover:bg-blue-600 transition-colors duration-200">
         Filter
        </button>
       </div>
      </div>
-     <div>
+
+     <div className="mt-6">
       <FoodCard recipes={filteredRecipes} />
      </div>
     </div>

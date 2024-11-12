@@ -454,4 +454,199 @@ export const recipeData = [
    "4. Add soy sauce and Szechuan chili oil, tossing to coat. Serve with rice.",
   ],
  },
+ {
+  id: 15,
+  title: "Indian Butter Chicken",
+  time: "25m",
+  author: "Priya Sharma",
+  ratings: 4.9,
+  img_path: "/foodimages/butter-chicken.jpg",
+  vid_path: "",
+  difficulty: "Medium",
+  cuisine: "Indian",
+  category: "Main Dishes",
+  dateCreated: "2024-09-19",
+  description: "Tender chicken in a rich, creamy tomato-based curry sauce...",
+  ingredients: [
+   "500g chicken tikka",
+   "Butter",
+   "Tomato puree",
+   "Heavy cream",
+   "Garam masala",
+   "Kasuri methi",
+   "Honey"
+  ],
+  instructions: [
+   "1. Cook marinated chicken tikka",
+   "2. Prepare makhani sauce",
+   "3. Combine chicken with sauce",
+   "4. Finish with cream and butter"
+  ]
+ },
+ {
+  id: 16,
+  title: "Japanese Mochi",
+  time: "30m",
+  author: "Yuki Tanaka",
+  ratings: 4.6,
+  img_path: "/foodimages/japanese-mochi.jpg",
+  vid_path: "",
+  difficulty: "Medium",
+  cuisine: "Japanese",
+  category: "Desserts",
+  dateCreated: "2024-09-20",
+  description: "Sweet rice cakes with various fillings...",
+  ingredients: [
+   "Glutinous rice flour",
+   "Sugar",
+   "Water",
+   "Cornstarch",
+   "Red bean paste"
+  ],
+  instructions: [
+   "1. Mix rice flour with water",
+   "2. Steam the mixture",
+   "3. Knead until smooth",
+   "4. Fill with red bean paste"
+  ]
+ },
+ {
+  id: 17,
+  title: "Korean Kimchi Pancake",
+  time: "15m",
+  author: "Park Min Young",
+  ratings: 4.7,
+  img_path: "/foodimages/kimchi-pancake.jpg",
+  vid_path: "",
+  difficulty: "Easy",
+  cuisine: "Korean",
+  category: "Side Dishes",
+  dateCreated: "2024-09-21",
+  description: "Crispy savory pancakes made with fermented kimchi...",
+  ingredients: [
+   "Kimchi",
+   "Flour",
+   "Eggs",
+   "Green onions",
+   "Vegetable oil"
+  ],
+  instructions: [
+   "1. Mix chopped kimchi with batter",
+   "2. Heat oil in pan",
+   "3. Pour mixture and spread",
+   "4. Flip and cook until crispy"
+  ]
+ },
+ {
+  id: 18,
+  title: "Thai Mango Sticky Rice",
+  time: "20m",
+  author: "Supaporn Chan",
+  ratings: 4.8,
+  img_path: "/foodimages/mango-sticky-rice.jpg",
+  vid_path: "",
+  difficulty: "Medium",
+  cuisine: "Thai",
+  category: "Desserts",
+  dateCreated: "2024-09-22",
+  description: "Sweet coconut sticky rice with fresh mango...",
+  ingredients: [
+   "Glutinous rice",
+   "Coconut milk",
+   "Palm sugar",
+   "Ripe mangoes",
+   "Salt"
+  ],
+  instructions: [
+   "1. Steam sticky rice",
+   "2. Prepare coconut sauce",
+   "3. Mix rice with sauce",
+   "4. Serve with fresh mango"
+  ]
+ },
+ {
+  id: 19,
+  title: "Chinese Hot Pot",
+  time: "35m",
+  author: "Li Wei",
+  ratings: 4.9,
+  img_path: "/foodimages/chinese-hot-pot.jpg",
+  vid_path: "",
+  difficulty: "Medium",
+  cuisine: "Chinese",
+  category: "Main Dishes",
+  dateCreated: "2024-09-23",
+  description: "Interactive dining experience with simmering broth and various ingredients...",
+  ingredients: [
+   "Hot pot broth",
+   "Sliced meat",
+   "Seafood",
+   "Vegetables",
+   "Noodles",
+   "Tofu",
+   "Dipping sauces"
+  ],
+  instructions: [
+   "1. Prepare broth base",
+   "2. Arrange ingredients",
+   "3. Cook items in broth",
+   "4. Dip in sauce and enjoy"
+  ]
+ },
+ {
+  id: 20,
+  title: "Vietnamese Spring Rolls",
+  time: "20m",
+  author: "Nguyen Thu",
+  ratings: 4.7,
+  img_path: "/foodimages/vietnamese-spring-rolls.jpg",
+  vid_path: "",
+  difficulty: "Easy",
+  cuisine: "Vietnamese",
+  category: "Appetizers",
+  dateCreated: "2024-09-24",
+  description: "Fresh rice paper rolls with herbs and shrimp...",
+  ingredients: [
+   "Rice paper",
+   "Shrimp",
+   "Rice vermicelli",
+   "Fresh herbs",
+   "Lettuce",
+   "Peanut sauce"
+  ],
+  instructions: [
+   "1. Prepare filling ingredients",
+   "2. Soak rice paper",
+   "3. Add fillings and roll",
+   "4. Serve with peanut sauce"
+  ]
+ },
+ {
+  id: 21,
+  title: "Malaysian Roti Canai",
+  time: "25m",
+  author: "Farah Abdullah",
+  ratings: 4.8,
+  img_path: "/foodimages/roti-canai.jpg",
+  vid_path: "",
+  difficulty: "Hard",
+  cuisine: "Malaysian",
+  category: "Side Dishes",
+  dateCreated: "2024-09-25",
+  description: "Flaky, crispy flatbread served with curry sauce...",
+  ingredients: [
+   "Flour",
+   "Water",
+   "Salt",
+   "Ghee",
+   "Oil",
+   "Curry sauce"
+  ],
+  instructions: [
+   "1. Knead dough until elastic",
+   "2. Rest dough",
+   "3. Flatten and fold",
+   "4. Cook on griddle"
+  ]
+ }
 ];
