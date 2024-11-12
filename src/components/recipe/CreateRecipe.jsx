@@ -1,22 +1,37 @@
 import { useState } from "react";
-import { MdCancel } from "react-icons/md";
+import { MdCancel, MdCloudUpload, MdDelete } from "react-icons/md";
 import { UserRecipeData } from "../../../data/UserRecipeData";
+import { motion, AnimatePresence } from "framer-motion";
+import { IoTimeOutline } from "react-icons/io5";
 
 export const CreateRecipe = ({ setCreateRecipe }) => {
- // Form state
  const [formData, setFormData] = useState({
   title: "",
   description: "",
   category: "",
-  img_path: "",
+  cuisine: "",
+  images: [],
+  video: null,
   time: "",
   difficulty: "",
-  ingredients: "",
-  instructions: "",
-  vid_path: "",
+  ingredients: [],
+  instructions: [],
  });
 
- // Handle input changes
+ const [currentIngredient, setCurrentIngredient] = useState("");
+ const [currentInstruction, setCurrentInstruction] = useState("");
+ const [dragActive, setDragActive] = useState(false);
+ const [showTimeSlider, setShowTimeSlider] = useState(false);
+ const [timeInMinutes, setTimeInMinutes] = useState(30);
+
+ const formatTime = (minutes) => {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  if (hours === 0) return `${mins} mins`;
+  if (mins === 0) return `${hours} ${hours === 1 ? 'hour' : 'hours'}`;
+  return `${hours} ${hours === 1 ? 'hour' : 'hours'} ${mins} mins`;
+ };
+
  const handleChange = (e) => {
   const { name, value } = e.target;
   setFormData((prev) => ({
@@ -25,200 +40,469 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
   }));
  };
 
- // Handle file input
- const handleFileChange = (e) => {
-  const file = e.target.files[0];
-  // Create a temporary URL for the uploaded image
-  const imageUrl = URL.createObjectURL(file);
-  setFormData((prev) => ({
+ const handleTimeChange = (e) => {
+  const minutes = parseInt(e.target.value);
+  setTimeInMinutes(minutes);
+  setFormData(prev => ({
    ...prev,
-   img_path: imageUrl,
+   time: formatTime(minutes)
   }));
  };
 
- // Handle form submission
- const handleSubmit = (e) => {
-  e.preventDefault();
-
-  // Create new recipe object
-  const newRecipe = {
-   id: UserRecipeData.length + 1, // Generate new ID
-   title: formData.title,
-   time: formData.time,
-   author: "Patrick James Dionen", // Default author
-   ratings: 0, // Initial rating
-   img_path: formData.img_path,
-   vid_path: formData.vid_path,
-   difficulty: formData.difficulty,
-   category: formData.category,
-   dateCreated: new Date().toISOString().split('T')[0], // Current date
-   description: formData.description,
-   ingredients: formData.ingredients.split(',').map(item => item.trim()), // Convert string to array
-   instructions: formData.instructions.split(',').map(item => item.trim()), // Convert string to array
-  };
-
-  // Add new recipe to UserRecipeData
-  UserRecipeData.push(newRecipe);
-  
-  // Close the modal
-  setCreateRecipe(false);
+ const handleMediaUpload = (e) => {
+  const files = Array.from(e.target.files);
+  files.forEach(file => {
+   if (file.type.startsWith('image/')) {
+    setFormData(prev => ({
+     ...prev,
+     images: [...prev.images, URL.createObjectURL(file)]
+    }));
+   } else if (file.type.startsWith('video/')) {
+    setFormData(prev => ({
+     ...prev,
+     video: URL.createObjectURL(file)
+    }));
+   }
+  });
  };
 
+ const handleDrag = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  if (e.type === "dragenter" || e.type === "dragover") {
+   setDragActive(true);
+  } else if (e.type === "dragleave") {
+   setDragActive(false);
+  }
+ };
+
+ const handleDrop = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  setDragActive(false);
+  
+  const files = Array.from(e.dataTransfer.files);
+  files.forEach(file => {
+   if (file.type.startsWith('image/')) {
+    setFormData(prev => ({
+     ...prev,
+     images: [...prev.images, URL.createObjectURL(file)]
+    }));
+   } else if (file.type.startsWith('video/')) {
+    setFormData(prev => ({
+     ...prev,
+     video: URL.createObjectURL(file)
+    }));
+   }
+  });
+ };
+
+ const removeMedia = (index, type) => {
+  if (type === 'image') {
+   setFormData(prev => ({
+    ...prev,
+    images: prev.images.filter((_, i) => i !== index)
+   }));
+  } else {
+   setFormData(prev => ({
+    ...prev,
+    video: null
+   }));
+  }
+ };
+
+ const addIngredient = () => {
+  if (currentIngredient.trim()) {
+   setFormData(prev => ({
+    ...prev,
+    ingredients: [...prev.ingredients, currentIngredient.trim()]
+   }));
+   setCurrentIngredient("");
+  }
+ };
+
+ const addInstruction = () => {
+  if (currentInstruction.trim()) {
+   setFormData(prev => ({
+    ...prev,
+    instructions: [...prev.instructions, currentInstruction.trim()]
+   }));
+   setCurrentInstruction("");
+  }
+ };
+
+ const cuisines = [
+  "Chinese",
+  "Japanese",
+  "Korean",
+  "Thai",
+  "Indian",
+  "Vietnamese",
+  "Filipino",
+  "Malaysian",
+  "Indonesian",
+ ];
+
+ const categories = [
+  "Appetizers",
+  "Main Dishes",
+  "Side Dishes",
+  "Desserts",
+  "Soups",
+  "Noodles & Rice",
+  "Sauces & Condiments",
+ ];
+
  return (
-  <>
-   <div className="p-5 md:p-0 fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center overflow-x-scroll md:overflow-hidden z-20">
-    <div className="mt-60 md:mt-0 bg-white border w-full max-w-[700px] min-h-[400px] md:min-h-[500px] p-5 rounded ">
-     <div className="flex items-center justify-between">
-      <h1 className="text-lg font-bold">Add Recipe</h1>
-      <MdCancel
-       onClick={() => setCreateRecipe(false)}
-       size={20}
-       className="text-red-500 cursor-pointer"
-      />
-     </div>
-     <div>
-      <form onSubmit={handleSubmit}>
-       <div className="flex flex-col md:flex-row gap-2">
-        <div className="space-y-3 mt-5 w-full">
-         <div className="flex flex-col gap-1">
-          <label htmlFor="title" className="text-xs font-medium">
-           Title
-          </label>
-          <input
-           type="text"
-           name="title"
-           value={formData.title}
-           onChange={handleChange}
-           placeholder="Recipe name"
-           className="h-10 border rounded px-4 text-xs font-medium outline-none"
-           required
-          />
-         </div>
-         <div className="flex flex-col gap-1">
-          <label htmlFor="description" className="text-xs font-medium">
-           Description
-          </label>
-          <textarea
-           name="description"
-           value={formData.description}
-           onChange={handleChange}
-           placeholder="Recipe description"
-           className="h-10 pt-2 min-h-[70px] border rounded px-4 text-xs font-medium outline-none"
-           required
-          />
-         </div>
-         <div className="flex flex-col gap-1">
-          <label htmlFor="category" className="text-xs font-medium">
+  <motion.div
+   initial={{ opacity: 0 }}
+   animate={{ opacity: 1 }}
+   exit={{ opacity: 0 }}
+   className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50"
+  >
+   <motion.div
+    initial={{ scale: 0.9, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    exit={{ scale: 0.9, opacity: 0 }}
+    className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+   >
+    <div className="sticky top-0 bg-white p-6 border-b flex items-center justify-between">
+     <h1 className="text-xl font-semibold text-gray-800">Create New Recipe</h1>
+     <button
+      onClick={() => setCreateRecipe(false)}
+      className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+     >
+      <MdCancel size={24} className="text-gray-500" />
+     </button>
+    </div>
+
+    <div className="p-6">
+     <form className="space-y-6">
+      {/* Basic Info Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <div className="space-y-4">
+        <div>
+         <label className="block text-sm font-medium text-gray-700 mb-1">
+          Recipe Title
+         </label>
+         <input
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          placeholder="Enter recipe title"
+         />
+        </div>
+
+        <div>
+         <label className="block text-sm font-medium text-gray-700 mb-1">
+          Description
+         </label>
+         <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          rows={3}
+          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          placeholder="Describe your recipe"
+         />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+         <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
            Category
           </label>
-          <input
-           type="text"
+          <select
            name="category"
            value={formData.category}
            onChange={handleChange}
-           placeholder="Lunch"
-           className="h-10 border rounded px-4 text-xs font-medium outline-none"
-           required
-          />
+           className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          >
+           <option value="">Select category</option>
+           {categories.map((cat) => (
+            <option key={cat} value={cat.toLowerCase()}>
+             {cat}
+            </option>
+           ))}
+          </select>
          </div>
-         <div className="flex flex-col gap-1">
-          <label htmlFor="img_path" className="text-xs font-medium">
-           Food Image
+
+         <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+           Cuisine
           </label>
-          <input
-           type="file"
-           name="img_path"
-           onChange={handleFileChange}
-           className="h-10 border rounded px-4 text-xs font-medium outline-none"
-           accept="image/*"
-           required
-          />
-         </div>
-         <div className="flex flex-col gap-1">
-          <label htmlFor="time" className="text-xs font-medium">
-           Cooking Time
-          </label>
-          <input
-           type="text"
-           name="time"
-           value={formData.time}
+          <select
+           name="cuisine"
+           value={formData.cuisine}
            onChange={handleChange}
-           placeholder="e.g., 30m"
-           className="h-10 border rounded px-4 text-xs font-medium outline-none"
-           required
-          />
+           className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          >
+           <option value="">Select cuisine</option>
+           {cuisines.map((cuisine) => (
+            <option key={cuisine} value={cuisine.toLowerCase()}>
+             {cuisine}
+            </option>
+           ))}
+          </select>
          </div>
-        </div>
-        <div className="space-y-3 mt-5 w-full">
-         <div className="flex flex-col gap-1">
-          <label htmlFor="difficulty" className="text-xs">
+
+         <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
            Difficulty
           </label>
-          <input
-           type="text"
+          <select
            name="difficulty"
            value={formData.difficulty}
            onChange={handleChange}
-           placeholder="Easy, Medium, Hard"
-           className="h-10 rounded px-4 border outline-none"
-           required
-          />
+           className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          >
+           <option value="">Select difficulty</option>
+           <option value="easy">Easy</option>
+           <option value="medium">Medium</option>
+           <option value="hard">Hard</option>
+          </select>
          </div>
-         <div className="flex flex-col gap-1">
-          <label htmlFor="ingredients" className="text-xs">
-           Ingredients (comma-separated)
+
+         <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+           Cooking Time
           </label>
-          <input
-           type="text"
-           name="ingredients"
-           value={formData.ingredients}
-           onChange={handleChange}
-           placeholder="ingredient 1, ingredient 2, ingredient 3"
-           className="h-10 rounded px-4 border outline-none"
-           required
-          />
-         </div>
-         <div className="flex flex-col gap-1">
-          <label htmlFor="instructions" className="text-xs">
-           Instructions (comma-separated)
-          </label>
-          <input
-           type="text"
-           name="instructions"
-           value={formData.instructions}
-           onChange={handleChange}
-           placeholder="step 1, step 2, step 3"
-           className="h-10 rounded px-4 border outline-none"
-           required
-          />
-         </div>
-         <div className="flex flex-col gap-1">
-          <label htmlFor="vid_path" className="text-xs">
-           Video Instructions (optional)
-          </label>
-          <input
-           type="text"
-           name="vid_path"
-           value={formData.vid_path}
-           onChange={handleChange}
-           className="h-10 rounded px-4 border outline-none"
-          />
+          <div className="relative">
+           <div
+            className="w-full px-4 py-2 border border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 transition-all flex items-center justify-between"
+            onClick={() => setShowTimeSlider(!showTimeSlider)}
+           >
+            <span className="text-gray-700">
+             {formData.time || "Select cooking time"}
+            </span>
+            <IoTimeOutline className="text-gray-500" />
+           </div>
+
+           <AnimatePresence>
+            {showTimeSlider && (
+             <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute z-10 mt-2 p-4 bg-white border border-gray-200 rounded-lg shadow-lg w-full"
+             >
+              <div className="space-y-4">
+               <div className="flex justify-between items-center">
+                <span className="text-sm font-medium text-gray-600">
+                  5 mins
+                </span>
+                <span className="text-sm font-medium text-blue-500">
+                 {formatTime(timeInMinutes)}
+                </span>
+                <span className="text-sm font-medium text-gray-600">
+                  3 hours
+                </span>
+               </div>
+               <input
+                type="range"
+                min="5"
+                max="180"
+                value={timeInMinutes}
+                onChange={handleTimeChange}
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+               />
+               <div className="flex justify-between text-xs text-gray-500">
+                <span>Minimum</span>
+                <span>Maximum</span>
+               </div>
+              </div>
+             </motion.div>
+            )}
+           </AnimatePresence>
+          </div>
          </div>
         </div>
        </div>
-       {/* Create Recipe Button */}
-       <div className="mt-5">
-        <button
-         type="submit"
-         className="w-full bg-blue-500 text-xs text-white font-medium py-2 rounded hover:bg-blue-600 transition duration-200"
-        >
-         Create Recipe
-        </button>
+
+       {/* Media Upload Section */}
+       <div
+        className={`border-2 border-dashed rounded-lg p-4 ${
+         dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+        }`}
+        onDragEnter={handleDrag}
+        onDragLeave={handleDrag}
+        onDragOver={handleDrag}
+        onDrop={handleDrop}
+       >
+        <div className="text-center space-y-4">
+         <MdCloudUpload className="mx-auto h-12 w-12 text-gray-400" />
+         <div className="space-y-1">
+          <p className="text-sm text-gray-500">
+           Drag and drop your images or video here, or
+          </p>
+          <label className="relative cursor-pointer">
+           <span className="text-blue-500 hover:text-blue-600">browse files</span>
+           <input
+            type="file"
+            multiple
+            accept="image/*,video/*"
+            onChange={handleMediaUpload}
+            className="hidden"
+           />
+          </label>
+         </div>
+        </div>
+
+        {/* Preview Section */}
+        <div className="mt-4 grid grid-cols-3 gap-4">
+         {formData.images.map((image, index) => (
+          <div key={index} className="relative group">
+           <img
+            src={image}
+            alt={`Preview ${index + 1}`}
+            className="w-full h-24 object-cover rounded-lg"
+           />
+           <button
+            type="button"
+            onClick={() => removeMedia(index, 'image')}
+            className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+           >
+            <MdDelete size={16} />
+           </button>
+          </div>
+         ))}
+         {formData.video && (
+          <div className="relative group">
+           <video
+            src={formData.video}
+            className="w-full h-24 object-cover rounded-lg"
+           />
+           <button
+            type="button"
+            onClick={() => removeMedia(0, 'video')}
+            className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+           >
+            <MdDelete size={16} />
+           </button>
+          </div>
+         )}
+        </div>
        </div>
-      </form>
-     </div>
+      </div>
+
+      {/* Ingredients and Instructions */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+       {/* Ingredients */}
+       <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+         Ingredients
+        </label>
+        <div className="flex gap-2 mb-2">
+         <input
+          type="text"
+          value={currentIngredient}
+          onChange={(e) => setCurrentIngredient(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && addIngredient()}
+          className="flex-1 px-4 py-2 border border-gray-200 rounded-lg"
+          placeholder="Add ingredient"
+         />
+         <button
+          type="button"
+          onClick={addIngredient}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+         >
+          Add
+         </button>
+        </div>
+        <div className="space-y-2">
+         {formData.ingredients.map((ingredient, index) => (
+          <div
+           key={index}
+           className="flex items-center justify-between p-2 bg-gray-50 rounded-lg"
+          >
+           <span className="text-sm">{ingredient}</span>
+           <button
+            type="button"
+            onClick={() => {
+             setFormData(prev => ({
+              ...prev,
+              ingredients: prev.ingredients.filter((_, i) => i !== index)
+             }));
+            }}
+            className="text-red-500 hover:text-red-600"
+           >
+            <MdDelete size={18} />
+           </button>
+          </div>
+         ))}
+        </div>
+       </div>
+
+       {/* Instructions */}
+       <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+         Instructions
+        </label>
+        <div className="flex gap-2 mb-2">
+         <input
+          type="text"
+          value={currentInstruction}
+          onChange={(e) => setCurrentInstruction(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && addInstruction()}
+          className="flex-1 px-4 py-2 border border-gray-200 rounded-lg"
+          placeholder="Add instruction"
+         />
+         <button
+          type="button"
+          onClick={addInstruction}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+         >
+          Add
+         </button>
+        </div>
+        <div className="space-y-2">
+         {formData.instructions.map((instruction, index) => (
+          <div
+           key={index}
+           className="flex items-center justify-between p-2 bg-gray-50 rounded-lg"
+          >
+           <span className="text-sm">
+            {index + 1}. {instruction}
+           </span>
+           <button
+            type="button"
+            onClick={() => {
+             setFormData(prev => ({
+              ...prev,
+              instructions: prev.instructions.filter((_, i) => i !== index)
+             }));
+            }}
+            className="text-red-500 hover:text-red-600"
+           >
+            <MdDelete size={18} />
+           </button>
+          </div>
+         ))}
+        </div>
+       </div>
+      </div>
+
+      {/* Submit Button */}
+      <div className="flex justify-end gap-3 pt-4 border-t">
+       <button
+        type="button"
+        onClick={() => setCreateRecipe(false)}
+        className="px-6 py-2 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50"
+       >
+        Cancel
+       </button>
+       <button
+        type="submit"
+        className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+       >
+        Create Recipe
+       </button>
+      </div>
+     </form>
     </div>
-   </div>
-  </>
+   </motion.div>
+  </motion.div>
  );
 };

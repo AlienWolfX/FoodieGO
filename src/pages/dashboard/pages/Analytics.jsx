@@ -51,7 +51,6 @@ export const Analytics = () => {
      </Typography>
     </div>
     <hr className="border-gray-100" />
-
     {/* Stats Cards */}
     <Grid container spacing={3}>
      {[
