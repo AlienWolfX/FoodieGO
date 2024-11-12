@@ -95,24 +95,23 @@
  fill: #4364ff;
 }
 
+/* Add to your CSS file */
+.slick-prev:before,
+.slick-next:before {
+ display: none !important;
+}
 
- /* Add to your CSS file */
- .slick-prev:before,
- .slick-next:before {
-  display: none !important;
- }
+/* Hide only the default Slick arrows */
+.slick-prev.slick-arrow,
+.slick-next.slick-arrow {
+ display: none !important;
+}
 
- /* Hide only the default Slick arrows */
- .slick-prev.slick-arrow,
- .slick-next.slick-arrow {
-  display: none !important;
- }
+/* Ensure custom arrows are visible */
+.custom-arrow-container {
+ display: flex !important;
+}
 
- /* Ensure custom arrows are visible */
- .custom-arrow-container {
-  display: flex !important;
- }
-
- .custom-arrow {
-  display: flex !important;
- }
+.custom-arrow {
+ display: flex !important;
+}

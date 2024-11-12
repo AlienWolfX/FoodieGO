@@ -24,29 +24,29 @@ export const Navbar = () => {
  const navExplore = () => {
   const section = document.getElementById("explore");
   if (section) {
-    window.location.hash = "explore";
+   window.location.hash = "explore";
   } else {
-    nav("/"); // Navigate to home if section not found
+   nav("/"); // Navigate to home if section not found
   }
-};
+ };
 
  const navAboutUs = () => {
   const section = document.getElementById("about");
   if (section) {
-    window.location.hash = "about";
+   window.location.hash = "about";
   } else {
-    nav("/"); // Navigate to home if section not found
+   nav("/"); // Navigate to home if section not found
   }
-};
+ };
 
  const navContact = () => {
   const section = document.getElementById("contact");
   if (section) {
-    window.location.hash = "contact";
+   window.location.hash = "contact";
   } else {
-    nav("/"); // Navigate to home if section not found
+   nav("/"); // Navigate to home if section not found
   }
-};
+ };
 
  useEffect(() => {
   const handleScroll = () => {
@@ -89,7 +89,7 @@ export const Navbar = () => {
      <ul className="flex items-center gap-5">
       <li
        onClick={navHome}
-       className={`text-sm font-medium cursor-pointer${
+       className={`text-sm font-medium cursor-pointer ${
         activeItem === "hero" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -97,7 +97,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navAboutUs}
-       className={`text-sm font-medium cursor-pointer${
+       className={`text-sm font-medium cursor-pointer ${
         activeItem === "about" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -105,7 +105,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navExplore}
-       className={`text-sm font-medium cursor-pointer${
+       className={`text-sm font-medium cursor-pointer ${
         activeItem === "explore" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -113,7 +113,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navContact}
-       className={`text-sm font-medium cursor-pointer${
+       className={`text-sm font-medium cursor-pointer ${
         activeItem === "contact" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -141,7 +141,7 @@ export const Navbar = () => {
      <ul className="flex flex-col items-start gap-5">
       <li
        onClick={navHome}
-       className={`text-sm font-medium cursor-pointer${
+       className={`text-sm font-medium cursor-pointer ${
         activeItem === "hero" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -149,7 +149,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navAboutUs}
-       className={`text-sm font-medium cursor-pointer${
+       className={`text-sm font-medium cursor-pointer ${
         activeItem === "about" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -157,7 +157,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navExplore}
-       className={`text-sm font-medium cursor-pointer${
+       className={`text-sm font-medium cursor-pointer ${
         activeItem === "explore" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >
@@ -165,7 +165,7 @@ export const Navbar = () => {
       </li>
       <li
        onClick={navContact}
-       className={`text-sm font-medium cursor-pointer${
+       className={`text-sm font-medium cursor-pointer ${
         activeItem === "contact" ? "text-mainblue" : "text-gray-600"
        } hover:text-mainblue`}
       >

@@ -15,13 +15,25 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { motion, AnimatePresence } from "framer-motion";
 import { Favorite } from "@mui/icons-material";
 
+import {
+ getUserData,
+ addFavorite,
+ removeFavorite,
+ likeRecipe,
+ unlikeRecipe,
+} from "../../../../data/UserData.js";
+
 export const ViewRecipe = () => {
  const nav = useNavigate();
  const location = useLocation();
 
- const [like, setLike] = useState(false);
+ const [isLiked, setIsLiked] = useState(false);
+ const [likes, setLikes] = useState([]);
+ const [isFavorite, setIsFavorite] = useState([]);
+ const [isCurrentFavorite, setIsCurrentFavorite] = useState(false);
 
  const {
+  id,
   title,
   author,
   category,
@@ -31,15 +43,80 @@ export const ViewRecipe = () => {
   img_path,
   ingredients,
   instructions,
- } = location.state; // Retrieve data passed from the previous page
+ } = location.state;
 
  const [authorModal, setAuthorModal] = useState(false);
  const [favModal, setFavModal] = useState(false);
  const [analyze, setAnalyze] = useState(false);
-
  useEffect(() => {
-  console.log(`Recipe ${like ? "liked" : "unliked"}`);
- }, [like]);
+  const userData = getUserData();
+  setIsFavorite(userData.favorites);
+  setLikes(userData.likes);
+
+  const isFavoriteRecipe = userData.favorites.some((fav) => fav.id === id);
+  const isLikedRecipe = userData.likes.some((like) => like.id === id);
+  
+  setIsCurrentFavorite(isFavoriteRecipe);
+  setIsLiked(isLikedRecipe);
+ }, [id]);
+
+ const toggleFavorite = () => {
+  const newFavorite = {
+   id,
+   title,
+   author,
+   category,
+   description,
+   difficulty,
+   time,
+   img_path,
+   ingredients,
+   instructions,
+  };
+
+  const userData = getUserData();
+
+  if (isCurrentFavorite) {
+   // Remove favorite
+   removeFavorite(id);
+   setIsFavorite(userData.favorites.filter((fav) => fav.id !== id));
+   setIsCurrentFavorite(false);
+  } else {
+   // Add favorite while preserving existing favorites
+   addFavorite(newFavorite);
+   setIsFavorite([...userData.favorites, newFavorite]);
+   setIsCurrentFavorite(true);
+  }
+ };
+
+ const toggleLike = () => {
+  const likedRecipe = {
+   id,
+   title,
+   author,
+   category,
+   description,
+   difficulty,
+   time,
+   img_path,
+   ingredients,
+   instructions,
+  };
+
+  const userData = getUserData();
+
+  if (isLiked) {
+   // Remove like
+   unlikeRecipe(id);
+   setLikes(userData.likes.filter((like) => like.id !== id));
+   setIsLiked(false);
+  } else {
+   // Add like while preserving existing likes
+   likeRecipe(likedRecipe);
+   setLikes([...userData.likes, likedRecipe]);
+   setIsLiked(true);
+  }
+ };
 
  return (
   <Layout>
@@ -87,12 +164,12 @@ export const ViewRecipe = () => {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.4 }}
-      className="flex items-center gap-2"
+      className="flex items-center gap-1"
      >
-      <div className="rounded-lg h-10 w-10 flex items-center justify-center">
-       <Tooltip title="Add to Favorites" onClick={() => setFavModal(true)}>
+      <div className="rounded-lg flex items-center justify-center">
+       <Tooltip title="Add to Favorites" onClick={toggleFavorite}>
         <IconButton>
-         {favModal ? (
+         {isCurrentFavorite ? (
           <BookmarkIcon className="text-yellow-300" fontSize="medium" />
          ) : (
           <BookmarkBorderIcon className="text-yellow-300" fontSize="medium" />
@@ -100,10 +177,10 @@ export const ViewRecipe = () => {
         </IconButton>
        </Tooltip>
       </div>
-      <div className="rounded-lg h-10 w-10 flex items-center justify-center">
-       <Tooltip title="Like" onClick={() => setLike((prev) => !prev)}>
+      <div className="rounded-lg flex items-center justify-center">
+       <Tooltip title="Like" onClick={toggleLike}>
         <IconButton>
-         {like ? (
+         {isLiked ? (
           <Favorite className="text-red-500" fontSize="small" />
          ) : (
           <FavoriteBorderOutlinedIcon
@@ -224,7 +301,7 @@ export const ViewRecipe = () => {
     >
      <button
       onClick={() => setAnalyze(true)}
-      className="text-mainblue text-xs fotn-medium"
+      className="text-mainblue text-xs font-medium"
      >
       Analyze Nutrition✨
      </button>
@@ -233,7 +310,6 @@ export const ViewRecipe = () => {
      </button>
     </motion.div>
    </motion.div>
-
    <motion.div
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
@@ -242,7 +318,6 @@ export const ViewRecipe = () => {
    >
     <AiSuggestions />
    </motion.div>
-
    <motion.div
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
@@ -251,7 +326,6 @@ export const ViewRecipe = () => {
    >
     <CommentsCard />
    </motion.div>
-
    <AnimatePresence>
     {authorModal && (
      <motion.div

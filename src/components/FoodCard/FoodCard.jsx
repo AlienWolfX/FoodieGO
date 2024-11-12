@@ -13,6 +13,7 @@ export const FoodCard = ({ recipes, basePath }) => {
       key={recipe.id}
       to={`${basePath}/view-recipe`}
       state={{
+       id: recipe.id,
        title: recipe.title,
        img_path: recipe.img_path,
        category: recipe.category,

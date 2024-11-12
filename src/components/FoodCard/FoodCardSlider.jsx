@@ -15,10 +15,10 @@ export const FoodCardSlider = ({ recipes }) => {
  const sliderRef = useRef(null);
 
  const CustomArrow = ({ direction, onClick }) => {
-   return (
-     <button
-       onClick={onClick}
-       className={`
+  return (
+   <button
+    onClick={onClick}
+    className={`
          custom-arrow 
          w-8 h-8 
          flex items-center justify-center 
@@ -27,16 +27,16 @@ export const FoodCardSlider = ({ recipes }) => {
          rounded-full 
          hover:bg-gray-50
          transition-all
-         ${!onClick && 'opacity-50 cursor-not-allowed'}
+         ${!onClick && "opacity-50 cursor-not-allowed"}
        `}
-     >
-       {direction === 'prev' ? (
-         <IoIosArrowBack size={20} className="text-gray-600" />
-       ) : (
-         <IoIosArrowForward size={20} className="text-gray-600" />
-       )}
-     </button>
-   );
+   >
+    {direction === "prev" ? (
+     <IoIosArrowBack size={20} className="text-gray-600" />
+    ) : (
+     <IoIosArrowForward size={20} className="text-gray-600" />
+    )}
+   </button>
+  );
  };
 
  const settings = {
@@ -91,17 +91,23 @@ export const FoodCardSlider = ({ recipes }) => {
   <div className="w-full relative">
    <div className="absolute right-2 top-[-50px] flex items-center gap-2 z-10">
     <div className="custom-arrow-container">
-     <CustomArrow direction="prev" onClick={() => sliderRef.current?.slickPrev()} />
+     <CustomArrow
+      direction="prev"
+      onClick={() => sliderRef.current?.slickPrev()}
+     />
     </div>
     <div className="custom-arrow-container">
-     <CustomArrow direction="next" onClick={() => sliderRef.current?.slickNext()} />
+     <CustomArrow
+      direction="next"
+      onClick={() => sliderRef.current?.slickNext()}
+     />
     </div>
    </div>
 
    <Slider ref={sliderRef} {...settings}>
     {recipes?.map((recipe) => (
-     <motion.div 
-      key={recipe.id} 
+     <motion.div
+      key={recipe.id}
       className="inline-block"
       layout
       initial={{ opacity: 0 }}
@@ -111,6 +117,7 @@ export const FoodCardSlider = ({ recipes }) => {
       <Link
        to="/view-recipe"
        state={{
+        id: recipe.id,
         title: recipe.title,
         img_path: recipe.img_path,
         category: recipe.category,
@@ -124,16 +131,16 @@ export const FoodCardSlider = ({ recipes }) => {
        }}
       >
        <div className="px-2">
-        <motion.div 
+        <motion.div
          className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 gap-1 flex flex-col h-[290px]"
          layout
          transition={{
           layout: { duration: 0.3 },
-          ease: "easeInOut"
+          ease: "easeInOut",
          }}
-         whileHover={{ 
+         whileHover={{
           scale: 1.02,
-          transition: { duration: 0.2 }
+          transition: { duration: 0.2 },
          }}
         >
          <div className="overflow-hidden rounded">

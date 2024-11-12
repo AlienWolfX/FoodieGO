@@ -6,16 +6,26 @@ import exploreSide from "/exploreSide.png";
 
 export const ExploreRecipes = () => {
  const [searchTerm, setSearchTerm] = useState("");
+ const [selectedCuisine, setSelectedCuisine] = useState("All");
+ const [selectedCategory, setSelectedCategory] = useState("All");
 
- // Filter recipes based on search term
- const filteredRecipes = recipeData.filter((recipe) =>
-  recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
- );
+ // Filter recipes based on search term, selected cuisine, and selected category
+ const filteredRecipes = recipeData.filter((recipe) => {
+  const matchesSearch = recipe.title
+   .toLowerCase()
+   .includes(searchTerm.toLowerCase());
+  const matchesCuisine =
+   selectedCuisine === "All" || recipe.cuisine === selectedCuisine;
+  const matchesCategory =
+   selectedCategory === "All" || recipe.category === selectedCategory;
+
+  return matchesSearch && matchesCuisine && matchesCategory;
+ });
 
  return (
   <>
    <Navbar />
-   <div className="pt-20 bg-gray-100">
+   <div className="pt-20 bg-gray-100 h-screen">
     <div className="mt-2 mx-5 md:mx-10 lg:mx-32 pb-20">
      <div className="flex flex-col md:flex-row items-center justify-between">
       <div className="w-full md:w-[400px]">
@@ -34,24 +44,58 @@ export const ExploreRecipes = () => {
      </div>
      <div className="md:pt-10 flex flex-col md:flex-row justify-between items-center mt-5">
       <div className="flex flex-wrap gap-1 mb-4 md:mb-0">
-       <button className="bg-white border border-gray-300 rounded px-4 py-2">
-        All
-       </button>
-       <button className="bg-white border border-gray-300 rounded px-4 py-2">
-        Breakfast
-       </button>
-       <button className="bg-white border border-gray-300 rounded px-4 py-2">
-        Lunch
-       </button>
-       <button className="bg-white border border-gray-300 rounded px-4 py-2">
-        Dinner
-       </button>
-       <button className="bg-white border border-gray-300 rounded px-4 py-2">
-        Snacks
-       </button>
-       <button className="bg-white border border-gray-300 rounded px-4 py-2">
-        Dessert
-       </button>
+       <label htmlFor="cuisine" className="mr-2 text-gray-600">
+        Cuisine:
+       </label>
+       <select
+        id="cuisine"
+        value={selectedCuisine}
+        onChange={(e) => setSelectedCuisine(e.target.value)}
+        className="bg-white border border-gray-300 rounded px-4 py-2"
+       >
+        {[
+         "All",
+         "Chinese",
+         "Japanese",
+         "Korean",
+         "Thai",
+         "Indian",
+         "Vietnamese",
+         "Filipino",
+         "Malaysian",
+         "Indonesian",
+        ].map((cuisine) => (
+         <option key={cuisine} value={cuisine}>
+          {cuisine}
+         </option>
+        ))}
+       </select>
+      </div>
+      <div className="flex flex-wrap gap-1 mb-4 md:mb-0">
+       <label htmlFor="category" className="mr-2 text-gray-600">
+        Category:
+       </label>
+       <select
+        id="category"
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+        className="bg-white border border-gray-300 rounded px-4 py-2"
+       >
+        {[
+         "All",
+         "Appetizers",
+         "Main Dishes",
+         "Side Dishes",
+         "Desserts",
+         "Soups",
+         "Noodles & Rice",
+         "Sauces & Condiments",
+        ].map((category) => (
+         <option key={category} value={category}>
+          {category}
+         </option>
+        ))}
+       </select>
       </div>
       <div className="flex items-center w-full md:w-auto">
        <input
@@ -67,7 +111,7 @@ export const ExploreRecipes = () => {
       </div>
      </div>
      <div>
-      <FoodCard recipes={recipeData} />
+      <FoodCard recipes={filteredRecipes} />
      </div>
     </div>
    </div>

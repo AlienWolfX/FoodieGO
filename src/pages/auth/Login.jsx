@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
 import { useState, useEffect, useRef } from "react";
-import { Toaster } from "sonner";
+import { Toaster, toast } from "sonner";
 import LoadingBar from "react-top-loading-bar";
 
 import loginImg from "/auth-images/login.png";
@@ -27,6 +27,7 @@ export const Login = () => {
   }, 1500);
 
   setTimeout(() => {
+   toast.success("Login Successful!");
    ref.current.complete();
    setTimeout(() => {
     nav("/home");
@@ -54,14 +55,14 @@ export const Login = () => {
     <div className="hidden md:block h-full w-full md:w-1/2">
      <img src={loginImg} alt="Login" className="w-full h-full object-cover" />
     </div>
-    
+
     {isMobile ? (
-     <div 
+     <div
       className="fixed inset-0 flex justify-center items-center z-20"
-      style={{ 
+      style={{
        backgroundImage: `linear-gradient(rgba(107, 114, 128, 0.75), rgba(107, 114, 128, 0.75)), url(${loginImg})`,
-       backgroundSize: 'cover',
-       backgroundPosition: 'center'
+       backgroundSize: "cover",
+       backgroundPosition: "center",
       }}
      >
       <div className="bg-white h-auto p-8 rounded-md shadow-md w-[90%] max-w-[400px]">

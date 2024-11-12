@@ -29,7 +29,7 @@ export const Topbar = () => {
      <p>Patrick James Dionen</p>
     </div>
     <div className="flex flex-col items-center">
-     <h1 className="text-sm font-medium text-textheader">{formattedDate}</h1>
+     <h1 className="text-xs font-medium text-textheader">{formattedDate}</h1>
      <p className="text-xs font-light">{dayOfWeek}</p>
     </div>
    </div>
