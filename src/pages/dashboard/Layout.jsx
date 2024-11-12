@@ -1,6 +1,7 @@
 import { Sidebar } from "../../components/DashboardComponents/Sidebar";
 import { Topbar } from "../../components/Topbar";
 import { useState } from "react";
+import { ProfileProvider } from "../../context/ProfileContext";
 
 export const Layout = ({ children }) => {
  const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -22,8 +23,12 @@ export const Layout = ({ children }) => {
     {/* Scrollable content area */}
     <div className="h-screen mx-auto">
      <div className="px-4 md:px-10 py-5">
-      <Topbar />
-      <div className="mt-5">{children}</div>
+      <ProfileProvider>
+       <Topbar />
+       <div className="mt-5">
+        {children}
+       </div>
+      </ProfileProvider>
      </div>
     </div>
    </div>

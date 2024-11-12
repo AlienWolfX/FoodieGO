@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { CiBellOn } from "react-icons/ci";
 import { motion, AnimatePresence } from "framer-motion";
+import { useProfile } from '../context/ProfileContext';
 
 export const Topbar = () => {
  const [formattedDate, setFormattedDate] = useState("");
  const [dayOfWeek, setDayOfWeek] = useState("");
  const [showNotifications, setShowNotifications] = useState(false);
  const notificationRef = useRef(null);
+ const { profilePicture } = useProfile();
 
  // Dummy notifications data
  const notifications = [
@@ -67,22 +69,54 @@ export const Topbar = () => {
  return (
   <>
    <div className="border rounded-xl w-full h-12 flex items-center justify-between px-3 bg-white">
-    <div className="flex items-center gap-2">
-     <div className="h-8 w-8 bg-gray-50 rounded-full border"></div>
-     <p>Patrick James Dionen</p>
+    <div className="flex items-center gap-3">
+     <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="relative h-8 w-8 rounded-full overflow-hidden border border-gray-200"
+     >
+      {profilePicture ? (
+       <img
+        src={profilePicture}
+        alt="Profile"
+        className="w-full h-full object-cover"
+       />
+      ) : (
+       <div className="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+        <span className="text-blue-500 text-sm font-medium">
+         {("Patrick James Dionen").split(' ').map(word => word[0]).join('')}
+        </span>
+       </div>
+      )}
+     </motion.div>
+     <motion.p
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      className="text-sm font-medium text-gray-700"
+     >
+      Patrick James Dionen
+     </motion.p>
     </div>
-    <div className="flex items-center gap-2">
-     <div className="flex flex-col items-center">
-      <h1 className="text-xs font-medium text-textheader">{formattedDate}</h1>
-      <p className="text-xs font-light">{dayOfWeek}</p>
-     </div>
+
+    <div className="flex items-center gap-4">
+     <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex flex-col items-end"
+     >
+      <h1 className="text-xs font-medium text-gray-700">{formattedDate}</h1>
+      <p className="text-xs text-gray-500">{dayOfWeek}</p>
+     </motion.div>
+
      <div className="relative" ref={notificationRef}>
-      <div
+      <motion.div
+       whileHover={{ scale: 1.05 }}
+       whileTap={{ scale: 0.95 }}
        onClick={() => setShowNotifications(!showNotifications)}
-       className="flex items-center justify-center w-7 h-7 rounded-full border border-gray-400 cursor-pointer hover:bg-gray-50"
+       className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-50"
       >
-       <CiBellOn size={20} className="text-gray-400" />
-      </div>
+       <CiBellOn size={20} className="text-gray-500" />
+      </motion.div>
 
       <AnimatePresence>
        {showNotifications && (
@@ -91,19 +125,25 @@ export const Topbar = () => {
          animate={{ opacity: 1, y: 0 }}
          exit={{ opacity: 0, y: -10 }}
          transition={{ duration: 0.2 }}
-         className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
+         className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden"
         >
-         <div className="p-3 border-b">
-          <h3 className="text-sm font-medium">Notifications</h3>
+         <div className="p-3 border-b bg-gray-50">
+          <h3 className="text-sm font-medium text-gray-700">Notifications</h3>
          </div>
          <div className="max-h-[400px] overflow-y-auto">
           {notifications.map((notification) => (
-           <div
+           <motion.div
             key={notification.id}
-            className="p-3 border-b hover:bg-gray-50 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="p-3 border-b hover:bg-gray-50 cursor-pointer transition-colors duration-200"
            >
-            <div className="flex items-start gap-2">
-             <div className="h-8 w-8 bg-gray-100 rounded-full flex-shrink-0"></div>
+            <div className="flex items-start gap-3">
+             <div className="h-8 w-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex-shrink-0 flex items-center justify-center">
+              <span className="text-blue-500 text-xs font-medium">
+               {notification.user.split(' ').map(word => word[0]).join('')}
+              </span>
+             </div>
              <div className="flex-1">
               <p className="text-sm">
                <span className="font-medium">{notification.user}</span>{" "}
@@ -112,14 +152,17 @@ export const Topbar = () => {
               <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
              </div>
             </div>
-           </div>
+           </motion.div>
           ))}
          </div>
-         <div className="p-2 text-center border-t">
-          <button className="text-xs text-blue-500 hover:text-blue-600">
+         <motion.div
+          whileHover={{ backgroundColor: "#F9FAFB" }}
+          className="p-2 text-center border-t"
+         >
+          <button className="text-xs text-blue-500 hover:text-blue-600 font-medium">
            View all notifications
           </button>
-         </div>
+         </motion.div>
         </motion.div>
        )}
       </AnimatePresence>
