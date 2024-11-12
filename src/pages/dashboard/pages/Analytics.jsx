@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { OverviewCards } from "../../../components/AnalyticsComponents/OverviewCards";
 import { Layout } from "../Layout";
 import { LineChart, BarChart, PieChart } from "@mui/x-charts";
 import Grid from "@mui/material/Grid";
@@ -8,31 +7,98 @@ import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
+import { useState, useEffect, useRef } from "react";
+import { UserRecipeData } from "../../../../data/UserRecipeData";
 
 export const Analytics = () => {
- // Sample data - replace with real data
+ // Calculate total stats from UserRecipeData
  const statsData = {
-  followers: 1234,
-  likes: 5678,
-  downloads: 910,
-  recipes: 23,
+  followers: 1234, // Keep this static as it's user-specific
+  likes: UserRecipeData.reduce((sum, recipe) => sum + recipe.likes, 0),
+  downloads: UserRecipeData.reduce((sum, recipe) => sum + recipe.downloads, 0),
+  recipes: UserRecipeData.length,
  };
 
- const monthlyData = [
-  { month: "Jan", followers: 100, likes: 150 },
-  { month: "Feb", followers: 200, likes: 300 },
-  { month: "Mar", followers: 300, likes: 450 },
-  { month: "Apr", followers: 400, likes: 600 },
-  { month: "May", followers: 500, likes: 750 },
+ // Line Chart Data - Calculate monthly trends
+ const months = ['Mar', 'Apr', 'May', 'Jun', 'Jul'];
+ const viewsData = [
+  UserRecipeData.slice(0, 3).reduce((sum, recipe) => sum + recipe.views, 0),
+  UserRecipeData.slice(3, 6).reduce((sum, recipe) => sum + recipe.views, 0),
+  UserRecipeData.slice(6, 9).reduce((sum, recipe) => sum + recipe.views, 0),
+  UserRecipeData.slice(9, 12).reduce((sum, recipe) => sum + recipe.views, 0),
+  UserRecipeData.slice(12).reduce((sum, recipe) => sum + recipe.views, 0),
+ ];
+ const likesData = [
+  UserRecipeData.slice(0, 3).reduce((sum, recipe) => sum + recipe.likes, 0),
+  UserRecipeData.slice(3, 6).reduce((sum, recipe) => sum + recipe.likes, 0),
+  UserRecipeData.slice(6, 9).reduce((sum, recipe) => sum + recipe.likes, 0),
+  UserRecipeData.slice(9, 12).reduce((sum, recipe) => sum + recipe.likes, 0),
+  UserRecipeData.slice(12).reduce((sum, recipe) => sum + recipe.likes, 0),
  ];
 
- const recipeCategories = [
-  { id: 0, value: 35, label: "Main Course" },
-  { id: 1, value: 25, label: "Desserts" },
-  { id: 2, value: 20, label: "Appetizers" },
-  { id: 3, value: 15, label: "Beverages" },
-  { id: 4, value: 5, label: "Others" },
- ];
+ // Bar Chart Data - Top 5 recipes by views
+ const topRecipes = [...UserRecipeData]
+  .sort((a, b) => b.views - a.views)
+  .slice(0, 5);
+ const recipeNames = topRecipes.map(recipe => recipe.title);
+ const recipeViews = topRecipes.map(recipe => recipe.views);
+
+ // Recipe Categories data - Calculate from UserRecipeData
+ const categoryCount = UserRecipeData.reduce((acc, recipe) => {
+  acc[recipe.category] = (acc[recipe.category] || 0) + 1;
+  return acc;
+ }, {});
+
+ const recipeCategories = Object.entries(categoryCount)
+  .map(([label, value], id) => ({
+   id,
+   label,
+   value: (value / UserRecipeData.length) * 100,
+  }));
+
+ // Cuisine distribution data - Calculate from UserRecipeData
+ const cuisineCount = UserRecipeData.reduce((acc, recipe) => {
+  acc[recipe.cuisine] = (acc[recipe.cuisine] || 0) + 1;
+  return acc;
+ }, {});
+
+ const cuisineDistribution = Object.entries(cuisineCount)
+  .map(([label, value], id) => ({
+   id,
+   label,
+   value: (value / UserRecipeData.length) * 100,
+  }));
+
+ // Add responsive width calculation
+ const useChartWidth = (containerRef) => {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+   const updateWidth = () => {
+    if (containerRef.current) {
+     setWidth(containerRef.current.offsetWidth);
+    }
+   };
+
+   updateWidth();
+   window.addEventListener('resize', updateWidth);
+   return () => window.removeEventListener('resize', updateWidth);
+  }, [containerRef]);
+
+  return width;
+ };
+
+ // Create refs for chart containers
+ const lineChartRef = useRef(null);
+ const pieChart1Ref = useRef(null);
+ const pieChart2Ref = useRef(null);
+ const barChartRef = useRef(null);
+
+ // Get responsive widths
+ const lineChartWidth = useChartWidth(lineChartRef);
+ const pieChart1Width = useChartWidth(pieChart1Ref);
+ const pieChart2Width = useChartWidth(pieChart2Ref);
+ const barChartWidth = useChartWidth(barChartRef);
 
  return (
   <Layout>
@@ -128,189 +194,165 @@ export const Analytics = () => {
      ))}
     </Grid>
 
-    {/* Charts Section */}
+    {/* Charts Grid */}
     <Grid container spacing={3}>
-     {/* Growth Chart */}
-     <Grid item xs={12} md={8}>
-      <motion.div
-       initial={{ opacity: 0, y: 20 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ delay: 0.4 }}
+     {/* Line Chart */}
+     <Grid item xs={12} lg={8}>
+      <Card 
+       elevation={0}
+       className="p-6 border border-gray-100"
+       sx={{ borderRadius: 3 }}
       >
-       <Card 
-        elevation={0}
-        className="p-6 border border-gray-100"
-        sx={{ borderRadius: 3 }}
-       >
-        <div className="flex items-center justify-between mb-6">
-         <Typography variant="h6" className="text-gray-700 font-medium">
-          Growth Overview
-         </Typography>
-         <select className="text-sm border border-gray-200 rounded-lg px-3 py-1.5">
-          <option>Last 6 months</option>
-          <option>Last year</option>
-         </select>
-        </div>
+       <Typography variant="h6" className="mb-4">Growth Trends</Typography>
+       <div ref={lineChartRef} className="w-full">
         <LineChart
-         xAxis={[
-          {
-           data: monthlyData.map((item) => item.month),
-           scaleType: "point",
-           tickLabelStyle: { fontSize: 11 },
-          },
-         ]}
-         yAxis={[
-          {
-           tickLabelStyle: { fontSize: 11 },
-          },
-         ]}
+         width={lineChartWidth - 48 || 500}
+         height={300}
          series={[
           {
-           data: monthlyData.map((item) => item.followers),
-           label: "Followers",
-           color: "#3b82f6",
-           curve: "linear",
-           showMark: true,
+           data: viewsData,
+           label: 'Views',
+           color: '#3b82f6',
           },
           {
-           data: monthlyData.map((item) => item.likes),
-           label: "Likes",
-           color: "#ef4444",
-           curve: "linear",
-           showMark: true,
+           data: likesData,
+           label: 'Likes',
+           color: '#ef4444',
           },
          ]}
-         height={300}
-         margin={{ left: 40, right: 40, top: 20, bottom: 30 }}
+         xAxis={[{
+          data: months,
+          scaleType: 'point',
+         }]}
          sx={{
+          '.MuiChartsAxis-bottom .MuiChartsAxis-tickLabel': {
+           fontSize: '0.875rem',
+          },
           '.MuiChartsLegend-root': {
-           fontSize: 11,
-           gap: '8px',
-          },
-          '.MuiLineElement-root': {
-           strokeWidth: 2,
-          },
-          '.MuiMarkElement-root': {
-           stroke: 'white',
-           strokeWidth: 2,
-           fill: 'currentColor',
+           fontSize: '0.875rem',
           },
          }}
         />
-       </Card>
-      </motion.div>
+       </div>
+      </Card>
      </Grid>
 
-     {/* Recipe Categories */}
-     <Grid item xs={12} md={4}>
-      <motion.div
-       initial={{ opacity: 0, y: 20 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ delay: 0.5 }}
+     {/* Recipe Categories Pie Chart */}
+     <Grid item xs={12} lg={4}>
+      <Card 
+       elevation={0}
+       className="p-6 h-full border border-gray-100"
+       sx={{ borderRadius: 3 }}
       >
-       <Card 
-        elevation={0}
-        className="p-6 border border-gray-100"
-        sx={{ borderRadius: 3 }}
-       >
-        <div className="flex items-center justify-between mb-6">
-         <Typography variant="h6" className="text-gray-700 font-medium">
-          Recipe Categories
-         </Typography>
-         <button className="text-sm text-blue-500 hover:text-blue-600">
-          View All
-         </button>
-        </div>
+       <Typography variant="h6" className="mb-4">Recipe Categories</Typography>
+       <div ref={pieChart1Ref} className="w-full">
         <PieChart
-         series={[
-          {
-           data: recipeCategories,
-           highlightScope: { faded: "global", highlighted: "item" },
-           faded: { innerRadius: 20, additionalRadius: -20 },
-           innerRadius: 20,
-           paddingAngle: 2,
-           cornerRadius: 4,
-           outerRadius: 80,
-           labels: { style: { fontSize: 11 } },
-          },
-         ]}
+         series={[{
+          data: recipeCategories,
+          highlightScope: { faded: 'global', highlighted: 'item' },
+          innerRadius: 30,
+          paddingAngle: 2,
+          cornerRadius: 4,
+         }]}
          height={300}
-         width={300}
-         margin={{ left: 120, right: 20, top: 20, bottom: 20 }}
+         width={pieChart1Width || 400}
          slotProps={{
           legend: {
-           direction: "row",
-           position: { vertical: "bottom", horizontal: "middle" },
+           direction: 'column',
+           position: { vertical: 'middle', horizontal: 'right' },
            padding: 0,
            itemMarkWidth: 10,
            itemMarkHeight: 10,
            markGap: 5,
            itemGap: 8,
-           labelStyle: {
-            fontSize: 11,
-            fill: "gray",
-           },
-          },
-         }}
-         sx={{
-          '.MuiChartsLegend-root': {
-           fontSize: 11,
-           gap: '8px',
           },
          }}
         />
-       </Card>
-      </motion.div>
+       </div>
+      </Card>
      </Grid>
 
-     {/* Popular Recipes */}
-     <Grid item xs={12}>
-      <motion.div
-       initial={{ opacity: 0, y: 20 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ delay: 0.6 }}
+     {/* Cuisine Distribution Pie Chart */}
+     <Grid item xs={12} lg={4}>
+      <Card 
+       elevation={0}
+       className="p-6 h-full border border-gray-100"
+       sx={{ borderRadius: 3 }}
       >
-       <Card 
-        elevation={0}
-        className="p-6 border border-gray-100"
-        sx={{ borderRadius: 3 }}
-       >
-        <div className="flex items-center justify-between mb-6">
-         <Typography variant="h6" className="text-gray-700 font-medium">
-          Most Popular Recipes
-         </Typography>
-         <div className="flex items-center gap-2">
-          <select className="text-sm border border-gray-200 rounded-lg px-3 py-1.5">
-           <option>This Month</option>
-           <option>Last Month</option>
-          </select>
-         </div>
-        </div>
-        <BarChart
-         xAxis={[
-          {
-           scaleType: "band",
-           data: ["Recipe 1", "Recipe 2", "Recipe 3", "Recipe 4", "Recipe 5"],
-           gap: 0.2,
-          },
-         ]}
-         series={[
-          {
-           data: [300, 250, 200, 150, 100],
-           color: "#3b82f6",
-           radius: 4,
-          },
-         ]}
+       <Typography variant="h6" className="mb-4">Cuisine Distribution</Typography>
+       <div ref={pieChart2Ref} className="w-full flex justify-center">
+        <PieChart
+         series={[{
+          data: cuisineDistribution,
+          highlightScope: { faded: 'global', highlighted: 'item' },
+          innerRadius: 30,
+          paddingAngle: 2,
+          cornerRadius: 4,
+         }]}
          height={300}
-         margin={{ left: 40, right: 40, top: 20, bottom: 30 }}
-         sx={{
-          '.MuiBarElement-root': {
-           borderRadius: '6px',
+         width={Math.min(pieChart2Width || 400, 400)}
+         slotProps={{
+          legend: {
+           direction: 'column',
+           position: { vertical: 'middle', horizontal: 'right' },
+           padding: 0,
+           itemMarkWidth: 10,
+           itemMarkHeight: 10,
+           markGap: 5,
+           itemGap: 8,
           },
          }}
         />
-       </Card>
-      </motion.div>
+       </div>
+      </Card>
+     </Grid>
+
+     {/* Bar Chart - Now full width like Growth Trends */}
+     <Grid item xs={12} lg={8}>
+      <Card 
+       elevation={0}
+       className="p-6 h-full border border-gray-100"
+       sx={{ borderRadius: 3 }}
+      >
+       <Typography variant="h6" className="mb-4">Popular Recipes</Typography>
+       <div ref={barChartRef} className="w-full">
+        <BarChart
+         width={barChartWidth - 48 || 500}
+         height={300}
+         series={[{
+          data: recipeViews,
+          label: 'Views',
+          color: '#3b82f6',
+          valueFormatter: (value) => `${value} views`,
+         }]}
+         xAxis={[{
+          data: recipeNames,
+          scaleType: 'band',
+          tickLabelStyle: {
+           fontSize: '0.75rem',
+           angle: 45,
+           textAnchor: 'start',
+           dominantBaseline: 'middle',
+          },
+         }]}
+         margin={{ 
+          left: 40,
+          right: 20,
+          top: 10,
+          bottom: 50 
+         }}
+         sx={{
+          width: '100%',
+          '.MuiChartsAxis-bottom .MuiChartsAxis-tickLabel': {
+           fontSize: '0.75rem',
+          },
+          '.MuiChartsAxis-left .MuiChartsAxis-tickLabel': {
+           fontSize: '0.75rem',
+          },
+         }}
+        />
+       </div>
+      </Card>
      </Grid>
     </Grid>
    </motion.div>
