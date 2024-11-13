@@ -124,7 +124,7 @@ export const ExploreRecipes = () => {
      </div>
 
      <div className="mt-6">
-      <FoodCard recipes={filteredRecipes} />
+      <FoodCard recipes={filteredRecipes} basePath={"/explore"}/>
      </div>
     </div>
    </div>

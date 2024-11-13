@@ -5,20 +5,26 @@ export const ViewRecipeInitial = () => {
  const location = useLocation(); // Retrieve location object
 
  const {
+  id,
   title,
-  author,
+  img_path,
   category,
+  author,
   description,
   difficulty,
+  ratings,
   time,
-  img_path,
   ingredients,
   instructions,
+  likes,
+  downloads,
+  views,
+  dateCreated,
  } = location.state; // Retrieve data passed from the previous page
 
  return (
   <>
-   <RecipeCard 
+   <RecipeCard
     title={title}
     author={author}
     category={category}
