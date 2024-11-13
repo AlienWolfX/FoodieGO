@@ -4,7 +4,7 @@ import { CiHeart } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { CiClock2 } from "react-icons/ci";
 
-export const FoodCard = ({ recipes, basePath }) => {
+export const FoodCard = ({ recipes, basePath, onCardClick }) => {
  return (
   <>
    <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -24,9 +24,16 @@ export const FoodCard = ({ recipes, basePath }) => {
        time: recipe.time,
        ingredients: recipe.ingredients,
        instructions: recipe.instructions,
+       likers: recipe.likes,
+       downloads: recipe.downloads,
+       views: recipe.views,
+       dateCreated: recipe.dateCreated,
       }}
      >
-      <div className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 w-full flex flex-col">
+      <div
+       onClick={() => onCardClick(false)}
+       className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 w-full flex flex-col"
+      >
        <div className="relative overflow-hidden rounded">
         {recipe.img_path ? (
          <img

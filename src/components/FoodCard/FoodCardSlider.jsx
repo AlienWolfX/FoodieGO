@@ -132,6 +132,7 @@ export const FoodCardSlider = ({ recipes }) => {
         downloads: recipe.downloads,
         views: recipe.views,
         dateCreated: recipe.dateCreated,
+        cuisine: recipe.cuisine,
        }}
       >
        <div className="px-2">
