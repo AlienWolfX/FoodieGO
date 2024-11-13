@@ -60,9 +60,9 @@ export const Preferences = () => {
 
  return (
   <>
-   <Navbar />
+   {/* <Navbar /> */}
    <Toaster richColors position="top-center" />
-   <div className="bg-gradient-to-b from-blue-50 to-white min-h-screen py-10 px-4">
+   <div className="bg-gradient-to-b from-blue-50 to-white h-screen pt-2 px-4">
     <motion.div
      initial={{ opacity: 0, y: 20 }}
      animate={{ opacity: 1, y: 0 }}

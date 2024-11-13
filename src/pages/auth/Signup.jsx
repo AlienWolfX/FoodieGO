@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
-import registerImg from "/auth-images/register.png";
 import LoadingBar from "react-top-loading-bar";
+import { toast, Toaster } from "sonner";
 
 export const Signup = () => {
  const nav = useNavigate();
  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+ const [username, setUsername] = useState("");
+ const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
+ const [confirmPassword, setConfirmPassword] = useState("");
+ const [isChecked, setIsChecked] = useState(false);
  const [passwordStrength, setPasswordStrength] = useState({
   hasLength: false,
   hasUpperCase: false,
@@ -36,18 +40,31 @@ export const Signup = () => {
  };
 
  const register = async (e) => {
-  ref.current.staticStart(50);
+  if (!isChecked) {
+   toast.error("Please agree to the terms and conditions");
+  } else if (password !== confirmPassword) {
+   toast.error("Passwords do not match!");
+  } else if (
+   email === "" ||
+   username === "" ||
+   password === "" ||
+   confirmPassword === ""
+  ) {
+   toast.error("All fields are required!");
+  } else {
+   ref.current.staticStart(50);
 
-  setTimeout(() => {
-   ref.current.staticStart(70);
-  }, 1500);
-
-  setTimeout(() => {
-   ref.current.complete();
    setTimeout(() => {
-    nav("/preferences");
-   }, 300);
-  }, 3000);
+    ref.current.staticStart(70);
+   }, 1500);
+
+   setTimeout(() => {
+    ref.current.complete();
+    setTimeout(() => {
+     nav("/preferences");
+    }, 300);
+   }, 3000);
+  }
  };
 
  useEffect(() => {
@@ -59,270 +76,66 @@ export const Signup = () => {
 
  return (
   <>
-   <Navbar />
    <LoadingBar color="#f11946" ref={ref} />
-   <div className="w-full h-screen bg-mainbg flex flex-col md:flex-row justify-between items-center">
-    <div className="hidden md:block h-full w-full md:w-1/2">
-     <img
-      src={registerImg}
-      alt="Register"
-      className="w-full h-full object-cover"
-     />
+   <Toaster richColors position="top-center"/>
+   <div className="w-full h-screen flex flex-col md:flex-row justify-between items-center">
+    <div className="hidden md:flex md:w-1/2 h-full p-2">
+     <div className="w-full h-full bg-mainblue rounded-lg"></div>
     </div>
 
     {isMobile ? (
      <div
       className="fixed inset-0 flex justify-center items-center z-20"
       style={{
-       backgroundImage: `linear-gradient(rgba(107, 114, 128, 0.75), rgba(107, 114, 128, 0.75)), url(${registerImg})`,
-       backgroundSize: "cover",
-       backgroundPosition: "center",
+       background: "linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)",
       }}
      >
-      <div className="bg-white w-[90%] max-w-[400px] h-auto p-8 rounded-md shadow-md">
-       <div className="text-2xl text-mainblue font-bold text-center">
-        Signup Page
-       </div>
-       <div className="flex flex-col gap-4 pt-5">
-        <div className="flex flex-col">
-         <label htmlFor="username" className="text-xs text-gray-600">
-          Username
-         </label>
-         <input
-          type="text"
-          placeholder="Enter your username"
-          className="px-4 h-10 rounded text-xs border"
-         />
-        </div>
-        <div className="flex flex-col">
-         <label htmlFor="email" className="text-xs text-gray-600">
-          Email
-         </label>
-         <input
-          type="email"
-          placeholder="Enter your email"
-          className="px-4 h-10 rounded text-xs border"
-         />
-        </div>
-        <div className="flex flex-col relative">
-         <label htmlFor="password" className="text-xs text-gray-600">
-          Password
-         </label>
-         <input
-          type="password"
-          placeholder="Enter your password"
-          className="px-4 h-10 rounded text-xs border"
-          value={password}
-          onChange={(e) => {
-           setPassword(e.target.value);
-           checkPasswordStrength(e.target.value);
-          }}
-          onFocus={() => setShowTooltip(true)}
-          onBlur={() => setShowTooltip(false)}
-         />
-         {showTooltip && (
-          <div className="absolute right-0 mt-12 bg-white border rounded-md shadow-lg p-3 z-10">
-           <div className="space-y-1">
-            <p
-             className={`text-xs ${
-              passwordStrength.hasLength ? "text-green-500" : "text-gray-400"
-             }`}
-            >
-             ✓ At least 8 characters
-            </p>
-            <p
-             className={`text-xs ${
-              passwordStrength.hasUpperCase ? "text-green-500" : "text-gray-400"
-             }`}
-            >
-             ✓ At least one capital letter
-            </p>
-            <p
-             className={`text-xs ${
-              passwordStrength.hasLowerCase ? "text-green-500" : "text-gray-400"
-             }`}
-            >
-             ✓ At least one lowercase letter
-            </p>
-            <p
-             className={`text-xs ${
-              passwordStrength.hasSymbol ? "text-green-500" : "text-gray-400"
-             }`}
-            >
-             ✓ At least one symbol
-            </p>
-           </div>
-          </div>
-         )}
-        </div>
-        <div className="flex flex-col">
-         <label htmlFor="confirm-password" className="text-xs text-gray-600">
-          Confirm Password
-         </label>
-         <input
-          type="password"
-          placeholder="Confirm your password"
-          className="px-4 h-10 rounded text-xs border"
-         />
-        </div>
-       </div>
-       <div className="mt-10 flex flex-col gap-1">
-        <div className="flex items-start">
-         <p
-          onClick={navLogin}
-          className="text-xs text-gray-500 font-light cursor-pointer"
-         >
-          Already have an account? Login here
-         </p>
-        </div>
-        <button
-         onClick={register}
-         className="w-full bg-mainblue h-10 text-white rounded"
-        >
-         Create Account
-        </button>
-        <div className="flex items-center justify-center gap-2 mt-2">
-         <input type="checkbox" />
-         <label
-          onClick={() => nav("/terms-conditions")}
-          htmlFor=""
-          className="text-xs font-light text-gray-400"
-         >
-          I agree to the{" "}
-          <span className="underline cursor-pointer text-main">
-           terms and conditions
-          </span>{" "}
-          of FoodieGo
-         </label>
-        </div>
-       </div>
+      <div className="w-[90%] max-w-[400px] animate-fadeIn">
+       <SignupFormContent
+        username={username}
+        setUsername={setUsername}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        confirmPassword={confirmPassword}
+        setConfirmPassword={setConfirmPassword}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+        checkPasswordStrength={checkPasswordStrength}
+        passwordStrength={passwordStrength}
+        showTooltip={showTooltip}
+        setShowTooltip={setShowTooltip}
+        register={register}
+        nav={nav}
+        navLogin={navLogin}
+        isMobile={isMobile}
+       />
       </div>
      </div>
     ) : (
-     <div className="h-full w-full md:w-1/2 flex items-center justify-center">
-      <div className="p-5 md:p-10">
-       <div className="bg-white w-full lg:w-[450px] h-auto p-8 mt-5 rounded-md shadow-md">
-        <div className="text-2xl text-mainblue font-bold text-center">
-         Signup Page
-        </div>
-        <div className="flex flex-col gap-4 pt-5">
-         <div className="flex flex-col">
-          <label htmlFor="username" className="text-xs text-gray-600">
-           Username
-          </label>
-          <input
-           type="text"
-           placeholder="Enter your username"
-           className="px-4 h-10 rounded text-xs border"
-          />
-         </div>
-         <div className="flex flex-col">
-          <label htmlFor="email" className="text-xs text-gray-600">
-           Email
-          </label>
-          <input
-           type="email"
-           placeholder="Enter your email"
-           className="px-4 h-10 rounded text-xs border"
-          />
-         </div>
-         <div className="flex flex-col relative">
-          <label htmlFor="password" className="text-xs text-gray-600">
-           Password
-          </label>
-          <input
-           type="password"
-           placeholder="Enter your password"
-           className="px-4 h-10 rounded text-xs border"
-           value={password}
-           onChange={(e) => {
-            setPassword(e.target.value);
-            checkPasswordStrength(e.target.value);
-           }}
-           onFocus={() => setShowTooltip(true)}
-           onBlur={() => setShowTooltip(false)}
-          />
-          {showTooltip && (
-           <div className="absolute right-0 mt-12 bg-white border rounded-md shadow-lg p-3 z-10">
-            <div className="space-y-1">
-             <p
-              className={`text-xs ${
-               passwordStrength.hasLength ? "text-green-500" : "text-gray-400"
-              }`}
-             >
-              ✓ At least 8 characters
-             </p>
-             <p
-              className={`text-xs ${
-               passwordStrength.hasUpperCase
-                ? "text-green-500"
-                : "text-gray-400"
-              }`}
-             >
-              ✓ At least one capital letter
-             </p>
-             <p
-              className={`text-xs ${
-               passwordStrength.hasLowerCase
-                ? "text-green-500"
-                : "text-gray-400"
-              }`}
-             >
-              ✓ At least one lowercase letter
-             </p>
-             <p
-              className={`text-xs ${
-               passwordStrength.hasSymbol ? "text-green-500" : "text-gray-400"
-              }`}
-             >
-              ✓ At least one symbol
-             </p>
-            </div>
-           </div>
-          )}
-         </div>
-         <div className="flex flex-col">
-          <label htmlFor="confirm-password" className="text-xs text-gray-600">
-           Confirm Password
-          </label>
-          <input
-           type="password"
-           placeholder="Confirm your password"
-           className="px-4 h-10 rounded text-xs border"
-          />
-         </div>
-        </div>
-        <div className="mt-10 flex flex-col gap-1">
-         <div className="flex items-start">
-          <p
-           onClick={navLogin}
-           className="text-xs text-gray-500 font-light cursor-pointer"
-          >
-           Already have an account? Login here
-          </p>
-         </div>
-         <button
-          onClick={register}
-          className="w-full bg-mainblue h-10 text-white rounded"
-         >
-          Create Account
-         </button>
-         <div className="flex items-center justify-center gap-2 mt-2">
-          <input type="checkbox" />
-          <label
-           onClick={() => nav("/terms-conditions")}
-           htmlFor=""
-           className="text-xs font-light text-gray-400"
-          >
-           I agree to the{" "}
-           <span className="underline cursor-pointer text-main">
-            terms and conditions
-           </span>{" "}
-           of FoodieGo
-          </label>
-         </div>
-        </div>
-       </div>
+     <div className="h-screen w-full md:w-1/2 flex items-center justify-center">
+      <div className="bg-white h-auto p-10 rounded-xl shadow-xl w-[90%] max-w-[400px] transition-all duration-300 hover:shadow-2xl">
+       <SignupFormContent
+        username={username}
+        setUsername={setUsername}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        confirmPassword={confirmPassword}
+        setConfirmPassword={setConfirmPassword}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+        checkPasswordStrength={checkPasswordStrength}
+        passwordStrength={passwordStrength}
+        showTooltip={showTooltip}
+        setShowTooltip={setShowTooltip}
+        register={register}
+        nav={nav}
+        navLogin={navLogin}
+        isMobile={isMobile}
+       />
       </div>
      </div>
     )}
@@ -330,3 +143,219 @@ export const Signup = () => {
   </>
  );
 };
+
+const SignupFormContent = ({
+ username,
+ setUsername,
+ email,
+ setEmail,
+ password,
+ setPassword,
+ confirmPassword,
+ setConfirmPassword,
+ isChecked,
+ setIsChecked,
+ checkPasswordStrength,
+ passwordStrength,
+ showTooltip,
+ setShowTooltip,
+ register,
+ nav,
+ navLogin,
+ isMobile,
+}) => (
+ <>
+  <div
+   className={`text-2xl ${
+    isMobile ? "text-white" : "text-mainblue"
+   } font-bold text-center mb-6`}
+  >
+   Create Account
+  </div>
+  <div className="flex flex-col gap-4 pt-2">
+   <div className="flex flex-col gap-1.5">
+    <label
+     htmlFor="username"
+     className={`text-sm font-medium ${
+      isMobile ? "text-gray-200" : "text-gray-700"
+     }`}
+    >
+     Username
+    </label>
+    <input
+     type="text"
+     id="username"
+     placeholder="Enter your username"
+     value={username}
+     onChange={(e) => setUsername(e.target.value)}
+     className={`px-4 h-10 rounded-lg text-sm border 
+                    ${
+                     isMobile
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-gray-300"
+                      : "border-gray-300"
+                    } 
+                    focus:ring-2 focus:ring-mainblue focus:border-mainblue
+                    transition-all duration-200 outline-none`}
+    />
+   </div>
+
+   <div className="flex flex-col gap-1.5">
+    <label
+     htmlFor="email"
+     className={`text-sm font-medium ${
+      isMobile ? "text-gray-200" : "text-gray-700"
+     }`}
+    >
+     Email
+    </label>
+    <input
+     type="email"
+     id="email"
+     placeholder="Enter your email"
+     value={email}
+     onChange={(e) => setEmail(e.target.value)}
+     className={`px-4 h-10 rounded-lg text-sm border 
+                    ${
+                     isMobile
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-gray-300"
+                      : "border-gray-300"
+                    } 
+                    focus:ring-2 focus:ring-mainblue focus:border-mainblue
+                    transition-all duration-200 outline-none`}
+    />
+   </div>
+
+   <div className="flex flex-col gap-1.5 relative">
+    <label
+     htmlFor="password"
+     className={`text-sm font-medium ${
+      isMobile ? "text-gray-200" : "text-gray-700"
+     }`}
+    >
+     Password
+    </label>
+    <input
+     type="password"
+     placeholder="Enter your password"
+     value={password}
+     onChange={(e) => {
+      setPassword(e.target.value);
+      checkPasswordStrength(e.target.value);
+     }}
+     onFocus={() => setShowTooltip(true)}
+     onBlur={() => setShowTooltip(false)}
+     className={`px-4 h-10 rounded-lg text-sm border 
+                    ${
+                     isMobile
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-gray-300"
+                      : "border-gray-300"
+                    } 
+                    focus:ring-2 focus:ring-mainblue focus:border-mainblue
+                    transition-all duration-200 outline-none`}
+    />
+    {showTooltip && (
+     <div className="absolute right-0 mt-12 bg-white border rounded-lg shadow-lg p-3 z-10">
+      <div className="space-y-1.5">
+       {Object.entries({
+        hasLength: "At least 8 characters",
+        hasUpperCase: "At least one capital letter",
+        hasLowerCase: "At least one lowercase letter",
+        hasSymbol: "At least one symbol",
+       }).map(([key, text]) => (
+        <p
+         key={key}
+         className={`text-xs flex items-center gap-2 ${
+          passwordStrength[key] ? "text-green-500" : "text-gray-400"
+         }`}
+        >
+         <span className="text-base">{passwordStrength[key] ? "✓" : "○"}</span>
+         {text}
+        </p>
+       ))}
+      </div>
+     </div>
+    )}
+   </div>
+
+   <div className="flex flex-col gap-1.5">
+    <label
+     htmlFor="confirm-password"
+     className={`text-sm font-medium ${
+      isMobile ? "text-gray-200" : "text-gray-700"
+     }`}
+    >
+     Confirm Password
+    </label>
+    <input
+     type="password"
+     placeholder="Confirm your password"
+     value={confirmPassword}
+     onChange={(e) => setConfirmPassword(e.target.value)}
+     className={`px-4 h-10 rounded-lg text-sm border 
+                    ${
+                     isMobile
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-gray-300"
+                      : "border-gray-300"
+                    } 
+                    focus:ring-2 focus:ring-mainblue focus:border-mainblue
+                    transition-all duration-200 outline-none
+                    ${password && confirmPassword && password !== confirmPassword 
+                      ? 'border-red-500 focus:border-red-500 focus:ring-red-500' 
+                      : ''
+                    }`}
+    />
+    {password && confirmPassword && password !== confirmPassword && (
+     <p className={`text-xs mt-1 ${isMobile ? "text-red-300" : "text-red-500"}`}>
+      Passwords do not match
+     </p>
+    )}
+   </div>
+  </div>
+
+  <div className="mt-6 flex flex-col gap-3 items-center">
+   <div className="flex items-center gap-2 w-full">
+    <input
+     type="checkbox"
+     checked={isChecked}
+     onChange={(e) => setIsChecked(e.target.checked)}
+     className="w-3.5 h-3.5 text-mainblue border-gray-300 rounded 
+                    focus:ring-mainblue"
+    />
+    <label
+     className={`text-xs ${isMobile ? "text-gray-200" : "text-gray-600"}`}
+    >
+     I agree to the{" "}
+     <span
+      onClick={() => nav("/terms-conditions")}
+      className="text-mainblue underline cursor-pointer"
+     >
+      terms and conditions
+     </span>
+    </label>
+   </div>
+
+   <button
+    onClick={register}
+    className={`w-full h-10 rounded-lg font-medium
+                  transform transition-all duration-200 
+                  ${
+                   isMobile
+                    ? "bg-white text-mainblue text-sm hover:bg-white/90"
+                    : "bg-mainblue text-white hover:bg-mainblue/90"
+                  }
+                  hover:shadow-lg active:scale-95`}
+   >
+    Create Account
+   </button>
+
+   <p
+    onClick={navLogin}
+    className={`text-xs ${
+     isMobile ? "text-gray-200" : "text-gray-600"
+    } hover:text-mainblue transition-colors duration-200 cursor-pointer`}
+   >
+    Already have an account? <span className="font-medium">Sign in</span>
+   </p>
+  </div>
+ </>
+);
