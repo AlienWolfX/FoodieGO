@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { BrowserRouter as Routers, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import "./App.css";
 import { Mainpage } from "./pages/landing page/Mainpage";
 import { Login } from "./pages/auth/Login";
@@ -17,11 +16,12 @@ import { ViewRecipeInitial } from "./pages/landing page/ViewRecipeInitial";
 import { ForgotPassword } from "./pages/auth/ForgotPassword";
 import { OneTimePassword } from "./pages/auth/OneTimePassword";
 import { ResetPassword } from "./pages/auth/ResetPassword";
+import { RecipeProvider } from './context/RecipeContext';
 
 function App() {
  return (
-  <>
-   <Routers>
+  <BrowserRouter>
+   <RecipeProvider>
     <Routes>
      <Route path="/" element={<Mainpage />} />
      <Route path="/terms-conditions" element={<TermsConditions />} />
@@ -46,8 +46,8 @@ function App() {
      <Route path="/profile" element={<MyProfile />} />
      <Route path="/view-recipe" element={<ViewRecipe />} />
     </Routes>
-   </Routers>
-  </>
+   </RecipeProvider>
+  </BrowserRouter>
  );
 }
 

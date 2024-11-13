@@ -3,20 +3,31 @@ import { MdCancel, MdCloudUpload, MdDelete } from "react-icons/md";
 import { UserRecipeData } from "../../../data/UserRecipeData";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoTimeOutline } from "react-icons/io5";
+import { toast } from 'sonner';
 
-export const CreateRecipe = ({ setCreateRecipe }) => {
- const [formData, setFormData] = useState({
-  title: "",
-  description: "",
-  category: "",
-  cuisine: "",
-  images: [],
-  video: null,
-  time: "",
-  difficulty: "",
-  ingredients: [],
-  instructions: [],
- });
+export const CreateRecipe = ({ 
+  setCreateRecipe, 
+  isEditing = false, 
+  recipeData = null,
+  onRecipeCreated,
+  onRecipeUpdated 
+}) => {
+ const [formData, setFormData] = useState(
+  isEditing 
+    ? recipeData 
+    : {
+        title: "",
+        description: "",
+        category: "",
+        cuisine: "",
+        images: [],
+        video: null,
+        time: "",
+        difficulty: "",
+        ingredients: [],
+        instructions: [],
+      }
+ );
 
  const [currentIngredient, setCurrentIngredient] = useState("");
  const [currentInstruction, setCurrentInstruction] = useState("");
@@ -51,18 +62,19 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
 
  const handleMediaUpload = (e) => {
   const files = Array.from(e.target.files);
+  
   files.forEach(file => {
-   if (file.type.startsWith('image/')) {
-    setFormData(prev => ({
-     ...prev,
-     images: [...prev.images, URL.createObjectURL(file)]
-    }));
-   } else if (file.type.startsWith('video/')) {
-    setFormData(prev => ({
-     ...prev,
-     video: URL.createObjectURL(file)
-    }));
-   }
+    if (file.type.startsWith('image/')) {
+      // Convert image to base64 string
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({
+          ...prev,
+          img_path: reader.result // Store the base64 string
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   });
  };
 
@@ -83,17 +95,16 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
   
   const files = Array.from(e.dataTransfer.files);
   files.forEach(file => {
-   if (file.type.startsWith('image/')) {
-    setFormData(prev => ({
-     ...prev,
-     images: [...prev.images, URL.createObjectURL(file)]
-    }));
-   } else if (file.type.startsWith('video/')) {
-    setFormData(prev => ({
-     ...prev,
-     video: URL.createObjectURL(file)
-    }));
-   }
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({
+          ...prev,
+          img_path: reader.result // Store the base64 string
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
   });
  };
 
@@ -153,6 +164,34 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
   "Sauces & Condiments",
  ];
 
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  try {
+    const recipeId = Date.now().toString();
+    
+    const recipe = {
+      id: recipeId,
+      ...formData,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      author: "You",
+      ratings: 0,
+      downloads: 0,
+      views: 0,
+      shares: 0,
+      likes: [],
+    };
+
+    onRecipeCreated?.(recipe);
+    toast.success('Recipe created successfully');
+    setCreateRecipe(false);
+  } catch (error) {
+    console.error('Error creating recipe:', error);
+    toast.error('Failed to create recipe');
+  }
+ };
+
  return (
   <motion.div
    initial={{ opacity: 0 }}
@@ -177,7 +216,7 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
     </div>
 
     <div className="p-6">
-     <form className="space-y-6">
+     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Basic Info Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
        <div className="space-y-4">
@@ -351,38 +390,24 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
         </div>
 
         {/* Preview Section */}
-        <div className="mt-4 grid grid-cols-3 gap-4">
-         {formData.images.map((image, index) => (
-          <div key={index} className="relative group">
-           <img
-            src={image}
-            alt={`Preview ${index + 1}`}
-            className="w-full h-24 object-cover rounded-lg"
-           />
-           <button
-            type="button"
-            onClick={() => removeMedia(index, 'image')}
-            className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-           >
-            <MdDelete size={16} />
-           </button>
-          </div>
-         ))}
-         {formData.video && (
-          <div className="relative group">
-           <video
-            src={formData.video}
-            className="w-full h-24 object-cover rounded-lg"
-           />
-           <button
-            type="button"
-            onClick={() => removeMedia(0, 'video')}
-            className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-           >
-            <MdDelete size={16} />
-           </button>
-          </div>
-         )}
+        <div className="mt-4 grid grid-cols-1 gap-4">
+          {formData.img_path && (
+            <div className="relative group">
+              <img
+                src={formData.img_path}
+                alt="Recipe preview"
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <button
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, img_path: null }))}
+                className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full 
+                         opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <MdDelete size={16} />
+              </button>
+            </div>
+          )}
         </div>
        </div>
       </div>
@@ -497,7 +522,7 @@ export const CreateRecipe = ({ setCreateRecipe }) => {
         type="submit"
         className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
        >
-        Create Recipe
+        {isEditing ? 'Update Recipe' : 'Create Recipe'}
        </button>
       </div>
      </form>

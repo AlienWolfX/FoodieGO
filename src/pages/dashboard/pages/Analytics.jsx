@@ -106,7 +106,7 @@ export const Analytics = () => {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="space-y-6"
+    className="space-y-2"
    >
     <div className="flex items-center justify-between">
      <Typography className="text-lg text-gray-700 font-medium">
@@ -116,7 +116,7 @@ export const Analytics = () => {
       Last updated: {new Date().toLocaleDateString()}
      </Typography>
     </div>
-    <hr className="border-gray-100" />
+    <hr className="border-gray-200" />
     {/* Stats Cards */}
     <Grid container spacing={3}>
      {[
@@ -165,7 +165,7 @@ export const Analytics = () => {
          sx={{ borderRadius: 3 }}
         >
          <Box display="flex" alignItems="center" justifyContent="space-between">
-          <div className="space-y-2">
+          <div className="space-y-0">
            <Typography color="textSecondary" variant="subtitle2" className="text-gray-500">
             {stat.title}
            </Typography>
