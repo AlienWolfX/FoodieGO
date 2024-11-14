@@ -7,7 +7,7 @@ import { Menu } from "@headlessui/react";
 import { FiSearch, FiChevronDown, FiFilter, FiX } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, Transition } from "@headlessui/react";
 
 export const ExploreRecipes = () => {
  const location = useLocation();
@@ -75,23 +75,27 @@ export const ExploreRecipes = () => {
  // When component mounts, trigger search if there's a query
  useEffect(() => {
   if (location.state?.searchQuery) {
-    setSearchTerm(location.state.searchQuery);
-    setActiveSearch(location.state.searchQuery);
-    // Clear the location state after using it
-    window.history.replaceState({}, document.title);
+   setSearchTerm(location.state.searchQuery);
+   setActiveSearch(location.state.searchQuery);
+   // Clear the location state after using it
+   window.history.replaceState({}, document.title);
   }
  }, [location.state]);
 
  // Add separate effect for handling search
  useEffect(() => {
   if (activeSearch) {
-    handleSearch();
+   handleSearch();
   }
  }, [activeSearch]);
 
+ useEffect(() => {
+  window.scroll(0, 0);
+ }, []);
+
  const handleSearch = async () => {
   if (!searchTerm.trim()) return;
-  
+
   setIsLoading(true);
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 800));
@@ -100,21 +104,25 @@ export const ExploreRecipes = () => {
 
   // Check if there are any results after filtering
   const results = recipeData.filter((recipe) => {
-    const matchesSearch = recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCuisine = selectedCuisine === "All" || recipe.cuisine === selectedCuisine;
-    const matchesCategory = selectedCategory === "All" || recipe.category === selectedCategory;
-    return matchesSearch && matchesCuisine && matchesCategory;
+   const matchesSearch = recipe.title
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase());
+   const matchesCuisine =
+    selectedCuisine === "All" || recipe.cuisine === selectedCuisine;
+   const matchesCategory =
+    selectedCategory === "All" || recipe.category === selectedCategory;
+   return matchesSearch && matchesCuisine && matchesCategory;
   });
 
   if (results.length === 0) {
-    setShowNoResults(true);
-    setTimeout(() => {
-      setSearchTerm("");
-      setActiveSearch("");
-      setSelectedCuisine("All");
-      setSelectedCategory("All");
-      window.location.reload();
-    }, 2000);
+   setShowNoResults(true);
+   setTimeout(() => {
+    setSearchTerm("");
+    setActiveSearch("");
+    setSelectedCuisine("All");
+    setSelectedCategory("All");
+    window.location.reload();
+   }, 2000);
   }
  };
 
@@ -132,52 +140,60 @@ export const ExploreRecipes = () => {
  // Add NoResultsModal component
  const NoResultsModal = () => (
   <Transition appear show={showNoResults} as={Fragment}>
-    <Dialog as="div" className="relative z-50" onClose={() => setShowNoResults(false)}>
-      <Transition.Child
-        as={Fragment}
-        enter="ease-out duration-300"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="ease-in duration-200"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <div className="fixed inset-0 bg-black bg-opacity-25" />
-      </Transition.Child>
+   <Dialog
+    as="div"
+    className="relative z-50"
+    onClose={() => setShowNoResults(false)}
+   >
+    <Transition.Child
+     as={Fragment}
+     enter="ease-out duration-300"
+     enterFrom="opacity-0"
+     enterTo="opacity-100"
+     leave="ease-in duration-200"
+     leaveFrom="opacity-100"
+     leaveTo="opacity-0"
+    >
+     <div className="fixed inset-0 bg-black bg-opacity-25" />
+    </Transition.Child>
 
-      <div className="fixed inset-0 overflow-y-auto">
-        <div className="flex min-h-full items-center justify-center p-4">
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
-          >
-            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-              <div className="flex justify-between items-start">
-                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                  No Results Found
-                </Dialog.Title>
-                <button
-                  onClick={() => setShowNoResults(false)}
-                  className="text-gray-400 hover:text-gray-500"
-                >
-                  <FiX className="h-5 w-5" />
-                </button>
-              </div>
-              <div className="mt-2">
-                <p className="text-sm text-gray-500">
-                  We couldn't find any recipes matching your search criteria. Try adjusting your filters or search term.
-                </p>
-              </div>
-            </Dialog.Panel>
-          </Transition.Child>
+    <div className="fixed inset-0 overflow-y-auto">
+     <div className="flex min-h-full items-center justify-center p-4">
+      <Transition.Child
+       as={Fragment}
+       enter="ease-out duration-300"
+       enterFrom="opacity-0 scale-95"
+       enterTo="opacity-100 scale-100"
+       leave="ease-in duration-200"
+       leaveFrom="opacity-100 scale-100"
+       leaveTo="opacity-0 scale-95"
+      >
+       <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+        <div className="flex justify-between items-start">
+         <Dialog.Title
+          as="h3"
+          className="text-lg font-medium leading-6 text-gray-900"
+         >
+          No Results Found
+         </Dialog.Title>
+         <button
+          onClick={() => setShowNoResults(false)}
+          className="text-gray-400 hover:text-gray-500"
+         >
+          <FiX className="h-5 w-5" />
+         </button>
         </div>
-      </div>
-    </Dialog>
+        <div className="mt-2">
+         <p className="text-sm text-gray-500">
+          We couldn't find any recipes matching your search criteria. Try
+          adjusting your filters or search term.
+         </p>
+        </div>
+       </Dialog.Panel>
+      </Transition.Child>
+     </div>
+    </div>
+   </Dialog>
   </Transition>
  );
 

@@ -17,6 +17,7 @@ export const Navbar = () => {
   if (section) {
    window.location.hash = "hero";
   } else {
+   window.scroll(0, 0);
    nav("/"); // Navigate to home if section not found
   }
  };
@@ -26,6 +27,7 @@ export const Navbar = () => {
   if (section) {
    window.location.hash = "explore";
   } else {
+   window.scroll(0, 0);
    nav("/"); // Navigate to home if section not found
   }
  };
@@ -35,6 +37,7 @@ export const Navbar = () => {
   if (section) {
    window.location.hash = "about";
   } else {
+   window.scroll(0, 0);
    nav("/"); // Navigate to home if section not found
   }
  };
@@ -44,6 +47,7 @@ export const Navbar = () => {
   if (section) {
    window.location.hash = "contact";
   } else {
+   window.scroll(0, 0);
    nav("/"); // Navigate to home if section not found
   }
  };

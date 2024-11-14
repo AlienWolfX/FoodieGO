@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Searchbar } from "../../components/Searchbar";
-import threePlateFood from "/threePlateFood.png";
+import threePlateFood from "/threePlateFood.png ";
 import { FiUsers, FiBook, FiDownload } from "react-icons/fi";
 
 export const Hero = () => {

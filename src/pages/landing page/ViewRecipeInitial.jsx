@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { RecipeCard } from "../../components/RecipeCard";
 import { useLocation } from "react-router-dom";
 
@@ -21,6 +22,10 @@ export const ViewRecipeInitial = () => {
   views,
   dateCreated,
  } = location.state; // Retrieve data passed from the previous page
+
+ useEffect(() => {
+  window.scroll(0, 0);
+ }, []);
 
  return (
   <>

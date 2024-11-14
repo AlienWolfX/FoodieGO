@@ -9,7 +9,7 @@ export const recipeData = [
   downloads: 89,
   views: 892,
   shares: 67,
-  img_path: "/foodimages/szechuan-chicken.jpg",
+  img_path: "/foodimages/szechuan-chicken-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Chinese",
@@ -49,7 +49,7 @@ export const recipeData = [
   downloads: 145,
   views: 1256,
   shares: 84,
-  img_path: "/foodimages/thai-green-chicken-curry.jpg",
+  img_path: "/foodimages/thai-green-chicken-curry-min.jpg",
   vid_path: "",
   difficulty: "Hard",
   cuisine: "Thai",
@@ -88,7 +88,7 @@ export const recipeData = [
   downloads: 167,
   views: 1567,
   shares: 95,
-  img_path: "/foodimages/teriyaki-salmon-rice-bowl-recipe.jpg",
+  img_path: "/foodimages/teriyaki-salmon-rice-bowl-recipe-min.jpg",
   vid_path: "",
   difficulty: "Easy",
   cuisine: "Japanese",
@@ -125,7 +125,7 @@ export const recipeData = [
   downloads: 156,
   views: 1435,
   shares: 98,
-  img_path: "/foodimages/korean-bibimbap.jpg",
+  img_path: "/foodimages/korean-bibimbap-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Korean",
@@ -165,7 +165,7 @@ export const recipeData = [
   downloads: 178,
   views: 1678,
   shares: 112,
-  img_path: "/foodimages/Vietnamese-Pho-Soup-Recipe-1.jpg",
+  img_path: "/foodimages/Vietnamese-Pho-Soup-Recipe-1-min.jpg",
   vid_path: "",
   difficulty: "Hard",
   cuisine: "Vietnamese",
@@ -245,7 +245,7 @@ export const recipeData = [
   downloads: 98,
   views: 876,
   shares: 54,
-  img_path: "/foodimages/greek-moussaka-ft.jpg",
+  img_path: "/foodimages/greek-moussaka-ft-min.jpg",
   vid_path: "",
   difficulty: "Hard",
   cuisine: "Greek",
@@ -283,7 +283,7 @@ export const recipeData = [
   downloads: 134,
   views: 945,
   shares: 76,
-  img_path: "/foodimages/mexican-al-pastor.jpg",
+  img_path: "/foodimages/mexican-al-pastor-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Mexican",
@@ -319,7 +319,7 @@ export const recipeData = [
   downloads: 145,
   views: 1234,
   shares: 88,
-  img_path: "/foodimages/italian-margherita.jpg",
+  img_path: "/foodimages/italian-margherita-min.jpg",
   vid_path: "",
   difficulty: "Easy",
   cuisine: "Italian",
@@ -353,7 +353,7 @@ export const recipeData = [
   downloads: 156,
   views: 1345,
   shares: 92,
-  img_path: "/foodimages/md_ratatouille.jpg",
+  img_path: "/foodimages/md_ratatouille-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "French",
@@ -391,7 +391,7 @@ export const recipeData = [
   downloads: 143,
   views: 1123,
   shares: 79,
-  img_path: "/foodimages/szechuan-spicy-noodles.jpg",
+  img_path: "/foodimages/szechuan-spicy-noodles-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Chinese",
@@ -427,7 +427,7 @@ export const recipeData = [
   downloads: 145,
   views: 1234,
   shares: 88,
-  img_path: "/foodimages/szechuan-eggplant.jpg",
+  img_path: "/foodimages/szechuan-eggplant-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Chinese",
@@ -463,7 +463,7 @@ export const recipeData = [
   downloads: 156,
   views: 1345,
   shares: 92,
-  img_path: "/foodimages/szechuan-chicken-lettuce-wraps.jpg",
+  img_path: "/foodimages/szechuan-chicken-lettuce-wraps-min.jpg",
   vid_path: "",
   difficulty: "Easy",
   cuisine: "Chinese",
@@ -498,7 +498,7 @@ export const recipeData = [
   downloads: 189,
   views: 1789,
   shares: 123,
-  img_path: "/foodimages/szechuan-tofu.jpg",
+  img_path: "/foodimages/szechuan-tofu-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Chinese",
@@ -534,7 +534,7 @@ export const recipeData = [
   downloads: 189,
   views: 1789,
   shares: 123,
-  img_path: "/foodimages/butter-chicken.jpg",
+  img_path: "/foodimages/butter-chicken-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Indian",
@@ -548,14 +548,14 @@ export const recipeData = [
    "Heavy cream",
    "Garam masala",
    "Kasuri methi",
-   "Honey"
+   "Honey",
   ],
   instructions: [
    "1. Cook marinated chicken tikka",
    "2. Prepare makhani sauce",
    "3. Combine chicken with sauce",
-   "4. Finish with cream and butter"
-  ]
+   "4. Finish with cream and butter",
+  ],
  },
  {
   id: 16,
@@ -567,7 +567,7 @@ export const recipeData = [
   downloads: 98,
   views: 876,
   shares: 54,
-  img_path: "/foodimages/japanese-mochi.jpg",
+  img_path: "/foodimages/japanese-mochi-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Japanese",
@@ -579,14 +579,14 @@ export const recipeData = [
    "Sugar",
    "Water",
    "Cornstarch",
-   "Red bean paste"
+   "Red bean paste",
   ],
   instructions: [
    "1. Mix rice flour with water",
    "2. Steam the mixture",
    "3. Knead until smooth",
-   "4. Fill with red bean paste"
-  ]
+   "4. Fill with red bean paste",
+  ],
  },
  {
   id: 17,
@@ -598,26 +598,20 @@ export const recipeData = [
   downloads: 134,
   views: 945,
   shares: 76,
-  img_path: "/foodimages/kimchi-pancake.jpg",
+  img_path: "/foodimages/kimchi-pancake-min.jpg",
   vid_path: "",
   difficulty: "Easy",
   cuisine: "Korean",
   category: "Side Dishes",
   dateCreated: "2024-09-21",
   description: "Crispy savory pancakes...",
-  ingredients: [
-   "Kimchi",
-   "Flour",
-   "Eggs",
-   "Green onions",
-   "Vegetable oil"
-  ],
+  ingredients: ["Kimchi", "Flour", "Eggs", "Green onions", "Vegetable oil"],
   instructions: [
    "1. Mix chopped kimchi with batter",
    "2. Heat oil in pan",
    "3. Pour mixture and spread",
-   "4. Flip and cook until crispy"
-  ]
+   "4. Flip and cook until crispy",
+  ],
  },
  {
   id: 18,
@@ -629,7 +623,7 @@ export const recipeData = [
   downloads: 145,
   views: 1234,
   shares: 88,
-  img_path: "/foodimages/mango-sticky-rice.jpg",
+  img_path: "/foodimages/mango-sticky-rice-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Thai",
@@ -641,14 +635,14 @@ export const recipeData = [
    "Coconut milk",
    "Palm sugar",
    "Ripe mangoes",
-   "Salt"
+   "Salt",
   ],
   instructions: [
    "1. Steam sticky rice",
    "2. Prepare coconut sauce",
    "3. Mix rice with sauce",
-   "4. Serve with fresh mango"
-  ]
+   "4. Serve with fresh mango",
+  ],
  },
  {
   id: 19,
@@ -660,7 +654,7 @@ export const recipeData = [
   downloads: 189,
   views: 1789,
   shares: 123,
-  img_path: "/foodimages/chinese-hot-pot.jpg",
+  img_path: "/foodimages/chinese-hot-pot-min.jpg",
   vid_path: "",
   difficulty: "Medium",
   cuisine: "Chinese",
@@ -674,14 +668,14 @@ export const recipeData = [
    "Vegetables",
    "Noodles",
    "Tofu",
-   "Dipping sauces"
+   "Dipping sauces",
   ],
   instructions: [
    "1. Prepare broth base",
    "2. Arrange ingredients",
    "3. Cook items in broth",
-   "4. Dip in sauce and enjoy"
-  ]
+   "4. Dip in sauce and enjoy",
+  ],
  },
  {
   id: 20,
@@ -693,7 +687,7 @@ export const recipeData = [
   downloads: 156,
   views: 1345,
   shares: 92,
-  img_path: "/foodimages/vietnamese-spring-rolls.jpg",
+  img_path: "/foodimages/vietnamese-spring-rolls-min.jpg",
   vid_path: "",
   difficulty: "Easy",
   cuisine: "Vietnamese",
@@ -706,14 +700,14 @@ export const recipeData = [
    "Rice vermicelli",
    "Fresh herbs",
    "Lettuce",
-   "Peanut sauce"
+   "Peanut sauce",
   ],
   instructions: [
    "1. Prepare filling ingredients",
    "2. Soak rice paper",
    "3. Add fillings and roll",
-   "4. Serve with peanut sauce"
-  ]
+   "4. Serve with peanut sauce",
+  ],
  },
  {
   id: 21,
@@ -725,26 +719,19 @@ export const recipeData = [
   downloads: 143,
   views: 1123,
   shares: 79,
-  img_path: "/foodimages/roti-canai.jpg",
+  img_path: "/foodimages/roti-canai-min.jpg",
   vid_path: "",
   difficulty: "Hard",
   cuisine: "Malaysian",
   category: "Side Dishes",
   dateCreated: "2024-09-25",
   description: "Flaky, crispy flatbread...",
-  ingredients: [
-   "Flour",
-   "Water",
-   "Salt",
-   "Ghee",
-   "Oil",
-   "Curry sauce"
-  ],
+  ingredients: ["Flour", "Water", "Salt", "Ghee", "Oil", "Curry sauce"],
   instructions: [
    "1. Knead dough until elastic",
    "2. Rest dough",
    "3. Flatten and fold",
-   "4. Cook on griddle"
-  ]
- }
+   "4. Cook on griddle",
+  ],
+ },
 ];
