@@ -197,31 +197,31 @@ export const CreateRecipe = ({
    initial={{ opacity: 0 }}
    animate={{ opacity: 1 }}
    exit={{ opacity: 0 }}
-   className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50"
+   className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-2 z-50"
   >
    <motion.div
     initial={{ scale: 0.9, opacity: 0 }}
     animate={{ scale: 1, opacity: 1 }}
     exit={{ scale: 0.9, opacity: 0 }}
-    className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+    className="bg-white rounded-lg w-full max-w-3xl max-h-[95vh] overflow-y-auto"
    >
-    <div className="sticky top-0 bg-white p-6 border-b flex items-center justify-between">
-     <h1 className="text-xl font-semibold text-gray-800">Create New Recipe</h1>
+    <div className="sticky top-0 bg-white px-4 py-3 border-b flex items-center justify-between">
+     <h1 className="text-base font-medium text-gray-800">Create New Recipe</h1>
      <button
       onClick={() => setCreateRecipe(false)}
-      className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+      className="p-1 hover:bg-gray-100 rounded-full transition-colors"
      >
-      <MdCancel size={24} className="text-gray-500" />
+      <MdCancel size={20} className="text-gray-500" />
      </button>
     </div>
 
-    <div className="p-6">
-     <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="p-4">
+     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Basic Info Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-       <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div className="space-y-3">
         <div>
-         <label className="block text-sm font-medium text-gray-700 mb-1">
+         <label className="block text-xs font-medium text-gray-700 mb-1">
           Recipe Title
          </label>
          <input
@@ -229,35 +229,35 @@ export const CreateRecipe = ({
           name="title"
           value={formData.title}
           onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-transparent"
           placeholder="Enter recipe title"
          />
         </div>
 
         <div>
-         <label className="block text-sm font-medium text-gray-700 mb-1">
+         <label className="block text-xs font-medium text-gray-700 mb-1">
           Description
          </label>
          <textarea
           name="description"
           value={formData.description}
           onChange={handleChange}
-          rows={3}
-          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          rows={2}
+          className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-transparent"
           placeholder="Describe your recipe"
          />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
          <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
            Category
           </label>
           <select
            name="category"
            value={formData.category}
            onChange={handleChange}
-           className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+           className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-transparent"
           >
            <option value="">Select category</option>
            {categories.map((cat) => (
@@ -269,14 +269,14 @@ export const CreateRecipe = ({
          </div>
 
          <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
            Cuisine
           </label>
           <select
            name="cuisine"
            value={formData.cuisine}
            onChange={handleChange}
-           className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+           className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-transparent"
           >
            <option value="">Select cuisine</option>
            {cuisines.map((cuisine) => (
@@ -288,14 +288,14 @@ export const CreateRecipe = ({
          </div>
 
          <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
            Difficulty
           </label>
           <select
            name="difficulty"
            value={formData.difficulty}
            onChange={handleChange}
-           className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+           className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-transparent"
           >
            <option value="">Select difficulty</option>
            <option value="easy">Easy</option>
@@ -305,16 +305,16 @@ export const CreateRecipe = ({
          </div>
 
          <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
            Cooking Time
           </label>
           <div className="relative">
            <div
-            className="w-full px-4 py-2 border border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 transition-all flex items-center justify-between"
+            className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-md cursor-pointer hover:border-blue-500 transition-all flex items-center justify-between"
             onClick={() => setShowTimeSlider(!showTimeSlider)}
            >
             <span className="text-gray-700">
-             {formData.time || "Select cooking time"}
+             {formData.time || "select time"}
             </span>
             <IoTimeOutline className="text-gray-500" />
            </div>
@@ -362,7 +362,7 @@ export const CreateRecipe = ({
 
        {/* Media Upload Section */}
        <div
-        className={`border-2 border-dashed rounded-lg p-4 ${
+        className={`border border-dashed rounded-md p-3 ${
          dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
         }`}
         onDragEnter={handleDrag}
@@ -370,18 +370,18 @@ export const CreateRecipe = ({
         onDragOver={handleDrag}
         onDrop={handleDrop}
        >
-        <div className="text-center space-y-4">
-         <MdCloudUpload className="mx-auto h-12 w-12 text-gray-400" />
+        <div className="text-center space-y-2">
+         <MdCloudUpload className="mx-auto h-8 w-8 text-gray-400" />
          <div className="space-y-1">
-          <p className="text-sm text-gray-500">
-           Drag and drop your images or video here, or
+          <p className="text-xs text-gray-500">
+           Drag and drop your images here, or
           </p>
-          <label className="relative cursor-pointer">
+          <label className="relative cursor-pointer ml-1">
            <span className="text-blue-500 hover:text-blue-600">browse files</span>
            <input
             type="file"
             multiple
-            accept="image/*,video/*"
+            accept="image/*"
             onChange={handleMediaUpload}
             className="hidden"
            />
@@ -390,21 +390,20 @@ export const CreateRecipe = ({
         </div>
 
         {/* Preview Section */}
-        <div className="mt-4 grid grid-cols-1 gap-4">
+        <div className="mt-3">
           {formData.img_path && (
             <div className="relative group">
               <img
                 src={formData.img_path}
                 alt="Recipe preview"
-                className="w-full h-48 object-cover rounded-lg"
+                className="w-full h-36 object-cover rounded-md"
               />
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, img_path: null }))}
-                className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full 
-                         opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
               >
-                <MdDelete size={16} />
+                <MdDelete size={14} />
               </button>
             </div>
           )}
@@ -413,10 +412,10 @@ export const CreateRecipe = ({
       </div>
 
       {/* Ingredients and Instructions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
        {/* Ingredients */}
        <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-xs font-medium text-gray-700 mb-1">
          Ingredients
         </label>
         <div className="flex gap-2 mb-2">
@@ -425,13 +424,13 @@ export const CreateRecipe = ({
           value={currentIngredient}
           onChange={(e) => setCurrentIngredient(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && addIngredient()}
-          className="flex-1 px-4 py-2 border border-gray-200 rounded-lg"
+          className="flex-1 px-3 py-1.5 text-sm border border-gray-200 rounded-md"
           placeholder="Add ingredient"
          />
          <button
           type="button"
           onClick={addIngredient}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          className="px-3 py-1.5 text-xs bg-blue-500 text-white rounded-md hover:bg-blue-600"
          >
           Add
          </button>
@@ -462,7 +461,7 @@ export const CreateRecipe = ({
 
        {/* Instructions */}
        <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-xs font-medium text-gray-700 mb-1">
          Instructions
         </label>
         <div className="flex gap-2 mb-2">
@@ -471,13 +470,13 @@ export const CreateRecipe = ({
           value={currentInstruction}
           onChange={(e) => setCurrentInstruction(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && addInstruction()}
-          className="flex-1 px-4 py-2 border border-gray-200 rounded-lg"
+          className="flex-1 px-3 py-1.5 text-sm border border-gray-200 rounded-md"
           placeholder="Add instruction"
          />
          <button
           type="button"
           onClick={addInstruction}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          className="px-3 py-1.5 text-xs bg-blue-500 text-white rounded-md hover:bg-blue-600"
          >
           Add
          </button>
@@ -510,17 +509,17 @@ export const CreateRecipe = ({
       </div>
 
       {/* Submit Button */}
-      <div className="flex justify-end gap-3 pt-4 border-t">
+      <div className="flex justify-end gap-2 pt-3 border-t">
        <button
         type="button"
         onClick={() => setCreateRecipe(false)}
-        className="px-6 py-2 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50"
+        className="px-4 py-1.5 text-xs border border-gray-200 text-gray-600 rounded-md hover:bg-gray-50"
        >
         Cancel
        </button>
        <button
         type="submit"
-        className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        className="px-4 py-1.5 text-xs bg-blue-500 text-white rounded-md hover:bg-blue-600"
        >
         {isEditing ? 'Update Recipe' : 'Create Recipe'}
        </button>

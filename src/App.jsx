@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { Mainpage } from "./pages/landing page/Mainpage";
 import { Login } from "./pages/auth/Login";
@@ -16,7 +16,8 @@ import { ViewRecipeInitial } from "./pages/landing page/ViewRecipeInitial";
 import { ForgotPassword } from "./pages/auth/ForgotPassword";
 import { OneTimePassword } from "./pages/auth/OneTimePassword";
 import { ResetPassword } from "./pages/auth/ResetPassword";
-import { RecipeProvider } from './context/RecipeContext';
+import { RecipeProvider } from "./context/RecipeContext";
+import { MoreRecipes } from "./pages/dashboard/pages/MoreRecipes";
 
 function App() {
  return (
@@ -45,6 +46,7 @@ function App() {
      <Route path="/analytics" element={<Analytics />} />
      <Route path="/profile" element={<MyProfile />} />
      <Route path="/view-recipe" element={<ViewRecipe />} />
+     <Route path="/explore-more-recipes" element={<MoreRecipes />} />
     </Routes>
    </RecipeProvider>
   </BrowserRouter>
@@ -58,6 +60,7 @@ const UserRoutes = () => {
   <Route path="/favorite-recipes" element={<SavedRecipes />} />
   <Route path="/analytics" element={<Analytics />} />
   <Route path="/profile" element={<MyProfile />} />
+  <Route path="/explore-more-recipes" element={<MoreRecipes />} />
  </Routes>;
 };
 

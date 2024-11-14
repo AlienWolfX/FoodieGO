@@ -9,9 +9,12 @@ import {
  addFavorite,
  removeFavorite,
 } from "../../../../data/UserData";
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
+ const navigate = useNavigate();
  const [favorites, setFavorites] = useState(getUserData().favorites); // Initialize favorites from user data
+ const [searchTerm, setSearchTerm] = useState(""); // Add this state
 
  const sections = [
   { title: "Latest Recipes", data: recipeData },
@@ -48,63 +51,111 @@ export const Home = () => {
   },
  };
 
+ // Add this function to handle search
+ const handleSearch = () => {
+  if (searchTerm.trim()) {
+   navigate('/explore-more-recipes', { 
+    state: { 
+     searchQuery: searchTerm 
+    }
+   });
+  }
+ };
+
  return (
   <Layout>
    <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="w-full flex items-center justify-between"
+    className="relative w-full bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12 overflow-hidden"
    >
-    <div className="w-full md:w-[400px]">
-     <motion.h1
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.2 }}
-      className="text-3xl md:text-4xl font-bold text-gray-700"
-     >
-      Explore New Recipes
-     </motion.h1>
-     <motion.p
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.3 }}
-      className="text-xs font-light text-gray-500 mt-2 leading-5"
-     >
-      Discover a variety of delicious recipes that you can try at home. From
-      appetizers to desserts, we have something for everyone!
-     </motion.p>
-     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.4 }}
-      className="mt-5 w-full flex items-center justify-between gap-2"
-     >
-      <input
-       type="text"
-       className="w-full h-10 border rounded-md px-4 outline-none text-xs"
-       placeholder="Search recipes..."
-      />
-      <button className="h-10 px-4 rounded border border-mainblue text-mainblue text-xs font-medium hover:bg-mainblue hover:text-white transition-colors">
-       Search
-      </button>
-     </motion.div>
+    <div className="absolute inset-0 opacity-10">
+     <div className="absolute inset-0 bg-grid-pattern" />
     </div>
-    <motion.img
-     initial={{ opacity: 0, x: 20 }}
-     animate={{ opacity: 1, x: 0 }}
-     transition={{ delay: 0.5 }}
-     src={exploreSide}
-     alt="Explore"
-     className="hidden md:block w-full md:w-[390px] mt-5 md:mt-0"
-    />
+
+    <div className="relative flex items-center justify-between">
+     <div className="w-full md:w-[500px] space-y-6">
+      <motion.div
+       initial={{ opacity: 0, y: 20 }}
+       animate={{ opacity: 1, y: 0 }}
+       transition={{ delay: 0.2 }}
+       className="space-y-3"
+      >
+       <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+        Discover & Cook
+        <span className="block text-3xl md:text-4xl mt-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text">
+         Amazing Recipes
+        </span>
+       </h1>
+       <p className="text-sm text-gray-600 leading-relaxed max-w-md">
+        Explore a world of culinary delights. From quick weekday meals to 
+        gourmet weekend feasts, find the perfect recipe for any occasion.
+       </p>
+      </motion.div>
+
+      <motion.div
+       initial={{ opacity: 0 }}
+       animate={{ opacity: 1 }}
+       transition={{ delay: 0.4 }}
+       className="relative max-w-xl"
+      >
+       <div className="relative flex items-center">
+        <input
+         type="text"
+         value={searchTerm}
+         onChange={(e) => setSearchTerm(e.target.value)}
+         onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+         className="w-full h-12 pl-5 pr-32 rounded-xl border-2 border-gray-100 
+                          focus:border-blue-500 focus:ring-2 focus:ring-blue-200 
+                          transition-all duration-200 outline-none text-sm"
+         placeholder="Search for any recipe..."
+        />
+        <button 
+         onClick={handleSearch}
+         className="absolute right-2 h-8 px-6 bg-blue-600 text-white 
+                          rounded-lg text-sm font-medium hover:bg-blue-700 
+                          transition-colors duration-200 flex items-center gap-2"
+        >
+         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+         </svg>
+         Search
+        </button>
+       </div>
+       
+       <div className="flex gap-2 mt-3">
+        {['Quick & Easy', 'Vegetarian', 'Healthy', 'Trending'].map((tag) => (
+         <button
+          key={tag}
+          className="px-3 py-1 text-xs font-medium text-gray-600 bg-white 
+                           rounded-full border border-gray-200 hover:border-blue-500 
+                           hover:text-blue-600 transition-colors duration-200"
+         >
+          {tag}
+         </button>
+        ))}
+       </div>
+      </motion.div>
+     </div>
+
+     <motion.img
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.5 }}
+      src={exploreSide}
+      alt="Explore"
+      className="hidden md:block w-[450px] object-cover rounded-lg 
+                       transition-transform duration-300"
+     />
+    </div>
    </motion.div>
 
    <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 0.6 }}
-    className="w-full flex flex-col gap-10"
+    className="space-y-12"
    >
     {sections.map((section, index) => (
      <SliderSection
@@ -112,8 +163,8 @@ export const Home = () => {
       section={section}
       index={index}
       variants={sliderVariants}
-      favorites={favorites} // Pass favorites to the section
-      toggleFavorite={toggleFavorite} // Pass toggle function
+      favorites={favorites}
+      toggleFavorite={toggleFavorite}
      />
     ))}
    </motion.div>
@@ -141,15 +192,20 @@ const SliderSection = ({
    variants={variants}
    initial="hidden"
    animate={isInView ? "visible" : "hidden"}
-   className="w-full flex flex-col mt-8"
+   className="w-full"
   >
    <motion.div
     initial={{ opacity: 0, x: -20 }}
     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
     transition={{ delay: 0.2, duration: 0.5 }}
+    className="flex items-center justify-between mb-6"
    >
-    <h1 className="font-semibold text-2xl text-gray-800">{section.title}</h1>
-    <hr className="my-3" />
+    <div>
+     <h2 className="text-2xl font-bold text-gray-800">{section.title}</h2>
+     <p className="text-sm text-gray-500 mt-1">
+      Discover our {section.title.toLowerCase()} curated just for you
+     </p>
+    </div>
    </motion.div>
 
    <motion.div
@@ -159,8 +215,8 @@ const SliderSection = ({
    >
     <FoodCardSlider
      recipes={section.data}
-     favorites={favorites} // Pass favorites to the slider
-     toggleFavorite={toggleFavorite} // Pass toggle function
+     favorites={favorites}
+     toggleFavorite={toggleFavorite}
     />
    </motion.div>
   </motion.section>

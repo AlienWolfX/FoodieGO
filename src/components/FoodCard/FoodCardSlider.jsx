@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { CiClock2 } from "react-icons/ci";
@@ -12,6 +12,8 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export const FoodCardSlider = ({ recipes }) => {
  const [favModal, setFavModal] = useState(false);
+
+ const nav = useNavigate();
  const sliderRef = useRef(null);
 
  const CustomArrow = ({ direction, onClick }) => {
@@ -90,6 +92,12 @@ export const FoodCardSlider = ({ recipes }) => {
  return (
   <div className="w-full relative">
    <div className="absolute right-2 top-[-50px] flex items-center gap-2 z-10">
+    <button
+     onClick={() => nav("/explore-more-recipes")}
+     className="text-xs font-regular hover:text-mainblue text-gray-600"
+    >
+     see more
+    </button>
     <div className="custom-arrow-container">
      <CustomArrow
       direction="prev"
