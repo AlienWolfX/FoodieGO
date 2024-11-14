@@ -103,9 +103,20 @@ export const MoreRecipes = () => {
 
   if (results.length === 0) {
    setShowNoResults(true);
+   // Clear all search states immediately
+   setSearchTerm("");
+   setActiveSearch("");
+   setSelectedCuisine("All");
+   setSelectedCategory("All");
+   
+   // Clear location state if it exists
+   if (location.state?.searchQuery) {
+    window.history.replaceState({}, document.title);
+   }
+   
    setTimeout(() => {
     window.location.reload();
-   }, [2000]);
+   }, 2000);
   }
  };
 

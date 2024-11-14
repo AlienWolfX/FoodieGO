@@ -1,45 +1,34 @@
 import { Link, useNavigate } from "react-router-dom";
-import { CiHeart } from "react-icons/ci";
-import { CiStar } from "react-icons/ci";
-import { CiClock2 } from "react-icons/ci";
+import { CiStar, CiClock2 } from "react-icons/ci";
+import { FiBarChart2 } from "react-icons/fi";
+import { TbCategory } from "react-icons/tb";
+import { GiCook } from "react-icons/gi";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useState, useRef } from "react";
-import { AddFavorite } from "../Modals/AddFavorite";
 import { motion } from "framer-motion";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export const FoodCardSlider = ({ recipes }) => {
- const [favModal, setFavModal] = useState(false);
-
  const nav = useNavigate();
  const sliderRef = useRef(null);
 
- const CustomArrow = ({ direction, onClick }) => {
-  return (
+ const CustomArrow = ({ direction, onClick }) => (
    <button
-    onClick={onClick}
-    className={`
-         custom-arrow 
-         w-8 h-8 
-         flex items-center justify-center 
-         bg-white 
-         border border-gray-200 
-         rounded-full 
-         hover:bg-gray-50
-         transition-all
-         ${!onClick && "opacity-50 cursor-not-allowed"}
-       `}
+     onClick={onClick}
+     className={`custom-arrow w-8 h-8 flex items-center justify-center 
+                bg-white border border-gray-200 rounded-full 
+                hover:bg-gray-50 transition-all
+                ${!onClick && "opacity-50 cursor-not-allowed"}`}
    >
-    {direction === "prev" ? (
-     <IoIosArrowBack size={20} className="text-gray-600" />
-    ) : (
-     <IoIosArrowForward size={20} className="text-gray-600" />
-    )}
+     {direction === "prev" ? (
+       <IoIosArrowBack size={20} className="text-gray-600" />
+     ) : (
+       <IoIosArrowForward size={20} className="text-gray-600" />
+     )}
    </button>
-  );
- };
+ );
 
  const settings = {
   className: "slider-width",
@@ -99,16 +88,10 @@ export const FoodCardSlider = ({ recipes }) => {
      see more
     </button>
     <div className="custom-arrow-container">
-     <CustomArrow
-      direction="prev"
-      onClick={() => sliderRef.current?.slickPrev()}
-     />
+     <CustomArrow direction="prev" onClick={() => sliderRef.current?.slickPrev()} />
     </div>
     <div className="custom-arrow-container">
-     <CustomArrow
-      direction="next"
-      onClick={() => sliderRef.current?.slickNext()}
-     />
+     <CustomArrow direction="next" onClick={() => sliderRef.current?.slickNext()} />
     </div>
    </div>
 
@@ -116,7 +99,7 @@ export const FoodCardSlider = ({ recipes }) => {
     {recipes?.map((recipe) => (
      <motion.div
       key={recipe.id}
-      className="inline-block"
+      className="inline-block px-2"
       layout
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -143,58 +126,82 @@ export const FoodCardSlider = ({ recipes }) => {
         cuisine: recipe.cuisine,
        }}
       >
-       <div className="px-2">
-        <motion.div
-         className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 gap-1 flex flex-col h-[290px]"
-         layout
-         transition={{
-          layout: { duration: 0.3 },
-          ease: "easeInOut",
-         }}
-         whileHover={{
-          scale: 1.02,
-          transition: { duration: 0.2 },
-         }}
-        >
-         <div className="overflow-hidden rounded">
-          {recipe.img_path ? (
-           <img
-            src={recipe.img_path}
-            alt={recipe.title}
-            className="w-full h-[140px] md:h-[180px] object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-150"
-           />
-          ) : (
-           <div className="h-[140px] md:h-[180px] bg-gray-500 rounded"></div>
-          )}
-         </div>
-         <div className="pt-2 flex items-center justify-between">
-          <div className="flex flex-col">
-           <h1 className="text-sm md:text-base font-medium">{recipe.title}</h1>
-           <h1 className="text-xs md:text-sm font-medium text-gray-500">
-            Author: {recipe.author}
-           </h1>
-          </div>
-         </div>
-         <div className="md:flex items-center gap-3 mt-auto">
-          <p className="text-gray-500 text-xs font-light">
-           Category: {recipe.category}
-          </p>
-          <div className="flex items-center gap-2">
-           <div className="flex items-center gap-1">
-            <CiStar size={16} className="text-yellow-400" />
-            <p className="text-gray-500 text-xs font-light">{recipe.ratings}</p>
+       <motion.div
+        className="group bg-white rounded-xl shadow-sm border border-gray-100
+                   hover:shadow-lg hover:shadow-blue-50 hover:border-blue-100 
+                   transition-all duration-200 h-[320px]"
+        whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+       >
+         {/* Image Container */}
+         <div className="relative w-full h-44 overflow-hidden rounded-t-xl">
+           {recipe.img_path ? (
+             <img
+               src={recipe.img_path}
+               alt={recipe.title}
+               className="w-full h-full object-cover transition-transform duration-300 
+                         group-hover:scale-105"
+             />
+           ) : (
+             <div className="w-full h-full bg-gray-200 animate-pulse" />
+           )}
+           {/* Difficulty Badge */}
+           <div className="absolute top-3 left-3">
+             <span className={`px-2.5 py-1.5 rounded-lg text-xs font-medium 
+                           ${recipe.difficulty === "Easy" ? "bg-green-100 text-green-700" :
+                             recipe.difficulty === "Medium" ? "bg-yellow-100 text-yellow-700" :
+                             "bg-red-100 text-red-700"}`}>
+               {recipe.difficulty}
+             </span>
            </div>
-           <div className="flex items-center gap-1">
-            <CiClock2 size={16} className="text-yellow-400" />
-            <p className="text-gray-500 text-xs font-light">{recipe.time}</p>
-           </div>
-          </div>
          </div>
-        </motion.div>
-       </div>
+
+         {/* Content Container */}
+         <div className="p-3">
+           {/* Title and Author */}
+           <div className="mb-3">
+             <h1 className="text-base font-medium text-gray-800 line-clamp-1 
+                           group-hover:text-blue-600">
+               {recipe.title}
+             </h1>
+             <p className="text-sm text-gray-500 mt-1">
+               By {recipe.author}
+             </p>
+           </div>
+
+           {/* Tags */}
+           <div className="flex flex-wrap gap-2 mb-3">
+             <div className="flex items-center gap-1 px-2 py-1 bg-gray-50 rounded-md">
+               <TbCategory className="w-4 h-4 text-gray-400" />
+               <span className="text-xs text-gray-600">{recipe.category}</span>
+             </div>
+             <div className="flex items-center gap-1 px-2 py-1 bg-gray-50 rounded-md">
+               <GiCook className="w-4 h-4 text-gray-400" />
+               <span className="text-xs text-gray-600">{recipe.cuisine}</span>
+             </div>
+           </div>
+
+           {/* Metrics */}
+           <div className="flex items-center justify-between pt-2 border-t border-gray-50">
+             <div className="flex items-center gap-3">
+               <div className="flex items-center gap-1">
+                 <CiStar className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                 <span className="text-sm font-medium text-gray-700">{recipe.ratings}</span>
+               </div>
+               <div className="flex items-center gap-1">
+                 <CiClock2 className="w-5 h-5 text-blue-400" />
+                 <span className="text-sm text-gray-600">{recipe.time}</span>
+               </div>
+             </div>
+             <div className="flex items-center gap-1">
+               <FiBarChart2 className="w-4 h-4 text-gray-400" />
+               <span className="text-xs text-gray-500">{recipe.views} views</span>
+             </div>
+           </div>
+         </div>
+       </motion.div>
       </Link>
      </motion.div>
-    )) || null}
+    ))}
    </Slider>
   </div>
  );

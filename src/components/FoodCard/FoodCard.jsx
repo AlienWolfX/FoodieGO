@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CiHeart } from "react-icons/ci";
-import { CiStar } from "react-icons/ci";
-import { CiClock2 } from "react-icons/ci";
+import { CiStar, CiClock2 } from "react-icons/ci";
+import { FiBarChart2 } from "react-icons/fi";
+import { TbCategory } from "react-icons/tb";
+import { GiCook } from "react-icons/gi";
 
 export const FoodCard = ({ recipes, basePath, onCardClick }) => {
  return (
-  <>
-   <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  <div className="w-full mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     {recipes.map((recipe) => (
      <Link
       key={recipe.id}
@@ -28,55 +28,85 @@ export const FoodCard = ({ recipes, basePath, onCardClick }) => {
        downloads: recipe.downloads,
        views: recipe.views,
        dateCreated: recipe.dateCreated,
+       cuisine: recipe.cuisine,
       }}
+      className="w-full block"
      >
       <div
        onClick={() => onCardClick(false)}
-       className="border border-mainblue border-opacity-5 bg-white shadow-sm p-2 rounded cursor-pointer hover:border-blue-400 hover:shadow-blue-200 w-full flex flex-col"
+       className="group bg-white rounded-xl shadow-sm border border-gray-100
+                hover:shadow-lg hover:shadow-blue-50 hover:border-blue-100 
+                transition-all duration-200 h-[320px]"
       >
-       <div className="relative overflow-hidden rounded">
-        {recipe.img_path ? (
-         <img
-          src={recipe.img_path}
-          alt={recipe.title}
-          className="h-[140px] w-full object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-150"
-         />
-        ) : (
-         <div className="h-[140px] md:h-[180px] bg-gray-500 rounded"></div>
-        )}
-       </div>
+        {/* Image Container */}
+        <div className="relative w-full h-44 overflow-hidden rounded-t-xl">
+          {recipe.img_path ? (
+            <img
+              src={recipe.img_path}
+              alt={recipe.title}
+              className="w-full h-full object-cover transition-transform duration-300 
+                        group-hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 animate-pulse" />
+          )}
+          {/* Difficulty Badge */}
+          <div className="absolute top-3 left-3">
+            <span className={`px-2.5 py-1.5 rounded-lg text-xs font-medium 
+                          ${recipe.difficulty === "Easy" ? "bg-green-100 text-green-700" :
+                            recipe.difficulty === "Medium" ? "bg-yellow-100 text-yellow-700" :
+                            "bg-red-100 text-red-700"}`}>
+              {recipe.difficulty}
+            </span>
+          </div>
+        </div>
 
-       <div className="pt-2 flex items-center justify-between">
-        <div className="flex flex-col">
-         <h1 className="text-sm md:text-base font-medium">{recipe.title}</h1>
-         <h1 className="text-xs md:text-sm font-medium text-gray-500">
-          Author: {recipe.author}
-         </h1>
+        {/* Content Container */}
+        <div className="p-3">
+          {/* Title and Author */}
+          <div className="mb-3">
+            <h1 className="text-base font-medium text-gray-800 line-clamp-1 
+                          group-hover:text-blue-600">
+              {recipe.title}
+            </h1>
+            <p className="text-sm text-gray-500 mt-1">
+              By {recipe.author}
+            </p>
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mb-3">
+            <div className="flex items-center gap-1 px-2 py-1 bg-gray-50 rounded-md">
+              <TbCategory className="w-4 h-4 text-gray-400" />
+              <span className="text-xs text-gray-600">{recipe.category}</span>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-1 bg-gray-50 rounded-md">
+              <GiCook className="w-4 h-4 text-gray-400" />
+              <span className="text-xs text-gray-600">{recipe.cuisine}</span>
+            </div>
+          </div>
+
+          {/* Metrics */}
+          <div className="flex items-center justify-between pt-2 border-t border-gray-50">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1">
+                <CiStar className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                <span className="text-sm font-medium text-gray-700">{recipe.ratings}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <CiClock2 className="w-5 h-5 text-blue-400" />
+                <span className="text-sm text-gray-600">{recipe.time}</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-1">
+              <FiBarChart2 className="w-4 h-4 text-gray-400" />
+              <span className="text-xs text-gray-500">{recipe.views} views</span>
+            </div>
+          </div>
         </div>
-       </div>
-       <div className="md:flex items-center gap-3 mt-auto">
-        <p className="text-gray-500 text-xs md:text-sm font-light">
-         Category: {recipe.category}
-        </p>
-        <div className="flex items-center gap-2">
-         <div className="flex items-center gap-1">
-          <CiStar size={16} className="text-yellow-400" />
-          <p className="text-gray-500 text-xs md:text-sm font-light">
-           {recipe.ratings}
-          </p>
-         </div>
-         <div className="flex items-center gap-1">
-          <CiClock2 size={16} className="text-yellow-400" />
-          <p className="text-gray-500 text-xs md:text-sm font-light">
-           {recipe.time}
-          </p>
-         </div>
-        </div>
-       </div>
       </div>
      </Link>
     ))}
-   </div>
-  </>
+  </div>
  );
 };
