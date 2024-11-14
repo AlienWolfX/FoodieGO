@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { CiBellOn } from "react-icons/ci";
 import { motion, AnimatePresence } from "framer-motion";
-import { useProfile } from '../context/ProfileContext';
+import { useProfile } from "../context/ProfileContext";
 
 export const Topbar = () => {
  const [formattedDate, setFormattedDate] = useState("");
@@ -57,7 +57,10 @@ export const Topbar = () => {
 
   // Close notifications when clicking outside
   const handleClickOutside = (event) => {
-   if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+   if (
+    notificationRef.current &&
+    !notificationRef.current.contains(event.target)
+   ) {
     setShowNotifications(false);
    }
   };
@@ -84,18 +87,31 @@ export const Topbar = () => {
       ) : (
        <div className="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
         <span className="text-blue-500 text-sm font-medium">
-         {("Patrick James Dionen").split(' ').map(word => word[0]).join('')}
+         {"Patrick James Dionen"
+          .split(" ")
+          .map((word) => word[0])
+          .join("")}
         </span>
        </div>
       )}
      </motion.div>
-     <motion.p
-      initial={{ opacity: 0, x: -10 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="text-sm font-medium text-gray-700"
-     >
-      Patrick James Dionen
-     </motion.p>
+     <div className="flex items-center gap-1">
+      {" "}
+      <motion.p
+       initial={{ opacity: 0, x: -10 }}
+       animate={{ opacity: 1, x: 0 }}
+       className="text-sm font-medium text-gray-700"
+      >
+       Patrick James Dionen
+      </motion.p>
+      <motion.span
+       initial={{ opacity: 0, x: -10 }}
+       animate={{ opacity: 1, x: 0 }}
+       className="text-[10px] flex font-light text-blue-500 p-[3px] bg-blue-100 rounded-full"
+      >
+       student
+      </motion.span>
+     </div>
     </div>
 
     <div className="flex items-center gap-4">
@@ -141,7 +157,10 @@ export const Topbar = () => {
             <div className="flex items-start gap-3">
              <div className="h-8 w-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex-shrink-0 flex items-center justify-center">
               <span className="text-blue-500 text-xs font-medium">
-               {notification.user.split(' ').map(word => word[0]).join('')}
+               {notification.user
+                .split(" ")
+                .map((word) => word[0])
+                .join("")}
               </span>
              </div>
              <div className="flex-1">
