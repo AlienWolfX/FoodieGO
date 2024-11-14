@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { Toaster, toast } from "sonner";
 import LoadingBar from "react-top-loading-bar";
+import loginImg from "/auth-images/loginImg.jpg";
 
 export const Login = () => {
  const [email, setEmail] = useState("");
@@ -52,15 +53,15 @@ export const Login = () => {
    <LoadingBar color="#f11946" ref={ref} />
    <Toaster richColors position="top-center" />
    <div className="w-full h-screen flex flex-col md:flex-row justify-between items-center">
-    <div className="hidden md:flex md:w-1/2 h-full p-2">
-     <div className="w-full h-full bg-mainblue rounded-lg"></div>
+    <div className="hidden md:flex shadow-lg w-full h-full">
+     <img src={loginImg} alt="" className="w-full bg-cover bg-center" />
     </div>
 
     {isMobile ? (
      <div
       className="fixed inset-0 flex justify-center items-center z-20"
       style={{
-       background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+       background: "linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)",
       }}
      >
       <div className="w-[90%] max-w-[400px] animate-fadeIn">
@@ -78,7 +79,7 @@ export const Login = () => {
      </div>
     ) : (
      <div className="h-screen w-full md:w-1/2 flex items-center justify-center">
-      <div className="bg-white h-auto p-10 rounded-xl shadow-xl w-[90%] max-w-[400px] transition-all duration-300 hover:shadow-2xl">
+      <div className="bg-white h-auto p-10 rounded-xl border border-mainblue border-opacity-15 shadow-sm w-[90%] max-w-[400px] transition-all duration-300 hover:shadow-lg">
        <LoginFormContent
         email={email}
         setEmail={setEmail}
@@ -108,19 +109,32 @@ const LoginFormContent = ({
  isMobile,
 }) => (
  <>
-  <div className={`text-2xl ${isMobile ? 'text-white' : 'text-mainblue'} font-bold text-center mb-6`}>
+  <div
+   className={`text-2xl ${
+    isMobile ? "text-white" : "text-mainblue"
+   } font-bold text-center mb-6`}
+  >
    Welcome Back
   </div>
   <div className="flex flex-col gap-4 pt-2">
    <div className="flex flex-col gap-1.5">
-    <label htmlFor="email" className={`text-sm font-medium ${isMobile ? 'text-gray-200' : 'text-gray-700'}`}>
+    <label
+     htmlFor="email"
+     className={`text-sm font-medium ${
+      isMobile ? "text-gray-200" : "text-gray-700"
+     }`}
+    >
      Email
     </label>
     <input
      type="email"
      placeholder="Enter your email"
      className={`px-4 h-10 rounded-lg text-sm border 
-                    ${isMobile ? 'bg-white/10 border-white/20 text-white placeholder:text-gray-300' : 'border-gray-300'} 
+                    ${
+                     isMobile
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-gray-300"
+                      : "border-gray-300"
+                    } 
                     focus:ring-2 focus:ring-mainblue focus:border-mainblue
                     transition-all duration-200 outline-none`}
      value={email}
@@ -128,14 +142,23 @@ const LoginFormContent = ({
     />
    </div>
    <div className="flex flex-col gap-1.5">
-    <label htmlFor="password" className={`text-sm font-medium ${isMobile ? 'text-gray-200' : 'text-gray-700'}`}>
+    <label
+     htmlFor="password"
+     className={`text-sm font-medium ${
+      isMobile ? "text-gray-200" : "text-gray-700"
+     }`}
+    >
      Password
     </label>
     <input
      type="password"
      placeholder="Enter your password"
      className={`px-4 h-10 rounded-lg text-sm border 
-                    ${isMobile ? 'bg-white/10 border-white/20 text-white placeholder:text-gray-300' : 'border-gray-300'} 
+                    ${
+                     isMobile
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-gray-300"
+                      : "border-gray-300"
+                    } 
                     focus:ring-2 focus:ring-mainblue focus:border-mainblue
                     transition-all duration-200 outline-none`}
      value={password}
@@ -144,7 +167,9 @@ const LoginFormContent = ({
     <div className="flex justify-end mt-1">
      <p
       onClick={() => nav("/forgot-password")}
-      className={`text-xs ${isMobile ? 'text-gray-200' : 'text-gray-600'} hover:text-mainblue transition-colors duration-200 cursor-pointer`}
+      className={`text-xs ${
+       isMobile ? "text-gray-200" : "text-gray-600"
+      } hover:text-mainblue transition-colors duration-200 cursor-pointer`}
      >
       Forgot your password?
      </p>
@@ -156,14 +181,20 @@ const LoginFormContent = ({
     onClick={login}
     className={`w-full h-10 rounded-lg font-medium text-sm
                   transform transition-all duration-200 
-                  ${isMobile ? 'bg-white text-mainblue hover:bg-white/90' : 'bg-mainblue text-white hover:bg-mainblue/90'}
+                  ${
+                   isMobile
+                    ? "bg-white text-mainblue hover:bg-white/90"
+                    : "bg-mainblue text-white hover:bg-mainblue/90"
+                  }
                   hover:shadow-lg active:scale-95`}
    >
     Sign In
    </button>
    <p
     onClick={navCreateAccount}
-    className={`text-xs ${isMobile ? 'text-gray-200' : 'text-gray-600'} hover:text-mainblue transition-colors duration-200 cursor-pointer`}
+    className={`text-xs ${
+     isMobile ? "text-gray-200" : "text-gray-600"
+    } hover:text-mainblue transition-colors duration-200 cursor-pointer`}
    >
     Don't have an account yet?{" "}
     <span className="font-medium text-sm">Create account</span>

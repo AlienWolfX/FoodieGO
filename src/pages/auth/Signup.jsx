@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
 import LoadingBar from "react-top-loading-bar";
 import { toast, Toaster } from "sonner";
+import signupImg from "/auth-images/signupImg.jpg";
 
 export const Signup = () => {
  const nav = useNavigate();
@@ -77,10 +78,10 @@ export const Signup = () => {
  return (
   <>
    <LoadingBar color="#f11946" ref={ref} />
-   <Toaster richColors position="top-center"/>
+   <Toaster richColors position="top-center" />
    <div className="w-full h-screen flex flex-col md:flex-row justify-between items-center">
-    <div className="hidden md:flex md:w-1/2 h-full p-2">
-     <div className="w-full h-full bg-mainblue rounded-lg"></div>
+    <div className="hidden md:flex w-full h-full">
+     <img src={signupImg} alt="" className="w-full bg-cover bg-center" />
     </div>
 
     {isMobile ? (
@@ -115,7 +116,7 @@ export const Signup = () => {
      </div>
     ) : (
      <div className="h-screen w-full md:w-1/2 flex items-center justify-center">
-      <div className="bg-white h-auto p-10 rounded-xl shadow-xl w-[90%] max-w-[400px] transition-all duration-300 hover:shadow-2xl">
+      <div className="bg-white h-auto p-10 rounded-xl border border-mainblue border-opacity-15 shadow-sm w-[90%] max-w-[400px] transition-all duration-300 hover:shadow-sm">
        <SignupFormContent
         username={username}
         setUsername={setUsername}
@@ -299,13 +300,16 @@ const SignupFormContent = ({
                     } 
                     focus:ring-2 focus:ring-mainblue focus:border-mainblue
                     transition-all duration-200 outline-none
-                    ${password && confirmPassword && password !== confirmPassword 
-                      ? 'border-red-500 focus:border-red-500 focus:ring-red-500' 
-                      : ''
+                    ${
+                     password && confirmPassword && password !== confirmPassword
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : ""
                     }`}
     />
     {password && confirmPassword && password !== confirmPassword && (
-     <p className={`text-xs mt-1 ${isMobile ? "text-red-300" : "text-red-500"}`}>
+     <p
+      className={`text-xs mt-1 ${isMobile ? "text-red-300" : "text-red-500"}`}
+     >
       Passwords do not match
      </p>
     )}
