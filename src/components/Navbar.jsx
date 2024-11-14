@@ -5,7 +5,7 @@ import { FaBars, FaTimes } from "react-icons/fa"; // Importing hamburger and clo
 
 export const Navbar = () => {
  const nav = useNavigate();
- const [activeItem, setActiveItem] = useState("home");
+ const [activeItem, setActiveItem] = useState("hero");
  const [isOpen, setIsOpen] = useState(false); // State to manage sidebar visibility
 
  const navLogin = () => {

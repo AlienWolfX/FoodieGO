@@ -1,49 +1,91 @@
+import { motion } from "framer-motion";
 import { Searchbar } from "../../components/Searchbar";
 import threePlateFood from "/threePlateFood.png";
+import { FiUsers, FiBook, FiDownload } from "react-icons/fi";
 
 export const Hero = () => {
+ const stats = [
+  { label: "Users", value: "12k", icon: FiUsers },
+  { label: "Recipes", value: "12k", icon: FiBook },
+  { label: "Downloads", value: "12k", icon: FiDownload },
+ ];
+
  return (
-  <>
-   <div
-    id="hero"
-    className="relative md:flex items-center justify-center h-auto lg:h-screen bg-mainbg pt-12"
-   >
-    <div className="mx-auto p-10 md:mx-32 md:flex items-center justify-center md:gap-14">
-     <div className="w-full max-w-lg md:max-w-[500px]">
-      <div className="font-black text-[#313638] text-3xl md:text-5xl leading-[50px]">
-       <h1>Foodie on the Go With your Kodigo</h1>
-       <div className="pt-3 leading-6">
-        <p className="text-base md:text-[20px] font-light">
-         Discover, Save, Share, and Savor: Explore Recipes, Connect with Cooks,
-         and Review Delicious Dishes.
-        </p>
-       </div>
-      </div>
-      <div className="pt-5">
-       <Searchbar />
-      </div>
-      <div className="mt-10 flex flex-row items-center justify-start md:justify-start gap-1 md:gap-4">
-       <div className="bg-white px-2 sm:px-6 py-2 border rounded-md flex flex-col items-center">
-        <h1 className="text-md font-semibold text-red-500">12k</h1>
-        <p className="text-sm font-light text-gray-500">Users</p>
-       </div>
-       <div className="bg-white px-2 sm:px-6 py-2 border rounded-md flex flex-col items-center">
-        <h1 className="text-md font-semibold text-red-500">12k</h1>
-        <p className="text-sm font-light text-gray-500">Recipes</p>
-       </div>
-       <div className="bg-white px-2 sm:px-6 py-2 border rounded-md flex flex-col items-center">
-        <h1 className="text-md font-semibold text-red-500">12k</h1>
-        <p className="text-sm font-light text-gray-500">Downloads</p>
-       </div>
-      </div>
+  <div className="relative bg-gradient-to-b from-mainbg to-white md:h-screen isolate">
+   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+    <div className="pt-20 pb-16 lg:pt-32 lg:pb-24">
+     <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center justify-between">
+      {/* Left Column */}
+      <motion.div
+       initial={{ opacity: 0, y: 20 }}
+       animate={{ opacity: 1, y: 0 }}
+       transition={{ duration: 0.6 }}
+       className="max-w-xl z-10"
+      >
+       <h1 className="text-4xl sm:text-5xl font-black text-gray-900 leading-tight">
+        Foodie on the Go
+        <span className="text-mainblue"> With your Kodigo</span>
+       </h1>
+
+       <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className="mt-6 text-lg text-gray-600 leading-relaxed"
+       >
+        Discover, Save, Share, and Savor: Explore Recipes, Connect with Cooks,
+        and Review Delicious Dishes.
+       </motion.p>
+
+       <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+        className="mt-8 z-[99999]"
+       >
+        <Searchbar />
+       </motion.div>
+
+       {/* Stats */}
+       <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.6 }}
+        className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 z-10"
+       >
+        {stats.map((stat, index) => (
+         <div
+          key={stat.label}
+          className="bg-white border p-4 rounded-lg flex items-center justify-between"
+         >
+          <div className="flex items-start gap-2">
+           <div className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center">
+            <stat.icon className="h-6 w-6 text-mainblue" />
+           </div>
+           <div className="flex flex-col">
+            <h2 className="text-lg font-semibold text-gray-800">
+             {stat.value}
+            </h2>
+            <p className="text-sm text-gray-500">{stat.label}</p>
+           </div>
+          </div>
+         </div>
+        ))}
+       </motion.div>
+      </motion.div>
+
+      {/* Right Column */}
+      <motion.div className="w-full flex items-center justify-center z-10">
+       <img
+        src={threePlateFood}
+        alt=""
+        className="w-full hidden lg:block max-w-xs lg:max-w-[430px] xl:w-[500px]"
+       />
+      </motion.div>
      </div>
-     <img
-      src={threePlateFood}
-      alt=""
-      className="w-full hidden z-10 lg:block max-w-xs lg:max-w-[430px] xl:w-[500px]"
-     />
     </div>
    </div>
+
    {/* background divider image  */}
    <div className="custom-shape-divider-bottom-1730098822 hidden lg:block">
     <svg
@@ -58,6 +100,6 @@ export const Hero = () => {
      ></path>
     </svg>
    </div>
-  </>
+  </div>
  );
 };

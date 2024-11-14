@@ -9,7 +9,7 @@ import {
  addFavorite,
  removeFavorite,
 } from "../../../../data/UserData";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
  const navigate = useNavigate();
@@ -54,10 +54,10 @@ export const Home = () => {
  // Add this function to handle search
  const handleSearch = () => {
   if (searchTerm.trim()) {
-   navigate('/explore-more-recipes', { 
-    state: { 
-     searchQuery: searchTerm 
-    }
+   navigate("/explore-more-recipes", {
+    state: {
+     searchQuery: searchTerm,
+    },
    });
   }
  };
@@ -89,7 +89,7 @@ export const Home = () => {
         </span>
        </h1>
        <p className="text-sm text-gray-600 leading-relaxed max-w-md">
-        Explore a world of culinary delights. From quick weekday meals to 
+        Explore a world of culinary delights. From quick weekday meals to
         gourmet weekend feasts, find the perfect recipe for any occasion.
        </p>
       </motion.div>
@@ -105,27 +105,37 @@ export const Home = () => {
          type="text"
          value={searchTerm}
          onChange={(e) => setSearchTerm(e.target.value)}
-         onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+         onKeyPress={(e) => e.key === "Enter" && handleSearch()}
          className="w-full h-12 pl-5 pr-32 rounded-xl border-2 border-gray-100 
                           focus:border-blue-500 focus:ring-2 focus:ring-blue-200 
                           transition-all duration-200 outline-none text-sm"
          placeholder="Search for any recipe..."
         />
-        <button 
+        <button
          onClick={handleSearch}
          className="absolute right-2 h-8 px-6 bg-blue-600 text-white 
                           rounded-lg text-sm font-medium hover:bg-blue-700 
                           transition-colors duration-200 flex items-center gap-2"
         >
-         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+         <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+         >
+          <path
+           strokeLinecap="round"
+           strokeLinejoin="round"
+           strokeWidth={2}
+           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
          </svg>
          Search
         </button>
        </div>
-       
+
        <div className="flex gap-2 mt-3">
-        {['Quick & Easy', 'Vegetarian', 'Healthy', 'Trending'].map((tag) => (
+        {["Quick & Easy", "Vegetarian", "Healthy", "Trending"].map((tag) => (
          <button
           key={tag}
           className="px-3 py-1 text-xs font-medium text-gray-600 bg-white 
