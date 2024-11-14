@@ -23,8 +23,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShareIcon from "@mui/icons-material/Share";
 import { toast } from "sonner";
 import { Toaster } from "sonner";
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 import {
  getUserData,
@@ -120,67 +120,76 @@ export const ViewRecipe = () => {
    addFavorite(newFavorite);
    setIsFavorite([...userData.favorites, newFavorite]);
    setIsCurrentFavorite(true);
-   
-   toast.custom((t) => (
+
+   toast.custom(
+    (t) => (
      <div className="bg-white rounded-lg shadow-lg p-4 max-w-md w-full border border-gray-100">
-       <div className="flex items-start gap-3">
-         {/* Recipe Image */}
-         <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-           <img 
-             src={img_path || '/default-recipe.jpg'} 
-             alt={title}
-             className="w-full h-full object-cover"
-           />
-         </div>
-
-         <div className="flex-1">
-           {/* Success Message */}
-           <div className="flex items-center gap-2 mb-1">
-             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-             <p className="text-sm font-medium text-gray-800">
-               Added to Favorites
-             </p>
-           </div>
-
-           {/* Recipe Title */}
-           <p className="text-xs text-gray-600 line-clamp-1">
-             {title}
-           </p>
-
-           {/* Action Buttons */}
-           <div className="flex items-center gap-2 mt-2">
-             <button
-               onClick={() => nav("/favorite-recipes")}
-               className="text-xs px-3 py-1.5 bg-mainblue text-white rounded-lg
-                         hover:bg-mainblue/90 transition-colors duration-200"
-             >
-               View Favorites
-             </button>
-             <button
-               onClick={() => toast.dismiss(t)}
-               className="text-xs px-3 py-1.5 text-gray-600 hover:text-gray-800
-                         transition-colors duration-200"
-             >
-               Dismiss
-             </button>
-           </div>
-         </div>
-
-         {/* Close Button */}
-         <button
-           onClick={() => toast.dismiss(t)}
-           className="text-gray-400 hover:text-gray-600 transition-colors"
-         >
-           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-           </svg>
-         </button>
+      <div className="flex items-start gap-3">
+       {/* Recipe Image */}
+       <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+        <img
+         src={img_path || "/default-recipe.jpg"}
+         alt={title}
+         className="w-full h-full object-cover"
+        />
        </div>
+
+       <div className="flex-1">
+        {/* Success Message */}
+        <div className="flex items-center gap-2 mb-1">
+         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+         <p className="text-sm font-medium text-gray-800">Added to Favorites</p>
+        </div>
+
+        {/* Recipe Title */}
+        <p className="text-xs text-gray-600 line-clamp-1">{title}</p>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-2 mt-2">
+         <button
+          onClick={() => nav("/favorite-recipes")}
+          className="text-xs px-3 py-1.5 bg-mainblue text-white rounded-lg
+                         hover:bg-mainblue/90 transition-colors duration-200"
+         >
+          View Favorites
+         </button>
+         <button
+          onClick={() => toast.dismiss(t)}
+          className="text-xs px-3 py-1.5 text-gray-600 hover:text-gray-800
+                         transition-colors duration-200"
+         >
+          Dismiss
+         </button>
+        </div>
+       </div>
+
+       {/* Close Button */}
+       <button
+        onClick={() => toast.dismiss(t)}
+        className="text-gray-400 hover:text-gray-600 transition-colors"
+       >
+        <svg
+         className="w-4 h-4"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor"
+        >
+         <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M6 18L18 6M6 6l12 12"
+         />
+        </svg>
+       </button>
+      </div>
      </div>
-   ), {
+    ),
+    {
      duration: 4000,
      position: "top-center",
-   });
+    }
+   );
   }
  };
 
@@ -225,112 +234,114 @@ export const ViewRecipe = () => {
 
  const handleDownload = async () => {
   try {
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    
-    // Add recipe title
-    pdf.setFontSize(24);
-    pdf.setFont('helvetica', 'bold');
-    pdf.text(title, 20, 20);
+   const pdf = new jsPDF("p", "mm", "a4");
 
-    // Add author and date
-    pdf.setFontSize(12);
-    pdf.setFont('helvetica', 'normal');
-    pdf.text(`By: ${author}`, 20, 30);
-    pdf.text(`Created: ${formattedDate}`, 20, 37);
+   // Add recipe title
+   pdf.setFontSize(24);
+   pdf.setFont("helvetica", "bold");
+   pdf.text(title, 20, 20);
 
-    // Add recipe details
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('Recipe Details', 20, 50);
-    pdf.setFont('helvetica', 'normal');
-    pdf.text(`Category: ${category}`, 25, 57);
-    pdf.text(`Cuisine: ${cuisine}`, 25, 64);
-    pdf.text(`Difficulty: ${difficulty}`, 25, 71);
-    pdf.text(`Preparation Time: ${time}`, 25, 78);
+   // Add author and date
+   pdf.setFontSize(12);
+   pdf.setFont("helvetica", "normal");
+   pdf.text(`By: ${author}`, 20, 30);
+   pdf.text(`Created: ${formattedDate}`, 20, 37);
 
-    // Add description
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('Description', 20, 91);
-    pdf.setFont('helvetica', 'normal');
-    const descriptionLines = pdf.splitTextToSize(description, 170);
-    pdf.text(descriptionLines, 20, 98);
+   // Add recipe details
+   pdf.setFont("helvetica", "bold");
+   pdf.text("Recipe Details", 20, 50);
+   pdf.setFont("helvetica", "normal");
+   pdf.text(`Category: ${category}`, 25, 57);
+   pdf.text(`Cuisine: ${cuisine}`, 25, 64);
+   pdf.text(`Difficulty: ${difficulty}`, 25, 71);
+   pdf.text(`Preparation Time: ${time}`, 25, 78);
 
-    // Add ingredients
-    let currentY = 120;
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('Ingredients', 20, currentY);
-    pdf.setFont('helvetica', 'normal');
+   // Add description
+   pdf.setFont("helvetica", "bold");
+   pdf.text("Description", 20, 91);
+   pdf.setFont("helvetica", "normal");
+   const descriptionLines = pdf.splitTextToSize(description, 170);
+   pdf.text(descriptionLines, 20, 98);
+
+   // Add ingredients
+   let currentY = 120;
+   pdf.setFont("helvetica", "bold");
+   pdf.text("Ingredients", 20, currentY);
+   pdf.setFont("helvetica", "normal");
+   currentY += 7;
+   ingredients.forEach((ingredient) => {
+    pdf.text(`• ${ingredient}`, 25, currentY);
     currentY += 7;
-    ingredients.forEach((ingredient) => {
-      pdf.text(`• ${ingredient}`, 25, currentY);
-      currentY += 7;
-    });
+   });
 
-    // Add instructions
-    currentY += 5;
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('Instructions', 20, currentY);
-    pdf.setFont('helvetica', 'normal');
-    currentY += 7;
-    instructions.forEach((instruction, index) => {
-      const instructionLines = pdf.splitTextToSize(`${index + 1}. ${instruction}`, 165);
-      pdf.text(instructionLines, 25, currentY);
-      currentY += (instructionLines.length * 7) + 3;
+   // Add instructions
+   currentY += 5;
+   pdf.setFont("helvetica", "bold");
+   pdf.text("Instructions", 20, currentY);
+   pdf.setFont("helvetica", "normal");
+   currentY += 7;
+   instructions.forEach((instruction, index) => {
+    const instructionLines = pdf.splitTextToSize(
+     `${index + 1}. ${instruction}`,
+     165
+    );
+    pdf.text(instructionLines, 25, currentY);
+    currentY += instructionLines.length * 7 + 3;
 
-      // Add new page if needed
-      if (currentY > 270) {
-        pdf.addPage();
-        currentY = 20;
-      }
-    });
-
-    // Add nutritional information
-    if (currentY > 220) {
-      pdf.addPage();
-      currentY = 20;
+    // Add new page if needed
+    if (currentY > 270) {
+     pdf.addPage();
+     currentY = 20;
     }
-    
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('Nutritional Information', 20, currentY);
-    currentY += 7;
-    pdf.setFont('helvetica', 'normal');
-    pdf.text(`Calories: 230`, 25, currentY);
-    pdf.text(`Total Fat: 28.6g (44%)`, 25, currentY + 7);
-    pdf.text(`Protein: 6.3g`, 25, currentY + 14);
-    pdf.text(`Carbohydrates: 22.4g`, 25, currentY + 21);
+   });
 
-    // Add recommendations
-    if (currentY > 220) {
-      pdf.addPage();
-      currentY = 20;
-    } else {
-      currentY += 35;
-    }
-    
-    pdf.setFont('helvetica', 'bold');
-    pdf.text('AI Recommendations', 20, currentY);
-    pdf.setFont('helvetica', 'normal');
-    const recommendations = [
-      "• Use fresh ingredients for better flavor",
-      "• Store leftovers in an airtight container",
-      "• Can be prepared ahead and reheated",
-    ];
-    currentY += 7;
-    recommendations.forEach((rec) => {
-      pdf.text(rec, 25, currentY);
-      currentY += 7;
-    });
+   // Add nutritional information
+   if (currentY > 220) {
+    pdf.addPage();
+    currentY = 20;
+   }
 
-    // Save the PDF
-    pdf.save(`${title.toLowerCase().replace(/\s+/g, '-')}-recipe.pdf`);
-    
-    // Show success toast
-    toast.success('Recipe downloaded successfully!');
-    
+   pdf.setFont("helvetica", "bold");
+   pdf.text("Nutritional Information", 20, currentY);
+   currentY += 7;
+   pdf.setFont("helvetica", "normal");
+   pdf.text(`Calories: 230`, 25, currentY);
+   pdf.text(`Total Fat: 28.6g (44%)`, 25, currentY + 7);
+   pdf.text(`Protein: 6.3g`, 25, currentY + 14);
+   pdf.text(`Carbohydrates: 22.4g`, 25, currentY + 21);
+
+   // Add recommendations
+   if (currentY > 220) {
+    pdf.addPage();
+    currentY = 20;
+   } else {
+    currentY += 35;
+   }
+
+   pdf.setFont("helvetica", "bold");
+   pdf.text("AI Recommendations", 20, currentY);
+   pdf.setFont("helvetica", "normal");
+   const recommendations = [
+    "• Use fresh ingredients for better flavor",
+    "• Store leftovers in an airtight container",
+    "• Can be prepared ahead and reheated",
+   ];
+   currentY += 7;
+   recommendations.forEach((rec) => {
+    pdf.text(rec, 25, currentY);
+    currentY += 7;
+   });
+
+   // Save the PDF
+   pdf.save(`${title.toLowerCase().replace(/\s+/g, "-")}-recipe.pdf`);
+
+   // Show success toast
+   toast.success("Recipe downloaded successfully!");
   } catch (error) {
-    console.error('Error generating PDF:', error);
-    toast.error('Failed to download recipe. Please try again.');
+   console.error("Error generating PDF:", error);
+   toast.error("Failed to download recipe. Please try again.");
   }
-};
+ };
 
  return (
   <Layout>
@@ -382,29 +393,37 @@ export const ViewRecipe = () => {
       className="flex items-center gap-1"
      >
       <div className="rounded-lg flex items-center justify-center">
-       <Tooltip title="Add to Favorites" onClick={toggleFavorite}>
-        <IconButton>
-         {isCurrentFavorite ? (
+       {isCurrentFavorite ? (
+        <Tooltip title="Remove from Favorites" onClick={toggleFavorite}>
+         <IconButton>
           <BookmarkIcon className="text-yellow-300" fontSize="medium" />
-         ) : (
+         </IconButton>
+        </Tooltip>
+       ) : (
+        <Tooltip title="Add to Favorites" onClick={toggleFavorite}>
+         <IconButton>
           <BookmarkBorderIcon className="text-yellow-300" fontSize="medium" />
-         )}
-        </IconButton>
-       </Tooltip>
+         </IconButton>
+        </Tooltip>
+       )}
       </div>
       <div className="rounded-lg flex items-center justify-center">
-       <Tooltip title="Like" onClick={toggleLike}>
-        <IconButton>
-         {isLiked ? (
+       {isLiked ? (
+        <Tooltip title="Unlike" onClick={toggleLike}>
+         <IconButton>
           <Favorite className="text-red-500" fontSize="small" />
-         ) : (
+         </IconButton>
+        </Tooltip>
+       ) : (
+        <Tooltip title="Like" onClick={toggleLike}>
+         <IconButton>
           <FavoriteBorderOutlinedIcon
            className="text-red-500"
            fontSize="small"
           />
-         )}
-        </IconButton>
-       </Tooltip>
+         </IconButton>
+        </Tooltip>
+       )}
       </div>
      </motion.div>
     </motion.div>
