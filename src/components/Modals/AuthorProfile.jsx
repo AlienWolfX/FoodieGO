@@ -53,7 +53,7 @@ export const AuthorProfile = ({ setAuthorModal, author }) => {
     initial={{ scale: 0.95, opacity: 0 }}
     animate={{ scale: 1, opacity: 1 }}
     exit={{ scale: 0.95, opacity: 0 }}
-    className="bg-white w-full max-w-[900px] max-h-[80vh] rounded-xl shadow-2xl overflow-hidden"
+    className="bg-white w-full max-w-[1000px] max-h-[80vh] rounded-xl shadow-2xl overflow-hidden"
    >
     {/* Header */}
     <div className="p-6 border-b">
