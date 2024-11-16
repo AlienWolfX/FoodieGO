@@ -10,6 +10,7 @@ import { LuClipboardList } from "react-icons/lu";
 import { MdOutlineDashboard } from "react-icons/md";
 import { IoPieChartOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
+import { BsTrophy } from "react-icons/bs";
 
 export const sidebar = [
  {
@@ -27,6 +28,12 @@ export const sidebar = [
   icon: MdBookmarkBorder,
   label: "Favorites",
  },
+ {
+  path: "/leaderboards",
+  icon: BsTrophy,
+  label: "Leaderboards",
+ },
+
  {
   path: "/analytics",
   icon: IoPieChartOutline,

@@ -7,11 +7,23 @@ import mainLogo from "/mainLogo.png";
 import { motion } from "framer-motion";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
-// import 
+import { BsGrid1X2, BsPieChart, BsJournalText, BsTrophy, BsPerson, BsDoorOpen } from "react-icons/bs";
 
-export const Sidebar = ({ onToggle }) => {
+export const Sidebar = ({ onToggle, isAdmin }) => {
  const [collapsed, setCollapsed] = useState(false);
  const nav = useNavigate();
+
+ // Define admin menu items
+ const adminMenuItems = [
+  { path: "/admin/home", icon: BsGrid1X2, label: "Home" },
+  { path: "/admin/reports", icon: BsPieChart, label: "Reports" },
+  { path: "/admin/recipes", icon: BsJournalText, label: "Recipes" },
+  { path: "/admin/leaderboards", icon: BsTrophy, label: "Leaderboards" },
+  { path: "/admin/profile", icon: BsPerson, label: "Profile" },
+ ];
+
+ // Use either admin menu items or regular sidebar items based on isAdmin prop
+ const menuItems = isAdmin ? adminMenuItems : sidebar;
 
  const handleLogout = () => {
   toast.info("Logging out of account");
@@ -49,7 +61,7 @@ export const Sidebar = ({ onToggle }) => {
          collapsed ? "hidden" : "text-sm text-mainblue font-medium"
         }`}
        >
-        FoodieGO
+        {isAdmin ? "FoodieGO Admin" : "FoodieGO"}
        </h1>
       </div>
       <div className="absolute -right-[28px]">
@@ -69,7 +81,7 @@ export const Sidebar = ({ onToggle }) => {
       <p className="text-[10px] font-light text-gray-500">Menu</p>
      </div>
      <div className={`flex-grow ${collapsed ? "hidden" : ""}`}>
-      {sidebar.map((item, index) => {
+      {menuItems.map((item, index) => {
        const IconComponent = item.icon;
        return (
         <NavLink key={index} to={item.path}>

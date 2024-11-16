@@ -18,12 +18,29 @@ import { OneTimePassword } from "./pages/auth/OneTimePassword";
 import { ResetPassword } from "./pages/auth/ResetPassword";
 import { RecipeProvider } from "./context/RecipeContext";
 import { MoreRecipes } from "./pages/dashboard/pages/MoreRecipes";
+import { AdminLogin } from "./pages/adminDashboard/AdminLogin";
+import { AdminHome } from "./pages/adminDashboard/AdminHome";
+import { AdminReports } from "./pages/adminDashboard/AdminReports";
+import { AdminRecipes } from "./pages/adminDashboard/AdminRecipes";
+import { AdminLeaderBoards } from "./pages/adminDashboard/AdminLeaderBoards";
+import { AdminUsers } from "./pages/adminDashboard/AdminUsers";
+import { AdminProfile } from "./pages/adminDashboard/AdminProfile";
+import { Leaderboards } from "./pages/dashboard/pages/Leaderboards";
 
 function App() {
  return (
   <BrowserRouter>
    <RecipeProvider>
     <Routes>
+     <Route path="/admin" element={<AdminLogin />} />
+     <Route path="/admin/home" element={<AdminHome />} />
+     <Route path="/admin/reports" element={<AdminReports />} />
+     <Route path="/admin/recipes" element={<AdminRecipes />} />
+     <Route path="/admin/leaderboards" element={<AdminLeaderBoards />} />
+     <Route path="/admin/users" element={<AdminUsers />} />
+     <Route path="/admin/profile" element={<AdminProfile />} />
+     <Route path="/admin/recipes/view-recipe" element={<ViewRecipe />} />
+
      <Route path="/" element={<Mainpage />} />
      <Route path="/terms-conditions" element={<TermsConditions />} />
      <Route path="/explore" element={<ExploreRecipes />} />
@@ -43,6 +60,7 @@ function App() {
      <Route path="/home" element={<Home />} />
      <Route path="/my-recipes" element={<MyRecipes />} />
      <Route path="/favorite-recipes" element={<FavoriteRecipes />} />
+     <Route path="/leaderboards" element={<Leaderboards />} />
      <Route path="/analytics" element={<Analytics />} />
      <Route path="/profile" element={<MyProfile />} />
      <Route path="/view-recipe" element={<ViewRecipe />} />

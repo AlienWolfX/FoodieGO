@@ -2,9 +2,12 @@ import { Sidebar } from "../../components/DashboardComponents/Sidebar";
 import { Topbar } from "../../components/Topbar";
 import { useState } from "react";
 import { ProfileProvider } from "../../context/ProfileContext";
+import { useLocation } from "react-router-dom";
 
 export const Layout = ({ children }) => {
  const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
+ const location = useLocation();
+ const isAdmin = location.pathname.startsWith("/admin");
 
  const handleSidebarToggle = (collapsed) => {
   setSidebarCollapsed(collapsed);
@@ -12,7 +15,7 @@ export const Layout = ({ children }) => {
 
  return (
   <div className="flex h-screen bg-mainbg">
-   <Sidebar onToggle={handleSidebarToggle} />
+   <Sidebar onToggle={handleSidebarToggle} isAdmin={isAdmin} />
 
    {/* Main content wrapper */}
    <div

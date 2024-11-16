@@ -37,6 +37,7 @@ import {
 export const ViewRecipe = () => {
  const nav = useNavigate();
  const location = useLocation();
+ const isAdmin = location.pathname.startsWith("/admin");
 
  const [isLiked, setIsLiked] = useState(false);
  const [likes, setLikes] = useState([]);
@@ -377,55 +378,54 @@ export const ViewRecipe = () => {
        {title}
       </motion.h1>
       <motion.p
-       initial={{ opacity: 0 }}
-       animate={{ opacity: 1 }}
-       transition={{ delay: 0.4 }}
-       onClick={() => setAuthorModal(true)}
-       className="cursor-pointer hover:text-red-500"
+       onClick={() => !isAdmin && setAuthorModal(true)}
+       className={`${!isAdmin ? "cursor-pointer hover:text-red-500" : ""}`}
       >
        Author: {author}
       </motion.p>
      </div>
-     <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.4 }}
-      className="flex items-center gap-1"
-     >
-      <div className="rounded-lg flex items-center justify-center">
-       {isCurrentFavorite ? (
-        <Tooltip title="Remove from Favorites" onClick={toggleFavorite}>
-         <IconButton>
-          <BookmarkIcon className="text-yellow-300" fontSize="medium" />
-         </IconButton>
-        </Tooltip>
-       ) : (
-        <Tooltip title="Add to Favorites" onClick={toggleFavorite}>
-         <IconButton>
-          <BookmarkBorderIcon className="text-yellow-300" fontSize="medium" />
-         </IconButton>
-        </Tooltip>
-       )}
-      </div>
-      <div className="rounded-lg flex items-center justify-center">
-       {isLiked ? (
-        <Tooltip title="Unlike" onClick={toggleLike}>
-         <IconButton>
-          <Favorite className="text-red-500" fontSize="small" />
-         </IconButton>
-        </Tooltip>
-       ) : (
-        <Tooltip title="Like" onClick={toggleLike}>
-         <IconButton>
-          <FavoriteBorderOutlinedIcon
-           className="text-red-500"
-           fontSize="small"
-          />
-         </IconButton>
-        </Tooltip>
-       )}
-      </div>
-     </motion.div>
+     {!isAdmin && (
+      <motion.div
+       initial={{ opacity: 0, x: 20 }}
+       animate={{ opacity: 1, x: 0 }}
+       transition={{ delay: 0.4 }}
+       className="flex items-center gap-1"
+      >
+       <div className="rounded-lg flex items-center justify-center">
+        {isCurrentFavorite ? (
+         <Tooltip title="Remove from Favorites" onClick={toggleFavorite}>
+          <IconButton>
+           <BookmarkIcon className="text-yellow-300" fontSize="medium" />
+          </IconButton>
+         </Tooltip>
+        ) : (
+         <Tooltip title="Add to Favorites" onClick={toggleFavorite}>
+          <IconButton>
+           <BookmarkBorderIcon className="text-yellow-300" fontSize="medium" />
+          </IconButton>
+         </Tooltip>
+        )}
+       </div>
+       <div className="rounded-lg flex items-center justify-center">
+        {isLiked ? (
+         <Tooltip title="Unlike" onClick={toggleLike}>
+          <IconButton>
+           <Favorite className="text-red-500" fontSize="small" />
+          </IconButton>
+         </Tooltip>
+        ) : (
+         <Tooltip title="Like" onClick={toggleLike}>
+          <IconButton>
+           <FavoriteBorderOutlinedIcon
+            className="text-red-500"
+            fontSize="small"
+           />
+          </IconButton>
+         </Tooltip>
+        )}
+       </div>
+      </motion.div>
+     )}
     </motion.div>
 
     <motion.hr
@@ -646,57 +646,26 @@ export const ViewRecipe = () => {
      </Tooltip>
     </motion.div>
    </motion.div>
-   <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 1.3 }}
-    className="mt-5"
-   >
-    <AiSuggestions />
-   </motion.div>
-   <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 1.4 }}
-    className="mt-8"
-   >
-    <CommentsCard />
-   </motion.div>
+   {!isAdmin && (
+    <>
+     <motion.div className="mt-5">
+      <AiSuggestions />
+     </motion.div>
+     <motion.div className="mt-8">
+      <CommentsCard />
+     </motion.div>
+    </>
+   )}
    <AnimatePresence>
     {authorModal && (
-     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-     >
-      <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
-     </motion.div>
+     <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
     )}
    </AnimatePresence>
    <AnimatePresence>
-    {favModal && (
-     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-     >
-      <AddFavorite setFavModal={setFavModal} />
-     </motion.div>
-    )}
+    {favModal && <AddFavorite setFavModal={setFavModal} />}
    </AnimatePresence>
    <AnimatePresence>
-    {analyze && (
-     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-     >
-      <AnalyzeRecipe setAnalyze={setAnalyze} />
-     </motion.div>
-    )}
+    {analyze && <AnalyzeRecipe setAnalyze={setAnalyze} />}
    </AnimatePresence>
   </Layout>
  );
