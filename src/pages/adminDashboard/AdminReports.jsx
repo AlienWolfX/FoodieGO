@@ -29,6 +29,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -65,18 +67,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
-  borderRadius: '12px',
-  border: '1px solid #f1f5f9',
+  borderRadius: '8px',
+  border: 'none',
   boxShadow: 'none',
+  backgroundColor: 'white',
   '.MuiTableCell-root': {
     borderBottom: '1px solid #f1f5f9',
-    fontSize: '0.875rem',
-    padding: theme.spacing(2),
+    fontSize: '0.813rem',
+    padding: theme.spacing(1.5),
   },
   '.MuiTableHead-root .MuiTableCell-root': {
-    backgroundColor: '#f8fafc',
+    backgroundColor: 'white',
     fontWeight: 500,
-    color: '#475569',
+    color: '#64748b',
+    borderBottom: '2px solid #f1f5f9',
   },
 }));
 
@@ -195,102 +199,54 @@ export const AdminReports = () => {
 
   return (
     <Layout>
-      <Box sx={{ p: { xs: 2, md: 4 }, backgroundColor: '#f8fafc', minHeight: '100vh' }}>
+      <Box sx={{ p: 3 }}>
         {/* Header Section */}
-        <Box sx={{ 
-          display: 'flex', 
-          flexDirection: { xs: 'column', md: 'row' },
-          justifyContent: 'space-between', 
-          alignItems: { xs: 'stretch', md: 'center' },
-          gap: 2,
-          mb: 4,
-        }}>
-          <Box>
-            <Typography 
-              variant="h5" 
-              sx={{ 
-                fontWeight: '600', 
-                color: '#0f172a',
-                mb: 1,
-              }}
-            >
-              Reported Recipes
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Manage and review reported content
-            </Typography>
-          </Box>
-
-          <Box sx={{ 
-            display: 'flex', 
-            gap: 2,
-            flexDirection: { xs: 'column', sm: 'row' },
-          }}>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon sx={{ color: '#94a3b8' }} />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search reports..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </Search>
-            <IconButton 
-              sx={{ 
-                backgroundColor: 'white',
-                border: '1px solid #f1f5f9',
-                borderRadius: '8px',
-                width: { xs: '100%', sm: 'auto' },
-                '&:hover': { 
-                  backgroundColor: '#f8fafc',
-                  borderColor: '#e2e8f0',
-                },
-              }}
-            >
-              <FilterListIcon sx={{ color: '#64748b' }} />
-            </IconButton>
-          </Box>
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ color: '#1e293b', fontWeight: 600, mb: 1 }}>
+            Report Management
+          </Typography>
+          <Typography variant="body2" sx={{ color: '#64748b' }}>
+            Review and manage reported content
+          </Typography>
         </Box>
 
-        {/* Stats Summary */}
+        {/* Stats Row */}
         <Box sx={{ 
           display: 'grid', 
-          gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr 1fr' },
+          gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(4, 1fr)' },
           gap: 2,
           mb: 4,
         }}>
           {[
-            { label: 'Total Reports', value: reports.length, color: '#3949ab' },
-            { label: 'Pending', value: reports.filter(r => r.status === 'pending').length, color: '#ffa000' },
-            { label: 'Approved', value: reports.filter(r => r.status === 'approved').length, color: '#2e7d32' },
-            { label: 'Rejected', value: reports.filter(r => r.status === 'rejected').length, color: '#c62828' },
+            { label: 'Total Reports', value: reports.length, color: '#3b82f6' },
+            { label: 'Pending', value: reports.filter(r => r.status === 'pending').length, color: '#f59e0b' },
+            { label: 'Approved', value: reports.filter(r => r.status === 'approved').length, color: '#10b981' },
+            { label: 'Rejected', value: reports.filter(r => r.status === 'rejected').length, color: '#ef4444' },
           ].map((stat) => (
             <Box key={stat.label} sx={{
-              backgroundColor: 'white',
-              p: 3,
-              borderRadius: '12px',
+              p: 2,
+              borderRadius: 1,
               border: '1px solid #f1f5f9',
+              backgroundColor: 'white',
             }}>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: '#64748b', mb: 0.5 }}>
                 {stat.label}
               </Typography>
-              <Typography variant="h4" sx={{ color: stat.color, fontWeight: '600', mt: 1 }}>
+              <Typography variant="h6" sx={{ color: stat.color, fontWeight: 600 }}>
                 {stat.value}
               </Typography>
             </Box>
           ))}
         </Box>
 
-        {/* Table */}
-        <StyledTableContainer component={Paper}>
+        {/* Table Section */}
+        <StyledTableContainer>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Recipe</TableCell>
-                <TableCell>Reported By</TableCell>
+                <TableCell>Reporter</TableCell>
                 <TableCell>Reason</TableCell>
-                <TableCell>Category</TableCell>
                 <TableCell>Severity</TableCell>
                 <TableCell>Date</TableCell>
                 <TableCell>Status</TableCell>
@@ -298,132 +254,103 @@ export const AdminReports = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {reports
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((report) => (
-                  <TableRow 
-                    key={report.id} 
-                    hover
-                    sx={{ '&:hover': { backgroundColor: '#f8fafc' } }}
-                  >
-                    <TableCell>
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                        <Avatar
-                          variant="rounded"
-                          src={report.recipeImage}
-                          sx={{ width: 40, height: 40, borderRadius: 1 }}
-                        />
-                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                          {report.recipeName}
-                        </Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Avatar src={report.reporterAvatar} sx={{ width: 24, height: 24 }} />
-                        <Typography variant="body2">{report.reportedBy}</Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2" color="text.secondary">
-                        {report.reason}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2" color="text.secondary">
-                        {report.category}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        label={report.severity}
-                        size="small"
-                        sx={{
-                          backgroundColor: getSeverityColor(report.severity).bg,
-                          color: getSeverityColor(report.severity).text,
-                          textTransform: 'capitalize',
-                          fontSize: '0.75rem',
-                        }}
+              {reports.map((report) => (
+                <TableRow 
+                  key={report.id}
+                  sx={{ 
+                    '&:hover': { backgroundColor: '#f8fafc' },
+                    transition: 'background-color 0.2s'
+                  }}
+                >
+                  <TableCell>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                      <Avatar
+                        variant="rounded"
+                        src={report.recipeImage}
+                        sx={{ width: 32, height: 32, borderRadius: 1 }}
                       />
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2" color="text.secondary">
-                        {new Date(report.date).toLocaleDateString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })}
+                      <Typography variant="body2">
+                        {report.recipeName}
                       </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        label={report.status}
-                        size="small"
-                        sx={{
-                          backgroundColor: getStatusColor(report.status).bg,
-                          color: getStatusColor(report.status).text,
-                          textTransform: 'capitalize',
-                          fontSize: '0.75rem',
-                        }}
+                    </Box>
+                  </TableCell>
+                  <TableCell>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Avatar 
+                        src={report.reporterAvatar} 
+                        sx={{ width: 20, height: 20 }} 
                       />
-                    </TableCell>
-                    <TableCell align="right">
-                      <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
-                        <Tooltip title="View Details">
-                          <IconButton 
-                            size="small" 
-                            onClick={() => handleOpenModal(report)}
-                            sx={{ 
-                              color: '#64748b',
-                              '&:hover': { backgroundColor: '#f1f5f9' }
-                            }}
-                          >
-                            <VisibilityIcon sx={{ fontSize: 18 }} />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Approve">
-                          <IconButton 
-                            size="small" 
-                            sx={{ 
-                              color: '#059669',
-                              '&:hover': { backgroundColor: '#f0fdf4' }
-                            }}
-                          >
-                            <CheckCircleIcon sx={{ fontSize: 18 }} />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Reject">
-                          <IconButton 
-                            size="small" 
-                            sx={{ 
-                              color: '#dc2626',
-                              '&:hover': { backgroundColor: '#fef2f2' }
-                            }}
-                          >
-                            <BlockIcon sx={{ fontSize: 18 }} />
-                          </IconButton>
-                        </Tooltip>
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      <Typography variant="body2">
+                        {report.reportedBy}
+                      </Typography>
+                    </Box>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" sx={{ color: '#64748b' }}>
+                      {report.reason}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Chip
+                      label={report.severity}
+                      size="small"
+                      sx={{
+                        height: '20px',
+                        backgroundColor: getSeverityColor(report.severity).bg,
+                        color: getSeverityColor(report.severity).text,
+                        fontSize: '0.75rem',
+                        '& .MuiChip-label': { px: 1 }
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body2" sx={{ color: '#64748b' }}>
+                      {new Date(report.date).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Chip
+                      label={report.status}
+                      size="small"
+                      sx={{
+                        height: '20px',
+                        backgroundColor: getStatusColor(report.status).bg,
+                        color: getStatusColor(report.status).text,
+                        fontSize: '0.75rem',
+                        '& .MuiChip-label': { px: 1 }
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <Box sx={{ display: 'flex', gap: 0.5, justifyContent: 'flex-end' }}>
+                      <IconButton 
+                        size="small"
+                        onClick={() => handleOpenModal(report)}
+                        sx={{ p: 0.5 }}
+                      >
+                        <VisibilityIcon sx={{ fontSize: 16, color: '#64748b' }} />
+                      </IconButton>
+                      <IconButton 
+                        size="small"
+                        sx={{ p: 0.5 }}
+                      >
+                        <CheckCircleIcon sx={{ fontSize: 16, color: '#10b981' }} />
+                      </IconButton>
+                      <IconButton 
+                        size="small"
+                        sx={{ p: 0.5 }}
+                      >
+                        <BlockIcon sx={{ fontSize: 16, color: '#ef4444' }} />
+                      </IconButton>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={reports.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            sx={{ 
-              borderTop: '1px solid #f1f5f9',
-              '.MuiTablePagination-select': { fontSize: '0.875rem' },
-              '.MuiTablePagination-displayedRows': { fontSize: '0.875rem' },
-            }}
-          />
         </StyledTableContainer>
       </Box>
 
@@ -431,169 +358,202 @@ export const AdminReports = () => {
       <Dialog
         open={openModal}
         onClose={handleCloseModal}
-        maxWidth="md"
+        maxWidth="sm"
         fullWidth
         PaperProps={{
           sx: {
-            borderRadius: '12px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.05)',
           }
         }}
       >
         {selectedReport && (
           <>
             <DialogTitle sx={{ 
-              borderBottom: '1px solid #f1f5f9',
-              px: 3,
-              py: 2,
+              p: 2.5,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              borderBottom: '1px solid #f1f5f9'
             }}>
-              <Typography variant="h6" sx={{ fontWeight: 600, color: '#0f172a' }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 500, color: '#1e293b' }}>
                 Report Details
               </Typography>
+              <IconButton 
+                size="small" 
+                onClick={handleCloseModal}
+                sx={{ color: '#94a3b8' }}
+              >
+                <CloseIcon sx={{ fontSize: 18 }} />
+              </IconButton>
             </DialogTitle>
-            <DialogContent sx={{ p: 3 }}>
+
+            <DialogContent sx={{ p: 2.5 }}>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                {/* Recipe Information */}
-                <Box>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                    Recipe Information
-                  </Typography>
-                  <Box sx={{ 
-                    display: 'flex', 
-                    gap: 2, 
-                    p: 2, 
-                    backgroundColor: '#f8fafc',
-                    borderRadius: '8px'
-                  }}>
-                    <Avatar
-                      variant="rounded"
-                      src={selectedReport.recipeImage}
-                      sx={{ width: 80, height: 80, borderRadius: 2 }}
-                    />
-                    <Box>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-                        {selectedReport.recipeName}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Category: {selectedReport.category}
-                      </Typography>
-                      <Link 
-                        to={`/admin/recipes/view-recipe`}
-                        state={{ id: selectedReport.recipeId }}
-                        style={{ textDecoration: 'none' }}
+                {/* Recipe Section */}
+                <Box sx={{ 
+                  display: 'flex', 
+                  gap: 2, 
+                  p: 2,
+                  backgroundColor: '#f8fafc',
+                  borderRadius: '6px'
+                }}>
+                  <Avatar
+                    variant="rounded"
+                    src={selectedReport.recipeImage}
+                    sx={{ width: 48, height: 48, borderRadius: 1 }}
+                  />
+                  <Box>
+                    <Typography variant="subtitle2" sx={{ color: '#1e293b', mb: 0.5 }}>
+                      {selectedReport.recipeName}
+                    </Typography>
+                    <Link 
+                      to={`/admin/recipes/view-recipe/${selectedReport.recipeId}`}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Button
+                        startIcon={<VisibilityIcon sx={{ fontSize: 16 }} />}
+                        size="small"
+                        sx={{ 
+                          color: '#3b82f6',
+                          textTransform: 'none',
+                          fontSize: '0.75rem',
+                          p: 0,
+                          minWidth: 0,
+                          '&:hover': {
+                            backgroundColor: 'transparent',
+                            color: '#2563eb'
+                          }
+                        }}
                       >
-                        <Button
-                          size="small"
-                          sx={{ 
-                            mt: 1,
-                            textTransform: 'none',
-                            fontSize: '0.875rem'
-                          }}
-                        >
-                          View Recipe
-                        </Button>
-                      </Link>
-                    </Box>
+                        View Recipe
+                      </Button>
+                    </Link>
                   </Box>
                 </Box>
 
-                {/* Report Information */}
-                <Box>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                    Report Information
-                  </Typography>
-                  <Box sx={{ display: 'grid', gap: 2 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                      <Box sx={{ width: 120 }}>
-                        <Typography variant="body2" color="text.secondary">
-                          Reported By
-                        </Typography>
-                      </Box>
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Avatar 
-                          src={selectedReport.reporterAvatar} 
-                          sx={{ width: 24, height: 24 }} 
-                        />
-                        <Typography variant="body2">
-                          {selectedReport.reportedBy}
-                        </Typography>
-                      </Box>
+                {/* Report Info Grid */}
+                <Box sx={{ display: 'grid', gap: 2 }}>
+                  {/* Reporter */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Avatar 
+                      src={selectedReport.reporterAvatar} 
+                      sx={{ width: 24, height: 24 }} 
+                    />
+                    <Box>
+                      <Typography variant="caption" sx={{ color: '#64748b' }}>
+                        Reported by
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#1e293b' }}>
+                        {selectedReport.reportedBy}
+                      </Typography>
                     </Box>
+                  </Box>
 
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                      <Box sx={{ width: 120 }}>
-                        <Typography variant="body2" color="text.secondary">
-                          Date Reported
-                        </Typography>
-                      </Box>
-                      <Typography variant="body2">
+                  {/* Date */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ 
+                      width: 24, 
+                      height: 24, 
+                      borderRadius: '50%',
+                      backgroundColor: '#f1f5f9',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <CalendarTodayIcon sx={{ fontSize: 14, color: '#64748b' }} />
+                    </Box>
+                    <Box>
+                      <Typography variant="caption" sx={{ color: '#64748b' }}>
+                        Date reported
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#1e293b' }}>
                         {new Date(selectedReport.date).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
+                          month: 'short',
                           day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit',
+                          year: 'numeric',
                         })}
                       </Typography>
                     </Box>
+                  </Box>
 
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                      <Box sx={{ width: 120 }}>
-                        <Typography variant="body2" color="text.secondary">
-                          Status
-                        </Typography>
-                      </Box>
+                  {/* Status & Severity */}
+                  <Box sx={{ 
+                    display: 'flex', 
+                    gap: 3,
+                    p: 2,
+                    backgroundColor: '#f8fafc',
+                    borderRadius: '6px'
+                  }}>
+                    <Box>
+                      <Typography variant="caption" sx={{ color: '#64748b' }}>
+                        Status
+                      </Typography>
                       <Chip
                         label={selectedReport.status}
                         size="small"
                         sx={{
+                          mt: 0.5,
+                          height: '20px',
                           backgroundColor: getStatusColor(selectedReport.status).bg,
                           color: getStatusColor(selectedReport.status).text,
-                          textTransform: 'capitalize',
+                          fontSize: '0.75rem',
+                          '& .MuiChip-label': { px: 1 }
                         }}
                       />
                     </Box>
-
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                      <Box sx={{ width: 120 }}>
-                        <Typography variant="body2" color="text.secondary">
-                          Severity
-                        </Typography>
-                      </Box>
+                    <Box>
+                      <Typography variant="caption" sx={{ color: '#64748b' }}>
+                        Severity
+                      </Typography>
                       <Chip
                         label={selectedReport.severity}
                         size="small"
                         sx={{
+                          mt: 0.5,
+                          height: '20px',
                           backgroundColor: getSeverityColor(selectedReport.severity).bg,
                           color: getSeverityColor(selectedReport.severity).text,
-                          textTransform: 'capitalize',
+                          fontSize: '0.75rem',
+                          '& .MuiChip-label': { px: 1 }
                         }}
                       />
                     </Box>
+                  </Box>
 
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                      <Box sx={{ width: 120 }}>
-                        <Typography variant="body2" color="text.secondary">
-                          Reason
-                        </Typography>
-                      </Box>
-                      <Typography variant="body2" sx={{ flex: 1 }}>
-                        {selectedReport.reason}
-                      </Typography>
-                    </Box>
+                  {/* Reason */}
+                  <Box>
+                    <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mb: 1 }}>
+                      Reason for report
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: '#1e293b',
+                        p: 2,
+                        backgroundColor: '#f8fafc',
+                        borderRadius: '6px',
+                        lineHeight: 1.5
+                      }}
+                    >
+                      {selectedReport.reason}
+                    </Typography>
                   </Box>
                 </Box>
               </Box>
             </DialogContent>
+
             <DialogActions sx={{ 
+              p: 2.5,
               borderTop: '1px solid #f1f5f9',
-              px: 3,
-              py: 2,
+              gap: 1
             }}>
-              <Button 
+              <Button
                 onClick={handleCloseModal}
                 sx={{ 
                   color: '#64748b',
+                  textTransform: 'none',
+                  fontSize: '0.875rem',
                   '&:hover': { backgroundColor: '#f1f5f9' }
                 }}
               >
@@ -603,21 +563,25 @@ export const AdminReports = () => {
                 variant="contained"
                 color="success"
                 sx={{ 
-                  backgroundColor: '#059669',
-                  '&:hover': { backgroundColor: '#047857' }
+                  backgroundColor: '#10b981',
+                  textTransform: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { backgroundColor: '#059669' }
                 }}
               >
-                Approve Report
+                Approve
               </Button>
               <Button
                 variant="contained"
                 color="error"
                 sx={{ 
-                  backgroundColor: '#dc2626',
-                  '&:hover': { backgroundColor: '#b91c1c' }
+                  backgroundColor: '#ef4444',
+                  textTransform: 'none',
+                  fontSize: '0.875rem',
+                  '&:hover': { backgroundColor: '#dc2626' }
                 }}
               >
-                Reject Report
+                Reject
               </Button>
             </DialogActions>
           </>

@@ -7,7 +7,7 @@ import { MdAdminPanelSettings } from "react-icons/md";
 export const AdminProfile = () => {
  // Sample admin data - replace with actual data
  const [adminData] = useState({
-  name: "John Doe",
+  name: "Patrick James",
   role: "Admin✨",
   email: "john.doe@foodiego.com",
   phone: "+1 (555) 123-4567",

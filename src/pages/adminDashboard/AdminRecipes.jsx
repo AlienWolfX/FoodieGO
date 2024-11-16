@@ -201,7 +201,7 @@ export const AdminRecipes = () => {
   <Layout>
    <div className=" bg-gray-100 min-h-screen">
     <div className="">
-     <div className="flex flex-col md:flex-row items-center justify-between mb-8">
+     {/* <div className="flex flex-col md:flex-row items-center justify-between mb-8">
       <motion.div
        initial={{ opacity: 0, y: 20 }}
        animate={{ opacity: 1, y: 0 }}
@@ -224,21 +224,21 @@ export const AdminRecipes = () => {
        alt=""
        className="hidden md:block w-full md:w-auto md:max-w-[600px] mt-4 md:mt-0"
       />
-     </div>
+     </div> */}
 
      {/* Search and Filters Section */}
-     <div className="bg-white rounded-xl shadow-sm p-4">
-      <div className="flex flex-col md:flex-row gap-3">
+     <div className="bg-white rounded-xl shadow-sm p-3">
+      <div className="flex flex-col md:flex-row gap-2">
        {/* Search Input */}
        <div className="relative flex-1">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-         <FiSearch className="h-5 w-5 text-gray-400" />
+        <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+         <FiSearch className="h-4 w-4 text-gray-400" />
         </div>
         <input
          type="text"
          placeholder="Search for recipes..."
-         className="w-full h-12 pl-10 pr-4 text-base border border-gray-200 rounded-lg 
-                   focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all"
+         className="w-full h-9 pl-8 pr-3 text-sm border border-gray-200 rounded-lg 
+                   focus:ring-1 focus:ring-blue-100 focus:border-blue-500 transition-all"
          value={searchTerm}
          onChange={(e) => setSearchTerm(e.target.value)}
          onKeyPress={(e) => e.key === "Enter" && handleSearch()}
@@ -250,15 +250,15 @@ export const AdminRecipes = () => {
         {/* Cuisine Dropdown */}
         <Menu as="div" className="relative">
          <Menu.Button
-          className="h-12 px-4 border border-gray-200 rounded-lg hover:bg-gray-50 
-                              transition-colors flex items-center gap-2 min-w-[140px]"
+          className="h-9 px-3 border border-gray-200 rounded-lg hover:bg-gray-50 
+                              transition-colors flex items-center gap-2 min-w-[120px] text-sm"
          >
           <span className="text-gray-700">{selectedCuisine}</span>
-          <FiChevronDown className="h-5 w-5 text-gray-400 ml-auto" />
+          <FiChevronDown className="h-4 w-4 text-gray-400 ml-auto" />
          </Menu.Button>
 
          <Menu.Items
-          className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 
+          className="absolute right-0 mt-1 w-48 origin-top-right divide-y divide-gray-100 
                               rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
          >
           <div className="p-1">
@@ -271,7 +271,7 @@ export const AdminRecipes = () => {
                 selectedCuisine === cuisine
                  ? "text-blue-600 bg-blue-50"
                  : "text-gray-700"
-               } group flex w-full items-center justify-between rounded-md px-3 py-2 text-sm`}
+               } group flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs`}
               >
                <span>{cuisine}</span>
                <span
@@ -294,15 +294,15 @@ export const AdminRecipes = () => {
         {/* Category Dropdown */}
         <Menu as="div" className="relative">
          <Menu.Button
-          className="h-12 px-4 border border-gray-200 rounded-lg hover:bg-gray-50 
-                                 transition-colors flex items-center gap-2 min-w-[140px]"
+          className="h-9 px-3 border border-gray-200 rounded-lg hover:bg-gray-50 
+                                 transition-colors flex items-center gap-2 min-w-[120px] text-sm"
          >
           <span className="text-gray-700">{selectedCategory}</span>
-          <FiChevronDown className="h-5 w-5 text-gray-400 ml-auto" />
+          <FiChevronDown className="h-4 w-4 text-gray-400 ml-auto" />
          </Menu.Button>
 
          <Menu.Items
-          className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 
+          className="absolute right-0 mt-1 w-48 origin-top-right divide-y divide-gray-100 
                                 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
          >
           <div className="p-1">
@@ -315,7 +315,7 @@ export const AdminRecipes = () => {
                 selectedCategory === category
                  ? "text-blue-600 bg-blue-50"
                  : "text-gray-700"
-               } group flex w-full items-center justify-between rounded-md px-3 py-2 text-sm`}
+               } group flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs`}
               >
                <span>{category}</span>
                <span
@@ -339,8 +339,8 @@ export const AdminRecipes = () => {
         <button
          onClick={handleSearch}
          disabled={isLoading}
-         className={`h-12 px-8 bg-mainblue text-white rounded-lg text-base font-medium 
-                    transition-all duration-200 flex items-center gap-2 whitespace-nowrap ${
+         className={`h-9 px-4 bg-mainblue text-white rounded-lg text-sm font-medium 
+                    transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap ${
                      isLoading
                       ? "opacity-70 cursor-not-allowed"
                       : "hover:bg-blue-600"
@@ -349,7 +349,7 @@ export const AdminRecipes = () => {
          {isLoading ? (
           <>
            <svg
-            className="animate-spin h-5 w-5"
+            className="animate-spin h-4 w-4"
             fill="none"
             viewBox="0 0 24 24"
            >
@@ -371,7 +371,7 @@ export const AdminRecipes = () => {
           </>
          ) : (
           <>
-           <FiSearch className="h-5 w-5" />
+           <FiSearch className="h-4 w-4" />
            <span>Search</span>
           </>
          )}
@@ -381,16 +381,16 @@ export const AdminRecipes = () => {
 
       {/* Active Filters */}
       {(selectedCuisine !== "All" || selectedCategory !== "All") && (
-       <div className="flex items-center gap-2 mt-3">
+       <div className="flex items-center gap-2 mt-2">
         <FiFilter className="h-3 w-3 text-gray-400" />
         <span className="text-xs text-gray-500">Active filters:</span>
         {selectedCuisine !== "All" && (
-         <span className="px-2 py-1 bg-blue-50 text-blue-600 rounded-md text-xs">
+         <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-md text-xs">
           {selectedCuisine}
          </span>
         )}
         {selectedCategory !== "All" && (
-         <span className="px-2 py-1 bg-blue-50 text-blue-600 rounded-md text-xs">
+         <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-md text-xs">
           {selectedCategory}
          </span>
         )}
