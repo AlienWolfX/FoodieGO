@@ -60,7 +60,7 @@ export const AdminProfile = () => {
        <div className="relative">
         <img
          src={adminData.avatar}
-         alt="Admin"
+         alt=""
          className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
         />
         <span className="absolute bottom-0 right-0 bg-green-500 w-5 h-5 rounded-full border-4 border-white"></span>

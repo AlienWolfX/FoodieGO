@@ -22,26 +22,124 @@ export const ExploreRecipes = () => {
 
  const cuisines = [
   "All",
+  // East Asian
   "Chinese",
   "Japanese",
   "Korean",
+  
+  // Southeast Asian
   "Thai",
-  "Indian",
   "Vietnamese",
   "Filipino",
   "Malaysian",
   "Indonesian",
+  "Singaporean",
+  "Burmese",
+  "Cambodian",
+  "Laotian",
+  
+  // South Asian
+  "Indian",
+  "Pakistani",
+  "Bangladeshi",
+  "Sri Lankan",
+  "Nepali",
+  
+  // Middle Eastern
+  "Lebanese",
+  "Turkish",
+  "Persian",
+  "Arabian",
+  "Israeli",
+  
+  // European
+  "Italian",
+  "French",
+  "Spanish",
+  "Greek",
+  "German",
+  "British",
+  "Russian",
+  "Polish",
+  "Hungarian",
+  
+  // American
+  "American",
+  "Mexican",
+  "Brazilian",
+  "Peruvian",
+  "Argentine",
+  
+  // African
+  "Moroccan",
+  "Ethiopian",
+  "Nigerian",
+  "Egyptian",
+  
+  // Fusion
+  "Asian Fusion",
+  "Mediterranean",
+  "Caribbean",
+  "Pacific Rim",
  ];
 
  const categories = [
   "All",
+  // Main Categories
   "Appetizers",
   "Main Dishes",
   "Side Dishes",
   "Desserts",
+  
+  // Course Types
+  "Breakfast",
+  "Lunch",
+  "Dinner",
+  "Snacks",
+  "Beverages",
+  
+  // Dish Types
   "Soups",
+  "Salads",
+  "Sandwiches",
   "Noodles & Rice",
+  "Pasta",
+  "Stir-Fries",
+  "Grilled Dishes",
+  "Roasted Dishes",
+  "Steamed Dishes",
+  "Braised Dishes",
+  "Stews",
+  "Curries",
+  
+  // Specific Categories
+  "Seafood",
+  "Meat Dishes",
+  "Poultry",
+  "Vegetarian",
+  "Vegan",
+  "Gluten-Free",
+  
+  // Baked Goods
+  "Breads",
+  "Pastries",
+  "Cakes",
+  "Cookies",
+  
+  // Condiments & Extras
   "Sauces & Condiments",
+  "Dips & Spreads",
+  "Marinades",
+  "Spice Blends",
+  
+  // Preservation
+  "Pickled & Fermented",
+  "Preserves & Jams",
+  
+  // Special Occasions
+  "Holiday Specials",
+  "Party Food",
+  "Street Food",
  ];
 
  // Calculate counts when component mounts
