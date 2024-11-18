@@ -3,8 +3,11 @@ import { FiUser } from "react-icons/fi";
 import { PiBowlFoodLight } from "react-icons/pi";
 import { RiUserFollowLine } from "react-icons/ri";
 import { FaMedal } from "react-icons/fa6";
+import { useState } from "react";
 
 export const Leaderboards = () => {
+ const [selectedRole, setSelectedRole] = useState('All');
+
  const popularFoodiegoers = [
   {
    id: 1,
@@ -239,6 +242,11 @@ export const Leaderboards = () => {
   }
 ];
 
+ // Filter foodiegoers based on selected role
+ const filteredFoodiegoers = popularFoodiegoers.filter(foodiegoer => 
+   selectedRole === 'All' ? true : foodiegoer.role === selectedRole
+ );
+
  return (
   <>
    <div>
@@ -307,7 +315,56 @@ export const Leaderboards = () => {
        </div>
        {/* popular foodiegoers */}
        <div className="mt-10">
-        <h1 className="text-lg font-medium mb-4">Popular Foodiegoers</h1>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-lg font-medium">Popular Foodiegoers</h1>
+          <div className="flex items-center gap-2">
+            <button 
+              className={`
+                px-3 py-1.5 text-xs font-medium rounded-full transition-all
+                ${selectedRole === 'All' ? 
+                  'bg-gray-900 text-white' : 
+                  'bg-gray-100 text-gray-600 hover:bg-gray-200'}
+              `}
+              onClick={() => setSelectedRole('All')}
+            >
+              All
+            </button>
+            <button 
+              className={`
+                px-3 py-1.5 text-xs font-medium rounded-full transition-all
+                ${selectedRole === 'Chef' ? 
+                  'bg-blue-600 text-white' : 
+                  'bg-blue-50 text-blue-600 hover:bg-blue-100'}
+              `}
+              onClick={() => setSelectedRole('Chef')}
+            >
+              Chef
+            </button>
+            <button 
+              className={`
+                px-3 py-1.5 text-xs font-medium rounded-full transition-all
+                ${selectedRole === 'Student' ? 
+                  'bg-green-600 text-white' : 
+                  'bg-green-50 text-green-600 hover:bg-green-100'}
+              `}
+              onClick={() => setSelectedRole('Student')}
+            >
+              Student
+            </button>
+            <button 
+              className={`
+                px-3 py-1.5 text-xs font-medium rounded-full transition-all
+                ${selectedRole === 'Home Cook' ? 
+                  'bg-purple-600 text-white' : 
+                  'bg-purple-50 text-purple-600 hover:bg-purple-100'}
+              `}
+              onClick={() => setSelectedRole('Home Cook')}
+            >
+              Home Cook
+            </button>
+          </div>
+        </div>
+
         <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
           {/* Table Header */}
           <div className="bg-gray-50 px-6 py-3 border-b border-gray-100">
@@ -323,7 +380,7 @@ export const Leaderboards = () => {
 
           {/* Table Body */}
           <div className="divide-y divide-gray-100">
-            {popularFoodiegoers.map((data) => (
+            {filteredFoodiegoers.map((data) => (
               <div 
                 key={data.id} 
                 className="px-6 py-3 hover:bg-gray-50 transition-colors grid grid-cols-12 gap-4 items-center"
