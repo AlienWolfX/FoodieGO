@@ -26,10 +26,10 @@ export const Layout = ({ children }) => {
     {/* Scrollable content area */}
     <div className="h-screen mx-auto">
      <div className="px-4 md:px-10 py-5">
-       <ProfileProvider>
-        <Topbar />
-        <div className="mt-5">{children}</div>
-       </ProfileProvider>
+      <ProfileProvider>
+       <Topbar isAdmin={isAdmin} />
+       <div className="mt-5">{children}</div>
+      </ProfileProvider>
      </div>
     </div>
    </div>

@@ -3,7 +3,7 @@ import { CiBellOn } from "react-icons/ci";
 import { motion, AnimatePresence } from "framer-motion";
 import { useProfile } from "../context/ProfileContext";
 
-export const Topbar = () => {
+export const Topbar = ({ isAdmin }) => {
  const [formattedDate, setFormattedDate] = useState("");
  const [dayOfWeek, setDayOfWeek] = useState("");
  const [showNotifications, setShowNotifications] = useState(false);
@@ -95,7 +95,7 @@ export const Topbar = () => {
        </div>
       )}
      </motion.div>
-     <div className="flex items-center gap-1">
+     <div className="flex flex-col items-start m-0">
       {" "}
       <motion.p
        initial={{ opacity: 0, x: -10 }}
@@ -104,13 +104,23 @@ export const Topbar = () => {
       >
        Patrick James Dionen
       </motion.p>
-      <motion.span
-       initial={{ opacity: 0, x: -10 }}
-       animate={{ opacity: 1, x: 0 }}
-       className="text-[10px] flex font-light text-blue-500 p-[3px] bg-blue-100 rounded-full"
-      >
-       student
-      </motion.span>
+      {isAdmin ? (
+       <motion.span
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="text-[8px] flex font-light text-blue-500 p-[3px] bg-blue-100 rounded-full"
+       >
+        admin✨
+       </motion.span>
+      ) : (
+       <motion.span
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="text-[8px] flex font-light text-blue-500 p-[3px] bg-blue-100 rounded-full"
+       >
+        student✨
+       </motion.span>
+      )}
      </div>
     </div>
 
