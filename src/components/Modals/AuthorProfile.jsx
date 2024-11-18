@@ -5,10 +5,15 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
-export const AuthorProfile = ({ setAuthorModal, author }) => {
- const [selectedAuthor, setSelectedAuthor] = useState(null);
- const [isFollowing, setIsFollowing] = useState(false);
+export const AuthorProfile = ({ setAuthorModal, author, authorData }) => {
+ const [isFollowing, setIsFollowing] = useState(
+  authorData?.isFollowing || false
+ );
  const [isLoading, setIsLoading] = useState(false);
+
+ // Get author image from recipe data
+ const authorRecipe = recipeData.find(recipe => recipe.author === author);
+ const authorImage = authorRecipe?.authorImage || authorData?.image;
 
  // Filter recipes by the selected author
  const filteredRecipes = recipeData.filter(
@@ -23,22 +28,22 @@ export const AuthorProfile = ({ setAuthorModal, author }) => {
  // Function to handle follow/unfollow
  const handleFollowClick = async () => {
   setIsLoading(true);
-  
+
   try {
-    // Simulate API call with setTimeout
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setIsFollowing(!isFollowing);
-    
-    if (!isFollowing) {
-      toast.success(`You are now following ${author}!`);
-    } else {
-      toast.success(`You have unfollowed ${author}`);
-    }
+   // Simulate API call with setTimeout
+   await new Promise((resolve) => setTimeout(resolve, 1000));
+
+   setIsFollowing(!isFollowing);
+
+   if (!isFollowing) {
+    toast.success(`You are now following ${author}!`);
+   } else {
+    toast.success(`You have unfollowed ${author}`);
+   }
   } catch (error) {
-    toast.error("Something went wrong. Please try again.");
+   toast.error("Something went wrong. Please try again.");
   } finally {
-    setIsLoading(false);
+   setIsLoading(false);
   }
  };
 
@@ -72,26 +77,35 @@ export const AuthorProfile = ({ setAuthorModal, author }) => {
     <div className="p-6">
      <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
-       <div className="h-16 w-16 bg-gradient-to-br from-mainblue to-blue-400 rounded-full flex items-center justify-center text-white text-xl font-semibold">
-        {author.charAt(0)}
-       </div>
+       <img
+        src={authorImage}
+        className="h-16 w-16 rounded-full ring-2 ring-offset-2 ring-gray-100"
+        alt={author}
+        onError={(e) => {
+         e.target.src = "https://api.dicebear.com/7.x/lorelei/svg?seed=fallback";
+        }}
+       />
        <div className="space-y-1">
         <h2 className="text-lg font-semibold text-gray-800">{author}</h2>
         <div className="flex items-center gap-4 text-sm text-gray-600">
          <div className="flex items-center gap-1">
           <span className="font-medium">
-            {isFollowing ? "101" : "100"}
+           {authorData?.followers.toLocaleString()}
           </span>
           <span className="text-gray-500">Followers</span>
          </div>
          <div className="flex items-center gap-1">
-          <span className="font-medium">{filteredRecipes.length}</span>
+          <span className="font-medium">{authorData?.recipes}</span>
           <span className="text-gray-500">Recipes</span>
          </div>
          <div className="flex items-center gap-1">
-          <span className="font-medium">100</span>
-          <span className="text-gray-500">Likes</span>
+          <span className="font-medium">{filteredRecipes.length}</span>
+          <span className="text-gray-500">Published</span>
          </div>
+        </div>
+        <div className="text-sm text-gray-600">
+         <span className="font-medium">{authorData?.cuisine}</span>
+         <span className="text-gray-500"> cuisine specialist</span>
         </div>
        </div>
       </div>
@@ -102,18 +116,21 @@ export const AuthorProfile = ({ setAuthorModal, author }) => {
          transition-all duration-200
          active:scale-95 transform
          disabled:opacity-50 disabled:cursor-not-allowed
-         ${isFollowing 
-           ? 'bg-gray-100 text-gray-700 hover:bg-gray-200' 
-           : 'bg-mainblue text-white hover:bg-mainblue/90'
+         ${
+          isFollowing
+           ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+           : "bg-mainblue text-white hover:bg-mainblue/90"
          }
-         ${isLoading ? 'cursor-wait' : 'cursor-pointer'}
+         ${isLoading ? "cursor-wait" : "cursor-pointer"}
          flex items-center justify-center gap-2 min-w-[100px]`}
       >
-        {isLoading ? (
-          <div className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin" />
-        ) : (
-          isFollowing ? 'Following' : 'Follow'
-        )}
+       {isLoading ? (
+        <div className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin" />
+       ) : isFollowing ? (
+        "Following"
+       ) : (
+        "Follow"
+       )}
       </button>
      </div>
     </div>
