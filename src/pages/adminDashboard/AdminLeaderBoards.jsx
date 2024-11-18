@@ -1,7 +1,7 @@
 import { Layout } from "../dashboard/Layout";
 import { LeaderboardComponent } from "../../components/LeaderboardComponent/LeaderboardComponent";
 
-export const AdminLeaderboards = () => {
+export const AdminLeaderBoards = () => {
  return (
   <>
    <div>

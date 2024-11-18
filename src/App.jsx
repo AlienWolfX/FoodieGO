@@ -24,7 +24,7 @@ import { AdminReports } from "./pages/adminDashboard/AdminReports";
 import { AdminRecipes } from "./pages/adminDashboard/AdminRecipes";
 import { AdminUsers } from "./pages/adminDashboard/AdminUsers";
 import { AdminProfile } from "./pages/adminDashboard/AdminProfile";
-import { AdminLeaderboards } from "./pages/adminDashboard/AdminLeaderboards";
+import { AdminLeaderBoards } from "./pages/adminDashboard/AdminLeaderBoards";
 import { Leaderboards } from "./pages/dashboard/pages/Leaderboards";
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
      <Route path="/admin/home" element={<AdminHome />} />
      <Route path="/admin/reports" element={<AdminReports />} />
      <Route path="/admin/recipes" element={<AdminRecipes />} />
-     <Route path="/admin/leaderboards" element={<AdminLeaderboards />} />
+     <Route path="/admin/leaderboards" element={<AdminLeaderBoards />} />
      <Route path="/admin/users" element={<AdminUsers />} />
      <Route path="/admin/profile" element={<AdminProfile />} />
      <Route path="/admin/recipes/view-recipe" element={<ViewRecipe />} />
