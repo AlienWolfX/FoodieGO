@@ -226,6 +226,10 @@ export const AdminRecipes = () => {
       />
      </div> */}
 
+     <div className="mb-5 mt-5">
+      <h1 className="text-xl text-gray-600 font-semibold">Recipes</h1>
+     </div>
+
      {/* Search and Filters Section */}
      <div className="bg-white rounded-xl shadow-sm p-3">
       <div className="flex flex-col md:flex-row gap-2">

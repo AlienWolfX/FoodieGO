@@ -42,6 +42,16 @@ export const Navbar = () => {
   }
  };
 
+ const navHowItWorks = () => {
+  const section = document.getElementById("howitworks");
+  if (section) {
+   window.location.hash = "howitworks";
+  } else {
+   window.scroll(0, 0);
+   nav("/"); // Navigate to home if section not found
+  }
+ };
+
  const navContact = () => {
   const section = document.getElementById("contact");
   if (section) {
@@ -54,7 +64,7 @@ export const Navbar = () => {
 
  useEffect(() => {
   const handleScroll = () => {
-   const sections = ["hero", "explore", "about", "contact"];
+   const sections = ["hero", "explore", "about", "howitworks", "contact"];
    const scrollPosition = window.scrollY;
 
    sections.forEach((section) => {
@@ -116,6 +126,14 @@ export const Navbar = () => {
        Explore
       </li>
       <li
+       onClick={navHowItWorks}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "howitworks" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
+      >
+       How it Works
+      </li>
+      <li
        onClick={navContact}
        className={`text-sm font-medium cursor-pointer ${
         activeItem === "contact" ? "text-mainblue" : "text-gray-600"
@@ -166,6 +184,14 @@ export const Navbar = () => {
        } hover:text-mainblue`}
       >
        Explore
+      </li>
+      <li
+       onClick={navHowItWorks}
+       className={`text-sm font-medium cursor-pointer ${
+        activeItem === "howitworks" ? "text-mainblue" : "text-gray-600"
+       } hover:text-mainblue`}
+      >
+       How it Works
       </li>
       <li
        onClick={navContact}

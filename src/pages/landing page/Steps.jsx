@@ -4,7 +4,10 @@ import img3 from "/steps/img3.png";
 
 export const Steps = () => {
  return (
-  <div className="h-auto lg:h-screen flex flex-col items-center justify-center pt-10 bg-gray-100">
+  <div
+   id="howitworks"
+   className="h-auto lg:h-screen flex flex-col items-center justify-center pt-10 bg-gray-100"
+  >
    {/* Title for the steps section */}
    <h1 className="text-3xl md:text-4xl font-bold mb-5">SHARING PLATFORM</h1>
    <p className="text-lg md:text-xl mb-10">

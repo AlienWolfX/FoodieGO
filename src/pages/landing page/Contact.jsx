@@ -5,7 +5,7 @@ export const Contact = () => {
     id="contact"
     className="h-auto lg:h-screen relative py-10 md:py-20 flex flex-col md:flex-row items-center justify-center"
    >
-    <div className="flex flex-col lg:flex-row items-center md:items-start gap-5 mx-5 md:mx-32 z-30">
+    <div className="flex flex-col lg:flex-row items-center md:items-start gap-5 mx-5 md:mx-32 z-10">
      <div className="flex flex-col w-full md:w-[500px]">
       <h1 className="text-3xl md:text-4xl font-black text-gray-700">
        Reach Out
