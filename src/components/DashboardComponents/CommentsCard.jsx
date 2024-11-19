@@ -5,6 +5,7 @@ import { useProfile } from "../../context/ProfileContext";
 
 export const CommentsCard = () => {
  const { profilePicture } = useProfile();
+
  const [comments, setComments] = useState([
   {
    name: "Lenor James Jamero",
@@ -105,8 +106,12 @@ export const CommentsCard = () => {
      <h1 className="text-sm font-medium">Leave Comments</h1>
      <div className="w-full flex items-start gap-4 justify-between bg-white rounded-md border p-5 mt-2">
       <div className="bg-gray-100 h-10 w-10 min-h-[40px] min-w-[40px] rounded-full flex items-center justify-center">
-       {newComment.name && (
-        <img src={profilePicture} alt="" className="h-full w-full rounded-full" />
+       {profilePicture && (
+        <img
+         src={profilePicture}
+         alt=""
+         className="h-full w-full rounded-full"
+        />
        )}
       </div>
 
