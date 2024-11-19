@@ -276,14 +276,10 @@ export const RecipeCard = () => {
       </motion.div>
 
       {/* AI Suggestions */}
-      <motion.div className="mt-5">
-       <AiSuggestions />
-      </motion.div>
+      <motion.div className="mt-5">{/* <AiSuggestions /> */}</motion.div>
 
       {/* Comments */}
-      <motion.div className="mt-8">
-       <CommentsCard />
-      </motion.div>
+      <motion.div className="mt-8">{/* <CommentsCard /> */}</motion.div>
 
       {/* Modals */}
       <AnimatePresence>
