@@ -26,47 +26,50 @@ import { AdminUsers } from "./pages/adminDashboard/AdminUsers";
 import { AdminProfile } from "./pages/adminDashboard/AdminProfile";
 import { AdminLeaderBoards } from "./pages/adminDashboard/AdminLeaderBoards";
 import { Leaderboards } from "./pages/dashboard/pages/Leaderboards";
+import { ProfileProvider } from "./context/ProfileContext";
 
 function App() {
  return (
   <BrowserRouter>
-   <RecipeProvider>
-    <Routes>
-     <Route path="/admin" element={<AdminLogin />} />
-     <Route path="/admin/home" element={<AdminHome />} />
-     <Route path="/admin/reports" element={<AdminReports />} />
-     <Route path="/admin/recipes" element={<AdminRecipes />} />
-     <Route path="/admin/leaderboards" element={<AdminLeaderBoards />} />
-     <Route path="/admin/users" element={<AdminUsers />} />
-     <Route path="/admin/profile" element={<AdminProfile />} />
-     <Route path="/admin/recipes/view-recipe" element={<ViewRecipe />} />
+   <ProfileProvider>
+    <RecipeProvider>
+     <Routes>
+      <Route path="/admin" element={<AdminLogin />} />
+      <Route path="/admin/home" element={<AdminHome />} />
+      <Route path="/admin/reports" element={<AdminReports />} />
+      <Route path="/admin/recipes" element={<AdminRecipes />} />
+      <Route path="/admin/leaderboards" element={<AdminLeaderBoards />} />
+      <Route path="/admin/users" element={<AdminUsers />} />
+      <Route path="/admin/profile" element={<AdminProfile />} />
+      <Route path="/admin/recipes/view-recipe" element={<ViewRecipe />} />
 
-     <Route path="/" element={<Mainpage />} />
-     <Route path="/terms-conditions" element={<TermsConditions />} />
-     <Route path="/explore" element={<ExploreRecipes />} />
-     <Route path="/explore/view-recipe" element={<ViewRecipeInitial />} />
-     <Route path="/login" element={<Login />} />
-     <Route path="/signup" element={<Signup />} />
-     <Route path="/forgot-password" element={<ForgotPassword />} />
-     <Route path="/reset-password" element={<ResetPassword />} />
-     <Route
-      path="/forgot-password/one-time-password"
-      element={<OneTimePassword />}
-     />
-     <Route path="/preferences" element={<Preferences />} />
-     <Route path="/home" element={<Home />} />
-     {/* todo: add protected routes */}
-     <Route path="/user/*" element={<UserRoutes />} />
-     <Route path="/home" element={<Home />} />
-     <Route path="/my-recipes" element={<MyRecipes />} />
-     <Route path="/favorite-recipes" element={<FavoriteRecipes />} />
-     <Route path="/leaderboards" element={<Leaderboards />} />
-     <Route path="/analytics" element={<Analytics />} />
-     <Route path="/profile" element={<MyProfile />} />
-     <Route path="/view-recipe" element={<ViewRecipe />} />
-     <Route path="/explore-more-recipes" element={<MoreRecipes />} />
-    </Routes>
-   </RecipeProvider>
+      <Route path="/" element={<Mainpage />} />
+      <Route path="/terms-conditions" element={<TermsConditions />} />
+      <Route path="/explore" element={<ExploreRecipes />} />
+      <Route path="/explore/view-recipe" element={<ViewRecipeInitial />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route
+       path="/forgot-password/one-time-password"
+       element={<OneTimePassword />}
+      />
+      <Route path="/preferences" element={<Preferences />} />
+      <Route path="/home" element={<Home />} />
+      {/* todo: add protected routes */}
+      <Route path="/user/*" element={<UserRoutes />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/my-recipes" element={<MyRecipes />} />
+      <Route path="/favorite-recipes" element={<FavoriteRecipes />} />
+      <Route path="/leaderboards" element={<Leaderboards />} />
+      <Route path="/analytics" element={<Analytics />} />
+      <Route path="/profile" element={<MyProfile />} />
+      <Route path="/view-recipe" element={<ViewRecipe />} />
+      <Route path="/explore-more-recipes" element={<MoreRecipes />} />
+     </Routes>
+    </RecipeProvider>
+   </ProfileProvider>
   </BrowserRouter>
  );
 }

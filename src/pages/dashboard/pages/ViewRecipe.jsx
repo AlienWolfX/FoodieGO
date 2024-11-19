@@ -33,6 +33,7 @@ import {
  likeRecipe,
  unlikeRecipe,
 } from "../../../../data/UserData.js";
+import { ReportRecipe } from "../../../components/recipe/ReportRecipe.jsx";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
@@ -233,6 +234,7 @@ export const ViewRecipe = () => {
   }
  };
 
+ // donwload recipe into pdf
  const handleDownload = async () => {
   try {
    const pdf = new jsPDF("p", "mm", "a4");
@@ -344,6 +346,10 @@ export const ViewRecipe = () => {
   }
  };
 
+ const [openReport, setOpenReport] = useState(false);
+
+ const reportedRecipe = {title, img_path, author};
+
  return (
   <Layout>
    <Toaster richColors position="top-center" />
@@ -375,7 +381,13 @@ export const ViewRecipe = () => {
        transition={{ delay: 0.3 }}
        className="text-xl md:text-2xl font-bold"
       >
-       {title}
+       {title}{" "}
+       <span
+        onClick={() => setOpenReport(true)}
+        className="text-[10px] ml-2 font-light text-gray-600 underline cursor-pointer"
+       >
+        report
+       </span>
       </motion.h1>
       <motion.p
        onClick={() => !isAdmin && setAuthorModal(true)}
@@ -659,6 +671,14 @@ export const ViewRecipe = () => {
    <AnimatePresence>
     {authorModal && (
      <AuthorProfile setAuthorModal={setAuthorModal} author={author} />
+    )}
+   </AnimatePresence>
+   <AnimatePresence>
+    {openReport && (
+     <ReportRecipe
+      setOpenReport={setOpenReport}
+      reportedRecipe={reportedRecipe}
+     />
     )}
    </AnimatePresence>
    <AnimatePresence>

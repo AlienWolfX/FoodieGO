@@ -12,9 +12,11 @@ export const AiSuggestions = () => {
       </div>
       <h1 className="text-sm font-medium">Food Suggestions</h1>
       <span className="text-xs font-light text-gray-500">
-       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-       ratione praesentium ex doloribus in incidunt sequi natus repellendus sint
-       fugiat fugit sed, ea omnis accusamus placeat illo culpa amet earum!
+       "Use buttermilk for marinating to make the chicken tender and
+       flavorful.", "Add a pinch of baking powder to the flour mixture for extra
+       crispiness.", "Double-dip the chicken in the batter for a thicker,
+       crunchier coating.", "Let the fried chicken rest on a wire rack to
+       maintain crispiness."
       </span>
      </div>
     </div>
@@ -25,9 +27,11 @@ export const AiSuggestions = () => {
       </div>
       <h1 className="text-sm font-medium">Food Preparations</h1>
       <span className="text-xs font-light text-gray-500">
-       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-       ratione praesentium ex doloribus in incidunt sequi natus repellendus sint
-       fugiat fugit sed, ea omnis accusamus placeat illo culpa amet earum!
+       "Gather ingredients: chicken pieces, buttermilk, flour, spices, eggs, and
+       oil.", "Marinate the chicken in buttermilk and spices for at least 4
+       hours or overnight.", "Prepare a dredging station with seasoned flour,
+       egg wash, and breadcrumbs.", "Heat oil in a deep fryer or pan to 350°F
+       (175°C)."
       </span>
      </div>
     </div>

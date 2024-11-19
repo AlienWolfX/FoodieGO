@@ -5,14 +5,19 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
-export const AuthorProfile = ({ setAuthorModal, author, authorData }) => {
+export const AuthorProfile = ({
+ setAuthorModal,
+ author,
+ authorData,
+ basePath,
+}) => {
  const [isFollowing, setIsFollowing] = useState(
   authorData?.isFollowing || false
  );
  const [isLoading, setIsLoading] = useState(false);
 
  // Get author image from recipe data
- const authorRecipe = recipeData.find(recipe => recipe.author === author);
+ const authorRecipe = recipeData.find((recipe) => recipe.author === author);
  const authorImage = authorRecipe?.authorImage || authorData?.image;
 
  // Filter recipes by the selected author
@@ -46,6 +51,14 @@ export const AuthorProfile = ({ setAuthorModal, author, authorData }) => {
    setIsLoading(false);
   }
  };
+
+ //get the url
+ const path = window.location.pathname;
+ let firstSegment;
+
+ if (path.startsWith("/admin")) {
+  firstSegment = path.split("/")[1];
+ }
 
  return (
   <motion.div
@@ -82,7 +95,8 @@ export const AuthorProfile = ({ setAuthorModal, author, authorData }) => {
         className="h-16 w-16 rounded-full ring-2 ring-offset-2 ring-gray-100"
         alt={author}
         onError={(e) => {
-         e.target.src = "https://api.dicebear.com/7.x/lorelei/svg?seed=fallback";
+         e.target.src =
+          "https://api.dicebear.com/7.x/lorelei/svg?seed=fallback";
         }}
        />
        <div className="space-y-1">
@@ -147,7 +161,7 @@ export const AuthorProfile = ({ setAuthorModal, author, authorData }) => {
      <div className="">
       <FoodCard
        recipes={filteredRecipes}
-       basePath={""}
+       basePath={`${firstSegment ? "/admin/recipes" : ""}`}
        onCardClick={handleCardClick}
       />
      </div>

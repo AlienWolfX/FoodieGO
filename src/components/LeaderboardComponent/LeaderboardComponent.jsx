@@ -430,8 +430,8 @@ export const LeaderboardComponent = () => {
            <div>
             <p
              onClick={() => {
-               setSelectedAuthor(data);
-               setAuthorModal(true);
+              setSelectedAuthor(data);
+              setAuthorModal(true);
              }}
              className="text-sm font-medium text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
             >
@@ -481,11 +481,12 @@ export const LeaderboardComponent = () => {
     </div>
    </div>
    {authorModal && (
-     <AuthorProfile 
-       setAuthorModal={setAuthorModal}
-       author={selectedAuthor?.name}
-       authorData={selectedAuthor}
-     />
+    <AuthorProfile
+     setAuthorModal={setAuthorModal}
+     author={selectedAuthor?.name}
+     authorData={selectedAuthor}
+     basePath={"/admin/recipes"}
+    />
    )}
   </>
  );
