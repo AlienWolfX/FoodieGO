@@ -70,7 +70,7 @@ export const CommentsCard = () => {
    const commentToAdd = {
     ...newComment,
     date: new Date().toISOString(),
-    avatar: `https://api.dicebear.com/7.x/lorelei/svg?seed=${newComment.name.replace(
+    avatar: profilePicture || `https://api.dicebear.com/7.x/lorelei/svg?seed=${newComment.name.replace(
      /\s+/g,
      ""
     )}`,
