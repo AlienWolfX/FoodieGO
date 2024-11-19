@@ -25,6 +25,7 @@ import { toast } from "sonner";
 import { Toaster } from "sonner";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { MdReportGmailerrorred } from "react-icons/md";
 
 import {
  getUserData,
@@ -348,7 +349,7 @@ export const ViewRecipe = () => {
 
  const [openReport, setOpenReport] = useState(false);
 
- const reportedRecipe = {title, img_path, author};
+ const reportedRecipe = { title, img_path, author };
 
  return (
   <Layout>
@@ -375,20 +376,27 @@ export const ViewRecipe = () => {
      className="flex flex-row items-center justify-between"
     >
      <div>
-      <motion.h1
-       initial={{ opacity: 0, y: -20 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ delay: 0.3 }}
-       className="text-xl md:text-2xl font-bold"
-      >
-       {title}{" "}
-       <span
-        onClick={() => setOpenReport(true)}
-        className="text-[10px] ml-2 font-light text-gray-600 underline cursor-pointer"
+      <div className="flex items-center gap-2">
+       <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="text-xl md:text-2xl font-bold"
        >
-        report
-       </span>
-      </motion.h1>
+        {title}
+       </motion.h1>
+       <div className="p-1 hover:bg-gray-200 rounded-xl">
+        <span className="flex items-center m-0 p-0 ">
+         <MdReportGmailerrorred size={14} />
+         <span
+          onClick={() => setOpenReport(true)}
+          className="text-[10px] ml-1 font-light text-gray-600 underline cursor-pointer"
+         >
+          report
+         </span>
+        </span>
+       </div>
+      </div>
       <motion.p
        onClick={() => !isAdmin && setAuthorModal(true)}
        className={`${!isAdmin ? "cursor-pointer hover:text-red-500" : ""}`}

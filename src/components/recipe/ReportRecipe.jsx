@@ -4,20 +4,46 @@ import { IoCheckmarkOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 import { IoCloseOutline } from "react-icons/io5";
 import { useState } from "react";
+import { toast, Toaster } from "sonner";
 
 export const ReportRecipe = ({ setOpenReport, reportedRecipe }) => {
- const reason = [
-  "Inappropriate",
-  "Copyrigth",
-  "Fake Recipe",
-  "Misleading",
-  "Misinformation",
+ const reasons = [
+  "Incorrect or Dangerous Instructions",
+  // "Allergic Information Missing",
+  "Misleading Recipe Results",
+  "Stolen Recipe/No Credit",
+  "Inappropriate Content",
+  "Incorrect Measurements",
+  "Missing Critical Steps",
+  "Safety Concerns",
+  "Spam or Commercial Promotion",
+  "Cultural Misappropriation",
+  "Incomplete Recipe Information",
+  "False Health Claims",
+  "Ingredient Availability Issues",
+  "Recipe Not Tested",
+  "Dietary Restriction Misinformation",
  ];
 
+ const [selectedReason, setSelectedReason] = useState("");
+ const [message, setMessage] = useState("");
  const [openSubmitReport, setOpenSubmitReport] = useState(false);
+
+ const handleSubmit = () => {
+  if (!selectedReason) {
+   toast.error("Please select a reason");
+   return;
+  }
+  if (!message.trim()) {
+   toast.error("Please provide a message");
+   return;
+  }
+  setOpenSubmitReport(true);
+ };
 
  return (
   <>
+   <Toaster richColors position="top-center" />
    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-2 z-50">
     <motion.div
      initial={{ opacity: 0, y: 800 }}
@@ -28,7 +54,10 @@ export const ReportRecipe = ({ setOpenReport, reportedRecipe }) => {
     >
      <div className="flex items-center justify-between">
       <h1 className="text-lg font-semibold text-gray-600">Report Recipe</h1>
-      <IoCloseCircleSharp onClick={() => setOpenReport(false)} className="text-gray-600"/>
+      <IoCloseCircleSharp
+       onClick={() => setOpenReport(false)}
+       className="text-gray-600"
+      />
      </div>
      <div className="mb-5">
       <hr />
@@ -57,15 +86,14 @@ export const ReportRecipe = ({ setOpenReport, reportedRecipe }) => {
      <div className="mt-5">
       <h1 className="text-sm font-medium text-gray-600">Select Reason</h1>
       <select
-       value={reason}
-       name=""
-       id=""
+       value={selectedReason}
+       onChange={(e) => setSelectedReason(e.target.value)}
        className="w-full px-4 h-10 text-xs border rounded-md border-gray-300"
       >
-       <option value="" disabled className="text-xs">
+       <option value="" disabled>
         Select an option
        </option>
-       {reason.map((option, index) => (
+       {reasons.map((option, index) => (
         <option key={index} value={option} className="text-xs text-gray-700">
          {option}
         </option>
@@ -74,14 +102,18 @@ export const ReportRecipe = ({ setOpenReport, reportedRecipe }) => {
       <div className="mt-5">
        <p className="text-sm font-medium text-gray-500">Message</p>
        <textarea
-        name=""
-        id=""
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
         className="min-h-[50px] w-full rounded-md border border-gray-200 p-3 text-xs text-gray-600"
-       ></textarea>
+        placeholder="Please provide details about your report..."
+       />
       </div>
      </div>
-     <div onClick={() => setOpenSubmitReport(true)} className="mt-5">
-      <button className="h-10 rounded-md bg-mainblue text-white text-xs font-medium px-4 w-full">
+     <div className="mt-5">
+      <button
+       onClick={handleSubmit}
+       className="h-10 rounded-md bg-mainblue text-white text-xs font-medium px-4 w-full hover:bg-blue-600 transition-colors"
+      >
        Submit Report
       </button>
      </div>
