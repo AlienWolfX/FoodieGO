@@ -176,7 +176,13 @@ const LoginFormContent = ({
     </div>
    </div>
   </div>
-  <div className="mt-6 flex flex-col gap-3 items-center">
+  <div className="mt-6 flex flex-col gap-1">
+   <span
+    onClick={() => nav("/admin")}
+    className="text-[10px] text-mainblue font-light flex items-start cursor-pointer"
+   >
+    login as admin
+   </span>
    <button
     onClick={login}
     className={`w-full h-10 rounded-lg font-medium text-sm
@@ -194,7 +200,7 @@ const LoginFormContent = ({
     onClick={navCreateAccount}
     className={`text-xs ${
      isMobile ? "text-gray-200" : "text-gray-600"
-    } hover:text-mainblue transition-colors duration-200 cursor-pointer`}
+    } hover:text-mainblue transition-colors duration-200 cursor-pointer text-center`}
    >
     Don't have an account yet?{" "}
     <span className="font-medium text-sm">Create account</span>

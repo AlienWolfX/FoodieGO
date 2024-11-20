@@ -75,7 +75,7 @@ export const ReportRecipe = ({ setOpenReport, reportedRecipe }) => {
        <img
         src={reportedRecipe.img_path}
         alt=""
-        className="w-full h-[150px] rounded-md"
+        className="h-[140px] w-full object-cover rounded"
        />
       </div>
      </div>
