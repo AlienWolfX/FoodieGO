@@ -35,6 +35,8 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { toast } from "sonner";
+import { recipeData } from "../../../data/RecipeData";
 
 const Search = styled("div")(({ theme }) => ({
  position: "relative",
@@ -191,14 +193,34 @@ export const AdminReports = () => {
   setPage(0);
  };
 
- const handleOpenModal = (report) => {
+ const handleViewReport = (report) => {
   setSelectedReport(report);
   setOpenModal(true);
  };
 
  const handleCloseModal = () => {
-  setOpenModal(false);
   setSelectedReport(null);
+  setOpenModal(false);
+ };
+
+ const handleApproveReport = () => {
+  if (selectedReport) {
+   const updatedReports = reports.map((report) =>
+    report.id === selectedReport.id ? { ...report, status: "approved" } : report
+   );
+   toast.success("Report approved successfully");
+   handleCloseModal();
+  }
+ };
+
+ const handleRejectReport = () => {
+  if (selectedReport) {
+   const updatedReports = reports.map((report) =>
+    report.id === selectedReport.id ? { ...report, status: "rejected" } : report
+   );
+   toast.success("Report rejected successfully");
+   handleCloseModal();
+  }
  };
 
  const statCards = [
@@ -235,6 +257,21 @@ export const AdminReports = () => {
    hoverBg: "#fff1f2",
   },
  ];
+
+ const getFullRecipeData = (recipeId) => {
+  const fullRecipe = recipeData.find(recipe => recipe.id === recipeId);
+  if (!fullRecipe) {
+   console.warn(`Recipe with id ${recipeId} not found in recipeData`);
+   // Return basic info if full recipe not found
+   return {
+    id: selectedReport.recipeId,
+    title: selectedReport.recipeName,
+    img_path: selectedReport.recipeImage,
+    category: selectedReport.category,
+   };
+  }
+  return fullRecipe;
+ };
 
  return (
   <Layout>
@@ -400,20 +437,16 @@ export const AdminReports = () => {
           />
          </TableCell>
          <TableCell align="right">
-          <Box sx={{ display: "flex", gap: 0.5, justifyContent: "flex-end" }}>
-           <IconButton
-            size="small"
-            onClick={() => handleOpenModal(report)}
-            sx={{ p: 0.5 }}
-           >
-            <VisibilityIcon sx={{ fontSize: 16, color: "#64748b" }} />
-           </IconButton>
-           <IconButton size="small" sx={{ p: 0.5 }}>
-            <CheckCircleIcon sx={{ fontSize: 16, color: "#10b981" }} />
-           </IconButton>
-           <IconButton size="small" sx={{ p: 0.5 }}>
-            <BlockIcon sx={{ fontSize: 16, color: "#ef4444" }} />
-           </IconButton>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
+           <Tooltip title="View Details">
+            <IconButton
+             size="small"
+             onClick={() => handleViewReport(report)}
+             sx={{ color: "#3b82f6" }}
+            >
+             <VisibilityIcon sx={{ fontSize: 20 }} />
+            </IconButton>
+           </Tooltip>
           </Box>
          </TableCell>
         </TableRow>
@@ -441,24 +474,21 @@ export const AdminReports = () => {
       <DialogTitle
        sx={{
         p: 2.5,
+        pb: 0,
         display: "flex",
-        alignItems: "center",
         justifyContent: "space-between",
-        borderBottom: "1px solid #f1f5f9",
+        alignItems: "center",
        }}
       >
-       <Typography
-        variant="subtitle1"
-        sx={{ fontWeight: 500, color: "#1e293b" }}
-       >
+       <Typography variant="h6" sx={{ fontSize: "1rem" }}>
         Report Details
        </Typography>
        <IconButton
-        size="small"
         onClick={handleCloseModal}
-        sx={{ color: "#94a3b8" }}
+        size="small"
+        sx={{ color: "#64748b" }}
        >
-        <CloseIcon sx={{ fontSize: 18 }} />
+        <CloseIcon sx={{ fontSize: 20 }} />
        </IconButton>
       </DialogTitle>
 
@@ -485,6 +515,7 @@ export const AdminReports = () => {
           </Typography>
           <Link
            to={`/admin/recipes/view-recipe`}
+           state={getFullRecipeData(selectedReport.recipeId)}
            style={{ textDecoration: "none" }}
           >
            <Button
@@ -647,6 +678,7 @@ export const AdminReports = () => {
        <Button
         variant="contained"
         color="success"
+        onClick={handleApproveReport}
         sx={{
          backgroundColor: "#10b981",
          textTransform: "none",
@@ -659,6 +691,7 @@ export const AdminReports = () => {
        <Button
         variant="contained"
         color="error"
+        onClick={handleRejectReport}
         sx={{
          backgroundColor: "#ef4444",
          textTransform: "none",

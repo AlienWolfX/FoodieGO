@@ -6,7 +6,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { useState } from "react";
 import { toast, Toaster } from "sonner";
 
-export const ReportRecipe = ({ setOpenReport, reportedRecipe }) => {
+export const ReportRecipe = ({ setOpenReport, reportedRecipe, isAdmin }) => {
  const reasons = [
   "Incorrect or Dangerous Instructions",
   // "Allergic Information Missing",
@@ -109,14 +109,24 @@ export const ReportRecipe = ({ setOpenReport, reportedRecipe }) => {
        />
       </div>
      </div>
-     <div className="mt-5">
+
+     {isAdmin ? (
+      <div className="mt-5">
+       <button
+        onClick={handleSubmit}
+        className="h-10 rounded-md bg-mainblue text-white text-xs font-medium px-4 w-full hover:bg-blue-600 transition-colors"
+       >
+        Report Recipe
+       </button>
+      </div>
+     ) : (
       <button
        onClick={handleSubmit}
        className="h-10 rounded-md bg-mainblue text-white text-xs font-medium px-4 w-full hover:bg-blue-600 transition-colors"
       >
        Submit Report
       </button>
-     </div>
+     )}
     </motion.div>
    </div>
 

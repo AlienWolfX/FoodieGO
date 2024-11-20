@@ -10,8 +10,8 @@ export const FoodCard = ({ recipes, basePath, onCardClick }) => {
   <div className="w-full mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     {recipes.map((recipe) => (
      <Link
-      key={recipe.id}
       to={`${basePath}/view-recipe`}
+      key={recipe.id}
       state={{
        id: recipe.id,
        title: recipe.title,

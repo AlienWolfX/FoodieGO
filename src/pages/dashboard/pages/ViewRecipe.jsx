@@ -26,6 +26,8 @@ import { Toaster } from "sonner";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { MdReportGmailerrorred } from "react-icons/md";
+import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 import {
  getUserData,
@@ -35,6 +37,7 @@ import {
  unlikeRecipe,
 } from "../../../../data/UserData.js";
 import { ReportRecipe } from "../../../components/recipe/ReportRecipe.jsx";
+import { FaInfo } from "react-icons/fa6";
 
 export const ViewRecipe = () => {
  const nav = useNavigate();
@@ -385,17 +388,19 @@ export const ViewRecipe = () => {
        >
         {title}
        </motion.h1>
-       <div className="p-1 hover:bg-gray-200 rounded-xl">
-        <span className="flex items-center m-0 p-0 ">
-         <MdReportGmailerrorred size={14} />
-         <span
-          onClick={() => setOpenReport(true)}
-          className="text-[10px] ml-1 font-light text-gray-600 underline cursor-pointer"
-         >
-          report
+       {!isAdmin && (
+        <div className="p-1 hover:bg-gray-200 rounded-xl">
+         <span className="flex items-center m-0 p-0 ">
+          <MdReportGmailerrorred size={14} />
+          <span
+           onClick={() => setOpenReport(true)}
+           className="text-[10px] ml-1 font-light text-gray-600 underline cursor-pointer"
+          >
+           report
+          </span>
          </span>
-        </span>
-       </div>
+        </div>
+       )}
       </div>
       <motion.p
        onClick={() => !isAdmin && setAuthorModal(true)}
@@ -404,6 +409,15 @@ export const ViewRecipe = () => {
        Author: {author}
       </motion.p>
      </div>
+     {isAdmin && (
+      <motion.div>
+       <Tooltip title="report recipe" onClick={() => setOpenReport(true)}>
+        <IconButton>
+         <ReportGmailerrorredIcon color="error" />
+        </IconButton>
+       </Tooltip>
+      </motion.div>
+     )}
      {!isAdmin && (
       <motion.div
        initial={{ opacity: 0, x: 20 }}
@@ -686,6 +700,7 @@ export const ViewRecipe = () => {
      <ReportRecipe
       setOpenReport={setOpenReport}
       reportedRecipe={reportedRecipe}
+      isAdmin={"Admin"}
      />
     )}
    </AnimatePresence>
