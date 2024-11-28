@@ -26,6 +26,17 @@ export const UserFoodCard = ({ recipes = [], onDelete, onUpdate }) => {
   }
  };
 
+ const handleRecipeUpdate = (updatedRecipe) => {
+  try {
+   onUpdate?.(updatedRecipe);
+   setEditingRecipe(null);
+   toast.success('Recipe updated successfully');
+  } catch (error) {
+   console.error('Error updating recipe:', error);
+   toast.error('Failed to update recipe');
+  }
+ };
+
  if (!recipes || recipes.length === 0) {
   return (
    <div className="text-center py-10">
@@ -176,10 +187,7 @@ export const UserFoodCard = ({ recipes = [], onDelete, onUpdate }) => {
       setCreateRecipe={() => setEditingRecipe(null)}
       isEditing={true}
       recipeData={editingRecipe}
-      onRecipeUpdated={(updatedRecipe) => {
-       onUpdate?.(updatedRecipe);
-       setEditingRecipe(null);
-      }}
+      onRecipeUpdated={handleRecipeUpdate}
      />
     )}
    </AnimatePresence>

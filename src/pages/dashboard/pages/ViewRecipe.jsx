@@ -389,16 +389,30 @@ export const ViewRecipe = () => {
         {title}
        </motion.h1>
        {!isAdmin && (
-        <div className="p-1 hover:bg-gray-200 rounded-xl">
-         <span className="flex items-center m-0 p-0 ">
-          <MdReportGmailerrorred size={14} />
-          <span
-           onClick={() => setOpenReport(true)}
-           className="text-[10px] ml-1 font-light text-gray-600 underline cursor-pointer"
-          >
-           report
-          </span>
-         </span>
+        <div className="flex items-center gap-2">
+         <div className="rounded-lg flex items-center justify-center">
+          {isCurrentFavorite ? (
+           <Tooltip title="Remove from Favorites">
+            <button
+             onClick={toggleFavorite}
+             className="flex items-center gap-1 px-2 py-1 bg-yellow-50 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+             <BookmarkIcon className="text-yellow-300" fontSize="medium" />
+             <span className="text-sm text-gray-600">Favorite</span>
+            </button>
+           </Tooltip>
+          ) : (
+           <Tooltip title="Add to Favorites">
+            <button
+             onClick={toggleFavorite}
+             className="flex items-center gap-1 px-2 py-1 bg-yellow-50 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+             <BookmarkBorderIcon className="text-yellow-300" fontSize="medium" />
+             <span className="text-sm text-gray-600">Favorite</span>
+            </button>
+           </Tooltip>
+          )}
+         </div>
         </div>
        )}
       </div>
@@ -409,7 +423,7 @@ export const ViewRecipe = () => {
        Author: {author}
       </motion.p>
      </div>
-     {isAdmin && (
+     {isAdmin ? (
       <motion.div>
        <Tooltip title="report recipe" onClick={() => setOpenReport(true)}>
         <IconButton>
@@ -417,41 +431,36 @@ export const ViewRecipe = () => {
         </IconButton>
        </Tooltip>
       </motion.div>
-     )}
-     {!isAdmin && (
+     ) : (
       <motion.div
        initial={{ opacity: 0, x: 20 }}
        animate={{ opacity: 1, x: 0 }}
        transition={{ delay: 0.4 }}
        className="flex items-center gap-1"
       >
-       <div className="rounded-lg flex items-center justify-center">
-        {isCurrentFavorite ? (
-         <Tooltip title="Remove from Favorites" onClick={toggleFavorite}>
-          <IconButton>
-           <BookmarkIcon className="text-yellow-300" fontSize="medium" />
-          </IconButton>
-         </Tooltip>
-        ) : (
-         <Tooltip title="Add to Favorites" onClick={toggleFavorite}>
-          <IconButton>
-           <BookmarkBorderIcon className="text-yellow-300" fontSize="medium" />
-          </IconButton>
-         </Tooltip>
-        )}
+       <div className="p-3 hover:bg-gray-100 rounded-xl">
+        <span className="flex items-center m-0 p-0">
+         <MdReportGmailerrorred size={14} />
+         <span
+          onClick={() => setOpenReport(true)}
+          className="text-[10px] ml-1 font-light text-gray-600 underline cursor-pointer"
+         >
+          report
+         </span>
+        </span>
        </div>
        <div className="rounded-lg flex items-center justify-center">
         {isLiked ? (
          <Tooltip title="Unlike" onClick={toggleLike}>
-          <IconButton>
-           <Favorite className="text-red-500" fontSize="small" />
+          <IconButton className="">
+           <Favorite className="text-red-500 " fontSize="small" />
           </IconButton>
          </Tooltip>
         ) : (
          <Tooltip title="Like" onClick={toggleLike}>
-          <IconButton>
+          <IconButton className="">
            <FavoriteBorderOutlinedIcon
-            className="text-red-500"
+            className="text-red-500 "
             fontSize="small"
            />
           </IconButton>

@@ -22,26 +22,124 @@ export const AdminRecipes = () => {
 
  const cuisines = [
   "All",
+  // East Asian
   "Chinese",
   "Japanese",
   "Korean",
+
+  // Southeast Asian
   "Thai",
-  "Indian",
   "Vietnamese",
   "Filipino",
   "Malaysian",
   "Indonesian",
+  "Singaporean",
+  "Burmese",
+  "Cambodian",
+  "Laotian",
+
+  // South Asian
+  "Indian",
+  "Pakistani",
+  "Bangladeshi",
+  "Sri Lankan",
+  "Nepali",
+
+  // Middle Eastern
+  "Lebanese",
+  "Turkish",
+  "Persian",
+  "Arabian",
+  "Israeli",
+
+  // European
+  "Italian",
+  "French",
+  "Spanish",
+  "Greek",
+  "German",
+  "British",
+  "Russian",
+  "Polish",
+  "Hungarian",
+
+  // American
+  "American",
+  "Mexican",
+  "Brazilian",
+  "Peruvian",
+  "Argentine",
+
+  // African
+  "Moroccan",
+  "Ethiopian",
+  "Nigerian",
+  "Egyptian",
+
+  // Fusion
+  "Asian Fusion",
+  "Mediterranean",
+  "Caribbean",
+  "Pacific Rim",
  ];
 
  const categories = [
   "All",
+  // Main Categories
   "Appetizers",
   "Main Dishes",
   "Side Dishes",
   "Desserts",
+
+  // Course Types
+  "Breakfast",
+  "Lunch",
+  "Dinner",
+  "Snacks",
+  "Beverages",
+
+  // Dish Types
   "Soups",
+  "Salads",
+  "Sandwiches",
   "Noodles & Rice",
+  "Pasta",
+  "Stir-Fries",
+  "Grilled Dishes",
+  "Roasted Dishes",
+  "Steamed Dishes",
+  "Braised Dishes",
+  "Stews",
+  "Curries",
+
+  // Specific Categories
+  "Seafood",
+  "Meat Dishes",
+  "Poultry",
+  "Vegetarian",
+  "Vegan",
+  "Gluten-Free",
+
+  // Baked Goods
+  "Breads",
+  "Pastries",
+  "Cakes",
+  "Cookies",
+
+  // Condiments & Extras
   "Sauces & Condiments",
+  "Dips & Spreads",
+  "Marinades",
+  "Spice Blends",
+
+  // Preservation
+  "Pickled & Fermented",
+  "Preserves & Jams",
+
+  // Special Occasions
+  "Holiday Specials",
+  "Party Food",
+  "Street Food",
  ];
 
  // Calculate counts when component mounts
@@ -265,7 +363,7 @@ export const AdminRecipes = () => {
           className="absolute right-0 mt-1 w-48 origin-top-right divide-y divide-gray-100 
                               rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
          >
-          <div className="p-1">
+          <div className="p-1  max-h-[300px] overflow-y-auto custom-scrollbar">
            {cuisines.map((cuisine) => (
             <Menu.Item key={cuisine}>
              {({ active }) => (
@@ -309,7 +407,7 @@ export const AdminRecipes = () => {
           className="absolute right-0 mt-1 w-48 origin-top-right divide-y divide-gray-100 
                                 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
          >
-          <div className="p-1">
+          <div className="p-1  max-h-[300px] overflow-y-auto custom-scrollbar">
            {categories.map((category) => (
             <Menu.Item key={category}>
              {({ active }) => (

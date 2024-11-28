@@ -78,13 +78,20 @@ export const MyRecipes = () => {
             onUpdate={handleRecipeUpdated}
           />
         </motion.div>
+      </motion.div>
 
-        <AnimatePresence mode="wait">
-          {createRecipe && (
+      <AnimatePresence>
+        {createRecipe && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+          >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2 }}
             >
               <CreateRecipe 
@@ -92,9 +99,9 @@ export const MyRecipes = () => {
                 onRecipeCreated={handleRecipeCreated}
               />
             </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 };

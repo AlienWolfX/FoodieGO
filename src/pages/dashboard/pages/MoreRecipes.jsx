@@ -7,7 +7,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { FiSearch, FiX, FiChevronDown, FiFilter } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
-import { Menu } from '@headlessui/react';
+import { Menu } from "@headlessui/react";
 
 export const MoreRecipes = () => {
  const location = useLocation();
@@ -26,26 +26,124 @@ export const MoreRecipes = () => {
 
  const cuisines = [
   "All",
+  // East Asian
   "Chinese",
   "Japanese",
   "Korean",
+
+  // Southeast Asian
   "Thai",
-  "Indian",
   "Vietnamese",
   "Filipino",
   "Malaysian",
   "Indonesian",
+  "Singaporean",
+  "Burmese",
+  "Cambodian",
+  "Laotian",
+
+  // South Asian
+  "Indian",
+  "Pakistani",
+  "Bangladeshi",
+  "Sri Lankan",
+  "Nepali",
+
+  // Middle Eastern
+  "Lebanese",
+  "Turkish",
+  "Persian",
+  "Arabian",
+  "Israeli",
+
+  // European
+  "Italian",
+  "French",
+  "Spanish",
+  "Greek",
+  "German",
+  "British",
+  "Russian",
+  "Polish",
+  "Hungarian",
+
+  // American
+  "American",
+  "Mexican",
+  "Brazilian",
+  "Peruvian",
+  "Argentine",
+
+  // African
+  "Moroccan",
+  "Ethiopian",
+  "Nigerian",
+  "Egyptian",
+
+  // Fusion
+  "Asian Fusion",
+  "Mediterranean",
+  "Caribbean",
+  "Pacific Rim",
  ];
 
  const categories = [
   "All",
+  // Main Categories
   "Appetizers",
   "Main Dishes",
   "Side Dishes",
   "Desserts",
+
+  // Course Types
+  "Breakfast",
+  "Lunch",
+  "Dinner",
+  "Snacks",
+  "Beverages",
+
+  // Dish Types
   "Soups",
+  "Salads",
+  "Sandwiches",
   "Noodles & Rice",
+  "Pasta",
+  "Stir-Fries",
+  "Grilled Dishes",
+  "Roasted Dishes",
+  "Steamed Dishes",
+  "Braised Dishes",
+  "Stews",
+  "Curries",
+
+  // Specific Categories
+  "Seafood",
+  "Meat Dishes",
+  "Poultry",
+  "Vegetarian",
+  "Vegan",
+  "Gluten-Free",
+
+  // Baked Goods
+  "Breads",
+  "Pastries",
+  "Cakes",
+  "Cookies",
+
+  // Condiments & Extras
   "Sauces & Condiments",
+  "Dips & Spreads",
+  "Marinades",
+  "Spice Blends",
+
+  // Preservation
+  "Pickled & Fermented",
+  "Preserves & Jams",
+
+  // Special Occasions
+  "Holiday Specials",
+  "Party Food",
+  "Street Food",
  ];
 
  // Add this effect to trigger search when navigated with a search query
@@ -59,22 +157,26 @@ export const MoreRecipes = () => {
  useEffect(() => {
   // Calculate cuisine counts
   const cCounts = cuisines.reduce((acc, cuisine) => {
-    if (cuisine === "All") {
-      acc[cuisine] = recipeData.length;
-    } else {
-      acc[cuisine] = recipeData.filter(recipe => recipe.cuisine === cuisine).length;
-    }
-    return acc;
+   if (cuisine === "All") {
+    acc[cuisine] = recipeData.length;
+   } else {
+    acc[cuisine] = recipeData.filter(
+     (recipe) => recipe.cuisine === cuisine
+    ).length;
+   }
+   return acc;
   }, {});
-  
+
   // Calculate category counts
   const catCounts = categories.reduce((acc, category) => {
-    if (category === "All") {
-      acc[category] = recipeData.length;
-    } else {
-      acc[category] = recipeData.filter(recipe => recipe.category === category).length;
-    }
-    return acc;
+   if (category === "All") {
+    acc[category] = recipeData.length;
+   } else {
+    acc[category] = recipeData.filter(
+     (recipe) => recipe.category === category
+    ).length;
+   }
+   return acc;
   }, {});
 
   setCuisineCounts(cCounts);
@@ -108,12 +210,12 @@ export const MoreRecipes = () => {
    setActiveSearch("");
    setSelectedCuisine("All");
    setSelectedCategory("All");
-   
+
    // Clear location state if it exists
    if (location.state?.searchQuery) {
     window.history.replaceState({}, document.title);
    }
-   
+
    setTimeout(() => {
     window.location.reload();
    }, 2000);
@@ -203,182 +305,186 @@ export const MoreRecipes = () => {
 
  return (
   <Layout>
-   <div className="bg-white rounded-xl shadow-sm mb-6">
-    <div className="p-4">
-     <div className="mx-auto">
-      {/* Search and Filters */}
-      <div className="flex flex-col md:flex-row gap-3">
-       {/* Search Input */}
-       <div className="relative flex-1">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-         <FiSearch className="h-4 w-4 text-gray-400" />
-        </div>
-        <input
-         type="text"
-         placeholder="Search for recipes..."
-         className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg 
-                          focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all"
-         value={searchTerm}
-         onChange={(e) => setSearchTerm(e.target.value)}
-         onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-         disabled={isLoading}
-        />
-       </div>
-
-       {/* Filter Dropdowns */}
-       <div className="flex gap-2">
-        {/* Cuisine Dropdown */}
-        <Menu as="div" className="relative">
-         <Menu.Button className="flex flex-col items-start px-4 py-2 text-sm border border-gray-200 
-                           rounded-lg hover:bg-gray-50 transition-colors duration-200 min-w-[140px]">
-          <span className="text-xs text-gray-500 mb-0.5">Cuisine</span>
-          <div className="flex items-center justify-between w-full">
-           <span className="font-medium text-gray-700 flex items-center gap-2">
-            {selectedCuisine}
-            {selectedCuisine !== "All" && (
-              <span className="px-1.5 py-0.5 text-xs bg-blue-100 text-blue-600 rounded-full">
-                {cuisineCounts[selectedCuisine] || 0}
-              </span>
-            )}
-           </span>
-           <FiChevronDown className="h-4 w-4 text-gray-400" />
-          </div>
-         </Menu.Button>
-
-         <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 
-                                     rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
-          <div className="p-1">
-           {cuisines.map((cuisine) => (
-            <Menu.Item key={cuisine}>
-             {({ active }) => (
-              <button
-               onClick={() => setSelectedCuisine(cuisine)}
-               className={`${
-                active ? 'bg-gray-50' : ''
-               } ${
-                selectedCuisine === cuisine ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
-               } group flex w-full items-center justify-between rounded-md px-3 py-2 text-sm`}
-              >
-               <span>{cuisine}</span>
-               <span className={`px-1.5 py-0.5 text-xs rounded-full ${
-                 selectedCuisine === cuisine 
-                   ? 'bg-blue-100 text-blue-600' 
-                   : 'bg-gray-100 text-gray-600'
-               }`}>
-                 {cuisineCounts[cuisine] || 0}
-               </span>
-              </button>
-             )}
-            </Menu.Item>
-           ))}
-          </div>
-         </Menu.Items>
-        </Menu>
-
-        {/* Category Dropdown */}
-        <Menu as="div" className="relative">
-         <Menu.Button className="flex flex-col items-start px-4 py-2 text-sm border border-gray-200 
-                           rounded-lg hover:bg-gray-50 transition-colors duration-200 min-w-[140px]">
-          <span className="text-xs text-gray-500 mb-0.5">Category</span>
-          <div className="flex items-center justify-between w-full">
-           <span className="font-medium text-gray-700 flex items-center gap-2">
-            {selectedCategory}
-            {selectedCategory !== "All" && (
-              <span className="px-1.5 py-0.5 text-xs bg-blue-100 text-blue-600 rounded-full">
-                {categoryCounts[selectedCategory] || 0}
-              </span>
-            )}
-           </span>
-           <FiChevronDown className="h-4 w-4 text-gray-400" />
-          </div>
-         </Menu.Button>
-
-         <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 
-                                     rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
-          <div className="p-1">
-           {categories.map((category) => (
-            <Menu.Item key={category}>
-             {({ active }) => (
-              <button
-               onClick={() => setSelectedCategory(category)}
-               className={`${
-                active ? 'bg-gray-50' : ''
-               } ${
-                selectedCategory === category ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
-               } group flex w-full items-center justify-between rounded-md px-3 py-2 text-sm`}
-              >
-               <span>{category}</span>
-               <span className={`px-1.5 py-0.5 text-xs rounded-full ${
-                 selectedCategory === category 
-                   ? 'bg-blue-100 text-blue-600' 
-                   : 'bg-gray-100 text-gray-600'
-               }`}>
-                 {categoryCounts[category] || 0}
-               </span>
-              </button>
-             )}
-            </Menu.Item>
-           ))}
-          </div>
-         </Menu.Items>
-        </Menu>
-
-        {/* Search Button */}
-        <button
-         onClick={handleSearch}
-         disabled={isLoading}
-         className={`px-6 py-2.5 bg-mainblue text-white rounded-lg text-sm font-medium 
-                          transition-all duration-200 flex items-center gap-2 whitespace-nowrap ${
-                            isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-600'
-                          }`}
-        >
-         {isLoading ? (
-          <>
-           <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path className="opacity-75" fill="currentColor" 
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-           </svg>
-           <span>Searching...</span>
-          </>
-         ) : (
-          <>
-           <FiSearch className="h-4 w-4" />
-           <span>Search</span>
-          </>
-         )}
-        </button>
-       </div>
+   {/* Search and Filters Section */}
+   <div className="bg-white rounded-xl shadow-sm p-3">
+    <div className="flex flex-col md:flex-row gap-2">
+     {/* Search Input */}
+     <div className="relative flex-1">
+      <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+       <FiSearch className="h-4 w-4 text-gray-400" />
       </div>
+      <input
+       type="text"
+       placeholder="Search for recipes..."
+       className="w-full h-9 pl-8 pr-3 text-sm border border-gray-200 rounded-lg 
+                        focus:ring-1 focus:ring-blue-100 focus:border-blue-500 transition-all"
+       value={searchTerm}
+       onChange={(e) => setSearchTerm(e.target.value)}
+       onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+       disabled={isLoading}
+    />
+     </div>
 
-      {/* Active Filters */}
-      {(selectedCuisine !== "All" || selectedCategory !== "All") && (
-       <div className="flex items-center gap-2 mt-3">
-        <FiFilter className="h-3 w-3 text-gray-400" />
-        <span className="text-xs text-gray-500">Active filters:</span>
-        {selectedCuisine !== "All" && (
-         <span className="px-2 py-1 bg-blue-50 text-blue-600 rounded-md text-xs">
-          {selectedCuisine}
-         </span>
-        )}
-        {selectedCategory !== "All" && (
-         <span className="px-2 py-1 bg-blue-50 text-blue-600 rounded-md text-xs">
-          {selectedCategory}
-         </span>
-        )}
-        <button
-         onClick={() => {
-          setSelectedCuisine("All");
-          setSelectedCategory("All");
-         }}
-         className="ml-auto text-xs text-red-500 hover:text-red-600"
-        >
-         Clear all
-        </button>
-       </div>
-      )}
+     {/* Filter Dropdowns */}
+     <div className="flex gap-2">
+      {/* Cuisine Dropdown */}
+      <Menu as="div" className="relative">
+       <Menu.Button
+        className="h-9 px-3 border border-gray-200 rounded-lg hover:bg-gray-50 
+                          transition-colors flex items-center gap-2 min-w-[120px] text-sm"
+       >
+        <span className="text-gray-700">{selectedCuisine}</span>
+        <FiChevronDown className="h-4 w-4 text-gray-400 ml-auto" />
+       </Menu.Button>
+
+       <Menu.Items
+        className="absolute right-0 mt-1 w-48 origin-top-right divide-y divide-gray-100 
+                          rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+       >
+        <div className="p-1 max-h-[300px] overflow-y-auto custom-scrollbar">
+         {cuisines.map((cuisine) => (
+          <Menu.Item key={cuisine}>
+           {({ active }) => (
+            <button
+             onClick={() => setSelectedCuisine(cuisine)}
+             className={`${active ? "bg-gray-50" : ""} ${
+              selectedCuisine === cuisine
+                ? "text-blue-600 bg-blue-50"
+                : "text-gray-700"
+             } group flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs`}
+            >
+             <span>{cuisine}</span>
+             <span
+              className={`px-1.5 py-0.5 text-xs rounded-full ${
+               selectedCuisine === cuisine
+                 ? "bg-blue-100 text-blue-600"
+                 : "bg-gray-100 text-gray-600"
+              }`}
+             >
+              {cuisineCounts[cuisine] || 0}
+             </span>
+            </button>
+           )}
+          </Menu.Item>
+         ))}
+        </div>
+       </Menu.Items>
+      </Menu>
+
+      {/* Category Dropdown */}
+      <Menu as="div" className="relative">
+       <Menu.Button
+        className="h-9 px-3 border border-gray-200 rounded-lg hover:bg-gray-50 
+                          transition-colors flex items-center gap-2 min-w-[120px] text-sm"
+       >
+        <span className="text-gray-700">{selectedCategory}</span>
+        <FiChevronDown className="h-4 w-4 text-gray-400 ml-auto" />
+       </Menu.Button>
+
+       <Menu.Items
+        className="absolute right-0 mt-1 w-48 origin-top-right divide-y divide-gray-100 
+                          rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+       >
+        <div className="p-1 max-h-[300px] overflow-y-auto custom-scrollbar">
+         {categories.map((category) => (
+          <Menu.Item key={category}>
+           {({ active }) => (
+            <button
+             onClick={() => setSelectedCategory(category)}
+             className={`${active ? "bg-gray-50" : ""} ${
+              selectedCategory === category
+                ? "text-blue-600 bg-blue-50"
+                : "text-gray-700"
+             } group flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs`}
+            >
+             <span>{category}</span>
+             <span
+              className={`px-1.5 py-0.5 text-xs rounded-full ${
+               selectedCategory === category
+                 ? "bg-blue-100 text-blue-600"
+                 : "bg-gray-100 text-gray-600"
+              }`}
+             >
+              {categoryCounts[category] || 0}
+             </span>
+            </button>
+           )}
+          </Menu.Item>
+         ))}
+        </div>
+       </Menu.Items>
+      </Menu>
+
+      {/* Search Button */}
+      <button
+       onClick={handleSearch}
+       disabled={isLoading}
+       className={`h-9 px-4 bg-mainblue text-white rounded-lg text-sm font-medium 
+                        transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap ${
+                         isLoading
+                           ? "opacity-70 cursor-not-allowed"
+                           : "hover:bg-blue-600"
+                        }`}
+      >
+       {isLoading ? (
+         <>
+          <svg
+           className="animate-spin h-4 w-4"
+           fill="none"
+           viewBox="0 0 24 24"
+          >
+           <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+           />
+           <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+           />
+          </svg>
+          <span>Searching...</span>
+         </>
+       ) : (
+         <>
+          <FiSearch className="h-4 w-4" />
+          <span>Search</span>
+         </>
+       )}
+      </button>
      </div>
     </div>
+
+    {/* Active Filters */}
+    {(selectedCuisine !== "All" || selectedCategory !== "All") && (
+     <div className="flex items-center gap-2 mt-2">
+      <FiFilter className="h-3 w-3 text-gray-400" />
+      <span className="text-xs text-gray-500">Active filters:</span>
+      {selectedCuisine !== "All" && (
+       <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-md text-xs">
+        {selectedCuisine}
+       </span>
+      )}
+      {selectedCategory !== "All" && (
+       <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-md text-xs">
+        {selectedCategory}
+       </span>
+      )}
+      <button
+       onClick={() => {
+        setSelectedCuisine("All");
+        setSelectedCategory("All");
+       }}
+       className="ml-auto text-xs text-red-500 hover:text-red-600"
+      >
+       Clear all
+      </button>
+     </div>
+    )}
    </div>
 
    {/* Recipe grid */}
