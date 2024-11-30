@@ -1,115 +1,215 @@
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FiMail, FiLock, FiArrowRight } from "react-icons/fi";
-import { MdAdminPanelSettings } from "react-icons/md";
+import { useState, useRef, useEffect } from "react";
+import { Toaster, toast } from "sonner";
+import LoadingBar from "react-top-loading-bar";
+import loginImg from "/auth-images/loginImg.jpg"; // You might want to use a different admin-specific image
 
 export const AdminLogin = () => {
- const nav = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const nav = useNavigate();
+  const ref = useRef(null);
 
- return (
-  <div className="flex w-full h-screen bg-gray-50">
-    {/* Left Side - Image/Brand Section */}
-    <div className="hidden lg:flex w-1/2 bg-blue-600 p-12 relative overflow-hidden">
-      <div className="relative z-10 w-full h-full flex flex-col justify-between text-white">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2"
-          >
-            <MdAdminPanelSettings className="text-4xl" />
-            <h1 className="text-2xl font-bold">FooDiego Admin</h1>
-          </motion.div>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 text-blue-100 max-w-md"
-          >
-            Manage your recipes, users, and content all in one place. Welcome to your administrative dashboard.
-          </motion.p>
-        </div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-sm text-blue-100"
-        >
-          © 2024 FooDiego. All rights reserved.
-        </motion.div>
-      </div>
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-blue-700 opacity-50">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.15"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-        }} />
-      </div>
-    </div>
+  const login = async (e) => {
+    if (email === "" || password === "") {
+      toast.error("Login credentials needed");
+    } else {
+      ref.current.staticStart(50);
 
-    {/* Right Side - Login Form */}
-    <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
-      >
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800">Welcome Back</h2>
-          <p className="text-gray-500 mt-2">Please sign in to your admin account</p>
+      setTimeout(() => {
+        ref.current.staticStart(70);
+      }, 1500);
+
+      setTimeout(() => {
+        toast.success("Admin Login Successful!");
+        ref.current.complete();
+        setTimeout(() => {
+          nav("/admin/home");
+        }, 300);
+      }, 3000);
+    }
+  };
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <>
+      <LoadingBar color="#f11946" ref={ref} />
+      <Toaster richColors position="top-center" />
+      <div className="w-full h-screen flex flex-col md:flex-row justify-between items-center">
+        <div className="hidden md:flex shadow-lg w-full h-full">
+          <img src={loginImg} alt="" className="w-full bg-cover bg-center" />
         </div>
 
-        <div className="space-y-6">
-          <div className="relative">
-            <label htmlFor="email" className="text-sm font-medium text-gray-700 block mb-2">
-              Email Address
-            </label>
-            <div className="relative">
-              <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <input
-                type="email"
-                id="email"
-                placeholder="admin@foodiego.com"
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition-colors outline-none"
+        {isMobile ? (
+          <div
+            className="fixed inset-0 flex justify-center items-center z-20"
+            style={{
+              background: "linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)",
+            }}
+          >
+            <div className="w-[90%] max-w-[400px] animate-fadeIn">
+              <AdminLoginContent
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+                login={login}
+                nav={nav}
+                isMobile={isMobile}
               />
             </div>
           </div>
-
-          <div className="relative">
-            <label htmlFor="password" className="text-sm font-medium text-gray-700 block mb-2">
-              Password
-            </label>
-            <div className="relative">
-              <FiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition-colors outline-none"
+        ) : (
+          <div className="h-screen w-full md:w-1/2 flex items-center justify-center">
+            <div className="bg-white h-auto p-10 rounded-xl border border-mainblue border-opacity-15 shadow-sm w-[90%] max-w-[400px] transition-all duration-300 hover:shadow-lg">
+              <AdminLoginContent
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+                login={login}
+                nav={nav}
+                isMobile={isMobile}
               />
             </div>
           </div>
-
-          <div className="flex items-center justify-between">
-            <label className="flex items-center">
-              <input type="checkbox" className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-              <span className="ml-2 text-sm text-gray-600">Remember me</span>
-            </label>
-            <a href="#" className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-              Forgot password?
-            </a>
-          </div>
-
-          <button
-            onClick={() => nav("/admin/home")}
-            className="w-full h-10 bg-blue-600 rounded-md text-white text-sm font-medium"
-          >
-            Login
-          </button>
-        </div>
-      </motion.div>
-    </div>
-  </div>
- );
+        )}
+      </div>
+    </>
+  );
 };
+
+const AdminLoginContent = ({
+  email,
+  setEmail,
+  password,
+  setPassword,
+  login,
+  nav,
+  isMobile,
+}) => (
+  <>
+    <div className="space-y-2 text-center mb-8">
+      <div
+        className={`text-2xl ${
+          isMobile ? "text-white" : "text-mainblue"
+        } font-bold`}
+      >
+        Welcome Back, Admin
+      </div>
+      <p className={`text-sm ${
+        isMobile ? "text-gray-200" : "text-gray-500"
+      }`}>
+        Start managing user reports and monitor activities
+      </p>
+    </div>
+
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1.5">
+        <label
+          htmlFor="email"
+          className={`text-sm font-medium ${
+            isMobile ? "text-gray-200" : "text-gray-700"
+          }`}
+        >
+          Admin Email
+        </label>
+        <input
+          type="email"
+          placeholder="Enter your admin email"
+          className={`px-4 h-10 rounded-lg text-sm border 
+            ${
+              isMobile
+                ? "bg-white/10 border-white/20 text-white placeholder:text-gray-300"
+                : "border-gray-300"
+            } 
+            focus:ring-2 focus:ring-mainblue focus:border-mainblue
+            transition-all duration-200 outline-none`}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <label
+          htmlFor="password"
+          className={`text-sm font-medium ${
+            isMobile ? "text-gray-200" : "text-gray-700"
+          }`}
+        >
+          Admin Password
+        </label>
+        <input
+          type="password"
+          placeholder="Enter your admin password"
+          className={`px-4 h-10 rounded-lg text-sm border 
+            ${
+              isMobile
+                ? "bg-white/10 border-white/20 text-white placeholder:text-gray-300"
+                : "border-gray-300"
+            } 
+            focus:ring-2 focus:ring-mainblue focus:border-mainblue
+            transition-all duration-200 outline-none`}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <div className="flex justify-end mt-1">
+          <p
+            onClick={() => nav("/admin/forgot-password")}
+            className={`text-xs ${
+              isMobile ? "text-gray-200" : "text-gray-600"
+            } hover:text-mainblue transition-colors duration-200 cursor-pointer`}
+          >
+            Forgot your password?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div className="mt-8 space-y-4">
+      <button
+        onClick={login}
+        className={`w-full h-10 rounded-lg font-medium text-sm
+          transform transition-all duration-200 
+          ${
+            isMobile
+              ? "bg-white text-mainblue hover:bg-white/90"
+              : "bg-mainblue text-white hover:bg-mainblue/90"
+          }
+          hover:shadow-lg active:scale-95`}
+      >
+        Sign In as Admin
+      </button>
+      
+      <div className="flex flex-col items-center gap-2">
+        <div className={`text-xs ${
+          isMobile ? "text-gray-200" : "text-gray-500"
+        }`}>
+          Access admin dashboard to:
+          <ul className="mt-1 space-y-1 text-left list-disc pl-4">
+            <li>Manage user reports</li>
+            <li>Monitor recipe activities</li>
+            <li>Review user feedback</li>
+          </ul>
+        </div>
+        
+        <span
+          onClick={() => nav("/login")}
+          className="text-[12px] text-mainblue font-light hover:font-medium flex items-center cursor-pointer mt-2"
+        >
+          ← Back to user login
+        </span>
+      </div>
+    </div>
+  </>
+);

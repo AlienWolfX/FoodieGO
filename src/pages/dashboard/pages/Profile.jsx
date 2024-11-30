@@ -11,7 +11,7 @@ export const MyProfile = () => {
    <div className="mt-2">
     <hr />
    </div>
-   <div className="mt-5 flex items-start gap-5">
+   <div className="mt-5 md:flex items-start gap-5">
     <ProfileCard />
     <ProfilePreferencesCards />
    </div>

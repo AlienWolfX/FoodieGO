@@ -104,6 +104,7 @@ const reports = [
   category: "Dinner",
   severity: "high",
   recipeId: 1,
+  message: "This recipe contains inappropriate language and misleading instructions that could be harmful.",
  },
  {
   id: 2,
@@ -117,6 +118,7 @@ const reports = [
   category: "Dinner",
   severity: "medium",
   recipeId: 2,
+  message: "This recipe violates copyright laws.",
  },
  {
   id: 3,
@@ -130,6 +132,7 @@ const reports = [
   category: "Desserts",
   severity: "low",
   recipeId: 16,
+  message: "This recipe contains misleading instructions.",
  },
  {
   id: 4,
@@ -143,6 +146,7 @@ const reports = [
   category: "Dinner",
   severity: "medium",
   recipeId: 4,
+  message: "This recipe contains incorrect ingredients.",
  },
  {
   id: 5,
@@ -156,6 +160,7 @@ const reports = [
   category: "Main Dishes",
   severity: "low",
   recipeId: 15,
+  message: "This recipe is a duplicate of another recipe.",
  },
 ];
 
@@ -494,167 +499,183 @@ export const AdminReports = () => {
 
       <DialogContent sx={{ p: 2.5 }}>
        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-        {/* Recipe Section */}
-        <Box
-         sx={{
-          display: "flex",
-          gap: 2,
-          p: 2,
-          backgroundColor: "#f8fafc",
-          borderRadius: "6px",
-         }}
-        >
-         <Avatar
-          variant="rounded"
-          src={selectedReport.recipeImage}
-          sx={{ width: 48, height: 48, borderRadius: 1 }}
-         />
-         <Box>
-          <Typography variant="subtitle2" sx={{ color: "#1e293b", mb: 0.5 }}>
-           {selectedReport.recipeName}
-          </Typography>
-          <Link
-           to={`/admin/recipes/view-recipe`}
-           state={getFullRecipeData(selectedReport.recipeId)}
-           style={{ textDecoration: "none" }}
-          >
-           <Button
-            startIcon={<VisibilityIcon sx={{ fontSize: 16 }} />}
-            size="small"
-            sx={{
-             color: "#3b82f6",
-             textTransform: "none",
-             fontSize: "0.75rem",
-             p: 0,
-             minWidth: 0,
-             "&:hover": {
-              backgroundColor: "transparent",
-              color: "#2563eb",
-             },
-            }}
-           >
-            View Recipe
-           </Button>
-          </Link>
-         </Box>
-        </Box>
-
-        {/* Report Info Grid */}
+        {/* Recipe Info */}
         <Box sx={{ display: "grid", gap: 2 }}>
-         {/* Reporter */}
-         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <Avatar
-           src={selectedReport.reporterAvatar}
-           sx={{ width: 24, height: 24 }}
-          />
-          <Box>
-           <Typography variant="caption" sx={{ color: "#64748b" }}>
-            Reported by
-           </Typography>
-           <Typography variant="body2" sx={{ color: "#1e293b" }}>
-            {selectedReport.reportedBy}
-           </Typography>
+          {/* Reporter Info */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Avatar
+              src={selectedReport.reporterAvatar}
+              sx={{ width: 24, height: 24 }}
+            />
+            <Box>
+              <Typography variant="caption" sx={{ color: "#64748b" }}>
+                Reported by
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#1e293b" }}>
+                {selectedReport.reportedBy}
+              </Typography>
+            </Box>
           </Box>
-         </Box>
 
-         {/* Date */}
-         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          {/* Date */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Box
+              sx={{
+                width: 24,
+                height: 24,
+                borderRadius: "50%",
+                backgroundColor: "#f1f5f9",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CalendarTodayIcon sx={{ fontSize: 14, color: "#64748b" }} />
+            </Box>
+            <Box>
+              <Typography variant="caption" sx={{ color: "#64748b" }}>
+                Date reported
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#1e293b" }}>
+                {new Date(selectedReport.date).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Status & Severity */}
           <Box
-           sx={{
-            width: 24,
-            height: 24,
-            borderRadius: "50%",
-            backgroundColor: "#f1f5f9",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-           }}
-          >
-           <CalendarTodayIcon sx={{ fontSize: 14, color: "#64748b" }} />
-          </Box>
-          <Box>
-           <Typography variant="caption" sx={{ color: "#64748b" }}>
-            Date reported
-           </Typography>
-           <Typography variant="body2" sx={{ color: "#1e293b" }}>
-            {new Date(selectedReport.date).toLocaleDateString("en-US", {
-             month: "short",
-             day: "numeric",
-             year: "numeric",
-            })}
-           </Typography>
-          </Box>
-         </Box>
-
-         {/* Status & Severity */}
-         <Box
-          sx={{
-           display: "flex",
-           gap: 3,
-           p: 2,
-           backgroundColor: "#f8fafc",
-           borderRadius: "6px",
-          }}
-         >
-          <Box>
-           <Typography variant="caption" sx={{ color: "#64748b" }}>
-            Status
-           </Typography>
-           <Chip
-            label={selectedReport.status}
-            size="small"
             sx={{
-             mt: 0.5,
-             height: "20px",
-             backgroundColor: getStatusColor(selectedReport.status).bg,
-             color: getStatusColor(selectedReport.status).text,
-             fontSize: "0.75rem",
-             "& .MuiChip-label": { px: 1 },
+              display: "flex",
+              gap: 3,
+              p: 2,
+              backgroundColor: "#f8fafc",
+              borderRadius: "6px",
             }}
-           />
+          >
+            <Box>
+              <Typography variant="caption" sx={{ color: "#64748b" }}>
+                Status
+              </Typography>
+              <Chip
+                label={selectedReport.status}
+                size="small"
+                sx={{
+                  mt: 0.5,
+                  height: "20px",
+                  backgroundColor: getStatusColor(selectedReport.status).bg,
+                  color: getStatusColor(selectedReport.status).text,
+                  fontSize: "0.75rem",
+                  "& .MuiChip-label": { px: 1 },
+                }}
+              />
+            </Box>
+            <Box>
+              <Typography variant="caption" sx={{ color: "#64748b" }}>
+                Severity
+              </Typography>
+              <Chip
+                label={selectedReport.severity}
+                size="small"
+                sx={{
+                  mt: 0.5,
+                  height: "20px",
+                  backgroundColor: getSeverityColor(selectedReport.severity).bg,
+                  color: getSeverityColor(selectedReport.severity).text,
+                  fontSize: "0.75rem",
+                  "& .MuiChip-label": { px: 1 },
+                }}
+              />
+            </Box>
           </Box>
-          <Box>
-           <Typography variant="caption" sx={{ color: "#64748b" }}>
-            Severity
-           </Typography>
-           <Chip
-            label={selectedReport.severity}
-            size="small"
-            sx={{
-             mt: 0.5,
-             height: "20px",
-             backgroundColor: getSeverityColor(selectedReport.severity).bg,
-             color: getSeverityColor(selectedReport.severity).text,
-             fontSize: "0.75rem",
-             "& .MuiChip-label": { px: 1 },
-            }}
-           />
-          </Box>
-         </Box>
 
-         {/* Reason */}
-         <Box>
-          <Typography
-           variant="caption"
-           sx={{ color: "#64748b", display: "block", mb: 1 }}
-          >
-           Reason for report
-          </Typography>
-          <Typography
-           variant="body2"
-           sx={{
-            color: "#1e293b",
-            p: 2,
-            backgroundColor: "#f8fafc",
-            borderRadius: "6px",
-            lineHeight: 1.5,
-           }}
-          >
-           {selectedReport.reason}
-          </Typography>
-         </Box>
+          {/* Reason */}
+          <Box>
+            <Typography
+              variant="caption"
+              sx={{ color: "#64748b", display: "block", mb: 1 }}
+            >
+              Reason for report
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "#1e293b",
+                p: 2,
+                backgroundColor: "#f8fafc",
+                borderRadius: "6px",
+                lineHeight: 1.5,
+              }}
+            >
+              {selectedReport.reason}
+            </Typography>
+          </Box>
+
+          {/* Reporter's Message */}
+          <Box>
+            <Typography
+              variant="caption"
+              sx={{ 
+                color: "#64748b", 
+                display: "flex", 
+                alignItems: "center", 
+                gap: 1, 
+                mb: 1 
+              }}
+            >
+              <AssignmentIcon sx={{ fontSize: 16 }} />
+              Reporter's Message
+            </Typography>
+            <Box
+              sx={{
+                p: 2,
+                backgroundColor: "#f8fafc",
+                borderRadius: "6px",
+                border: "1px solid #e2e8f0",
+              }}
+            >
+              <Box sx={{ display: "flex", alignItems: "start", gap: 2 }}>
+                <Avatar
+                  src={selectedReport.reporterAvatar}
+                  sx={{ width: 32, height: 32 }}
+                />
+                <Box sx={{ flex: 1 }}>
+                  <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ color: "#1e293b", fontSize: "0.875rem" }}
+                    >
+                      {selectedReport.reportedBy}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{ color: "#64748b" }}
+                    >
+                      {new Date(selectedReport.date).toLocaleTimeString("en-US", {
+                        hour: "numeric",
+                        minute: "2-digit",
+                      })}
+                    </Typography>
+                  </Box>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: "#475569",
+                      lineHeight: 1.6,
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {selectedReport.message || "No additional message provided."}
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
         </Box>
-       </Box>
+      </Box>
       </DialogContent>
 
       <DialogActions

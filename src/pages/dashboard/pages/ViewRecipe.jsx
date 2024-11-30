@@ -379,7 +379,7 @@ export const ViewRecipe = () => {
      className="flex flex-row items-center justify-between"
     >
      <div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
        <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -395,20 +395,20 @@ export const ViewRecipe = () => {
            <Tooltip title="Remove from Favorites">
             <button
              onClick={toggleFavorite}
-             className="flex items-center gap-1 px-2 py-1 bg-yellow-50 hover:bg-gray-100 rounded-lg transition-colors"
+             className="flex items-center gap-1 px-2 py-2 bg-yellow-50 hover:bg-gray-100 rounded-lg transition-colors"
             >
              <BookmarkIcon className="text-yellow-300" fontSize="medium" />
-             <span className="text-sm text-gray-600">Favorite</span>
+             <span className="text-xs text-gray-600">Favorite</span>
             </button>
            </Tooltip>
           ) : (
            <Tooltip title="Add to Favorites">
             <button
              onClick={toggleFavorite}
-             className="flex items-center gap-1 px-2 py-1 bg-yellow-50 hover:bg-gray-100 rounded-lg transition-colors"
+             className="flex items-center gap-1 px-2 py-2 bg-yellow-50 hover:bg-gray-100 rounded-lg transition-colors"
             >
              <BookmarkBorderIcon className="text-yellow-300" fontSize="medium" />
-             <span className="text-sm text-gray-600">Favorite</span>
+             <span className="text-xs text-gray-600">Favorite</span>
             </button>
            </Tooltip>
           )}

@@ -65,18 +65,18 @@ export const AuthorProfile = ({
    initial={{ opacity: 0 }}
    animate={{ opacity: 1 }}
    exit={{ opacity: 0 }}
-   className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-20"
+   className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-20 p-4 md:p-0"
   >
    <motion.div
     initial={{ scale: 0.95, opacity: 0 }}
     animate={{ scale: 1, opacity: 1 }}
     exit={{ scale: 0.95, opacity: 0 }}
-    className="bg-white w-full max-w-[1000px] max-h-[80vh] rounded-xl shadow-2xl overflow-hidden"
+    className="bg-white w-full max-w-[1000px] max-h-[90vh] md:max-h-[80vh] rounded-xl shadow-2xl overflow-hidden"
    >
     {/* Header */}
-    <div className="p-6 border-b">
+    <div className="p-4 md:p-6 border-b">
      <div className="flex items-center justify-between">
-      <h1 className="text-xl font-semibold text-gray-800">Foodigoer Profile</h1>
+      <h1 className="text-lg md:text-xl font-semibold text-gray-800">Foodigoer Profile</h1>
       <button
        onClick={() => setAuthorModal(false)}
        className="p-1 hover:bg-gray-100 rounded-full transition-colors"
@@ -87,9 +87,9 @@ export const AuthorProfile = ({
     </div>
 
     {/* Profile Section */}
-    <div className="p-6">
-     <div className="flex items-center justify-between">
-      <div className="flex items-center gap-4">
+    <div className="p-4 md:p-6">
+     <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
        <img
         src={authorImage}
         className="h-16 w-16 rounded-full ring-2 ring-offset-2 ring-gray-100"
@@ -99,9 +99,9 @@ export const AuthorProfile = ({
           "https://api.dicebear.com/7.x/lorelei/svg?seed=fallback";
         }}
        />
-       <div className="space-y-1">
+       <div className="space-y-2 sm:space-y-1">
         <h2 className="text-lg font-semibold text-gray-800">{author}</h2>
-        <div className="flex items-center gap-4 text-sm text-gray-600">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-600">
          <div className="flex items-center gap-1">
           <span className="font-medium">
            {authorData?.followers.toLocaleString()}
@@ -123,10 +123,11 @@ export const AuthorProfile = ({
         </div>
        </div>
       </div>
+      
       <button
        onClick={handleFollowClick}
        disabled={isLoading}
-       className={`px-6 py-2 rounded-lg font-medium
+       className={`w-full sm:w-auto px-6 py-2 rounded-lg font-medium
          transition-all duration-200
          active:scale-95 transform
          disabled:opacity-50 disabled:cursor-not-allowed
@@ -150,15 +151,15 @@ export const AuthorProfile = ({
     </div>
 
     {/* Recipes Section */}
-    <div className="px-6 pb-2">
+    <div className="px-4 md:px-6 pb-2">
      <h3 className="text-lg font-semibold text-gray-800 mb-4">
       Shared Recipes ({filteredRecipes.length})
      </h3>
     </div>
 
     {/* Scrollable Recipe Content */}
-    <div className="px-6 pb-6 overflow-y-auto max-h-[400px] custom-scrollbar">
-     <div className="">
+    <div className="px-4 md:px-6 pb-6 overflow-y-auto max-h-[350px] md:max-h-[400px] custom-scrollbar">
+     <div className="space-y-4">
       <FoodCard
        recipes={filteredRecipes}
        basePath={`${firstSegment ? "/admin/recipes" : ""}`}

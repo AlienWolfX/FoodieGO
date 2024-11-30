@@ -176,13 +176,7 @@ const LoginFormContent = ({
     </div>
    </div>
   </div>
-  <div className="mt-6 flex flex-col gap-1">
-   <span
-    onClick={() => nav("/admin")}
-    className="text-[10px] text-mainblue font-light flex items-start cursor-pointer"
-   >
-    login as admin
-   </span>
+  <div className="mt-6 flex flex-col gap-1 text-center items-center">
    <button
     onClick={login}
     className={`w-full h-10 rounded-lg font-medium text-sm
@@ -205,6 +199,12 @@ const LoginFormContent = ({
     Don't have an account yet?{" "}
     <span className="font-medium text-sm">Create account</span>
    </p>
+   <span
+    onClick={() => nav("/admin")}
+    className="text-[12px] text-mainblue font-light hover:font-medium flex items-center cursor-pointer"
+   >
+    login as admin ✨
+   </span>
   </div>
  </>
 );

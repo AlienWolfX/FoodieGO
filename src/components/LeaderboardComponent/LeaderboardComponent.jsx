@@ -4,11 +4,14 @@ import { RiUserFollowLine } from "react-icons/ri";
 import { FaMedal } from "react-icons/fa6";
 import { useState } from "react";
 import { AuthorProfile } from "../../components/Modals/AuthorProfile";
+import { useNavigate } from "react-router-dom";
+import { recipeData } from "../../../data/RecipeData";
 
 export const LeaderboardComponent = () => {
  const [selectedRole, setSelectedRole] = useState("All");
  const [selectedAuthor, setSelectedAuthor] = useState(null);
  const [authorModal, setAuthorModal] = useState(false);
+ const navigate = useNavigate();
 
  const popularFoodiegoers = [
   {
@@ -249,6 +252,17 @@ export const LeaderboardComponent = () => {
   selectedRole === "All" ? true : foodiegoer.role === selectedRole
  );
 
+ const handleTopRecipeClick = () => {
+  // Use an existing recipe from your data
+  const topRecipe = recipeData[0]; // This will use the first recipe in your data
+  
+  if (topRecipe) {
+    navigate("/view-recipe", {
+      state: topRecipe
+    });
+  }
+ };
+
  return (
   <>
    <div className="mt-5">
@@ -264,7 +278,13 @@ export const LeaderboardComponent = () => {
               relative overflow-hidden rounded-xl border ${stat.borderColor}
               p-5 transition-all duration-300 hover:shadow-lg
               ${stat.bgColor} bg-opacity-40 hover:bg-opacity-50
+              ${stat.title === "Top Recipe" ? "cursor-pointer" : ""}
             `}
+        onClick={() => {
+         if (stat.title === "Top Recipe") {
+          handleTopRecipeClick();
+         }
+        }}
        >
         {/* Header */}
         <div className="flex items-center justify-between mb-3">

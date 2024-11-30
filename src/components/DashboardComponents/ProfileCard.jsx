@@ -64,18 +64,18 @@ export const ProfileCard = () => {
     initial="hidden"
     animate="visible"
     variants={containerVariants}
-    className="flex flex-col gap-4"
+    className="flex flex-col gap-4 w-full px-4 sm:px-0"
    >
     {/* Profile Header Card */}
     <motion.div
      variants={itemVariants}
-     className="bg-white w-[400px] rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow duration-300"
+     className="bg-white w-full  rounded-xl shadow-sm p-4 sm:p-6 hover:shadow-md transition-shadow duration-300"
     >
      <motion.div
       variants={itemVariants}
-      className="flex items-start justify-between"
+      className="flex flex-col sm:flex-row items-center sm:items-start gap-4"
      >
-      <div className="flex items-start gap-4">
+      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
        <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -86,7 +86,7 @@ export const ProfileCard = () => {
          initial={{ scale: 0 }}
          animate={{ scale: 1 }}
          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-         className="w-16 h-16 rounded-full bg-gray-100 border-2 border-blue-100 overflow-hidden"
+         className="w-20 h-20 sm:w-16 sm:h-16 rounded-full bg-gray-100 border-2 border-blue-100 overflow-hidden"
         >
          {profilePicture ? (
           <img
@@ -109,11 +109,11 @@ export const ProfileCard = () => {
          <CiEdit className="text-white opacity-0 group-hover:opacity-100" size={20} />
         </motion.div>
        </motion.div>
-       <motion.div variants={itemVariants}>
+       <motion.div variants={itemVariants} className="text-center sm:text-left">
         <motion.h1
          initial={{ x: -20, opacity: 0 }}
          animate={{ x: 0, opacity: 1 }}
-         className="text-lg font-semibold text-gray-800"
+         className="text-xl sm:text-lg font-semibold text-gray-800"
         >
          Patrick James Dionen
         </motion.h1>
@@ -140,7 +140,7 @@ export const ProfileCard = () => {
      {/* Stats Section */}
      <motion.div
       variants={containerVariants}
-      className="grid grid-cols-3 gap-4 mt-6"
+      className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6"
      >
       {stats.map((stat, index) => (
        <motion.div
@@ -150,7 +150,7 @@ export const ProfileCard = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.1 }}
-        className="bg-gray-50 rounded-lg p-3 text-center hover:shadow-md transition-all duration-300"
+        className="bg-gray-50 rounded-lg p-4 sm:p-3 text-center hover:shadow-md transition-all duration-300"
        >
         <motion.div
          whileHover={{ rotate: 360 }}
@@ -184,7 +184,7 @@ export const ProfileCard = () => {
     {/* Personal Information Card */}
     <motion.div
      variants={itemVariants}
-     className="w-[400px] rounded-xl bg-white shadow-sm p-6 hover:shadow-md transition-all duration-300"
+     className="w-full rounded-xl bg-white shadow-sm p-4 sm:p-6 hover:shadow-md transition-all duration-300"
     >
      <motion.div variants={itemVariants} className="mb-5">
       <div className="flex items-center justify-between mb-4">
@@ -231,9 +231,9 @@ export const ProfileCard = () => {
         <h2 className="text-sm font-medium text-gray-600">{field.label}</h2>
         <motion.div
          whileHover={{ scale: 1.01 }}
-         className="h-10 border border-gray-200 rounded-lg bg-gray-50 flex items-center px-4"
+         className="min-h-[40px] sm:h-10 border border-gray-200 rounded-lg bg-gray-50 flex items-center px-4 py-2 sm:py-0"
         >
-         <p className="text-sm text-gray-700">{field.value}</p>
+         <p className="text-sm text-gray-700 break-all sm:break-normal">{field.value}</p>
         </motion.div>
        </motion.div>
       ))}

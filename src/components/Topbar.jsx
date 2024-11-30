@@ -71,12 +71,12 @@ export const Topbar = ({ isAdmin }) => {
 
  return (
   <>
-   <div className="border rounded-xl w-full h-12 flex items-center justify-between px-3 bg-white">
-    <div className="flex items-center gap-3">
+   <div className="border rounded-xl w-full h-12 flex items-center justify-between px-2 sm:px-3 bg-white">
+    <div className="flex items-center gap-2 sm:gap-3">
      <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="relative h-8 w-8 rounded-full overflow-hidden border border-gray-200"
+      className="relative h-7 w-7 sm:h-8 sm:w-8 rounded-full overflow-hidden border border-gray-200"
      >
       {profilePicture ? (
        <img
@@ -86,7 +86,7 @@ export const Topbar = ({ isAdmin }) => {
        />
       ) : (
        <div className="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
-        <span className="text-blue-500 text-sm font-medium">
+        <span className="text-blue-500 text-xs sm:text-sm font-medium">
          {"Patrick James Dionen"
           .split(" ")
           .map((word) => word[0])
@@ -96,11 +96,10 @@ export const Topbar = ({ isAdmin }) => {
       )}
      </motion.div>
      <div className="flex flex-col items-start m-0">
-      {" "}
       <motion.p
        initial={{ opacity: 0, x: -10 }}
        animate={{ opacity: 1, x: 0 }}
-       className="text-sm font-medium text-gray-700"
+       className="text-xs sm:text-sm font-medium text-gray-700 truncate max-w-[120px] sm:max-w-none"
       >
        Patrick James Dionen
       </motion.p>
@@ -124,7 +123,7 @@ export const Topbar = ({ isAdmin }) => {
      </div>
     </div>
 
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2 sm:gap-4">
      <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
@@ -139,9 +138,9 @@ export const Topbar = ({ isAdmin }) => {
        whileHover={{ scale: 1.05 }}
        whileTap={{ scale: 0.95 }}
        onClick={() => setShowNotifications(!showNotifications)}
-       className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-50"
+       className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-50"
       >
-       <CiBellOn size={20} className="text-gray-500" />
+       <CiBellOn size={18} className="text-gray-500" />
       </motion.div>
 
       <AnimatePresence>
@@ -151,12 +150,16 @@ export const Topbar = ({ isAdmin }) => {
          animate={{ opacity: 1, y: 0 }}
          exit={{ opacity: 0, y: -10 }}
          transition={{ duration: 0.2 }}
-         className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden"
+         className="absolute right-0 mt-2 w-[280px] sm:w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden"
+         style={{
+          maxWidth: 'calc(100vw - 1rem)',
+          right: '-10px'
+         }}
         >
          <div className="p-3 border-b bg-gray-50">
           <h3 className="text-sm font-medium text-gray-700">Notifications</h3>
          </div>
-         <div className="max-h-[400px] overflow-y-auto">
+         <div className="max-h-[60vh] sm:max-h-[400px] overflow-y-auto">
           {notifications.map((notification) => (
            <motion.div
             key={notification.id}
@@ -173,8 +176,8 @@ export const Topbar = ({ isAdmin }) => {
                 .join("")}
               </span>
              </div>
-             <div className="flex-1">
-              <p className="text-sm">
+             <div className="flex-1 min-w-0">
+              <p className="text-sm truncate">
                <span className="font-medium">{notification.user}</span>{" "}
                {notification.message}
               </p>

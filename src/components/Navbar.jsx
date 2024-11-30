@@ -16,6 +16,8 @@ export const Navbar = () => {
   const section = document.getElementById("hero");
   if (section) {
    window.location.hash = "hero";
+   setActiveItem("hero");
+   section.scrollIntoView({ behavior: "smooth" });
   } else {
    window.scroll(0, 0);
    nav("/"); // Navigate to home if section not found
@@ -26,6 +28,8 @@ export const Navbar = () => {
   const section = document.getElementById("explore");
   if (section) {
    window.location.hash = "explore";
+   setActiveItem("explore");
+   section.scrollIntoView({ behavior: "smooth" });
   } else {
    window.scroll(0, 0);
    nav("/"); // Navigate to home if section not found
@@ -65,23 +69,33 @@ export const Navbar = () => {
  useEffect(() => {
   const handleScroll = () => {
    const sections = ["hero", "explore", "about", "howitworks", "contact"];
-   const scrollPosition = window.scrollY;
+   const scrollPosition = window.scrollY + window.innerHeight / 3;
 
-   sections.forEach((section) => {
+   const currentSection = sections.find(section => {
     const element = document.getElementById(section);
     if (element) {
      const { offsetTop, clientHeight } = element;
-     if (
+     return (
       scrollPosition >= offsetTop &&
       scrollPosition < offsetTop + clientHeight
-     ) {
-      setActiveItem(section);
-     }
+     );
     }
+    return false;
    });
+
+   if (currentSection) {
+    setActiveItem(currentSection);
+   }
   };
 
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById(hash)) {
+   setActiveItem(hash);
+  }
+
   window.addEventListener("scroll", handleScroll);
+  handleScroll();
+
   return () => {
    window.removeEventListener("scroll", handleScroll);
   };
