@@ -214,7 +214,7 @@ export const LeaderboardComponent = () => {
  const trendingStats = [
   {
    title: "Top Foodiegoer",
-   name: "Bryan Ian Ramos",
+   name: "Chef Mei Lin",
    stat: "9.8K followers",
    change: "+12%",
    icon: <FiUser className="text-lg" />,
@@ -255,11 +255,22 @@ export const LeaderboardComponent = () => {
  const handleTopRecipeClick = () => {
   // Use an existing recipe from your data
   const topRecipe = recipeData[0]; // This will use the first recipe in your data
-  
+
   if (topRecipe) {
-    navigate("/view-recipe", {
-      state: topRecipe
-    });
+   navigate("/view-recipe", {
+    state: topRecipe,
+   });
+  }
+ };
+
+ const handleTopUserClick = () => {
+  // Find the user in popularFoodiegoers
+  const topUser = popularFoodiegoers.find(
+   (user) => user.name === "Chef Mei Lin"
+  );
+  if (topUser) {
+   setSelectedAuthor(topUser);
+   setAuthorModal(true);
   }
  };
 
@@ -278,11 +289,17 @@ export const LeaderboardComponent = () => {
               relative overflow-hidden rounded-xl border ${stat.borderColor}
               p-5 transition-all duration-300 hover:shadow-lg
               ${stat.bgColor} bg-opacity-40 hover:bg-opacity-50
-              ${stat.title === "Top Recipe" ? "cursor-pointer" : ""}
+              ${
+               stat.title === "Top Recipe" || stat.title === "Top Foodiegoer"
+                ? "cursor-pointer"
+                : ""
+              }
             `}
         onClick={() => {
          if (stat.title === "Top Recipe") {
           handleTopRecipeClick();
+         } else if (stat.title === "Top Foodiegoer") {
+          handleTopUserClick();
          }
         }}
        >
